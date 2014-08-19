@@ -1,7 +1,10 @@
 ﻿@model BlocketProject.Models.Pages.StartPage
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>StartPage</h2>
+<p>@Html.PropertyFor(x=>x.ContentArea)</p>
+
 <p>@Html.PropertyFor(x=>x.MainBody)</p>

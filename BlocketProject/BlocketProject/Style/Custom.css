@@ -1,0 +1,9 @@
+﻿#nav li {
+    list-style-type: none;
+    float: left;
+    margin: 10px;
+}
+
+#nav {
+    background-color: lightblue;
+}

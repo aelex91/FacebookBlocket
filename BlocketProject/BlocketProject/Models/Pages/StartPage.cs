@@ -8,16 +8,16 @@ using EPiServer.SpecializedProperties;
 namespace BlocketProject.Models.Pages
 {
     [ContentType(DisplayName = "StartPage", GUID = "061a1365-7fd6-4f72-ad76-4e8f349029ba", Description = "")]
-    public class StartPage : PageData
+    public class StartPage : PageGroup
     {
-        
                 [CultureSpecific]
                 [Display(
-                    Name = "Main body",
-                    Description = "The main body will be shown in the main content area of the page, using the XHTML-editor you can insert for example text, images and tables.",
+                    Name = "Set width",
+                    Description = "Set the width of the header",
                     GroupName = SystemTabNames.Content,
-                    Order = 1)]
-                public virtual XhtmlString MainBody { get; set; }
+                    Order = 200)]
+                [Range(1, 12)]
+                public virtual int SizeCount { get; set; }
          
     }
 }

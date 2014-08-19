@@ -1,0 +1,32 @@
+﻿@model BlocketProject.Models.Blocks.VideoBlock
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="http://jwpsrv.com/library/xp0lYIyzEeOSuyIACrqE1A.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @if (@Model.ShowTitle)
+    {
+        <h1>@Html.PropertyFor(p=>p.Title)</h1>
+    }
+    
+    <div id='playerYxldMoyGhAPQ'></div>
+    <script type='text/javascript'>
+        jwplayer('playerYxldMoyGhAPQ').setup({
+            file: '@Model.VideoFile',
+            image: '@Model.Image',
+            width: '100%',
+            aspectratio: '16:9',
+            autostart: '@Model.Autoplay',
+            
+        });
+    </script>
+</body>
+</html>

@@ -13,7 +13,7 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(StartPage currentPage)
         {
-            var mask = "Hej";
+            //currentPage.SizeCount = 12;
             /* Implementation of action. You can create your own view model class that you pass to the view or
              * you can pass the page type for simpler templates */
 
