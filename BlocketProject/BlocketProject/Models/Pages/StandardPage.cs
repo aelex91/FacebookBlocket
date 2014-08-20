@@ -7,8 +7,8 @@ using EPiServer.SpecializedProperties;
 
 namespace BlocketProject.Models.Pages
 {
-    [ContentType(DisplayName = "PageGroup", GUID = "21be8b82-c253-434b-942e-77442232fdd0", Description = "")]
-    public class PageGroup : SitePageData
+    [ContentType(DisplayName = "StandardPage", GUID = "c7c9642a-4f7b-4024-af6a-337c0fd443e5", Description = "")]
+    public class StandardPage : SitePageData
     {
 
         [CultureSpecific]
@@ -25,6 +25,5 @@ namespace BlocketProject.Models.Pages
             GroupName = SystemTabNames.Content,
             Order = 200)]
         public virtual ContentArea ContentArea { get; set; }
-
     }
 }

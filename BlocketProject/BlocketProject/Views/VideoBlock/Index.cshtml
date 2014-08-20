@@ -6,11 +6,10 @@
 <!DOCTYPE html>
 
 <html>
-<head>
+
     <script src="http://jwpsrv.com/library/xp0lYIyzEeOSuyIACrqE1A.js"></script>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
+
 <body>
     @if (@Model.ShowTitle)
     {
@@ -22,7 +21,7 @@
         jwplayer('playerYxldMoyGhAPQ').setup({
             file: '@Model.VideoFile',
             image: '@Model.Image',
-            width: '100%',
+            width: '@Model.VideoWidth%',
             aspectratio: '16:9',
             autostart: '@Model.Autoplay',
             

@@ -1,0 +1,14 @@
+﻿@using EPiServer.Web.Routing;
+@using EPiServer.Core
+@model BlocketProject.Models.ViewModels.SitemapBlockModel
+<div>
+    <ul>
+        <li><a href="@Url.PageUrl(Model.Startpage.LinkURL)">@Model.Startpage.Name</a></li>
+        @foreach (PageData page in Model.getPages)
+        { 
+            <li><a href="@Url.PageUrl(page.LinkURL)">@page.Name</a></li>
+        }
+
+    </ul>
+</div>
+ 

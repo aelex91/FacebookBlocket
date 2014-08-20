@@ -9,9 +9,9 @@ using BlocketProject.Models.Pages;
 
 namespace BlocketProject.Controllers
 {
-    public class StartPageController : PageController<StartPage>
+    public class ProfilePageController : PageController<ProfilePage>
     {
-        public ActionResult Index(StartPage currentPage)
+        public ActionResult Index(ProfilePage currentPage)
         {
             return View(currentPage);
         }

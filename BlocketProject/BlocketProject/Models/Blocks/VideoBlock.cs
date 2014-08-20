@@ -19,6 +19,13 @@ namespace BlocketProject.Models.Blocks
             Order = 100)]
         public virtual string Title { get; set; }
 
+        [Display(
+         Name = "Display Title",
+         GroupName = SystemTabNames.Content,
+         Order = 150
+         )]
+        public virtual Boolean ShowTitle { get; set; }
+
         [CultureSpecific]
         [Display(
             Name = "Video file",
@@ -27,23 +34,25 @@ namespace BlocketProject.Models.Blocks
         public virtual string VideoFile { get; set; }
 
         [Display(
-                    Order = 300)]
+        GroupName = SystemTabNames.Content,
+        Order = 300)]
         [UIHint(UIHint.Image)]
         public virtual Url Image { get; set; }
 
         [Display(
-            Name = "Autoplay",
+            Name = "Autostart",
             Order = 400
             )]
         public virtual Boolean Autoplay { get; set; }
 
 
+        [CultureSpecific]
         [Display(
-            Name = "Display Title",
-            Order = 500
-            )]
-        public virtual Boolean ShowTitle { get; set; }
+            Name = "Video Width in percent",
+            GroupName = SystemTabNames.Content,
+            Order = 600)]
+        public virtual string VideoWidth { get; set; }
 
- 
+
     }
 }
