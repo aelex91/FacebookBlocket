@@ -6,6 +6,7 @@ using EPiServer.Core;
 using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
 using BlocketProject.Models.Pages;
+using System.Configuration;
 
 namespace BlocketProject.Controllers
 {
@@ -15,7 +16,6 @@ namespace BlocketProject.Controllers
         {
             /* Implementation of action. You can create your own view model class that you pass to the view or
              * you can pass the page type for simpler templates */
-
             return View(currentPage);
         }
     }

@@ -9,11 +9,12 @@ using BlocketProject.Models.Pages;
 
 namespace BlocketProject.Controllers
 {
-    public class StartPageController : PageController<StartPage>
+    public class AdsPageController : PageController<AdsPage>
     {
-        public ActionResult Index(StartPage currentPage)
+        public ActionResult Index(AdsPage currentPage)
         {
-          
+           
+
             return View(currentPage);
         }
     }
