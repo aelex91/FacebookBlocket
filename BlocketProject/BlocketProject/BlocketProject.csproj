@@ -246,11 +246,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConnetionHelper.cs" />
     <Compile Include="Helpers\UrlHelpers.cs" />
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\SitemapBlock.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
     <Compile Include="Models\DbClasses\DbUserAds.cs" />
+    <Compile Include="Models\DbClasses\LetemsaleDbContext.cs" />
     <Compile Include="Models\Media\ImageData.cs" />
     <Compile Include="Models\Pages\AdsPage.cs" />
     <Compile Include="Models\Pages\PageGroup.cs" />
@@ -259,6 +261,7 @@
     <Compile Include="Models\Pages\StandardPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
     <Compile Include="Models\ViewModels\AdsPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\HomeModel.cs" />
     <Compile Include="Models\ViewModels\LayoutViewModel.cs" />
     <Compile Include="Models\ViewModels\SitemapBlockModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -301,6 +304,7 @@
     <Content Include="Views\StandardPage\Index.cshtml" />
     <Content Include="Views\ProfilePage\Index.cshtml" />
     <Content Include="Views\StartPage\Index.cshtml" />
+    <Content Include="Views\AdsPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

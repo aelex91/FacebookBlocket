@@ -6,6 +6,7 @@ using EPiServer.Core;
 using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
 using BlocketProject.Models.Pages;
+using BlocketProject.Models.ViewModels;
 
 namespace BlocketProject.Controllers
 {
@@ -13,9 +14,18 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(AdsPage currentPage)
         {
+            
+            var value = Helpers.ConnetionHelper.GetAllAds();
            
+            var model = new AdsPageViewModel(currentPage);
 
-            return View(currentPage);
+            model.ListUserAdsModel = value;
+
+            // hämta värden från db. klar
+            // fyll dom i en model,
+            //skicka vidare modellen.
+           
+            return View(model);
         }
     }
 }

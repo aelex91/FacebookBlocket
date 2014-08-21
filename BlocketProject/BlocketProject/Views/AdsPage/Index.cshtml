@@ -1,0 +1,23 @@
+﻿@model BlocketProject.Models.ViewModels.AdsPageViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Heading</h2>
+
+<ul>
+@foreach (var ad in Model.ListUserAdsModel)
+{
+    <li>
+        <h3>@ad.Title</h3><br />
+        <img src="@ad.ImageUrl" width="150" alt=""/><br />
+        <p>@ad.AdDescription</p><br />
+        <p>Pris: @ad.Price kr</p>
+        <p>Datum: @ad.PublishDate</p>
+        <b>Annons av: <a href="http://www.facebook.com/732642713">Alexander</a></b>
+
+    </li>  
+  
+}
+
+</ul>

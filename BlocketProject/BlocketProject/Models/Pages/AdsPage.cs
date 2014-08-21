@@ -13,10 +13,10 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Title",
+            Name = "Heading",
             GroupName = SystemTabNames.Content,
             Order = 100)]
-        public virtual string Title { get; set; }
+        public virtual string Heading { get; set; }
 
         [CultureSpecific]
         [Display(
@@ -24,6 +24,8 @@ namespace BlocketProject.Models.Pages
             GroupName = SystemTabNames.Content,
             Order = 200)]
         public virtual string AdCategory { get; set; }
+
+
 
     }
 }
