@@ -40,7 +40,7 @@ namespace BlocketProject.Helpers
             {
                 case PageShortcutType.Normal:
                 case PageShortcutType.FetchData:
-                    return new MvcHtmlString(urlResolver.GetVirtualPath(page.PageLink));
+                    return new MvcHtmlString(urlResolver.GetUrl(page.PageLink));
 
                 case PageShortcutType.Shortcut:
                     var shortcutProperty = page.Property["PageShortcutLink"] as PropertyPageReference;
