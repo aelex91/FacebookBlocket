@@ -7,15 +7,15 @@ using EPiServer.SpecializedProperties;
 
 namespace BlocketProject.Models.Pages
 {
-    [ContentType(DisplayName = "ProfilePage", GUID = "da1a2f04-9aa4-42b9-817d-ac845bc95bb0", Description = "")]
-    public class ProfilePage : SitePageData
+    [ContentType(DisplayName = "CreateAdPage", GUID = "9b55474a-cae0-4882-8f1b-1b0c084433c6", Description = "")]
+    public class CreateAdPage : PageData
     {
         
                 [CultureSpecific]
                 [Display(
                     Name = "Heading",
                     GroupName = SystemTabNames.Content,
-                    Order = 1)]
+                    Order = 100)]
                 public virtual string Heading { get; set; }
          
     }

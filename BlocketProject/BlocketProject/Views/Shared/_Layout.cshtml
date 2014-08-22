@@ -1,4 +1,4 @@
-﻿
+﻿@using BlocketProject.Helpers
 @{
     
 }
@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="viewport" content="width=device-width" />
     <title>LetEmSale</title>
@@ -16,14 +16,14 @@
     <link href="~/Style/Custom.css" rel="stylesheet" />
 </head>
 <body>
-
     <div class="container">
-        <div id="nav" class="col-md-12">
-       
+        <div class="row">
+            <div class="col-md-2">
+                <h3 class="muted">Let em sale</h3>
+            </div>
         </div>
-        <div class="row"></div>
+        @{ Html.RenderMainNavigation(); }
         @RenderBody()
     </div>
-
 </body>
 </html>

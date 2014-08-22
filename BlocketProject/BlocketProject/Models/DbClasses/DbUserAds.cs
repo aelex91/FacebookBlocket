@@ -14,6 +14,7 @@ namespace BlocketProject.Models.DbClasses
     {
         [Key, Column("AdId")]
         public int? AdId { get; set; }
+        public int? UserId { get; set; }
         public string Title { get; set; }
         public int Price { get; set; }
         public string Phone { get; set; }

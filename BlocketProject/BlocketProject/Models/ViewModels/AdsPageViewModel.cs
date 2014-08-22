@@ -19,6 +19,7 @@ namespace BlocketProject.Models.ViewModels
 
         public class UserAdsModel
         {
+            public int? UserId { get; set; }
             public int AdId { get; set; }
             public string Title { get; set; }
             public int Price { get; set; }
