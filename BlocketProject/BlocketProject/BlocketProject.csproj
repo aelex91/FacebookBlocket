@@ -306,6 +306,9 @@
     <Content Include="Views\StartPage\Index.cshtml" />
     <Content Include="Views\AdsPage\Index.cshtml" />
     <Content Include="Views\CreateAdPage\Index.cshtml" />
+    <Content Include="Views\Shared\_Root.cshtml" />
+    <Content Include="Views\Shared\_WithSubNavigation.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

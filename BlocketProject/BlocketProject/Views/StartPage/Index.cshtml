@@ -1,10 +1,10 @@
 ﻿@model BlocketProject.Models.Pages.StartPage
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
+@{ Layout = "~/Views/Shared/_Root.cshtml"; }
+
 <h2>Index</h2>
 
-@Html.PropertyFor(x=>x.ContentArea)
+@Html.PropertyFor(x => x.ContentArea)
 
-@Html.PropertyFor(x=>x.MainBody)
+@Html.PropertyFor(x => x.MainBody)
