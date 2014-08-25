@@ -1,0 +1,7 @@
+﻿@model BlocketProject.Models.ViewModels.PageListBlockViewModel
+
+
+@foreach (var page in Model.ListPages)
+{
+    <a href="@page.LinkURL">@page.Name</a>
+}

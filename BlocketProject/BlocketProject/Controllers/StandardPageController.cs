@@ -7,6 +7,8 @@ using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
 using BlocketProject.Models.Pages;
 using System.Configuration;
+using EPiServer.ServiceLocation;
+using BlocketProject.Models.ViewModels;
 
 namespace BlocketProject.Controllers
 {
@@ -14,9 +16,12 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(StandardPage currentPage)
         {
-            /* Implementation of action. You can create your own view model class that you pass to the view or
-             * you can pass the page type for simpler templates */
-            return View(currentPage);
+            var model = new StandardPageViewModel(currentPage);
+
+      
+
+            return View(model);
         }
+        
     }
 }

@@ -8,3 +8,11 @@
 @Html.PropertyFor(x => x.ContentArea)
 
 @Html.PropertyFor(x => x.MainBody)
+
+
+@using (Html.BeginForm("Hej", "formpost/StartPage"))
+        {
+          
+            <button type="submit" value="Sign in"  />
+            
+        }

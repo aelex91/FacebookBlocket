@@ -1,14 +1,19 @@
-﻿<!DOCTYPE html>
-
+﻿@using BlocketProject.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Html.RenderEPiServerQuickNavigator()
+    <title>_Root</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
 </head>
 <body>
-    <div>
-       
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <h3 class="muted">Letemsale</h3>
+            </div>
+        </div>
+        @{ Html.RenderMainNavigation(); }
         @RenderBody()
     </div>
 </body>

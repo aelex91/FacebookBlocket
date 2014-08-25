@@ -1,10 +1,10 @@
-﻿@model BlocketProject.Models.Pages.StandardPage
+﻿@model BlocketProject.Models.ViewModels.StandardPageViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
+<h1>@Html.PropertyFor(x => x.PageName)</h1>
 
 @Html.PropertyFor(x => x.MainBody)
 <br />
-@Html.PropertyFor(x => x.ContentArea)
+@Html.PropertyFor(x => x.CArea)

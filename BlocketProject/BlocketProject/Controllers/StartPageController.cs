@@ -16,5 +16,10 @@ namespace BlocketProject.Controllers
           
             return View(currentPage);
         }
+        public ActionResult Hej()
+        {
+
+            return View("Index");
+        }
     }
 }

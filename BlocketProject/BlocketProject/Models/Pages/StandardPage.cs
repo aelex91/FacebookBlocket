@@ -25,5 +25,12 @@ namespace BlocketProject.Models.Pages
             GroupName = SystemTabNames.Content,
             Order = 200)]
         public virtual ContentArea ContentArea { get; set; }
+
+        [CultureSpecific]
+        [Display(
+            Name = "List root from standardpage",
+            GroupName = SystemTabNames.Content,
+            Order = 300)]
+        public virtual ContentReference ContentReference { get; set; }
     }
 }

@@ -183,6 +183,7 @@
       <Private>True</Private>
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -197,9 +198,17 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Providers">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
@@ -237,8 +246,14 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business\RouteConfig.cs" />
     <Compile Include="Controllers\AdsPageController.cs" />
     <Compile Include="Controllers\CreateAdPageController.cs" />
+    <Compile Include="Controllers\PageListBlockController.cs" />
     <Compile Include="Controllers\ProfilePageController.cs" />
     <Compile Include="Controllers\StandardPageController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
@@ -249,6 +264,7 @@
     <Compile Include="Helpers\ConnetionHelper.cs" />
     <Compile Include="Helpers\NavigationHelpers.cs" />
     <Compile Include="Helpers\UrlHelpers.cs" />
+    <Compile Include="Models\Blocks\PageListBlock.cs" />
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
     <Compile Include="Models\DbClasses\DbUserAds.cs" />
@@ -264,15 +280,93 @@
     <Compile Include="Models\ViewModels\AdsPageViewModel.cs" />
     <Compile Include="Models\ViewModels\HomeModel.cs" />
     <Compile Include="Models\ViewModels\LayoutViewModel.cs" />
+    <Compile Include="Models\ViewModels\PageListBlockViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfilePageViewModel.cs" />
+    <Compile Include="Models\ViewModels\StandardPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\" />
     <Folder Include="Models\Properties\" />
     <Folder Include="Static\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\BlocketProject.dll" />
+    <Content Include="bin\BlocketProject.pdb" />
+    <Content Include="bin\Castle.Core.dll" />
+    <Content Include="bin\Castle.Core.xml" />
+    <Content Include="bin\Castle.Windsor.dll" />
+    <Content Include="bin\Castle.Windsor.xml" />
+    <Content Include="bin\CMS.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\EPiServer.ApplicationModules.dll" />
+    <Content Include="bin\EPiServer.BaseLibrary.dll" />
+    <Content Include="bin\EPiServer.BaseLibrary.xml" />
+    <Content Include="bin\EPiServer.Cms.Shell.UI.dll" />
+    <Content Include="bin\EPiServer.Configuration.dll" />
+    <Content Include="bin\EPiServer.Configuration.xml" />
+    <Content Include="bin\EPiServer.Data.Cache.dll" />
+    <Content Include="bin\EPiServer.Data.dll" />
+    <Content Include="bin\EPiServer.Data.xml" />
+    <Content Include="bin\EPiServer.dll" />
+    <Content Include="bin\EPiServer.Enterprise.dll" />
+    <Content Include="bin\EPiServer.Enterprise.xml" />
+    <Content Include="bin\EPiServer.Events.dll" />
+    <Content Include="bin\EPiServer.Events.xml" />
+    <Content Include="bin\EPiServer.Framework.dll" />
+    <Content Include="bin\EPiServer.Framework.xml" />
+    <Content Include="bin\EPiServer.ImageLibrary.dll" />
+    <Content Include="bin\EPiServer.Implementation.dll" />
+    <Content Include="bin\EPiServer.Licensing.dll" />
+    <Content Include="bin\EPiServer.LinkAnalyzer.dll" />
+    <Content Include="bin\EPiServer.Packaging.CmdAPI.dll" />
+    <Content Include="bin\EPiServer.Packaging.dll" />
+    <Content Include="bin\EPiServer.Packaging.UI.dll" />
+    <Content Include="bin\EPiServer.Search.IndexingService.dll" />
+    <Content Include="bin\EPiServer.Shell.dll" />
+    <Content Include="bin\EPiServer.Shell.UI.dll" />
+    <Content Include="bin\EPiServer.Shell.xml" />
+    <Content Include="bin\EPiServer.UI.dll" />
+    <Content Include="bin\EPiServer.Web.WebControls.dll" />
+    <Content Include="bin\EPiServer.Web.WebControls.xml" />
+    <Content Include="bin\EPiServer.WorkflowFoundation.dll" />
+    <Content Include="bin\EPiServer.WorkflowFoundation.xml" />
+    <Content Include="bin\EPiServer.XForms.dll" />
+    <Content Include="bin\EPiServer.XForms.xml" />
+    <Content Include="bin\EPiServer.xml" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\Ionic.Zip.dll" />
+    <Content Include="bin\Ionic.Zip.xml" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\log4net.xml" />
+    <Content Include="bin\Lucene.Net.dll" />
+    <Content Include="bin\Lucene.Net.pdb" />
+    <Content Include="bin\Lucene.Net.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\NuGet.Core.dll" />
+    <Content Include="bin\Shell.dll" />
+    <Content Include="bin\StructureMap.dll" />
+    <Content Include="bin\StructureMap.pdb" />
+    <Content Include="bin\StructureMap.xml" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Providers.dll" />
+    <Content Include="bin\System.Web.Providers.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -286,6 +380,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="connectionStrings.config" />
     <Content Include="appSettings.config" />
+    <Content Include="bin\BlocketProject.dll.config" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -309,6 +404,7 @@
     <Content Include="Views\Shared\_Root.cshtml" />
     <Content Include="Views\Shared\_WithSubNavigation.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\PageListBlock\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
