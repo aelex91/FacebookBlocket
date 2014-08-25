@@ -16,9 +16,10 @@ namespace BlocketProject.Controllers
           
             return View(currentPage);
         }
-        public ActionResult Hej()
+        [HttpPost]
+        public ActionResult Hejsan()
         {
-
+            Response.Write("hej");
             return View("Index");
         }
     }
