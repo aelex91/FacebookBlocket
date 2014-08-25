@@ -35,17 +35,5 @@ namespace BlocketProject.Controllers
             var children = serviceLocator.GetChildren<PageData>(block.ListRoot);
             return children.ToList();
         }
-        //public List<IContentLoader> GetAllStandardPages(StandardPage currentPage)
-        //{
-        //    var contentRef = ContentReference.EmptyReference;
-        //    var serviceLocator = ServiceLocator.Current.GetInstance<IContentLoader>();
-        //    if (currentPage.ContentReference == null)
-        //    {
-        //        currentPage.ContentReference = contentRef;
-        //    }
-        //    var children = serviceLocator.GetChildren<StandardPage>(currentPage.ContentReference);
-
-        //    return children.ToList();
-        //}
     }
 }

@@ -18,8 +18,6 @@ namespace BlocketProject.Controllers
         {
             var model = new StandardPageViewModel(currentPage);
 
-      
-
             return View(model);
         }
         
