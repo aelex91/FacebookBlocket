@@ -2,8 +2,13 @@
 using BlocketProject.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Web;
+
 namespace BlocketProject.Helpers
 {
 
@@ -11,10 +16,10 @@ namespace BlocketProject.Helpers
     {
         static LetemsaleDbContext db = new LetemsaleDbContext();
 
-        public static List<BlocketProject.Models.ViewModels.AdsPageViewModel.UserAdsModel> GetAllAds()
+        public static List<AdsPageViewModel.UserAdsModel> GetAllAds()
         {
             var query = (from p in db.DbUserAds
-                         select new BlocketProject.Models.ViewModels.AdsPageViewModel.UserAdsModel
+                         select new AdsPageViewModel.UserAdsModel
                           {
                               UserId = p.UserId,
                               AdDescription = p.AdDescription,
@@ -27,6 +32,7 @@ namespace BlocketProject.Helpers
                           }).ToList();
             return query;
         }
+
         public static string GetAdById(int? id)
         {
 
@@ -52,5 +58,35 @@ namespace BlocketProject.Helpers
             return new List<string>();
 
         }
+
+        public static string GetUserFacebookId(string id)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.FacebookId == id
+                          select r.FacebookId).FirstOrDefault();
+            return result;
+        }
+
+        public static string GetUserImageUrl(string facebookId)
+        {
+            WebResponse response = null;
+            string pictureUrl = string.Empty;
+            try
+            {
+                WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture?type=large", facebookId));
+                response = request.GetResponse();
+                pictureUrl = response.ResponseUri.ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                if (response != null) response.Close();
+            }
+            return pictureUrl;
+        }
+
     }
 }

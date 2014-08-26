@@ -15,7 +15,12 @@ namespace BlocketProject.Controllers
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
         {
+
+
             var model = new ProfilePageViewModel(currentPage);
+
+
+            
             return View(model);
         }
     }
