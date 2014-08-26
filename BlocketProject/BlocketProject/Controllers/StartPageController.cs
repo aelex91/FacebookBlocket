@@ -29,11 +29,11 @@ namespace BlocketProject.Controllers
         public ActionResult Index(StartPage currentPage)
         {
 
-            if (Request["code"]!= null)
+            if (Request["code"] != null)
             {
                 CheckAuthorization();
             }
-            
+
             return View(currentPage);
         }
 
@@ -43,14 +43,6 @@ namespace BlocketProject.Controllers
 
             CheckAuthorization();
             return RedirectToAction("Index");
-
-            /*
-             * Klicka på knappen
-    
-             * Redirect till Facebook för autentisering/inloggning
-             * Hämta facebookID och tillgängliga användaruppgifter
-             * Lagra användare och redirect till användarvy.
-             */
         }
 
         public void CheckAuthorization()
@@ -85,17 +77,12 @@ namespace BlocketProject.Controllers
 
                     StreamReader reader = new StreamReader(response.GetResponseStream());
 
-
-
                     string vals = reader.ReadToEnd();
 
 
 
                     foreach (string token in vals.Split('&'))
                     {
-
-                        
-
                         tokens.Add(token.Substring(0, token.IndexOf("=")), token.Substring(token.IndexOf("=") + 1, token.Length - token.IndexOf("=") - 1));
 
                     }
@@ -108,14 +95,14 @@ namespace BlocketProject.Controllers
                 JsonObject user = client.Get("me/") as JsonObject;
 
                 JObject json = JObject.Parse(user.ToString());
-                
-                
 
-               
+
+
+
 
             }
 
-           
+
         }
     }
 }
