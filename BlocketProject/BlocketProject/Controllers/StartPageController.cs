@@ -42,6 +42,8 @@ namespace BlocketProject.Controllers
             if (Request["code"] != null)
             {
                 CheckAuthorization(); // har access att få logga in
+               
+              
             }
 
             return View(currentPage);
@@ -53,8 +55,12 @@ namespace BlocketProject.Controllers
         {
 
 
-            Login(SaveUser(CheckAuthorization()));
-
+           
+            CheckAuthorization();
+            var info = CheckAuthorization();
+            SaveUser(info);
+            var saveuser = SaveUser(info);
+           
 
             return View("Index");
 
@@ -62,20 +68,7 @@ namespace BlocketProject.Controllers
         }
 
 
-        public ActionResult Login(DbUserInformation user)
-        {
-
-            if (Membership.ValidateUser(user.Email, user.FacebookId))
-            {
-                FormsAuthentication.SetAuthCookie(user.Email, true);
-                return RedirectToAction("Index", "ProfilePageController");
-            }
-            else
-            {
-                return View("Index");
-            }
-
-        }
+     
 
 
         public JsonObject CheckAuthorization()
@@ -134,7 +127,7 @@ namespace BlocketProject.Controllers
 
         }
 
-        public DbUserInformation SaveUser(JsonObject jsonUser)
+        public HomeModel.UserInformation SaveUser(JsonObject jsonUser)
         {
             JsonUserModel user = new JsonUserModel();
 
@@ -155,17 +148,20 @@ namespace BlocketProject.Controllers
 
 
             DbUser.FacebookId = user.id;
+            var UserImageUrl = ConnetionHelper.GetUserImageUrl(DbUser.FacebookId);
             DbUser.FirstName = user.first_name;
             DbUser.LastName = user.last_name;
             DbUser.Email = user.email;
             DbUser.City = city;
             DbUser.Country = country;
-
-            var UserImageUrl = ConnetionHelper.GetUserImageUrl(DbUser.FacebookId);
-
             DbUser.ImageUrl = UserImageUrl;
 
-
+            HomeModel.UserInformation model = new HomeModel.UserInformation
+            {
+            
+            
+            
+            };
 
             var checkDbId = ConnetionHelper.GetUserFacebookId(DbUser.FacebookId);
 
@@ -177,7 +173,21 @@ namespace BlocketProject.Controllers
                 Membership.CreateUser(DbUser.Email, DbUser.FacebookId);
             }
 
-            return DbUser;
+            return model;
+        }
+        public ActionResult Login(DbUserInformation user)
+        {
+
+            if (Membership.ValidateUser(user.Email, user.FacebookId))
+            {
+                FormsAuthentication.SetAuthCookie(user.Email, true);
+                return RedirectToAction("Index", "ProfilePageController");
+            }
+            else
+            {
+                return View("Index");
+            }
+
         }
 
     }
