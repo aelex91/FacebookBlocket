@@ -52,13 +52,13 @@ namespace BlocketProject.Controllers
         public ActionResult Authenticate()
         {
 
-            
+
             Login(SaveUser(CheckAuthorization()));
 
 
             return View("Index");
-            
-            
+
+
         }
 
 
@@ -84,10 +84,10 @@ namespace BlocketProject.Controllers
 
             if (Request["code"] == null)
             {
-                Response.Redirect(string.Format("https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}", appId, redirectUrl, scope));   
+                Response.Redirect(string.Format("https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}", appId, redirectUrl, scope));
             }
 
-            if(Request["code"] != null)
+            if (Request["code"] != null)
             {
 
                 Dictionary<string, string> tokens = new Dictionary<string, string>();
@@ -176,7 +176,7 @@ namespace BlocketProject.Controllers
                 db.SaveChanges();
                 Membership.CreateUser(DbUser.Email, DbUser.FacebookId);
             }
-       
+
             return DbUser;
         }
 
