@@ -81,6 +81,7 @@ namespace BlocketProject.Controllers
         public JsonObject CheckAuthorization()
         {
 
+
             if (Request["code"] == null)
             {
                 Response.Redirect(string.Format("https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}", appId, redirectUrl, scope));   
