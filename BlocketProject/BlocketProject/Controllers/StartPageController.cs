@@ -41,59 +41,42 @@ namespace BlocketProject.Controllers
 
             if (Request["code"] != null)
             {
-                CheckAuthorization(); // har access att få logga in
+                CheckAuthorization();
             }
 
             return View(currentPage);
         }
 
-
         [HttpPost]
         public ActionResult Authenticate()
         {
 
-            
-            Login(SaveUser(CheckAuthorization()));
+            CheckAuthorization();
 
-
-            return View("Index");
-            
-            
+            return RedirectToAction("Index");
         }
 
 
-        public ActionResult Login(DbUserInformation user)
-        {
-
-            if (Membership.ValidateUser(user.Email, user.FacebookId))
-            {
-                FormsAuthentication.SetAuthCookie(user.Email, true);
-                return RedirectToAction("Index", "ProfilePageController");
-            }
-            else
-            {
-                return View("Index");
-            }
-
-        }
-
-
-        public JsonObject CheckAuthorization()
+        public void CheckAuthorization()
         {
 
             if (Request["code"] == null)
             {
-                Response.Redirect(string.Format("https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}", appId, redirectUrl, scope));   
+
+                Response.Redirect(string.Format("https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}", appId, redirectUrl, scope));
+
             }
 
-            if(Request["code"] != null)
+            else
             {
 
                 Dictionary<string, string> tokens = new Dictionary<string, string>();
 
 
 
-                string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&scope={2}&code={3}&client_secret={4}", appId, Request.Url.AbsoluteUri, scope, Request["code"].ToString(), appSecret);
+                string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&scope={2}&code={3}&client_secret={4}",
+
+                    appId, Request.Url.AbsoluteUri, scope, Request["code"].ToString(), appSecret);
 
 
 
@@ -125,15 +108,16 @@ namespace BlocketProject.Controllers
 
                 JsonObject user = client.Get("me/") as JsonObject;
 
-                return user;
-            }
 
-            return null;
+                SaveUser(user);
+
+
+            }
 
 
         }
 
-        public DbUserInformation SaveUser(JsonObject jsonUser)
+        public JsonUserModel SaveUser(JsonObject jsonUser)
         {
             JsonUserModel user = new JsonUserModel();
 
@@ -164,20 +148,26 @@ namespace BlocketProject.Controllers
 
             DbUser.ImageUrl = UserImageUrl;
 
-
-
             var checkDbId = ConnetionHelper.GetUserFacebookId(DbUser.FacebookId);
-
 
             if (checkDbId != DbUser.FacebookId)
             {
                 db.DbUserInformation.Add(DbUser);
                 db.SaveChanges();
-                Membership.CreateUser(DbUser.Email, DbUser.FacebookId);
+
             }
-       
-            return DbUser;
+            else
+            {
+                return user;
+            }
+            return user;
         }
 
+        public void SignInUser(ProfilePageViewModel.FacebookUserModel model)
+        {
+            var query = (from m in db.DbUserInformation where model.FacebookId == m.FacebookId select m);
+
+
+        }
     }
 }
