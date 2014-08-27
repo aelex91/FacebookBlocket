@@ -7,6 +7,8 @@ using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
 using BlocketProject.Models.Pages;
 using BlocketProject.Models.ViewModels;
+using BlocketProject.Models.DbClasses;
+using System.Web.Security;
 
 namespace BlocketProject.Controllers
 {
@@ -15,13 +17,11 @@ namespace BlocketProject.Controllers
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
         {
-
-
             var model = new ProfilePageViewModel(currentPage);
-
-
-            
             return View(model);
         }
+
+        
+
     }
 }
