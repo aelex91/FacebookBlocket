@@ -36,14 +36,16 @@ namespace BlocketProject.Controllers
 
         LetemsaleDbContext db = new LetemsaleDbContext();
 
+        HomeModel.UserInformation model = new HomeModel.UserInformation();
+
         public ActionResult Index(StartPage currentPage)
         {
 
             if (Request["code"] != null)
             {
-                CheckAuthorization(); // har access att få logga in
-               
-              
+                var info = CheckAuthorization(); // har access att få logga in
+                SaveUser(info);
+                Login(model);
             }
 
             return View(currentPage);
@@ -54,22 +56,12 @@ namespace BlocketProject.Controllers
         public ActionResult Authenticate()
         {
 
-
-           
             CheckAuthorization();
-            var info = CheckAuthorization();
-            SaveUser(info);
-            var saveuser = SaveUser(info);
-           
+            
 
             return View("Index");
 
-
         }
-
-
-     
-
 
         public JsonObject CheckAuthorization()
         {
@@ -156,12 +148,15 @@ namespace BlocketProject.Controllers
             DbUser.Country = country;
             DbUser.ImageUrl = UserImageUrl;
 
-            HomeModel.UserInformation model = new HomeModel.UserInformation
-            {
-            
-            
-            
-            };
+
+            model.FacebookId = DbUser.FacebookId;
+            model.FirstName = DbUser.FirstName;
+            model.LastName = DbUser.LastName;
+            model.Email = DbUser.Email;
+            model.City = DbUser.City;
+            model.Country = DbUser.Country;
+            model.ImageUrl = DbUser.ImageUrl;
+           
 
             var checkDbId = ConnetionHelper.GetUserFacebookId(DbUser.FacebookId);
 
@@ -175,7 +170,8 @@ namespace BlocketProject.Controllers
 
             return model;
         }
-        public ActionResult Login(DbUserInformation user)
+
+        public ActionResult Login(HomeModel.UserInformation user)
         {
 
             if (Membership.ValidateUser(user.Email, user.FacebookId))
