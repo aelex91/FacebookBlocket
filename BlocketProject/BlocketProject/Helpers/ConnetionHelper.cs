@@ -67,6 +67,14 @@ namespace BlocketProject.Helpers
             return result;
         }
 
+        public static string GetUserEmail(string id)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.FacebookId == id
+                          select r.Email).FirstOrDefault();
+            return result;
+        }
+
         public static string GetUserImageUrl(string facebookId)
         {
             WebResponse response = null;
@@ -88,6 +96,35 @@ namespace BlocketProject.Helpers
             return pictureUrl;
         }
 
+        public static DbUserInformation GetUserInformation(string email)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.Email == email
+                          select r).FirstOrDefault();
+            return result;
+        }
+
+        public static List<ProfilePageViewModel.UserAdsModel> GetUserAds(int? id)
+        {
+
+
+            var query = (from r in db.DbUserInformation
+                         join a in db.DbUserAds on r.UserId equals a.UserId
+                         where a.UserId == id
+                         select new ProfilePageViewModel.UserAdsModel
+                         {
+                             UserId = a.UserId,
+                             AdDescription = a.AdDescription,
+                             ImageUrl = a.ImageUrl,
+                             Price = a.Price,
+                             PublishDate = a.PublishDate,
+                             Title = a.Title,
+
+
+                         }).ToList();
+
+            return query;
+        }
 
 
     }

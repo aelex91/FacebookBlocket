@@ -13,19 +13,30 @@
     border-radius: 4px;
 }
 
-    .sub-navigation ul {
-        padding: 10px 0;
-    }
+.sub-navigation ul {
+padding: 10px 0;
+}
 
-        .sub-navigation ul li.active > a {
-            font-weight: bold;
-        }
+.sub-navigation ul li.active > a {
+font-weight: bold;
+}
 
-        .sub-navigation ul ul {
-            padding: 0 10px 0 10px;
-        }
+.sub-navigation ul ul {
+padding: 0 10px 0 10px;
+}
 
-            .sub-navigation ul ul a {
-                padding: 5px 25px;
-                font-size: 90%;
-            }
+.sub-navigation ul ul a {
+    padding: 5px 25px;
+    font-size: 90%;
+}
+
+#UserTable img{
+    border-radius: 15px;
+}
+
+#UserTable{
+        font-weight: bold;
+        font-size: 1.3em;
+        text-align: center;
+        font-family: Verdana, Geneva, sans-serif;
+}

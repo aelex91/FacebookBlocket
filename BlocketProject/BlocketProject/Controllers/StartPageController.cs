@@ -149,6 +149,7 @@ namespace BlocketProject.Controllers
             DbUser.ImageUrl = UserImageUrl;
 
 
+
             model.FacebookId = DbUser.FacebookId;
             model.FirstName = DbUser.FirstName;
             model.LastName = DbUser.LastName;
@@ -165,26 +166,36 @@ namespace BlocketProject.Controllers
             {
                 db.DbUserInformation.Add(DbUser);
                 db.SaveChanges();
-                Membership.CreateUser(DbUser.Email, DbUser.FacebookId);
             }
 
             return model;
         }
 
-        public ActionResult Login(HomeModel.UserInformation user)
+        public void Login(HomeModel.UserInformation user)
         {
+            
+            bool isAuthenticated = false;
+            var checkUserEmail = ConnetionHelper.GetUserEmail(user.FacebookId);
 
-            if (Membership.ValidateUser(user.Email, user.FacebookId))
+
+            if (checkUserEmail != null)
             {
-                FormsAuthentication.SetAuthCookie(user.Email, true);
-                return RedirectToAction("Index", "ProfilePageController");
+                isAuthenticated = true;
+                
+            }
+            if(isAuthenticated == true)
+            {
+                FormsAuthentication.SetAuthCookie(user.Email, false);
+                Response.Redirect(redirectUrl + "profilepage");
+               
             }
             else
             {
-                return View("Index");
+
             }
 
         }
+
 
     }
 }

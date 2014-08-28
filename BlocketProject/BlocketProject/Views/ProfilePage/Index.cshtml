@@ -5,4 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<table id="UserTable" class="left">
+    <tr>
+        <td>
+            <img src="@Model.Fbuser.ImageUrl" />
+        </td>
+    </tr>
+    <tr>
+        <td>@Model.Fbuser.FirstName @Model.Fbuser.LastName </td>
+    </tr>
+    <tr>
+        <td>
+            @Model.Fbuser.City, @Model.Fbuser.Country
+        </td>
+    </tr>
 
+</table>
+
+
+<table id="UserAds" class="right">
+    @foreach (var ad in Model.ListUserAds)
+    {
+        <tr>
+            <td>
+                <a href="#">@ad.Title</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="@ad.ImageUrl" style="height:25%" width:25%;>
+            </td>
+
+        </tr>
+
+    }
+</table>
