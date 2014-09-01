@@ -64,7 +64,16 @@ namespace BlocketProject.Helpers
             var result = (from r in db.DbUserInformation
                           where r.FacebookId == id
                           select r.FacebookId).FirstOrDefault();
-            return result;
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            else
+            {
+                return null;
+            }
         }
 
         public static string GetUserEmail(string id)
@@ -122,6 +131,13 @@ namespace BlocketProject.Helpers
 
 
                          }).ToList();
+
+            return query;
+        }
+
+        public static List<DbUserInformation> GetAllUsers()
+        {
+            var query = (from p in db.DbUserInformation select p).ToList();
 
             return query;
         }
