@@ -13,11 +13,13 @@ namespace BlocketProject.Models.DbClasses
         {
 
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer<LetemsaleDbContext>(null);
             base.OnModelCreating(modelBuilder);
         } // om du har uppdaterat databasen på senaste måste du skriva in detta ^
+
         public DbSet<DbUserAds> DbUserAds { get; set; }
         public DbSet<DbUserInformation> DbUserInformation { get; set; }
     }
