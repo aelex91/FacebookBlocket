@@ -122,8 +122,16 @@ namespace BlocketProject.Controllers
         public HomeModel.UserInformation SaveUser(JsonObject jsonUser)
         {
             JsonUserModel user = new JsonUserModel();
-
             string jsonString = jsonUser.ToString();
+
+            //StringBuilder sb = new StringBuilder(jsonString);
+            //string cleanString = sb
+            //    .Replace("å", "a")
+            //    .Replace("Å", "A")
+            //    .Replace("ä", "a")
+            //    .Replace("Ä", "A")
+            //    .Replace("ö", "o")
+            //    .Replace("Ö", "O").ToString();
 
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(JsonUserModel));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
@@ -131,36 +139,31 @@ namespace BlocketProject.Controllers
 
             DbUserInformation DbUser = new DbUserInformation();
 
-            var location = user.hometown.name;
-            string[] collection = location.Split(',');
-            string city = collection[0];
-            string country = collection[1];
-            country.TrimStart();
+
+            
+
+            
 
 
+            var location = user.location.name;
 
             DbUser.FacebookId = user.id;
             var UserImageUrl = ConnetionHelper.GetUserImageUrl(DbUser.FacebookId);
             DbUser.FirstName = user.first_name;
             DbUser.LastName = user.last_name;
             DbUser.Email = user.email;
-            DbUser.City = city;
-            DbUser.Country = country;
+            DbUser.Location = location;
             DbUser.ImageUrl = UserImageUrl;
-
-
 
             model.FacebookId = DbUser.FacebookId;
             model.FirstName = DbUser.FirstName;
             model.LastName = DbUser.LastName;
             model.Email = DbUser.Email;
-            model.City = DbUser.City;
-            model.Country = DbUser.Country;
+            model.Location = DbUser.Location;
             model.ImageUrl = DbUser.ImageUrl;
            
-
             var checkDbId = ConnetionHelper.GetUserFacebookId(DbUser.FacebookId);
-
+            var checkUsers = ConnetionHelper.GetAllUsers();
 
             if (checkDbId != DbUser.FacebookId)
             {

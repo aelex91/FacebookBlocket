@@ -25,6 +25,18 @@ namespace BlocketProject.Models.ViewModels
             public string name { get; set; }
         }
 
+        [DataContract]
+        public class Location
+        {
+            [DataMember]
+            public string id { get; set; }
+            [DataMember]
+            public string name { get; set; }
+        }
+
+        [DataMember]
+        public Location location { get; set; }
+
         [DataMember]
         public Hometown hometown { get; set; }
 

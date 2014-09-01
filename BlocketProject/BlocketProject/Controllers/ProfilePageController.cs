@@ -24,8 +24,7 @@ namespace BlocketProject.Controllers
             var model = new ProfilePageViewModel(currentPage);
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
 
-            model.Fbuser.City = user.City;
-            model.Fbuser.Country = user.Country;
+            model.Fbuser.Location = user.Location;
             model.Fbuser.FacebookId = user.FacebookId;
             model.Fbuser.FirstName = user.FirstName;
             model.Fbuser.LastName = user.LastName;
