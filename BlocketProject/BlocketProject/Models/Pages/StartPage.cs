@@ -23,5 +23,23 @@ namespace BlocketProject.Models.Pages
             GroupName = SystemTabNames.Content,
             Order = 200)]
         public virtual XhtmlString MainBody { get; set; }
+
+        [Required]
+        [Display(
+            Name = "Login redirect URL",
+            Description = "Specify which page you want your user to be redirected to after signing in.",
+            Order = 300
+            )]
+        public virtual PageReference LoginRedirect { get; set; }
+
+        public override void SetDefaultValues(ContentType contentType)
+        {
+
+            base.SetDefaultValues(contentType);
+
+            LoginRedirect = PageReference.StartPage;
+        }
+
     }
+
 }

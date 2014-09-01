@@ -40,12 +40,13 @@ namespace BlocketProject.Controllers
 
         public ActionResult Index(StartPage currentPage)
         {
-
             if (Request["code"] != null)
             {
                 var info = CheckAuthorization(); // har access att få logga in
+
+                //kolla nuvarande profilbild
                 SaveUser(info);
-                Login(model);
+                Login(model, currentPage.LoginRedirect);
             }
 
             return View(currentPage);
@@ -124,29 +125,13 @@ namespace BlocketProject.Controllers
             JsonUserModel user = new JsonUserModel();
             string jsonString = jsonUser.ToString();
 
-            //StringBuilder sb = new StringBuilder(jsonString);
-            //string cleanString = sb
-            //    .Replace("å", "a")
-            //    .Replace("Å", "A")
-            //    .Replace("ä", "a")
-            //    .Replace("Ä", "A")
-            //    .Replace("ö", "o")
-            //    .Replace("Ö", "O").ToString();
-
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(JsonUserModel));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
             user = (JsonUserModel)ser.ReadObject(stream);
 
             DbUserInformation DbUser = new DbUserInformation();
 
-
-            
-
-            
-
-
             var location = user.location.name;
-
             DbUser.FacebookId = user.id;
             var UserImageUrl = ConnetionHelper.GetUserImageUrl(DbUser.FacebookId);
             DbUser.FirstName = user.first_name;
@@ -174,7 +159,7 @@ namespace BlocketProject.Controllers
             return model;
         }
 
-        public void Login(HomeModel.UserInformation user)
+        public void Login(HomeModel.UserInformation user, PageReference page)
         {
             
             bool isAuthenticated = false;
@@ -188,8 +173,9 @@ namespace BlocketProject.Controllers
             }
             if(isAuthenticated == true)
             {
+                UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
-                Response.Redirect(redirectUrl + "profilepage");
+                Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());
                
             }
             else
@@ -197,6 +183,14 @@ namespace BlocketProject.Controllers
 
             }
 
+        }
+
+        [HttpPost]
+        public void Logout() 
+        {
+            UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
+            FormsAuthentication.SignOut();
+            Response.Redirect(UrlHelpers.PageLinkUrl(url, PageReference.StartPage).ToHtmlString());
         }
 
 
