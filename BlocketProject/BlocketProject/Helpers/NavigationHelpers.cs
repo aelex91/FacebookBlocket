@@ -72,6 +72,7 @@ namespace BlocketProject.Helpers
                 writer.WriteLine("</li>");
             }
             //Close top level element
+            
             writer.WriteLine("</ul>");
             writer.WriteLine("</nav>");
         }
@@ -182,7 +183,7 @@ IContentLoader contentLoader = null)
                 }
                 writer.WriteLine("</li>");
             }
-
+            
             //Close list element
             writer.WriteLine("</ul>");
         }

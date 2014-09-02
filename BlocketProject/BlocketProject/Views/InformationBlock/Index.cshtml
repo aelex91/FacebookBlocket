@@ -1,0 +1,12 @@
+﻿@model BlocketProject.Models.Blocks.InformationBlock
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <img src="@Model.Image">
+    <br />
+    @Model.Information
+    <br />
+    <input type="submit" value="@Model.ButtonText" />
+</div>

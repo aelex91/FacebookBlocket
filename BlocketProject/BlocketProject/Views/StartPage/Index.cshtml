@@ -1,18 +1,18 @@
 ﻿@model BlocketProject.Models.Pages.StartPage
 
 
-@{ Layout = "~/Views/Shared/_Root.cshtml"; }
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <h2>Index</h2>
 
 @Html.PropertyFor(x => x.ContentArea)
 
 @Html.PropertyFor(x => x.MainBody)
-
+<br />
 
 @using (Html.BeginForm("Authenticate","StartPage",FormMethod.Post))
         {
           
-            <button type="submit">Click Me!</button>
+            <button type="submit">Login</button>
            
         }

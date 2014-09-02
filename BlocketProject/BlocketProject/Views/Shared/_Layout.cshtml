@@ -18,12 +18,22 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-12">
                 <h3 class="muted">Let em sale</h3>
             </div>
         </div>
+
+        @using (Html.BeginForm("Logout", "StartPage", FormMethod.Post))
+        {
+
+            <button type="submit">Logout</button>
+
+        }
+        
         @{ Html.RenderMainNavigation(null); }
+        
         @RenderBody()
+        
     </div>
 </body>
 </html>
