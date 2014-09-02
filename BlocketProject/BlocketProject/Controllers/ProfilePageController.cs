@@ -19,7 +19,7 @@ namespace BlocketProject.Controllers
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
         {
-            var user = ConnectionHelper.GetUserInformation(User.Identity.Name);
+            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
 
             var model = new ProfilePageViewModel(currentPage);
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();

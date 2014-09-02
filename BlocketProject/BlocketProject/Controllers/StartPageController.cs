@@ -163,7 +163,7 @@ namespace BlocketProject.Controllers
         {
             
             bool isAuthenticated = false;
-            var checkUserEmail = ConnectionHelper.GetUserEmail(user.FacebookId);
+            var checkUserEmail = ConnectionHelper.GetUserEmailById(user.FacebookId);
 
 
             if (checkUserEmail != null)

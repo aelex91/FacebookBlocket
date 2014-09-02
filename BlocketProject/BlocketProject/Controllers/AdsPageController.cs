@@ -19,7 +19,7 @@ namespace BlocketProject.Controllers
 
             if(currentPage.CurrentUserAds == true)
             {
-                var user = Helpers.ConnectionHelper.GetUserInformation(User.Identity.Name);
+                var user = Helpers.ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
                 var value = Helpers.ConnectionHelper.GetCurrentUserAds(user.UserId);
                 model.ListCurrentUserAdsModel = value;
                 return View(model);
