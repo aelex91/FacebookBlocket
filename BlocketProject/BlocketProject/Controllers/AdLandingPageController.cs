@@ -15,7 +15,7 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(AdLandingPage currentPage)
         {
-            var user = ConnectionHelper.GetUserInformation(User.Identity.Name);
+            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
             var model = new AdLandingPageViewModel(currentPage);
             
             model.Fbuser = new AdLandingPageViewModel.FacebookUserModel();

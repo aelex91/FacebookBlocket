@@ -8,11 +8,12 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BlocketProject.Helpers
 {
 
-    public static class ConnetionHelper
+    public static class ConnectionHelper
     {
         static LetemsaleDbContext db = new LetemsaleDbContext();
 
@@ -28,8 +29,95 @@ namespace BlocketProject.Helpers
                               PublishDate = p.PublishDate,
                               Title = p.Title,
 
-
                           }).ToList();
+            return query;
+        }
+
+        public static List<AdsPageViewModel.UserAdsModel> GetCurrentUserAds(int? id)
+        {
+
+
+            var query = (from r in db.DbUserInformation
+                         join a in db.DbUserAds on r.UserId equals a.UserId
+                         where a.UserId == id
+                         select new AdsPageViewModel.UserAdsModel
+                         {
+                             UserId = a.UserId,
+                             AdDescription = a.AdDescription,
+                             ImageUrl = a.ImageUrl,
+                             Price = a.Price,
+                             PublishDate = a.PublishDate,
+                             Title = a.Title,
+
+
+                         }).ToList();
+
+            return query;
+        }
+
+        public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, string publishdate, int userId, int price)
+        {
+            var expirationDate = DateTime.Now.AddDays(14).ToShortDateString();
+
+            var modelUserAds = new DbUserAds
+            {
+                Email = email,
+                Phone = phone,
+                CategoryId = catId,
+                SubCategoryId = subcatId,
+                ImageUrl = imageUrl,
+                Title = title,
+                PublishDate = publishdate,
+                ExpirationDate = expirationDate,
+                UserId = userId,
+                Price = price,
+            };
+            db.DbUserAds.Add(modelUserAds);
+
+
+
+        }
+        public static void SaveNumberOfAdsToUser(string email)
+        {
+            var checkNumberofAds = CheckNumberOfAds(email);
+            checkNumberofAds = checkNumberofAds + 1;
+            var query = (from p in db.DbUserInformation
+                         where p.Email == email
+                         select p).FirstOrDefault();
+            try
+            {
+                if (checkNumberofAds == null)
+                {
+                    query.NumberOfAds = 1;
+                }
+                else
+                {
+                    query.NumberOfAds = query.NumberOfAds + 1;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+        
+        }
+        public static int? CheckNumberOfAds(string email)
+        {
+
+            var query = (from p in db.DbUserInformation
+                         where email == p.Email
+                         select p.NumberOfAds).FirstOrDefault();
+
+            return query;
+        }
+        public static Dictionary<int, string> GetCategories()
+        {
+            var query = (from p in db.DbCategories
+                         select p).ToDictionary(t => t.Id, t => t.CategoryName);
+
             return query;
         }
 
@@ -76,11 +164,18 @@ namespace BlocketProject.Helpers
             }
         }
 
-        public static string GetUserEmail(string id)
+        public static string GetUserEmailById(string id)
         {
             var result = (from r in db.DbUserInformation
                           where r.FacebookId == id
                           select r.Email).FirstOrDefault();
+            return result;
+        }
+        public static int GetUserIdByEmail(string email)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.Email == email
+                          select r.UserId).FirstOrDefault();
             return result;
         }
 
@@ -105,7 +200,7 @@ namespace BlocketProject.Helpers
             return pictureUrl;
         }
 
-        public static DbUserInformation GetUserInformation(string email)
+        public static DbUserInformation GetUserInformationByEmail(string email)
         {
             var result = (from r in db.DbUserInformation
                           where r.Email == email
