@@ -29,22 +29,23 @@ namespace BlocketProject.Controllers
         [HttpPost]
         public ActionResult CreateAd(CreateAdPage currentPage, HttpPostedFileBase file, string email, string phone, string Adtitle, string price, string text, string Category)
         {
-            var model = new CreateAdsPageViewModel(currentPage) {
-            
+            var model = new CreateAdsPageViewModel(currentPage)
+            {
+
                 File = file,
                 Email = email,
                 Phone = phone,
                 AdTitle = Adtitle,
                 Price = price,
                 Text = text,
-            
+
             };
             if (ModelState.IsValid)
             {
-                
+
                 if (ConnectionHelper.CheckNumberOfAds(email) > 5)
                 {
-                   
+
                     return View("Index", model);
                 }
                 var datetime = DateTime.Now.ToShortDateString();
