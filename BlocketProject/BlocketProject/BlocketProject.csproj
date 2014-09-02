@@ -397,11 +397,12 @@
     <Content Include="connectionStrings.config" />
     <Content Include="appSettings.config" />
     <Content Include="bin\BlocketProject.dll.config" />
-    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.0.js" />
-    <Content Include="Scripts\jquery-1.9.0.min.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\letemsale.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Style\Custom.css" />
     <Content Include="Views\Web.config" />
@@ -412,7 +413,6 @@
     <Content Include="App_Data\GeoLiteCity.dat" />
     <None Include="EPiServerLog.config" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\VideoBlock\Index.cshtml" />
     <Content Include="Views\StandardPage\Index.cshtml" />
@@ -425,6 +425,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\PageListBlock\Index.cshtml" />
     <Content Include="Views\InformationBlock\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
