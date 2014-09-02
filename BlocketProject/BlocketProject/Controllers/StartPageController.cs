@@ -133,7 +133,7 @@ namespace BlocketProject.Controllers
 
             var location = user.location.name;
             DbUser.FacebookId = user.id;
-            var UserImageUrl = ConnetionHelper.GetUserImageUrl(DbUser.FacebookId);
+            var UserImageUrl = ConnectionHelper.GetUserImageUrl(DbUser.FacebookId);
             DbUser.FirstName = user.first_name;
             DbUser.LastName = user.last_name;
             DbUser.Email = user.email;
@@ -147,8 +147,8 @@ namespace BlocketProject.Controllers
             model.Location = DbUser.Location;
             model.ImageUrl = DbUser.ImageUrl;
            
-            var checkDbId = ConnetionHelper.GetUserFacebookId(DbUser.FacebookId);
-            var checkUsers = ConnetionHelper.GetAllUsers();
+            var checkDbId = ConnectionHelper.GetUserFacebookId(DbUser.FacebookId);
+            var checkUsers = ConnectionHelper.GetAllUsers();
 
             if (checkDbId != DbUser.FacebookId)
             {
@@ -163,7 +163,7 @@ namespace BlocketProject.Controllers
         {
             
             bool isAuthenticated = false;
-            var checkUserEmail = ConnetionHelper.GetUserEmail(user.FacebookId);
+            var checkUserEmail = ConnectionHelper.GetUserEmail(user.FacebookId);
 
 
             if (checkUserEmail != null)
@@ -184,15 +184,6 @@ namespace BlocketProject.Controllers
             }
 
         }
-
-        [HttpPost]
-        public void Logout() 
-        {
-            UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-            FormsAuthentication.SignOut();
-            Response.Redirect(UrlHelpers.PageLinkUrl(url, PageReference.StartPage).ToHtmlString());
-        }
-
 
     }
 }
