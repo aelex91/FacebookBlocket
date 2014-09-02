@@ -10,8 +10,6 @@
 @using (Html.BeginForm("CreateAd", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
    
-    <b>@Html.PropertyFor(x => x.NameLabel)</b>
-    @Html.TextBoxFor(x => x.NameLabel, Model.NameLabel, new { id = "name" })
     <br />
     <b>@Html.PropertyFor(x => x.EmailLabel, new { id = "email" })</b>
     @Html.TextBox("email")
