@@ -133,7 +133,7 @@ namespace BlocketProject.Controllers
 
             var location = user.location.name;
             DbUser.FacebookId = user.id;
-            var UserImageUrl = ConnetionHelper.GetUserImageUrl(DbUser.FacebookId);
+            var UserImageUrl = ConnectionHelper.GetUserImageUrl(DbUser.FacebookId);
             DbUser.FirstName = user.first_name;
             DbUser.LastName = user.last_name;
             DbUser.Email = user.email;
@@ -147,8 +147,8 @@ namespace BlocketProject.Controllers
             model.Location = DbUser.Location;
             model.ImageUrl = DbUser.ImageUrl;
            
-            var checkDbId = ConnetionHelper.GetUserFacebookId(DbUser.FacebookId);
-            var checkUsers = ConnetionHelper.GetAllUsers();
+            var checkDbId = ConnectionHelper.GetUserFacebookId(DbUser.FacebookId);
+            var checkUsers = ConnectionHelper.GetAllUsers();
 
             if (checkDbId != DbUser.FacebookId)
             {
@@ -163,7 +163,7 @@ namespace BlocketProject.Controllers
         {
             
             bool isAuthenticated = false;
-            var checkUserEmail = ConnetionHelper.GetUserEmail(user.FacebookId);
+            var checkUserEmail = ConnectionHelper.GetUserEmailById(user.FacebookId);
 
 
             if (checkUserEmail != null)

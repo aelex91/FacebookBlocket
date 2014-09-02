@@ -91,7 +91,7 @@ namespace BlocketProject.Models.Pages
             Namelabel = "Namn";
             EmailLabel = "Email";
             PhoneLabel = "Telefon";
-            CategoryLabel = "Kateogori";
+            CategoryLabel = "Kategori";
             TitleLabel = "Rubrik";
             AdDescriptionLabel = "Text";
             PriceLabel = "Pris";
