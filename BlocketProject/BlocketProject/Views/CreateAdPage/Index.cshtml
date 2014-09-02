@@ -9,29 +9,44 @@
 
 @using (Html.BeginForm("CreateAd", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-   
-    <b>@Html.PropertyFor(x => x.NameLabel)</b>
-    @Html.TextBoxFor(x => x.NameLabel, Model.NameLabel, new { id = "name" })
-    <br />
-    <b>@Html.PropertyFor(x => x.EmailLabel, new { id = "email" })</b>
-    @Html.TextBox("email")
-    <br />
-    <b>@Html.PropertyFor(x => x.Phonelabel, new { id = "phone" })</b>
-    @Html.TextBox("phone")
-    <br />
-@*
-    <b>@Html.PropertyFor(x => x.CategoryLabel)</b>*@
-    //todo skapa dropdownlist från databas
+    <br /><br /><br />
+    <div>
+        @*<b>@Html.PropertyFor(x => x.NameLabel)
+        </b>*@
+        @*<b>@Html.PropertyFor(x => x.EmailLabel, new { id = "email" })
+        </b>*@
+        @Html.TextBoxFor(x => x.EmailLabel, Model.EmailLabel, new { id = "email", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })
+        @*<b>@Html.PropertyFor(x => x.Phonelabel, new { id = "phone" })
+        </b>*@
+        @Html.TextBoxFor(x => x.Phonelabel, Model.Phonelabel, new { id = "phone", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })        
+        <br />
+        @*
+            <b>@Html.PropertyFor(x => x.CategoryLabel)</b>
+        todo skapa dropdownlist från databas*@
 
-    <b>@Html.PropertyFor(x => x.TitleLabel)</b>
-    @Html.TextBox("title")
-    <br />
- 
-    @Html.TextArea("text", new { id = "text" })
-    <b>@Html.PropertyFor(x => x.DescriptionLabel)</b>
-    <br />
-    <input type="file" name="file" id="file" style="width: 100%;" /> 
-    <br />
-    <input type="submit" value="@Model.ButtonLabel" />
-    <b>@Model.ErrorMessage</b>
+        @*<b>@Html.PropertyFor(x => x.TitleLabel)
+        </b>*@
+        @Html.TextBoxFor(x => x.TitleLabel, Model.TitleLabel, new { id = "title", @class = "textfield", style = "margin-top:50px", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })
+        <br />
+
+        @Html.TextArea("text", new { id = "text", @class = "textfieldBig", @onclick = "textfieldbigpressed()", @onblur = "textfieldbigblur()" })
+        @*<b>@Html.PropertyFor(x => x.DescriptionLabel)
+        </b>*@
+        <br />
+        <form>
+            <a href="#" id="browse">Välj fil</a>
+            <div id="wrapper">
+                <input type="file" size="1" name="file" id="wrapper" />
+            </div>
+        </form>
+
+            <br />
+            <br />
+        <br />
+            <input type="submit" class="button" value="Ladda upp" />
+
+            <b>@Model.ErrorMessage</b>
+
+        </div>
+
 }
