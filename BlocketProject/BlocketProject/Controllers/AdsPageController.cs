@@ -15,11 +15,11 @@ namespace BlocketProject.Controllers
         public ActionResult Index(AdsPage currentPage)
         {
             
-            var value = Helpers.ConnetionHelper.GetAllAds();
+            var GetAllAds = Helpers.ConnectionHelper.GetAllAds();
            
             var model = new AdsPageViewModel(currentPage);
 
-            model.ListUserAdsModel = value;
+            model.ListUserAdsModel = GetAllAds;
 
             // hämta värden från db. klar
             // fyll dom i en model,

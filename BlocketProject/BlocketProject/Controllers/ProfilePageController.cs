@@ -19,7 +19,7 @@ namespace BlocketProject.Controllers
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
         {
-            var user = ConnetionHelper.GetUserInformation(User.Identity.Name);
+            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
 
             var model = new ProfilePageViewModel(currentPage);
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
@@ -32,7 +32,7 @@ namespace BlocketProject.Controllers
             model.Fbuser.Email = user.Email;
             model.Fbuser.ImageUrl = user.ImageUrl;
 
-            model.ListUserAds = ConnetionHelper.GetUserAds(user.UserId);
+            model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
         }

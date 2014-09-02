@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BlocketProject.Models.ViewModels
 {
@@ -11,7 +12,6 @@ namespace BlocketProject.Models.ViewModels
     {
 
         public string Heading { get; set; }
-        [Required(ErrorMessage = "Compiletime error required")]
         public string NameLabel { get; set; }
         public string EmailLabel { get; set; }
         public string Phonelabel { get; set; }
@@ -22,6 +22,23 @@ namespace BlocketProject.Models.ViewModels
         public string ButtonLabel { get; set; }
         public string TitleLabel { get; set; }
         public string ErrorMessage { get; set; }
+
+        // properties to create an ad
+        public HttpPostedFileBase File { get; set; }
+        [Required(ErrorMessage = "Required an email")]
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string AdTitle { get; set; }
+        [Required(ErrorMessage = "Set a price")]
+        public string Price { get; set; }
+        [Required(ErrorMessage = "Write something..")]
+        public string Text { get; set; }
+       
+
+        //Categories
+        public string SelectedCategory { get; set; }
+        public Dictionary<int, string> Category { get; set; }
+
         public CreateAdsPageViewModel(CreateAdPage currentPage)
         {
 

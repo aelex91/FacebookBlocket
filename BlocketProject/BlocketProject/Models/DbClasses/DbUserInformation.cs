@@ -11,12 +11,13 @@ namespace BlocketProject.Models.DbClasses
     public class DbUserInformation
     {
         [Key, Column("UserId")]
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public string FacebookId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Location { get; set; }
         public string ImageUrl { get; set; }
+        public int? NumberOfAds { get; set; }
     }
 }

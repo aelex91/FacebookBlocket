@@ -9,6 +9,8 @@ using BlocketProject.Models.Pages;
 using BlocketProject.Models.ViewModels;
 using System.Web;
 using System.IO;
+using BlocketProject.Helpers;
+using System;
 
 namespace BlocketProject.Controllers
 {
@@ -16,31 +18,54 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(CreateAdPage currentPage)
         {
-            //MÅSTE VARA AUTHENTICATED. FÖR ATT SYNAS
-            // en användare ska kunna skapa en egen AD.
-            // så på profil sida har vi en knapp till adsidan (måste vara authorize för att komma dit)
-            // när man kommer till sidan ska man kunna skriva upp information om sin add.
-            //skapa upp en knapp, textfält, upload bild, pris, osv
+            // hämta listnamnen 
             var model = new CreateAdsPageViewModel(currentPage);
+            //    model.SelectedCategory = ConnectionHelper.GetCategories();
 
+
+            model.Category = ConnectionHelper.GetCategories();
             return View(model);
         }
         [HttpPost]
-        public ActionResult CreateAd(CreateAdPage currentPage,HttpPostedFileBase file,string name)
+        public ActionResult CreateAd(CreateAdPage currentPage, HttpPostedFileBase file, string email, string phone, string Adtitle, string price, string text, string Category)
         {
-              var model = new CreateAdsPageViewModel(currentPage);
-              if (file == null)
-              {
-                  model.ErrorMessage = "Choose an Image";
-                  return View("Index", model.ErrorMessage);
-              }
-            if (file.ContentLength > 0)
+            var model = new CreateAdsPageViewModel(currentPage) {
+            
+                File = file,
+                Email = email,
+                Phone = phone,
+                AdTitle = Adtitle,
+                Price = price,
+                Text = text,
+            
+            };
+            if (ModelState.IsValid)
             {
-                FileUpload(file);
+                
+                if (ConnectionHelper.CheckNumberOfAds(email) > 5)
+                {
+                   
+                    return View("Index", model);
+                }
+                var datetime = DateTime.Now.ToShortDateString();
+
+
+                if (file == null)
+                {
+                    return null;
+                }
+                if (file.ContentLength > 0)
+                {
+                    FileUpload(file);
+                }
+                var priceAsInt = Convert.ToInt32(price);
+                var phoneAsInt = Convert.ToInt32(phone);
+                var categoryAsInt = Convert.ToInt32(Category);
+                ConnectionHelper.SaveAdInformationToDb(email, phoneAsInt, categoryAsInt, 1, "/images/" + file.FileName, Adtitle, datetime, ConnectionHelper.GetUserIdByEmail(User.Identity.Name), priceAsInt);
+                ConnectionHelper.SaveNumberOfAdsToUser(email);
+                //ladda in värderna vi får från vyn in till en användares databas.
+                //skicka tillbaka personen till en tack sida?
             }
-        
-            //ladda in värderna vi får från vyn in till en användares databas.
-            //skicka tillbaka personen till en tack sida?
             return View("Index", model);
         }
         public ActionResult FileUpload(HttpPostedFileBase file)
