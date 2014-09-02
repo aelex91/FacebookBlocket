@@ -24,8 +24,9 @@ namespace BlocketProject.Helpers
             ContentReference.StartPage;
             var writer = html.ViewContext.Writer;
             //Top level elements
-            writer.WriteLine("<nav class=\"navbar navbar-inverse\">");
+            //writer.WriteLine("<nav class=\"navbar navbar-inverse\">");
             writer.WriteLine("<ul class=\"nav navbar-nav\">");
+            //writer.WriteLine("<ul class=\"menuborder\">");
             if (includeRoot)
             {
                 //Link to the root page
@@ -35,7 +36,7 @@ namespace BlocketProject.Helpers
                 }
                 else
                 {
-                    writer.WriteLine("<li>");
+                    writer.WriteLine("<li class=\"menulink\">");
                 }
                 writer.WriteLine(
                 html.PageLink(rootLink).ToHtmlString());

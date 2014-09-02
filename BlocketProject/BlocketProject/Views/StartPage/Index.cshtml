@@ -10,9 +10,9 @@
 @Html.PropertyFor(x => x.MainBody)
 <br />
 
-@using (Html.BeginForm("Authenticate","StartPage",FormMethod.Post))
-        {
-          
-            <button type="submit">Login</button>
-           
-        }
+@using (Html.BeginForm("Authenticate", "StartPage", FormMethod.Post))
+{
+
+    <button type="submit" class="logInOutButton">Login</button>
+
+}
