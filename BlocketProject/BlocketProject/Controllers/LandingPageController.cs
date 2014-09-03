@@ -11,18 +11,25 @@ using BlocketProject.Models.ViewModels;
 
 namespace BlocketProject.Controllers
 {
-    public class AdLandingPageController : PageController<AdLandingPage>
+    public class LandingPageController : PageController<LandingPage>
     {
-        public ActionResult Index(AdLandingPage currentPage)
+        public ActionResult Index(LandingPage currentPage)
         {
+            var model = new LandingPageViewModel(currentPage);
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-            var model = new AdLandingPageViewModel(currentPage);
-            
-            model.Fbuser = new AdLandingPageViewModel.FacebookUserModel();
 
-            model.Fbuser.firstName = user.FirstName;
-            model.Fbuser.lastName = user.LastName;
-            
+            if (user != null)
+            {
+
+                model.Fbuser.firstName = user.FirstName;
+                model.Fbuser.lastName = user.LastName;
+            }
+
+
+            model.Fbuser = new LandingPageViewModel.FacebookUserModel();
+
+
+
             return View(model);
         }
     }

@@ -1,0 +1,10 @@
+﻿@model BlocketProject.Models.ViewModels.LandingPageViewModel
+
+
+@if (Model.Fbuser.firstName != null || Model.Fbuser.lastName != null)
+{
+    <h2>@Model.Heading @Model.Fbuser.firstName @Model.Fbuser.lastName</h2>
+}
+
+
+@Html.PropertyFor(x=>x.MainBody)
