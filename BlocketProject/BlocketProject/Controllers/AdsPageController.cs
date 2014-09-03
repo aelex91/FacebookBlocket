@@ -14,18 +14,24 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(AdsPage currentPage)
         {
-            
-            var GetAllAds = Helpers.ConnectionHelper.GetAllAds();
-           
             var model = new AdsPageViewModel(currentPage);
+            
 
-            model.ListUserAdsModel = GetAllAds;
-
-            // hämta värden från db. klar
-            // fyll dom i en model,
-            //skicka vidare modellen.
+            if(currentPage.CurrentUserAds == true)
+            {
+                var user = Helpers.ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                var value = Helpers.ConnectionHelper.GetCurrentUserAds(user.UserId);
+                model.ListCurrentUserAdsModel = value;
+                return View(model);
+            }
+            else
+            {
+                var value = Helpers.ConnectionHelper.GetAllAds();
+                model.ListUserAdsModel = value;
+                return View(model);
+            }
            
-            return View(model);
+            
         }
     }
 }

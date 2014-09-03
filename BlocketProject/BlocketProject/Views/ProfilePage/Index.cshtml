@@ -4,33 +4,32 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<table id="UserTable" class="left">
-    <tr>
-        <td>
-            <img src="@Model.Fbuser.ImageUrl" />
-        </td>
-    </tr>
-    <tr>
-        <td>@Model.Fbuser.FirstName @Model.Fbuser.LastName </td>
-    </tr>
-    <tr>
-        <td>
-            @Model.Fbuser.Location
-        </td>
-    </tr>
-
-</table>
-
-
-<table id="UserAds" class="right">
-    @foreach (var ad in Model.ListUserAds)
-    {
+    <table id="UserTable" style="margin: 30px;">
         <tr>
             <td>
-                <a href="#">@ad.Title<br /><img src="@ad.ImageUrl" style="max-height: 100px; max-width:100px;" class="center-block"></a>
+                <img src="@Model.Fbuser.ImageUrl" />
+            </td>
+        </tr>
+        <tr>
+            <td>@Model.Fbuser.FirstName @Model.Fbuser.LastName </td>
+        </tr>
+        <tr>
+            <td>
+                @Model.Fbuser.Location
             </td>
         </tr>
 
-    }
-</table>
+    </table>
+    <table id="UserAds">
+        <tr>
+            @foreach (var ad in Model.ListUserAds)
+            {
+
+                <td style="text-align: center; margin: 30px; float: left;">
+                    <a href="#">@ad.Title<br /><img src="@ad.ImageUrl" style="height: 100px; width:100px;"></a>
+                </td>
+
+
+            }
+        </tr>
+    </table>

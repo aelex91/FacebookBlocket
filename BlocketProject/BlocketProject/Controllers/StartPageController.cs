@@ -185,14 +185,5 @@ namespace BlocketProject.Controllers
 
         }
 
-        [HttpPost]
-        public void Logout() 
-        {
-            UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-            FormsAuthentication.SignOut();
-            Response.Redirect(UrlHelpers.PageLinkUrl(url, PageReference.StartPage).ToHtmlString());
-        }
-
-
     }
 }
