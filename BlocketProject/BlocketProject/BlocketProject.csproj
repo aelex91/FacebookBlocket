@@ -256,14 +256,24 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\FilterConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\WebApiConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Business\RouteConfig.cs" />
+    <Compile Include="Controllers\AdLandingPageController.cs" />
     <Compile Include="Controllers\AdsPageController.cs" />
     <Compile Include="Controllers\CreateAdPageController.cs" />
     <Compile Include="Controllers\InformationBlockController.cs" />
+    <Compile Include="Controllers\LogoutBlockController.cs" />
     <Compile Include="Controllers\PageListBlockController.cs" />
     <Compile Include="Controllers\ProfilePageController.cs" />
     <Compile Include="Controllers\StandardPageController.cs" />
@@ -276,6 +286,7 @@
     <Compile Include="Helpers\NavigationHelpers.cs" />
     <Compile Include="Helpers\UrlHelpers.cs" />
     <Compile Include="Models\Blocks\InformationBlock.cs" />
+    <Compile Include="Models\Blocks\LogoutBlock.cs" />
     <Compile Include="Models\Blocks\PageListBlock.cs" />
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
@@ -284,12 +295,14 @@
     <Compile Include="Models\DbClasses\DbUserInformation.cs" />
     <Compile Include="Models\DbClasses\LetemsaleDbContext.cs" />
     <Compile Include="Models\Media\ImageData.cs" />
+    <Compile Include="Models\Pages\AdLandingPage.cs" />
     <Compile Include="Models\Pages\AdsPage.cs" />
     <Compile Include="Models\Pages\CreateAdPage.cs" />
     <Compile Include="Models\Pages\ProfilePage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\StandardPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
+    <Compile Include="Models\ViewModels\AdLandingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\AdsPageViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateAdsPageViewModel.cs" />
     <Compile Include="Models\ViewModels\HomeModel.cs" />
@@ -397,13 +410,11 @@
     <Content Include="connectionStrings.config" />
     <Content Include="appSettings.config" />
     <Content Include="bin\BlocketProject.dll.config" />
+    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\letemsale.js" />
-    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\jquery-1.9.0.js" />
+    <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Style\Custom.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Global.asax" />
@@ -413,6 +424,7 @@
     <Content Include="App_Data\GeoLiteCity.dat" />
     <None Include="EPiServerLog.config" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\VideoBlock\Index.cshtml" />
     <Content Include="Views\StandardPage\Index.cshtml" />
@@ -425,7 +437,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\PageListBlock\Index.cshtml" />
     <Content Include="Views\InformationBlock\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\LogoutBlock\Index.cshtml" />
+    <Content Include="Views\AdLandingPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -442,6 +455,8 @@
           <DevelopmentServerPort>57311</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://Letemsale.com/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://Letemsale.com/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

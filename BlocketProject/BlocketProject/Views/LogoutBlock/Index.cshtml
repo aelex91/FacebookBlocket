@@ -1,0 +1,11 @@
+﻿@model BlocketProject.Models.Blocks.LogoutBlock
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="logoutBlock">
+    @using (Html.BeginForm("Index", "LogoutBlock", FormMethod.Post))
+    {
+        <input type="submit" value="@Model.ButtonText" />
+    }
+</div>

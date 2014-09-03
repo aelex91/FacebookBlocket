@@ -7,41 +7,31 @@ using EPiServer.SpecializedProperties;
 
 namespace BlocketProject.Models.Pages
 {
-    [ContentType(DisplayName = "AdsPage", GUID = "93f82d57-f1b8-473f-9ba1-14843f10b8c5", Description = "")]
-    public class AdsPage : PageData
+    [ContentType(DisplayName = "AdLandingPage", GUID = "1f3e32e3-1d74-4c71-bc5a-e9e52f7298e2", Description = "")]
+    public class AdLandingPage : PageData
     {
-
         [CultureSpecific]
         [Display(
             Name = "Heading",
+            Description = "Heading of the landing page.",
             GroupName = SystemTabNames.Content,
-            Order = 100)]
+            Order = 1)]
         public virtual string Heading { get; set; }
 
-        [CultureSpecific]
-        [Display(
-            Name = "Ad Category",
-            GroupName = SystemTabNames.Content,
-            Order = 200)]
-        public virtual string AdCategory { get; set; }
 
         [CultureSpecific]
         [Display(
-            Name = "Only show current users ads",
-            Description = "Checking this will only show the ads from the currently active user.",
+            Name = "Main body",
+            Description = "The main body will be shown in the main content area of the page, using the XHTML-editor you can insert for example text, images and tables.",
             GroupName = SystemTabNames.Content,
-            Order = 300)]
-        public virtual bool CurrentUserAds { get; set; }
+            Order = 1)]
+        public virtual XhtmlString MainBody { get; set; }
 
         public override void SetDefaultValues(ContentType contentType)
         {
             base.SetDefaultValues(contentType);
-
-            CurrentUserAds = false;
+            Heading = "Thank you ";
         }
-
-
-
 
     }
 }

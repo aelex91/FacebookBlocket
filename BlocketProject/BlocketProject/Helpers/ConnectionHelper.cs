@@ -33,6 +33,28 @@ namespace BlocketProject.Helpers
             return query;
         }
 
+        public static List<AdsPageViewModel.UserAdsModel> GetCurrentUserAds(int? id)
+        {
+
+
+            var query = (from r in db.DbUserInformation
+                         join a in db.DbUserAds on r.UserId equals a.UserId
+                         where a.UserId == id
+                         select new AdsPageViewModel.UserAdsModel
+                         {
+                             UserId = a.UserId,
+                             AdDescription = a.AdDescription,
+                             ImageUrl = a.ImageUrl,
+                             Price = a.Price,
+                             PublishDate = a.PublishDate,
+                             Title = a.Title,
+
+
+                         }).ToList();
+
+            return query;
+        }
+
         public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, string publishdate, int userId, int price)
         {
             var expirationDate = DateTime.Now.AddDays(14).ToShortDateString();
