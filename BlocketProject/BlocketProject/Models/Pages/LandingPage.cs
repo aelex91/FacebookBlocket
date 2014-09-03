@@ -7,8 +7,8 @@ using EPiServer.SpecializedProperties;
 
 namespace BlocketProject.Models.Pages
 {
-    [ContentType(DisplayName = "AdLandingPage", GUID = "1f3e32e3-1d74-4c71-bc5a-e9e52f7298e2", Description = "")]
-    public class AdLandingPage : PageData
+    [ContentType(DisplayName = "LandingPage", GUID = "1f3e32e3-1d74-4c71-bc5a-e9e52f7298e2", Description = "")]
+    public class LandingPage : PageData
     {
         [CultureSpecific]
         [Display(

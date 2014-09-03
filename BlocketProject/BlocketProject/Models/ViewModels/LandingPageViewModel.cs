@@ -7,19 +7,19 @@ using System.Web;
 
 namespace BlocketProject.Models.ViewModels
 {
-    public class AdLandingPageViewModel
+    public class LandingPageViewModel
     {
         public string Heading { get; set; }
         public XhtmlString MainBody { get; set; }
 
-        public AdLandingPageViewModel(AdLandingPage currentPage)
+        public LandingPageViewModel(LandingPage currentPage)
         {
             Heading = currentPage.Heading;
             MainBody = currentPage.MainBody;
 
         }
 
-        public BlocketProject.Models.ViewModels.AdLandingPageViewModel.FacebookUserModel Fbuser { get; set; }
+        public BlocketProject.Models.ViewModels.LandingPageViewModel.FacebookUserModel Fbuser { get; set; }
 
         public class FacebookUserModel
         {
