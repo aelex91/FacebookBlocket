@@ -402,7 +402,6 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\letemsale.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Style\Custom.css" />
     <Content Include="Views\Web.config" />

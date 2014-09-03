@@ -26,7 +26,7 @@ namespace BlocketProject.Helpers
             //Top level elements
             //writer.WriteLine("<nav class=\"navbar navbar-inverse\">");
             writer.WriteLine("<ul class=\"nav navbar-nav\">");
-            //writer.WriteLine("<ul class=\"menuborder\">");
+            writer.WriteLine("<ul class=\"menuborder\">");
             if (includeRoot)
             {
                 //Link to the root page
