@@ -15,14 +15,15 @@
        @Html.DropDownListFor(x=>x.Category,new SelectList(Model.Category,"Key","Value"))
         @Html.TextBoxFor(x => x.EmailLabel, Model.EmailLabel, new { id = "email", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })
 
-        @Html.TextBoxFor(x => x.Phonelabel, Model.Phonelabel, new { id = "phone", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })        
+        @Html.TextBoxFor(x => x.Phonelabel, Model.Phonelabel, new { id = "phone", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })
+         @Html.TextBoxFor(x => x.Phonelabel, Model.PriceLabel, new { id = "price", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })                
         <br />
 
         @Html.TextBoxFor(x => x.TitleLabel, Model.TitleLabel, new { id = "title", @class = "textfield", style = "margin-top:50px", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id)" })
         <br />
 
         @Html.TextArea("text", new { id = "text", @class = "textfieldBig", @onclick = "textfieldbigpressed()", @onblur = "textfieldbigblur()" })
-
+       
         <br />
         <form>
             <a href="#" id="browse">Välj fil</a>

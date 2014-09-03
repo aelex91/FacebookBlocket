@@ -42,8 +42,8 @@ namespace BlocketProject.Controllers
             };
             if (ModelState.IsValid)
             {
-
-                if (ConnectionHelper.CheckNumberOfAds(email) > 5)
+                var userEmail = User.Identity.Name;
+                if (ConnectionHelper.CheckNumberOfAds(userEmail) > 5)
                 {
 
                     return View("Index", model);

@@ -10,16 +10,19 @@
 function textfieldpressed(id) {
     var element = $('#' + id);
     element.addClass("active");
-    if (element[0].value == "Namn") {
+    if (element[0].id == "name") {
         element[0].value = "";
     }
-    if (element[0].value == "Email") {
+    if (element[0].id == "email") {
         element[0].value = "";
     }
-    if (element[0].value == "Telefon") {
+    if (element[0].id == "phone") {
         element[0].value = "";
     }
-    if (element[0].value == "Rubrik") {
+    if (element[0].id == "title") {
+        element[0].value = "";
+    }
+    if (element[0].id == "price") {
         element[0].value = "";
     }
 }
