@@ -1,30 +1,9 @@
 ﻿
-//(function () {
-
-//    $(".textfield").on("click", function () {
-//        $(this).addClass("active");
-//    });
-
-//})();
 
 function textfieldpressed(id) {
     var element = $('#' + id);
     element.addClass("active");
-    //if (element[0].value == "Namn") {
-    //    element[0].value = "";
-    //}
-    //if (element[0].value == "Email") {
-    //    element[0].value = "";
-    //}
-    //if (element[0].value == "Telefon") {
-    //    element[0].value = "";
-    //}
-    //if (element[0].value == "Rubrik") {
-    //    element[0].value = "";
-    //}
-    //if (element[0].value == "Pris") {
-    //    element[0].value = "";
-    //}
+
     if (element[0].id == "email" || element[0].id == "phone" || element[0].id == "title" || element[0].id == "price")
     {
         $('#' + id).focus();
