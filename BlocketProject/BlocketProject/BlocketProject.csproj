@@ -295,9 +295,9 @@
     <Compile Include="Models\DbClasses\DbUserInformation.cs" />
     <Compile Include="Models\DbClasses\LetemsaleDbContext.cs" />
     <Compile Include="Models\Media\ImageData.cs" />
-    <Compile Include="Models\Pages\LandingPage.cs" />
     <Compile Include="Models\Pages\AdsPage.cs" />
     <Compile Include="Models\Pages\CreateAdPage.cs" />
+    <Compile Include="Models\Pages\LandingPage.cs" />
     <Compile Include="Models\Pages\ProfilePage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\StandardPage.cs" />
