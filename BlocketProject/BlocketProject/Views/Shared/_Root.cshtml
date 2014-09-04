@@ -13,7 +13,11 @@
                 <h3 class="muted">Letemsale</h3>
             </div>
         </div>
-        @{ Html.RenderMainNavigation(); }
+        @if (User.Identity.IsAuthenticated)
+        {
+           
+        }
+            
         @RenderBody()
     </div>
 </body>

@@ -33,13 +33,14 @@ namespace BlocketProject.Models.ViewModels
 
         public class UserAdsModel
         {
-            public int? UserId { get; set; }
+            public int UserId { get; set; }
             public int AdId { get; set; }
             public string Title { get; set; }
             public int Price { get; set; }
             public string AdDescription { get; set; }
             public string ImageUrl { get; set; }
-            public string PublishDate { get; set; }
+            public DateTime PublishDate { get; set; }
+            public DateTime ExpirationDate { get; set; }
             public int CategoryId { get; set; }
         }
 

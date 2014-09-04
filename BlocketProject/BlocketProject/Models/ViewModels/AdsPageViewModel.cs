@@ -14,6 +14,8 @@ namespace BlocketProject.Models.ViewModels
             Heading = currentPage.Heading;
             CurrentUserAds = currentPage.CurrentUserAds;
         }
+        
+        
 
         public List<UserAdsModel> ListUserAdsModel { get; set; }
         public List<UserAdsModel> ListCurrentUserAdsModel { get; set; }
@@ -32,9 +34,10 @@ namespace BlocketProject.Models.ViewModels
              [Required(ErrorMessage = "Description is required.")]
             public string AdDescription { get; set; }
             public string ImageUrl { get; set; }
-            public string PublishDate { get; set; }
-            public string ExpirationDate { get; set; }
+            public DateTime PublishDate { get; set; }
+            public DateTime ExpirationDate { get; set; }
             public int CategoryId { get; set; }
+            public int SubCategoryId { get; set; }
         }
     }
 }

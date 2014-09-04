@@ -73,7 +73,8 @@ namespace BlocketProject.Helpers
                 writer.WriteLine("</li>");
             }
             //Close top level element
-            
+
+            writer.WriteLine("<li><input class=\"btn btn-default\" type=\"submit\" value=\"Logout\"/></li>");
             writer.WriteLine("</ul>");
             writer.WriteLine("</nav>");
         }
