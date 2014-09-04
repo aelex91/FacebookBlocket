@@ -55,7 +55,7 @@ namespace BlocketProject.Helpers
             return query;
         }
 
-        public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, string publishdate, int userId, int price)
+        public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, string publishdate, int userId, int price,string text)
         {
             var expirationDate = DateTime.Now.AddDays(14).ToShortDateString();
 
