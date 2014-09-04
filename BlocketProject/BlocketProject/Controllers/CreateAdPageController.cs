@@ -20,28 +20,25 @@ namespace BlocketProject.Controllers
         {
             var model = new CreateAdsPageViewModel(currentPage);
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-            if (user.NumberOfAds >= currentPage.NumberOfAds)
-            {
-                model.ErrorMessage = "You can only have 5 ads.";
-                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
-            }
+         
             model.Category = ConnectionHelper.GetCategories();
             return View(model);
         }
         [HttpPost]
         public ActionResult CreateAd(CreateAdPage currentPage, HttpPostedFileBase file, string email, string phone, string title, string price, string text, string category)
         {
-            var model = new CreateAdsPageViewModel(currentPage)
+            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+            var model = new CreateAdsPageViewModel(currentPage);
+            if (user.NumberOfAds >= currentPage.NumberOfAds)
             {
-
-                File = file,
-                Email = email,
-                Phone = phone,
-                AdTitle = title,
-                Price = price,
-                Text = text,
-
-            };
+                model.ErrorMessage = "You can only have "+ currentPage.NumberOfAds + " adds.";
+                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
+            }
+            else
+            {
+          
+          
+          
             if (ModelState.IsValid)
             {
                 var userEmail = User.Identity.Name;
@@ -67,6 +64,7 @@ namespace BlocketProject.Controllers
                 ConnectionHelper.SaveNumberOfAdsToUser(User.Identity.Name);
                 //ladda in värderna vi får från vyn in till en användares databas.
                 //skicka tillbaka personen till en tack sida?
+            }
             }
             UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
             return Redirect(UrlHelpers.PageLinkUrl(url, currentPage.ReferenceToLandingPage ?? PageReference.StartPage).ToHtmlString());
