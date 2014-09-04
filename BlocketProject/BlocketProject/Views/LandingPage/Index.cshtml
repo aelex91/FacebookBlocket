@@ -1,3 +1,7 @@
 ﻿@model BlocketProject.Models.ViewModels.LandingPageViewModel
 
-<h1>Thank you</h1>
+<h1>Thank you @User.Identity.Name</h1>
+@if (Model.ErrorMessage != null)
+{
+    <h3>Problem occured..: @Model.ErrorMessage</h3>
+}

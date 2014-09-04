@@ -14,11 +14,15 @@ namespace BlocketProject.Controllers
     public class LandingPageController : PageController<LandingPage>
     {
         [HttpGet]
-        public ActionResult Index(LandingPage currentPage)
+        public ActionResult Index(LandingPage currentPage,string message)
         {
+
+         // TODO:
+            //Ändra så att urlen i webbläsaren inte tar med message. cutta bort den här.
+            
             var model = new LandingPageViewModel(currentPage);
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-
+            model.ErrorMessage = message;
             model.Fbuser = new LandingPageViewModel.FacebookUserModel {
             
                 FirstName = user.FirstName,

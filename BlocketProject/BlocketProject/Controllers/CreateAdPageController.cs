@@ -23,7 +23,7 @@ namespace BlocketProject.Controllers
             if (user.NumberOfAds >= 5)
             {
                 model.ErrorMessage = "You can only have 5 ads.";
-                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage });
+                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
             }
             model.Category = ConnectionHelper.GetCategories();
             return View(model);

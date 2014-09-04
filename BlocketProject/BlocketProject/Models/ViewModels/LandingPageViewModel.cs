@@ -10,6 +10,7 @@ namespace BlocketProject.Models.ViewModels
     public class LandingPageViewModel
     {
         public string Heading { get; set; }
+        public string ErrorMessage { get; set; }
         public XhtmlString MainBody { get; set; }
         public FacebookUserModel Fbuser { get; set; }
         public LandingPageViewModel(LandingPage currentPage)
