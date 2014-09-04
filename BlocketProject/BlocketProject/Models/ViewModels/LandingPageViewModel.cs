@@ -11,7 +11,7 @@ namespace BlocketProject.Models.ViewModels
     {
         public string Heading { get; set; }
         public XhtmlString MainBody { get; set; }
-
+        public FacebookUserModel Fbuser { get; set; }
         public LandingPageViewModel(LandingPage currentPage)
         {
             Heading = currentPage.Heading;
@@ -19,12 +19,12 @@ namespace BlocketProject.Models.ViewModels
 
         }
 
-        public BlocketProject.Models.ViewModels.LandingPageViewModel.FacebookUserModel Fbuser { get; set; }
+      
 
         public class FacebookUserModel
         {
-            public string firstName { get; set; }
-            public string lastName { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
         }
     }
 }

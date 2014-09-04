@@ -20,16 +20,20 @@
         </tr>
 
     </table>
+   <b>Skapade annonser: @Model.Fbuser.NumberOfAds</b>
     <table id="UserAds">
         <tr>
+         
             @foreach (var ad in Model.ListUserAds)
             {
-
                 <td style="text-align: center; margin: 30px; float: left;">
                     <a href="#">@ad.Title<br /><img src="@ad.ImageUrl" style="height: 100px; width:100px;"></a>
+                    <br />
+                    <input type="submit" value="Remove" />
                 </td>
 
 
             }
+          
         </tr>
     </table>

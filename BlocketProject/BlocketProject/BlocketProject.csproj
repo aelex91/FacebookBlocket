@@ -285,6 +285,7 @@
     <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Helpers\NavigationHelpers.cs" />
     <Compile Include="Helpers\UrlHelpers.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\Blocks\InformationBlock.cs" />
     <Compile Include="Models\Blocks\LogoutBlock.cs" />
     <Compile Include="Models\Blocks\PageListBlock.cs" />
@@ -410,11 +411,13 @@
     <Content Include="connectionStrings.config" />
     <Content Include="appSettings.config" />
     <Content Include="bin\BlocketProject.dll.config" />
-    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.0.js" />
-    <Content Include="Scripts\jquery-1.9.0.min.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Style\Custom.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Global.asax" />
@@ -424,7 +427,6 @@
     <Content Include="App_Data\GeoLiteCity.dat" />
     <None Include="EPiServerLog.config" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\VideoBlock\Index.cshtml" />
     <Content Include="Views\StandardPage\Index.cshtml" />

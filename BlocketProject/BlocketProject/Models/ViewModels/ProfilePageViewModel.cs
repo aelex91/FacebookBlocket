@@ -28,7 +28,7 @@ namespace BlocketProject.Models.ViewModels
             public string Email { get; set; }
             public string Location { get; set; }
             public string ImageUrl { get; set; }
-
+            public int? NumberOfAds { get; set; }
         }
 
         public class UserAdsModel
