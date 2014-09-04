@@ -46,7 +46,7 @@ namespace BlocketProject.Controllers
                 {
                     return RedirectToAction("Index", model);
                 }
-                var datetime = DateTime.Now.ToShortDateString();
+                var datetime = DateTime.Now;
 
 
                 if (file == null)
