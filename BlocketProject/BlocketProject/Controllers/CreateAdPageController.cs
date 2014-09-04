@@ -20,7 +20,7 @@ namespace BlocketProject.Controllers
         {
             var model = new CreateAdsPageViewModel(currentPage);
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-            if (user.NumberOfAds >= 5)
+            if (user.NumberOfAds >= currentPage.NumberOfAds)
             {
                 model.ErrorMessage = "You can only have 5 ads.";
                 return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
