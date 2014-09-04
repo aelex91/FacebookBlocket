@@ -60,7 +60,7 @@ namespace BlocketProject.Controllers
                 var priceAsInt = Convert.ToInt32(price);
                 var phoneAsInt = Convert.ToInt32(phone);
                 var categoryAsInt = Convert.ToInt32(category);
-                ConnectionHelper.SaveAdInformationToDb(email, phoneAsInt, categoryAsInt, 1, "/images/" + file.FileName, title, datetime, ConnectionHelper.GetUserIdByEmail(User.Identity.Name), priceAsInt);
+                ConnectionHelper.SaveAdInformationToDb(email, phoneAsInt, categoryAsInt, 1, "/images/" + file.FileName, title, datetime, ConnectionHelper.GetUserIdByEmail(User.Identity.Name), priceAsInt,text);
                 ConnectionHelper.SaveNumberOfAdsToUser(User.Identity.Name);
                 //ladda in värderna vi får från vyn in till en användares databas.
                 //skicka tillbaka personen till en tack sida?
