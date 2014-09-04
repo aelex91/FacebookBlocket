@@ -269,11 +269,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Business\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\AdsPageController.cs" />
     <Compile Include="Controllers\CreateAdPageController.cs" />
     <Compile Include="Controllers\InformationBlockController.cs" />
-    <Compile Include="Controllers\LogoutBlockController.cs" />
     <Compile Include="Controllers\PageListBlockController.cs" />
     <Compile Include="Controllers\ProfilePageController.cs" />
     <Compile Include="Controllers\StandardPageController.cs" />
@@ -287,7 +287,6 @@
     <Compile Include="Helpers\UrlHelpers.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\Blocks\InformationBlock.cs" />
-    <Compile Include="Models\Blocks\LogoutBlock.cs" />
     <Compile Include="Models\Blocks\PageListBlock.cs" />
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
@@ -441,6 +440,7 @@
     <Content Include="Views\InformationBlock\Index.cshtml" />
     <Content Include="Views\LogoutBlock\Index.cshtml" />
     <Content Include="Views\LandingPage\Index.cshtml" />
+    <Content Include="Views\AdsPage\AdPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

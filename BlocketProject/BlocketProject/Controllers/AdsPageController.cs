@@ -7,6 +7,7 @@ using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
 using BlocketProject.Models.Pages;
 using BlocketProject.Models.ViewModels;
+using BlocketProject.Models.DbClasses;
 
 namespace BlocketProject.Controllers
 {
@@ -15,7 +16,8 @@ namespace BlocketProject.Controllers
         public ActionResult Index(AdsPage currentPage)
         {
             var model = new AdsPageViewModel(currentPage);
-            
+
+
 
             if(currentPage.CurrentUserAds == true)
             {
@@ -32,6 +34,26 @@ namespace BlocketProject.Controllers
             }
            
             
+        }
+
+        [HttpPost]
+        public ActionResult Index(AdsPage currentPage, int AdId) 
+        {
+            DbUserAds ad = Helpers.ConnectionHelper.GetAdById(AdId);
+
+            var model = new AdsPageViewModel.UserAdsModel();
+
+            model.AdDescription = ad.AdDescription;
+            model.CategoryId = ad.CategoryId;
+            model.ExpirationDate = ad.ExpirationDate;
+            model.ImageUrl = ad.ImageUrl;
+            model.Price = ad.Price;
+            model.PublishDate = ad.PublishDate;
+            model.Title = ad.Title;
+            model.UserId = ad.UserId;
+           
+
+            return View("AdPage", model);
         }
     }
 }

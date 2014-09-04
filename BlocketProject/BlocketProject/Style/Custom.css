@@ -216,6 +216,12 @@
     height: 70px;
 }
 
+.menuborder li{
+    float: left;
+    margin-left: 20px;
+    list-style-type: none;
+}
+
 .menulink {
     color: red;
 }
