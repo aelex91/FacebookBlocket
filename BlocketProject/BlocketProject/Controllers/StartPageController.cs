@@ -22,6 +22,7 @@ using System.Text;
 using BlocketProject.Helpers;
 using BlocketProject.Models.ViewModels;
 using System.Web.Security;
+using System.Globalization;
 
 
 namespace BlocketProject.Controllers
@@ -128,7 +129,6 @@ namespace BlocketProject.Controllers
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(JsonUserModel));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
             user = (JsonUserModel)ser.ReadObject(stream);
-
             DbUserInformation DbUser = new DbUserInformation();
 
             var location = user.location.name;
@@ -139,13 +139,17 @@ namespace BlocketProject.Controllers
             DbUser.Email = user.email;
             DbUser.Location = location;
             DbUser.ImageUrl = UserImageUrl;
-
+            DbUser.Birthday = DateTime.Parse(user.birthday);
+            DbUser.Gender = user.gender;
+            
             model.FacebookId = DbUser.FacebookId;
+            model.Birthday = DbUser.Birthday;
             model.FirstName = DbUser.FirstName;
             model.LastName = DbUser.LastName;
             model.Email = DbUser.Email;
             model.Location = DbUser.Location;
             model.ImageUrl = DbUser.ImageUrl;
+            model.Gender = DbUser.Gender;
            
             var checkDbId = ConnectionHelper.GetUserFacebookId(DbUser.FacebookId);
             var checkUsers = ConnectionHelper.GetAllUsers();

@@ -12,9 +12,13 @@ namespace BlocketProject.Models.ViewModels
         [DataMember]
         public string id { get; set; }
         [DataMember]
+        public string birthday { get; set; }
+        [DataMember]
         public string email { get; set; }
         [DataMember]
         public string first_name { get; set; }
+        [DataMember]
+        public string gender { get; set; }
 
         [DataContract]
         public class Hometown

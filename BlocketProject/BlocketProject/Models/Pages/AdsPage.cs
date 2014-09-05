@@ -37,6 +37,7 @@ namespace BlocketProject.Models.Pages
         {
             base.SetDefaultValues(contentType);
 
+            Heading = "Ads";
             CurrentUserAds = false;
         }
 
