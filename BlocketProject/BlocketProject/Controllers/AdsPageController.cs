@@ -16,10 +16,7 @@ namespace BlocketProject.Controllers
         public ActionResult Index(AdsPage currentPage)
         {
             var model = new AdsPageViewModel(currentPage);
-
-            //Episerver URL för att kunna gå in i metoden nedan och ge ett resultat
-
-            if(currentPage.CurrentUserAds == true)
+            if (currentPage.CurrentUserAds == true)
             {
                 var user = Helpers.ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
                 var value = Helpers.ConnectionHelper.GetCurrentUserAds(user.UserId);
@@ -32,14 +29,21 @@ namespace BlocketProject.Controllers
                 model.ListUserAdsModel = value;
                 return View(model);
             }
-           
-            
         }
 
         [HttpPost]
-        public ActionResult AdPage(AdsPage currentPage, int AdId) 
+        public ActionResult Index(AdsPage currentPage, int AdId)
         {
             DbUserAds ad = Helpers.ConnectionHelper.GetAdById(AdId);
+
+            var model = new AdsPageViewModel.UserAdsModel();
+            GetAdsFromuser(ad);
+
+            return View("AdPage", model);
+        }
+
+        public AdsPageViewModel.UserAdsModel GetAdsFromuser(DbUserAds ad)
+        {
             var model = new AdsPageViewModel.UserAdsModel();
 
             model.AdDescription = ad.AdDescription;
@@ -50,9 +54,7 @@ namespace BlocketProject.Controllers
             model.PublishDate = ad.PublishDate;
             model.Title = ad.Title;
             model.UserId = ad.UserId;
-           
-
-            return View("AdPage", model);
+            return model;
         }
     }
 }

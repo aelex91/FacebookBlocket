@@ -3,9 +3,11 @@
     ViewBag.Title = "Index";
 }
 <div id="informationBlock">
-    <img src="@Model.Image">
+@*    todo- skapa upp en css class med informationblock image size osv.. ta bort sizen ja satt på bilden*@
+
+    <img src="@Model.Image" height="150" width="150" alt="Image" />
     <br />
-    @Model.Information
+    <p>@Model.Information</p>
     <br />
     <input type="submit" value="@Model.ButtonText" />
 </div>
