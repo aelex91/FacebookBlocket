@@ -1,57 +1,65 @@
 ﻿
+(function () {
+
+})();
 
 function textfieldpressed(id) {
     var element = $('#' + id);
     element.addClass("active");
 
-    if (element[0].id == "email" || element[0].id == "phone" || element[0].id == "title" || element[0].id == "price")
+    if (element[0].value == "Email" || element[0].value == "Telefon" || element[0].value == "Rubrik" || element[0].value == "Pris")
     {
-        $('#' + id).focus();
-        $('#' + id).get(0).setSelectionRange(0, 0);
+        element[0].value = "";
     }
 }
 
 function textfieldblur(id) {
     var element = $('#' + id);
     element.removeClass("active");
- 
+    var hasvalue = true;
     if (element[0].value == "" && id == "email") {
         element[0].value = "Email";
+        element.removeClass("hasText");
+        hasvalue = false;
     }
-    else{
-        element.addClass("text");
-    }
+
     if (element[0].value == "" && id == "phone") {
         element[0].value = "Telefon";
+        element.removeClass("hasText");
+        hasvalue = false;
     }
-    else {
-        element.addClass("text");
-    }
+ 
     if (element[0].value == "" && id == "title") {
         element[0].value = "Rubrik";
+        element.removeClass("hasText");
+        hasvalue = false;
     }
-    else {
-        element.addClass("text");
-    }
+
     if (element[0].value == "" && id == "price") {
         element[0].value = "Pris";
+        element.removeClass("hasText");
+        hasvalue = false;
     }
-    else {
-        element.addClass("text");
-    } 
+    if (hasvalue == true) {
+        element.addClass("hasText");
+    }  
 }
 
-function textfieldbigpressed() {
+function textareapressed() {
     var element = $('#text');
     element.addClass("active");
+
+    if (element[0].placeholder == "Annonstext") {
+        element[0].placeholder = "";
+    }
 }
 
-function textfieldbigblur() {
+function textareablur() {
     var element = $('#text');
     element.removeClass("active");
 }
 
-function emailkoll() {
+function validateemail() {
 
     var element = $('#email');
 
@@ -67,13 +75,9 @@ function emailkoll() {
     }
 }
 
-function focus() {
-    var element = $('#phone');
-    element.addClass("active");
-}
-
-function change(id){
+function keypressed(id) {
     var element = $('#' + id);
+
     if (element[0].value == "Email")
     {
         element[0].value = "";
@@ -87,4 +91,12 @@ function change(id){
     if (element[0].value == "Pris") {
         element[0].value = "";
     }
+}
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+
+    return true;
 }

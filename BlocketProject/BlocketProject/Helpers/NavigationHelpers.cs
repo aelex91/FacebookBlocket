@@ -32,7 +32,7 @@ namespace BlocketProject.Helpers
                 //Link to the root page
                 if (rootLink.CompareToIgnoreWorkID(contentLink))
                 {
-                    writer.WriteLine("<li class=\"active\">");
+                    writer.WriteLine("<li class=\"menuactive\">");
                 }
                 else
                 {
@@ -63,11 +63,11 @@ namespace BlocketProject.Helpers
                 if (currentBranch.Any(x =>
                 x.CompareToIgnoreWorkID(topLevelPage.ContentLink)))
                 {
-                    writer.WriteLine("<li class=\"active\">");
+                    writer.WriteLine("<li class=\"menuactive\">");
                 }
                 else
                 {
-                    writer.WriteLine("<li>");
+                    writer.WriteLine("<li class=\"menulink\">");
                 }
                 writer.WriteLine(html.PageLink(topLevelPage).ToHtmlString());
                 writer.WriteLine("</li>");
@@ -164,11 +164,11 @@ IContentLoader contentLoader = null)
                 {
                     //We highlight pages that are part of the current branch,
                     //including the currently viewed page.
-                    writer.WriteLine("<li class=\"active\">");
+                    writer.WriteLine("<li class=\"menuactive\">");
                 }
                 else
                 {
-                    writer.WriteLine("<li>");
+                    writer.WriteLine("<li class=\"menulink\">");
                 }
                 writer.WriteLine(helper.PageLink(page).ToHtmlString());
 
