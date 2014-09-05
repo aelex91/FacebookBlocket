@@ -33,7 +33,15 @@
 #UserTable img {
     border-radius: 15px;
 }
+.createEvent {
+    
+}
 
+#imagefile {
+ 
+    max-width: 200px;
+   max-height:200px;
+}
 #UserTable {
     font-weight: bold;
     font-size: 1.3em;

@@ -33,11 +33,12 @@ namespace BlocketProject.Models.ViewModels
         public string Price { get; set; }
         [Required(ErrorMessage = "Write something..")]
         public string Text { get; set; }
-       
+
 
         //Categories
         public string SelectedCategory { get; set; }
         public Dictionary<int, string> Category { get; set; }
+        public Dictionary<int, string> Genders { get; set; }
 
         public CreateAdsPageViewModel(CreateAdPage currentPage)
         {

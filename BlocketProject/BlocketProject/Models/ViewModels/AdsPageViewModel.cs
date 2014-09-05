@@ -38,6 +38,7 @@ namespace BlocketProject.Models.ViewModels
             public DateTime ExpirationDate { get; set; }
             public int CategoryId { get; set; }
             public int SubCategoryId { get; set; }
+            public string Text { get; set; }
         }
     }
 }

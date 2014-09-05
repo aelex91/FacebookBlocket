@@ -1,10 +1,12 @@
 ﻿@model BlocketProject.Models.ViewModels.LandingPageViewModel
-
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 @if (Model.Fbuser != null)
 {
-  <h1>Thank you @Model.Fbuser.FirstName @Model.Fbuser.LastName
+    <h1>Thank you @Model.Fbuser.FirstName @Model.Fbuser.LastName
 
-  </h1>  
+    </h1>  
 }
 <h1>Thank you @User.Identity.Name</h1>
 
@@ -13,7 +15,7 @@
 {
     <h3>Problem occured..: @Model.ErrorMessage</h3>
 }
-@Html.PropertyFor(x=>x.MainBody)
+@Html.PropertyFor(x => x.MainBody)
 <br />
-@Html.PropertyFor(x=>x.ContentArea)
+@Html.PropertyFor(x => x.ContentArea)
 

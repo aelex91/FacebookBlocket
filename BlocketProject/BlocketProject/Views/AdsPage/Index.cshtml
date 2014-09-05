@@ -2,11 +2,13 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/Teststyle.css" rel="stylesheet" />
 <h2>@Model.Heading</h2>
+<div id="search" class="searchbox_standard">
 
+    
 <ul>
-    @if (Model.CurrentUserAds == true)
+    @if (Model.CurrentUserAds)
     {
         foreach (var ad in Model.ListCurrentUserAdsModel)
         {
@@ -17,7 +19,7 @@
                 <p>Pris: @ad.Price kr</p>
                 <p>Skapad: @ad.PublishDate.ToString()</p>
                 <p>Går ut: @ad.ExpirationDate.ToString()</p>
-
+               
             </li>
 
         }
@@ -41,3 +43,4 @@
     }
 
 </ul>
+</div>

@@ -120,6 +120,13 @@ namespace BlocketProject.Helpers
 
             return query;
         }
+        public static Dictionary<int, string> GetGenders()
+        {
+            var query = (from p in db.DbGenders
+                         select p).ToDictionary(t => t.GenderId, t => t.Gender);
+
+            return query;
+        }
 
         public static DbUserAds GetAdById(int id)
         {

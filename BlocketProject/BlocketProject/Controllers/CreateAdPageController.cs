@@ -22,10 +22,12 @@ namespace BlocketProject.Controllers
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
          
             model.Category = ConnectionHelper.GetCategories();
+            model.Genders = ConnectionHelper.GetGenders();
+            
             return View(model);
         }
         [HttpPost]
-        public ActionResult CreateAd(CreateAdPage currentPage, HttpPostedFileBase file, string email, string phone, string title, string price, string text, string category)
+        public ActionResult CreateAd(CreateAdPage currentPage, HttpPostedFileBase file, string email, string phone, string title, string price, string text, string category,string gender)
         {
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
             var model = new CreateAdsPageViewModel(currentPage);

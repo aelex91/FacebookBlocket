@@ -291,6 +291,7 @@
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
     <Compile Include="Models\DbClasses\DbCategories.cs" />
+    <Compile Include="Models\DbClasses\DbGenders.cs" />
     <Compile Include="Models\DbClasses\DbUserAds.cs" />
     <Compile Include="Models\DbClasses\DbUserInformation.cs" />
     <Compile Include="Models\DbClasses\LetemsaleDbContext.cs" />
@@ -314,7 +315,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images\" />
     <Folder Include="Models\Properties\" />
     <Folder Include="Static\" />
   </ItemGroup>
@@ -400,7 +400,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Teststyle.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="images\facebook.jpg" />
+    <Content Include="images\mail.jpg" />
+    <Content Include="images\phone.jpg" />
     <Content Include="IndexingService\IndexingService.svc" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
