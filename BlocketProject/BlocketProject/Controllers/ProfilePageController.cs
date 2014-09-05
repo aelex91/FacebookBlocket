@@ -20,10 +20,14 @@ namespace BlocketProject.Controllers
         public ActionResult Index(ProfilePage currentPage)
         {
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-           
             var model = new ProfilePageViewModel(currentPage);
+            if (user == null)
+            {
+                return View();
+            }
+
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
-        model.Fbuser =  UserHelper.GetUserValues(model.Fbuser, user);
+            model.Fbuser = UserHelper.GetUserValues(model.Fbuser, user);
             model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);

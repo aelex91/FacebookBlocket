@@ -28,7 +28,7 @@ namespace BlocketProject
             routes.MapRoute(
                 "Ads",
                 "AdsPage/{action}",
-                new { controller = "AdsPage", action = "Index" });
+                new { controller = "AdsPage", action = "AdPage" });
 
 
 
