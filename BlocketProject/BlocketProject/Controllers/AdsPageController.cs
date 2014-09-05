@@ -8,6 +8,7 @@ using EPiServer.Web.Mvc;
 using BlocketProject.Models.Pages;
 using BlocketProject.Models.ViewModels;
 using BlocketProject.Models.DbClasses;
+using BlocketProject.Helpers;
 
 namespace BlocketProject.Controllers
 {
@@ -32,17 +33,18 @@ namespace BlocketProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AdsPage currentPage, int AdId)
+        public void AdPage(int AdId)
         {
             DbUserAds ad = Helpers.ConnectionHelper.GetAdById(AdId);
 
             var model = new AdsPageViewModel.UserAdsModel();
-            GetAdsFromuser(ad);
+            SetAdValues(ad);
 
-            return View("AdPage", model);
+            //UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
+            //Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());
         }
 
-        public AdsPageViewModel.UserAdsModel GetAdsFromuser(DbUserAds ad)
+        public AdsPageViewModel.UserAdsModel SetAdValues(DbUserAds ad)
         {
             var model = new AdsPageViewModel.UserAdsModel();
 
