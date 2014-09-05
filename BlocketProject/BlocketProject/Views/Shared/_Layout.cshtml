@@ -23,8 +23,16 @@
                 <h3 class="muted">Let em sale</h3>
             </div>
         </div>
-        
-        @{ Html.RenderMainNavigation(null); }
+           
+
+        @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                Html.RenderMainNavigation(null);
+            }
+            
+        }
         
         @RenderBody()
         

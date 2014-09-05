@@ -83,6 +83,22 @@ namespace BlocketProject.Models.Pages
             Order = 1100)]
         public virtual string TitleLabel { get; set; }
 
+        [CultureSpecific]
+        [Display(
+            Name = "Set number of ads",
+            Description = "Set the number of ads you want a user to be avaliable to create",
+            GroupName = SystemTabNames.Content,
+            Order = 1200)]
+        public virtual int NumberOfAds { get; set; }
+
+        [CultureSpecific]
+        [Display(
+            Name = "Refer to Landing Page",
+            Description = "Redirects users to the Landing Page.",
+            GroupName = SystemTabNames.Content,
+            Order = 1300)]
+        public virtual PageReference ReferenceToLandingPage { get; set; }
+
         public override void SetDefaultValues(ContentType contentType)
         {
 
@@ -97,6 +113,7 @@ namespace BlocketProject.Models.Pages
             PriceLabel = "Pris";
             UploadImageLabel = "Ladda upp bild";
             ButtonLabel = "Ladda upp annons";
+            NumberOfAds = 5;
 
         }
 

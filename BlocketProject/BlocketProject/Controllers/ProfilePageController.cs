@@ -15,29 +15,21 @@ namespace BlocketProject.Controllers
 {
     public class ProfilePageController : PageController<ProfilePage>
     {
-        
+
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
         {
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-
+           
             var model = new ProfilePageViewModel(currentPage);
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
-
-            model.Fbuser.Location = user.Location;
-            model.Fbuser.FacebookId = user.FacebookId;
-            model.Fbuser.FirstName = user.FirstName;
-            model.Fbuser.LastName = user.LastName;
-            model.Fbuser.UserId = user.UserId;
-            model.Fbuser.Email = user.Email;
-            model.Fbuser.ImageUrl = user.ImageUrl;
-
+        model.Fbuser =  UserHelper.GetUserValues(model.Fbuser, user);
             model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
         }
 
-        
+
 
     }
 }

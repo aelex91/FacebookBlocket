@@ -9,19 +9,18 @@
 
 @using (Html.BeginForm("CreateAd", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <br /><br /><br />
     <div>
-      
-       @Html.DropDownListFor(x => x.Category, new SelectList(Model.Category, "Key", "Value"), new { placeholder ="adsada", @class = "textfield" })
 
-        @Html.TextBoxFor(x => x.EmailLabel, Model.EmailLabel, new { id = "email", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+        @Html.DropDownList("category", new SelectList(Model.Category, "Key", "Value"), new { placeholder = "adsada", @class = "textfield" })
 
-        @Html.TextBoxFor(x => x.Phonelabel, Model.Phonelabel, new { id = "phone", @class = "textfield", @onclick = "textfieldpressed(id)", @onfocus = "this.style.background = '#fff'", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })        
+        @Html.TextBox("email", Model.EmailLabel, new { id = "email", @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+
+        @Html.TextBox("phone", Model.Phonelabel, new { id = "phone", @class = "textfield", @onclick = "textfieldpressed(id)", @onfocus = "this.style.background = '#fff'", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
         <br />
 
-        @Html.TextBoxFor(x => x.TitleLabel, Model.TitleLabel, new { id = "title", @class = "textfield", style = "margin-top:50px", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+        @Html.TextBox("title", Model.TitleLabel, new { id = "title", @class = "textfield", style = "margin-top:50px", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
 
-        @Html.TextBoxFor(x => x.PriceLabel, Model.PriceLabel, new { id = "price", @class = "textfield", style = "margin-top:50px", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+        @Html.TextBox("price", Model.PriceLabel, new { id = "price", @class = "textfield", style = "margin-top:50px", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
         <br />
 
         @Html.TextArea("text", new { id = "text", @class = "textfieldBig", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textfieldbigpressed()", @onblur = "textfieldbigblur(), this.style.background = '#ECF7FB'" })
@@ -34,13 +33,13 @@
             </div>
         </form>
 
-            <br />
-            <br />
         <br />
-            <input type="submit" class="button" value="Ladda upp" />
+        <br />
+        <br />
+        <input type="submit" class="button" value="Ladda upp" />
 
-            <b>@Model.ErrorMessage</b>
+        <b>@Model.ErrorMessage</b>
 
-        </div>
+    </div>
 
 }

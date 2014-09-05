@@ -55,9 +55,9 @@ namespace BlocketProject.Helpers
             return query;
         }
 
-        public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, string publishdate, int userId, int price)
+        public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, DateTime publishdate, int userId, int price,string text)
         {
-            var expirationDate = DateTime.Now.AddDays(14).ToShortDateString();
+            DateTime expirationDate = DateTime.Now.AddDays(14);
 
             var modelUserAds = new DbUserAds
             {
@@ -121,10 +121,11 @@ namespace BlocketProject.Helpers
             return query;
         }
 
-        public static string GetAdById(int? id)
+        public static DbUserAds GetAdById(int id)
         {
+            var query = (from p in db.DbUserAds where p.AdId == id select p).FirstOrDefault();
 
-            return "";
+            return query;
         }
         public static string GetUserName(int? id)
         {
@@ -208,7 +209,7 @@ namespace BlocketProject.Helpers
             return result;
         }
 
-        public static List<ProfilePageViewModel.UserAdsModel> GetUserAds(int? id)
+        public static List<ProfilePageViewModel.UserAdsModel> GetUserAds(int id)
         {
 
 
@@ -218,10 +219,12 @@ namespace BlocketProject.Helpers
                          select new ProfilePageViewModel.UserAdsModel
                          {
                              UserId = a.UserId,
+                             AdId = a.AdId,
                              AdDescription = a.AdDescription,
                              ImageUrl = a.ImageUrl,
                              Price = a.Price,
                              PublishDate = a.PublishDate,
+                             ExpirationDate = a.ExpirationDate,
                              Title = a.Title,
 
 
