@@ -17,7 +17,7 @@ namespace BlocketProject.Controllers
         {
             var model = new AdsPageViewModel(currentPage);
 
-
+            //Episerver URL för att kunna gå in i metoden nedan och ge ett resultat
 
             if(currentPage.CurrentUserAds == true)
             {
@@ -37,10 +37,9 @@ namespace BlocketProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AdsPage currentPage, int AdId) 
+        public ActionResult AdPage(AdsPage currentPage, int AdId) 
         {
             DbUserAds ad = Helpers.ConnectionHelper.GetAdById(AdId);
-
             var model = new AdsPageViewModel.UserAdsModel();
 
             model.AdDescription = ad.AdDescription;
