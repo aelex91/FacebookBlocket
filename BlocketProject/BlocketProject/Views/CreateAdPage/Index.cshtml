@@ -5,75 +5,85 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <h2>@Html.PropertyFor(x => x.Heading)</h2>
 
-<div class="createEvent">
-    @using (Html.BeginForm("CreateAd", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div class="">
+    @using (Html.BeginForm("CreateAd", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data", language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
     {
         <div>
 
-            @Html.TextBox("email", Model.EmailLabel, new { id = "email", @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+            @Html.TextBoxFor(x=>x.EmailLabel, new { id = Model.EmailLabel, @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
 
-            @Html.TextBox("phone", Model.Phonelabel, new { id = "phone", @class = "textfield phone", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
+
+            @Html.TextBoxFor(x => x.CreateEvent.Phone, new { id = Model.Phonelabel, @class = "textfield phone", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
+
+            <br />
+            @Html.TextBoxFor(x => x.CurrentUser.Location, new { id = Model.CreateEvent.Adress, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+
+
+            @Html.TextBoxFor(x => x.CreateEvent.ZipCode, new { id = Model.CreateEvent.ZipCode, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
+
             <br />
             <h3>Typ av gäster och typ av fest?</h3>
-            @Html.DropDownList("gender", new SelectList(Model.Genders, "Key", "Value"), new { placeholder = "", @class = "textfield" })
-            @Html.DropDownList("category", new SelectList(Model.Category, "Key", "Value"), new { placeholder = "", @class = "textfield" })
+            @Html.DropDownListFor(x => x.CreateEvent.SelectedGender, new SelectList(Model.CreateEvent.Genders, "Key", "Value"), new { placeholder = "", @class = "textfield", id = Model.CreateEvent.Genders })
+            @Html.DropDownListFor(x => x.CreateEvent.SelectedCategory, new SelectList(Model.CreateEvent.Category, "Key", "Value"), new { placeholder = "", @class = "textfield", id = Model.CreateEvent.Genders })
 
             <br />
-            <h3>Skriv lite om din fest</h3>
-            @Html.TextBox("title", Model.TitleLabel, new { id = "title", @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
-
-            @Html.TextBox("price", Model.PriceLabel, new { id = "price", @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+            <h3>Hur många får komma? <b>Gör till dropdownlist?</b></h3>
+          @*  @Html.TextBox("people", "Personer", new { id = "people", @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })*@
             <br />
-            @Html.TextArea("text", new { id = "text", @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })
+
+            <h3>Skriv lite om ditt evenemang</h3>
+            @Html.TextBoxFor(x => x.CreateEvent.AdTitle, new { id = Model.TitleLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+            <br />
+
+            @Html.TextBoxFor(x => x.CreateEvent.Price, new { id = Model.PriceLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
 
             <br />
-            <form id="form1" runat="server">
-                <input type='file' id="imgInp" />
+            @Html.TextAreaFor(x => x.CreateEvent.Text, new { id = Model.TextLabel, @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })
+            <input type='file' id="file" name="file" />
+            <img id="imagefile" src="@Model.DefaultImage" alt="your image" />
 
-                <img id="imagefile" src="#" alt="your image" />
-            </form>
         </div>
         <br />
-        <input type="submit" class="button" value="Ladda upp evenemang" />
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-                $('#price').hide();
-
-                $("#category").change(function () {
-                   var value = $('#category :selected').text();
-                   if (value == "Lokalfest") {
-                       $('#price').show();
-                   }
-                   else {
-
-                       $('#price').hide();
-                   }
-                      
-                });
-            });
-
-            function readURL(input) {
-
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#imagefile').attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-
-            $("#imgInp").change(function () {
-                readURL(this);
-            });
-
-        </script>
-
+        <input type="submit" class="button" value="@Model.ButtonLabel" />
+        <br />
+        <br />
     }
 </div>
+<script type="text/javascript">
+    @*$(document).ready(function () {
+        $('#@Model.PriceLabel').hide();
+
+        $("#category").change(function () {
+            var value = $('#category :selected').text();
+            if (value == "Lokalfest") {
+                $('#@Model.PriceLabel').show();
+            }
+            else {
+
+                $('#@Model.PriceLabel').hide();
+            }
+
+        });
+    });*@
+
+   
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imagefile').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file").change(function () {
+        readURL(this);
+    });
+
+</script>

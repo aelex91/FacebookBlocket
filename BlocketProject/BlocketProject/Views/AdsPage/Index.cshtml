@@ -6,41 +6,45 @@
 <h2>@Model.Heading</h2>
 <div id="search" class="searchbox_standard">
 
-    
-<ul>
-    @if (Model.CurrentUserAds)
-    {
-        foreach (var ad in Model.ListCurrentUserAdsModel)
+
+    <ul>
+        @if (Model.CurrentUserAds)
         {
+            foreach (var ad in Model.ListCurrentUserAdsModel)
+            {
             <li>
-                <h3>@ad.Title</h3><br />
+                <h3>@ad.Title</h3>
+                <br />
                 <img src="@ad.ImageUrl" width="150" alt="" /><br />
-                <p>@ad.AdDescription</p><br />
+                <p>@ad.AdDescription</p>
+                <br />
                 <p>Pris: @ad.Price kr</p>
                 <p>Skapad: @ad.PublishDate.ToString()</p>
                 <p>Går ut: @ad.ExpirationDate.ToString()</p>
-               
+
             </li>
 
+            }
         }
-    }
-    else
-    {
-        foreach (var ad in Model.ListUserAdsModel)
+        else
         {
+            foreach (var ad in Model.ListUserAdsModel)
+            {
             <li>
-                <h3>@ad.Title</h3><br />
+                <h3>@ad.Title</h3>
+                <br />
                 <img src="@ad.ImageUrl" width="150" alt="" /><br />
-                <p>@ad.AdDescription</p><br />
+                <p>@ad.AdDescription</p>
+                <br />
                 <p>Pris: @ad.Price kr</p>
                 <p>Datum: @ad.PublishDate</p>
                 <b>Annons av: <a href="#">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</a></b>
 
             </li>
 
+            }
+
         }
 
-    }
-
-</ul>
+    </ul>
 </div>

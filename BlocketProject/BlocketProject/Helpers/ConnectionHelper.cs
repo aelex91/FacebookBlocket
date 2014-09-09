@@ -55,22 +55,28 @@ namespace BlocketProject.Helpers
             return query;
         }
 
-        public static void SaveAdInformationToDb(string email, int phone, int catId, int subcatId, string imageUrl, string title, DateTime publishdate, int userId, int price,string text)
+        public static void SaveAdInformationToDb(CreateAdsPageViewModel model, HttpPostedFileBase file)
         {
             DateTime expirationDate = DateTime.Now.AddDays(14);
-
+            var selectedGender = Convert.ToInt32(model.CreateEvent.SelectedGender);
+            var priceAsInt = Convert.ToInt32(model.CreateEvent.Price);
+            var phoneAsInt = Convert.ToInt32(model.CreateEvent.Phone);
+            var selectedcategoryAsInt = Convert.ToInt32(model.CreateEvent.SelectedCategory);
+            var selectedGenderAsInt = Convert.ToInt32(model.CreateEvent.SelectedGender);
             var modelUserAds = new DbUserAds
             {
-                Email = email,
-                Phone = phone,
-                CategoryId = catId,
-                SubCategoryId = subcatId,
-                ImageUrl = imageUrl,
-                Title = title,
-                PublishDate = publishdate,
+                Email = model.CreateEvent.Email,
+                Phone = phoneAsInt,
+                CategoryId = selectedcategoryAsInt,
+                SubCategoryId = 2,
+                ImageUrl = "/images/" + file.FileName,
+                Title = model.CreateEvent.AdTitle,
+                PublishDate = DateTime.Now,
                 ExpirationDate = expirationDate,
-                UserId = userId,
-                Price = price,
+                UserId = model.CurrentUser.UserId,
+                Price = priceAsInt,
+                GenderId = selectedGender,
+
             };
             db.DbUserAds.Add(modelUserAds);
 
@@ -98,11 +104,11 @@ namespace BlocketProject.Helpers
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
 
-        
+
         }
         public static int? CheckNumberOfAds(string email)
         {
@@ -120,6 +126,7 @@ namespace BlocketProject.Helpers
 
             return query;
         }
+
         public static Dictionary<int, string> GetGenders()
         {
             var query = (from p in db.DbGenders

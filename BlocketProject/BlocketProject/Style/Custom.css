@@ -35,7 +35,9 @@
 }
 .createEvent {
     
+  
 }
+
 
 #imagefile {
  
@@ -81,13 +83,13 @@
 
     .textfield.mail {
         background-image: url("../../images/mail.jpg");
-        background-position: 23% 45%;
+        background-position: 90% 45%;
         background-repeat: no-repeat;
     }
 
     .textfield.phone {
         background-image: url("../../images/phone.jpg");
-        background-position: 27% 50%;
+        background-position: 90% 50%;
         background-repeat: no-repeat;
     }
 

@@ -4,6 +4,8 @@ using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
 using EPiServer.SpecializedProperties;
+using EPiServer;
+using EPiServer.Web;
 
 namespace BlocketProject.Models.Pages
 {
@@ -34,6 +36,20 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
+            Name = "Adress Label",
+            GroupName = SystemTabNames.Content,
+            Order = 320)]
+        public virtual string AdressLabel { get; set; }
+
+        [CultureSpecific]
+        [Display(
+            Name = "Zip code Label",
+            GroupName = SystemTabNames.Content,
+            Order = 340)]
+        public virtual string ZipCodeLabel { get; set; }
+
+        [CultureSpecific]
+        [Display(
             Name = "Phone Label",
             GroupName = SystemTabNames.Content,
             Order = 500)]
@@ -49,10 +65,10 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Ad Description Label",
+            Name = "TextLabel",
             GroupName = SystemTabNames.Content,
             Order = 700)]
-        public virtual string AdDescriptionLabel { get; set; }
+        public virtual string TextLabel { get; set; }
 
         [CultureSpecific]
         [Display(
@@ -99,6 +115,16 @@ namespace BlocketProject.Models.Pages
             Order = 1300)]
         public virtual PageReference ReferenceToLandingPage { get; set; }
 
+      
+        [CultureSpecific]
+        [Display(
+            Name = "Set default image.",
+            Description = "Set default image when a user creates an event.",
+            GroupName = SystemTabNames.Content,
+            Order = 1300)]
+        [UIHint(UIHint.Image)]
+        public virtual Url DefaultImage { get; set; }
+
         public override void SetDefaultValues(ContentType contentType)
         {
 
@@ -109,11 +135,14 @@ namespace BlocketProject.Models.Pages
             PhoneLabel = "Telefon";
             CategoryLabel = "Kategori";
             TitleLabel = "Rubrik";
-            AdDescriptionLabel = "Text";
+            TextLabel = "Text";
             PriceLabel = "Pris";
             UploadImageLabel = "Ladda upp bild";
             ButtonLabel = "Ladda upp annons";
             NumberOfAds = 5;
+            ButtonLabel = "Ladda upp evenemanget";
+            ZipCodeLabel = "Postnummer";
+            AdressLabel = "Adress";
 
         }
 

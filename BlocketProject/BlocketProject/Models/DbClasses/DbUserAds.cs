@@ -24,6 +24,7 @@ namespace BlocketProject.Models.DbClasses
         public DateTime PublishDate { get; set; }
         public int CategoryId { get; set; }
         public int SubCategoryId { get; set; }
+        public int GenderId { get; set; }
         public DateTime ExpirationDate { get; set; }
     }
 }

@@ -3,37 +3,24 @@
 
 })();
 
-function readURL(input) {
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#imageFile').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp").change(function () {
-    readURL(this);
-});
-
-function textfieldpressed(id) {
+function textfieldpressed(onClass) {
+   
     var element = $('#' + id);
-    element.addClass("active");
+    if (id == 'textfield') {
+        element.addClass("active");
 
-    if (element[0].value == "Email" || element[0].value == "Telefon" || element[0].value == "Rubrik" || element[0].value == "Pris")
-    {
         element[0].value = "";
     }
+    
 }
-
 function textfieldblur(id) {
     var element = $('#' + id);
     element.removeClass("active");
+
     var hasvalue = true;
+
     if (element[0].value == "" && id == "email") {
         element[0].value = "Email";
         element.removeClass("hasText");
@@ -45,7 +32,7 @@ function textfieldblur(id) {
         element.removeClass("hasText");
         hasvalue = false;
     }
- 
+
     if (element[0].value == "" && id == "title") {
         element[0].value = "Rubrik";
         element.removeClass("hasText");
@@ -59,20 +46,18 @@ function textfieldblur(id) {
     }
     if (hasvalue == true) {
         element.addClass("hasText");
-    }  
-}
-
-function textareapressed() {
-    var element = $('#text');
-    element.addClass("active");
-
-    if (element[0].placeholder == "Annonstext") {
-        element[0].placeholder = "";
     }
 }
 
-function textareablur() {
-    var element = $('#text');
+function textareapressed(id) {
+    var element = $('#' + id);
+    element.addClass("active");
+    element[0].placeholder = "";
+
+}
+
+function textareablur(id) {
+    var element = $('#' + id);
     element.removeClass("active");
 }
 
@@ -89,24 +74,6 @@ function validateemail() {
         else {
             element.removeClass("error");
         }
-    }
-}
-
-function keypressed(id) {
-    var element = $('#' + id);
-
-    if (element[0].value == "Email")
-    {
-        element[0].value = "";
-    }
-    if (element[0].value == "Telefon") {
-        element[0].value = "";
-    }
-    if (element[0].value == "Rubrik") {
-        element[0].value = "";
-    }
-    if (element[0].value == "Pris") {
-        element[0].value = "";
     }
 }
 

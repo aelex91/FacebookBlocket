@@ -21,5 +21,7 @@ namespace BlocketProject.Models.DbClasses
         public string ImageUrl { get; set; }
         public int? NumberOfAds { get; set; }
         public string Gender { get; set; }
+        public string Phone { get; set; }
+        public int? PhoneValidation { get; set; }
     }
 }
