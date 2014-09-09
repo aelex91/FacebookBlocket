@@ -68,7 +68,6 @@ namespace BlocketProject.Helpers
                 Email = model.CreateEvent.Email,
                 Phone = phoneAsInt,
                 CategoryId = selectedcategoryAsInt,
-                SubCategoryId = 2,
                 ImageUrl = "/images/" + file.FileName,
                 Title = model.CreateEvent.AdTitle,
                 PublishDate = DateTime.Now,

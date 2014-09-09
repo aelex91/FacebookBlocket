@@ -21,10 +21,11 @@ namespace BlocketProject.Models.DbClasses
         public int Phone { get; set; }
         public string AdDescription { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime PublishDate { get; set; }
         public int CategoryId { get; set; }
-        public int SubCategoryId { get; set; }
         public int GenderId { get; set; }
+        public DateTime PublishDate { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public int MunicipalityId { get; set; }
+        public int CountyId { get; set; }
     }
 }
