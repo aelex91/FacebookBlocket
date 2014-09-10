@@ -128,9 +128,16 @@ namespace BlocketProject.Models.Pages
             Name = "Set default image.",
             Description = "Set default image when a user creates an event.",
             GroupName = SystemTabNames.Content,
-            Order = 1300)]
+            Order = 1400)]
         [UIHint(UIHint.Image)]
         public virtual Url DefaultImage { get; set; }
+
+        [CultureSpecific]
+        [Display(
+            Name = "Datelabel",
+            GroupName = SystemTabNames.Content,
+            Order = 1500)]
+        public virtual string DateLabel { get; set; }
 
         public override void SetDefaultValues(ContentType contentType)
         {
@@ -151,6 +158,7 @@ namespace BlocketProject.Models.Pages
             ZipCodeLabel = "Postnummer";
             AdressLabel = "Adress";
             PersonLabel = "Antal Personer";
+            DateLabel = "Välj datum";
 
         }
 

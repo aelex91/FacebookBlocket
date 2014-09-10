@@ -116,3 +116,15 @@ function isNumberKey(evt) {
 
     return true;
 }
+
+  
+    $(function(){  
+        $('#datepicker').datepicker({
+            minDate: 0,
+            inline: true,
+            changeYear: true,
+            changeMonth: true,
+            showOtherMonths: true,  
+            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],  
+        });  
+    });  
