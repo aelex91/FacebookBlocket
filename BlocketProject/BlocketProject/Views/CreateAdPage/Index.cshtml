@@ -38,10 +38,10 @@
             <br />
 
             <h3>Skriv lite om ditt evenemang</h3>
-            @Html.TextBoxFor(x => x.CreateEvent.AdTitle, new { id = Model.TitleLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
-            <br />
-
             @Html.TextBoxFor(x => x.CreateEvent.Price, new { id = Model.PriceLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "ensureNumeric(arguments[0] || this);" })
+            @Html.TextBoxFor(x => x.DateLabel, new { id = "datepicker", @class = "textfield", @onfocus = "this.style.background = '#fff'", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'"})
+            <br />
+            @Html.TextBoxFor(x => x.CreateEvent.AdTitle, new { id = Model.TitleLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
 
             <br />
             @Html.TextAreaFor(x => x.CreateEvent.Text, new { id = Model.TextLabel, @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })

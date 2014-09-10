@@ -27,6 +27,8 @@ namespace BlocketProject.Models.ViewModels
             this.ButtonLabel = currentPage.ButtonLabel;
             this.TitleLabel = currentPage.TitleLabel;
             this.LabelPerson = currentPage.PersonLabel;
+            this.DateLabel = currentPage.DateLabel;
+            
 
 
         }
@@ -41,6 +43,7 @@ namespace BlocketProject.Models.ViewModels
         public string TitleLabel { get; set; }
         public string ErrorMessage { get; set; }
         public string LabelPerson { get; set; }
+        public string DateLabel { get; set; }
         public EPiServer.Url DefaultImage { get; set; }
         public string TextLabel { get; set; }
         public CreateEvent CreateEvent { get; set; }
@@ -62,6 +65,7 @@ namespace BlocketProject.Models.ViewModels
         public string Text { get; set; }
         public string Adress { get; set; }
         public string ZipCode { get; set; }
+        public DateTime Date { get; set; }
 
         //Categories
         public string SelectedCategory { get; set; }

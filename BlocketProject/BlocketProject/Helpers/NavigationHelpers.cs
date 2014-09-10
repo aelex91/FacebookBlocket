@@ -252,6 +252,7 @@ IContentLoader contentLoader = null)
                 writer.WriteLine("</li>");
             }
             //Close top level element
+            writer.WriteLine("<li><input type=\"submit\" style=\"background: none; border: none; margin-top: 15px;\" value=\"Logout\" /></li>");
             writer.WriteLine("</ul>");
             writer.WriteLine("</nav>");
         }

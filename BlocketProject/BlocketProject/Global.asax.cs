@@ -30,8 +30,6 @@ namespace BlocketProject
                 "AdsPage/{action}",
                 new { controller = "AdsPage", action = "AdPage" });
 
-
-
         }
 
         
