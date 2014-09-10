@@ -2,12 +2,12 @@
 @{
     ViewBag.Title = "Index";
 }
-<div id="informationBlock">
+<div id="informationBlock" class="col-md-@Model.BlockWidth">
 @*    todo- skapa upp en css class med informationblock image size osv.. ta bort sizen ja satt på bilden*@
 
     <img src="@Model.Image" height="150" width="150" alt="Image" />
     <br />
     <p>@Model.Information</p>
     <br />
-    <input type="submit" value="@Model.ButtonText" />
+    @Html.PageLink(Model.RedirectUrl, null, new { @class = "btn btn-default"})
 </div>

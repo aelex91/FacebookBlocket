@@ -10,6 +10,9 @@ using BlocketProject.Models.ViewModels;
 using BlocketProject.Models.DbClasses;
 using System.Web.Security;
 using BlocketProject.Helpers;
+using Facebook;
+using Newtonsoft.Json;
+using System;
 
 namespace BlocketProject.Controllers
 {
@@ -26,12 +29,24 @@ namespace BlocketProject.Controllers
                 return View();
             }
 
+            FacebookFriendsModel friends = new FacebookFriendsModel();
+
+
+            var b = Session["MyAccessToken"].ToString();
+            var client = new FacebookClient(b);
+            dynamic fbresult = client.Get("me/friends");
+            var data = fbresult["data"].ToString();
+            friends.friendsList = JsonConvert.DeserializeObject<List<FacebookFriend>>(data);
+
+            model.friendsList = friends.friendsList;
+
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
             model.Fbuser = UserHelper.GetUserValues(model.Fbuser, user);
             model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
         }
+
 
 
 

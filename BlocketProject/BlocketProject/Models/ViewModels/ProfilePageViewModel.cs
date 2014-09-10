@@ -18,6 +18,7 @@ namespace BlocketProject.Models.ViewModels
         public string Heading { get; set; }
         public FacebookUserModel Fbuser { get; set; }
         public List<UserAdsModel> ListUserAds { get; set; }
+        public List<FacebookFriend> friendsList { get; set; }
 
         public class FacebookUserModel
         {
@@ -30,6 +31,7 @@ namespace BlocketProject.Models.ViewModels
             public string ImageUrl { get; set; }
             public int? NumberOfAds { get; set; }
         }
+
 
         public class UserAdsModel
         {

@@ -20,7 +20,6 @@
     </tr>
 
 </table>
-<b>Skapade annonser: @Model.Fbuser.NumberOfAds</b>
 <table id="UserAds">
     <tr>
 
@@ -39,4 +38,13 @@
         }
 
     </tr>
+</table>
+<b>Vänner:</b><br />
+<table>
+    @foreach (var friend in Model.friendsList)
+    {
+        <tr>
+            <td><a href="http://facebook.com/@friend.id">@friend.name</a></td>
+        </tr>
+    }
 </table>

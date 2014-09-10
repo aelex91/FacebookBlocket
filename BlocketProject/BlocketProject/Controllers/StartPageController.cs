@@ -105,8 +105,10 @@ namespace BlocketProject.Controllers
                     }
 
                 }
-
+                
                 string access_token = tokens["access_token"];
+                Session["MyAccessToken"] = access_token;
+
                 var client = new FacebookClient(access_token);
 
                 Session["accessToken"] = client;

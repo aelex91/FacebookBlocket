@@ -17,24 +17,24 @@
     <link href="~/Style/Custom.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="muted">Let em sale</h3>
-            </div>
-        </div>
 
+    @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+    {
+           
+            <input type="submit" class="btn btn-default" value="Logout" />
+    }
 
-        @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+    <div class="container"> 
+        @using (Html.BeginForm(null)){
+             Html.RenderOtherMainNavigation(null);
+        }
+        <h3 class="muted">LetEmSale</h3>
+        @if (User.Identity.IsAuthenticated)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                Html.RenderMainNavigation(null);
-            }
-
+            Html.RenderMainNavigation(null);
         }
         @RenderBody()
-
     </div>
+
 </body>
 </html>

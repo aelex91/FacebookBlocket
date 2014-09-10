@@ -17,6 +17,12 @@ namespace BlocketProject.Models.Pages
                     GroupName = SystemTabNames.Content,
                     Order = 1)]
                 public virtual string Heading { get; set; }
+
+                public override void SetDefaultValues(ContentType contentType)
+                {
+                    base.SetDefaultValues(contentType);
+                    Heading = "Heading";
+                }
          
     }
 }
