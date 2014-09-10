@@ -22,7 +22,8 @@
 
 
             @Html.TextBoxFor(x => x.CreateEvent.ZipCode, new { id = Model.CreateEvent.ZipCode, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
-
+            <h4>Gömma viktig information för användare?</h4>
+            @Html.CheckBoxFor(m => m.CreateEvent.HideInformation, new { @disabled = "disabled" })
             <br />
             <h3>Typ av gäster och typ av fest?</h3>
             @Html.DropDownListFor(x => x.CreateEvent.SelectedGender, new SelectList(Model.CreateEvent.Genders, "Key", "Value"), new { placeholder = "", @class = "textfield", id = Model.CreateEvent.Genders })
@@ -47,7 +48,10 @@
             @Html.TextAreaFor(x => x.CreateEvent.Text, new { id = Model.TextLabel, @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })
             <input type='file' id="file" name="file" />
             <img id="imagefile" src="@Model.DefaultImage" alt="your image" />
-
+            @if (Model.ErrorMessage != null || Model.ErrorMessage != string.Empty)
+            {
+                <b>@Model.ErrorMessage</b>
+            }
         </div>
         <br />
         <input type="submit" class="button" value="@Model.ButtonLabel" />

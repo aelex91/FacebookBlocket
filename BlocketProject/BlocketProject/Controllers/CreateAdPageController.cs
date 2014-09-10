@@ -50,6 +50,8 @@ namespace BlocketProject.Controllers
                 Genders = ConnectionHelper.GetGenders(),
                 Municipality = ConnectionHelper.GetMuncipalities(),
                 County = ConnectionHelper.GetCounties(),
+                HideInformation = false,
+
             };
 
 
@@ -59,6 +61,11 @@ namespace BlocketProject.Controllers
         [HttpPost]
         public ActionResult CreateAd(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
         {
+            if (file == null || model == null)
+            {
+                model.ErrorMessage = "You need an image";
+                return View("Index",model.ErrorMessage);
+            }
             var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
             model.CurrentUser = user;
             if (model.CurrentUser.NumberOfAds >= currentPage.NumberOfAds)

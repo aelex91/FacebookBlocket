@@ -62,6 +62,7 @@ namespace BlocketProject.Models.ViewModels
         public string Text { get; set; }
         public string Adress { get; set; }
         public string ZipCode { get; set; }
+        public bool  HideInformation { get; set; }
 
         //Categories
         public string SelectedCategory { get; set; }
