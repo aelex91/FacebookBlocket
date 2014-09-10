@@ -133,6 +133,39 @@ namespace BlocketProject.Helpers
 
             return query;
         }
+        public static Dictionary<int, string> GetCounties()
+        {
+
+            var query = (from p in db.DbCounty
+                         select p).ToDictionary(x => x.Id, x => x.CountyName);
+            return query;
+        }
+        public static Dictionary<int, string> GetCountiesById(int id)
+        {
+            // skapa så att d
+            var query = (from p in db.DbCounty
+                         select p).ToDictionary(x => x.Id, x => x.CountyName);
+            return query;
+        }
+        public static Dictionary<int, string> GetMuncipalitiesFromId(int id)
+        {
+            // Hämta municipalities beroende på id för county.
+            var query = (from p in db.DbMunicipality
+                         where p.CountyId == id
+                         join ut in db.DbCounty on p.CountyId equals ut.Id
+                         select p).ToDictionary(t => t.Id, t => t.MunicipalityName);
+
+            return query.ToDictionary(x=>x.Key,x=>x.Value);
+        }
+        public static Dictionary<int, string> GetMuncipalities()
+        {
+            // Hämta municipalities beroende på id för county.
+            var query = (from p in db.DbMunicipality
+                         join ut in db.DbCounty on p.CountyId equals ut.Id
+                         select p).ToDictionary(t => t.Id, t => t.MunicipalityName);
+
+            return query;
+        }
 
         public static DbUserAds GetAdById(int id)
         {

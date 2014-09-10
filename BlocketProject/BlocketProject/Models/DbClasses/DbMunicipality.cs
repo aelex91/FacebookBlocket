@@ -10,7 +10,7 @@ namespace BlocketProject.Models.DbClasses
     [Table("Municipality")]
     public class DbMunicipality
     {
-        [Key, Column("AdId")]
+        [Key, Column("Id")]
         public int Id { get; set; }
         public string MunicipalityName { get; set; }
         public int CountyId { get; set; }

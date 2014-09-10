@@ -6,15 +6,47 @@
 
 
 function textfieldpressed(onClass) {
-   
+
     var element = $('#' + id);
     if (id == 'textfield') {
         element.addClass("active");
 
         element[0].value = "";
     }
-    
+
 }
+function ensureNumeric(e) {
+
+    var evt = window.event || e;
+    var code = evt.keyCode || evt.charCode;
+
+    return code <= 30 || (/^[0-9]+$/.test(String.fromCharCode(code)));
+}
+
+
+$(document).ready(function () {
+    $("#municipality").hide();
+    $("#counties").change(function () {
+        var dID = $(this).val();
+        $.getJSON("GetJson", { dropdownId: dID },
+               function (data) {
+                   $("#municipality").show();
+                   var select = $("#municipality");
+                   select.empty();
+                   select.append($('<option/>', {
+                       value: 0,
+                       text: "Välj kommun"
+                   }));
+                   $.each(data, function (index, itemData) {
+                       select.append($('<option/>', {
+                           value: itemData.Value,
+                           text: itemData.Text
+                       }));
+                   });
+               });
+    });
+});
+
 function textfieldblur(id) {
     var element = $('#' + id);
     element.removeClass("active");

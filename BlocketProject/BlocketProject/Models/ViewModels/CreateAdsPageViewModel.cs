@@ -66,9 +66,12 @@ namespace BlocketProject.Models.ViewModels
         public string SelectedCategory { get; set; }
         public string SelectedGender { get; set; }
         public string SelectedNumberOfPeople { get; set; }
+        public string SelectedCounty { get; set; }
+        public string SelectedMunicipality { get; set; }
         public Dictionary<int, string> Category { get; set; }
         public Dictionary<int, string> Genders { get; set; }
-        public Dictionary<int, int> ArrivingPeople { get; set; }
+        public Dictionary<int, string> County { get; set; }
+        public Dictionary<int, string> Municipality { get; set; }
 
 
     }
