@@ -26,7 +26,7 @@ namespace BlocketProject.Models.ViewModels
             this.UploadImageLabel = currentPage.UploadImageLabel;
             this.ButtonLabel = currentPage.ButtonLabel;
             this.TitleLabel = currentPage.TitleLabel;
-
+            this.LabelPerson = currentPage.PersonLabel;
 
 
         }
@@ -40,6 +40,7 @@ namespace BlocketProject.Models.ViewModels
         public string ButtonLabel { get; set; }
         public string TitleLabel { get; set; }
         public string ErrorMessage { get; set; }
+        public string LabelPerson { get; set; }
         public EPiServer.Url DefaultImage { get; set; }
         public string TextLabel { get; set; }
         public CreateEvent CreateEvent { get; set; }

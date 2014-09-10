@@ -101,6 +101,13 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
+            Name = "Label for persons",
+            GroupName = SystemTabNames.Content,
+            Order = 1150)]
+        public virtual string PersonLabel { get; set; }
+
+        [CultureSpecific]
+        [Display(
             Name = "Set number of ads",
             Description = "Set the number of ads you want a user to be avaliable to create",
             GroupName = SystemTabNames.Content,
@@ -143,6 +150,7 @@ namespace BlocketProject.Models.Pages
             ButtonLabel = "Ladda upp evenemanget";
             ZipCodeLabel = "Postnummer";
             AdressLabel = "Adress";
+            PersonLabel = "Antal Personer";
 
         }
 
