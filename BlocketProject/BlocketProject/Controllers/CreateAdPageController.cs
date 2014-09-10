@@ -17,6 +17,21 @@ namespace BlocketProject.Controllers
 {
     public class CreateAdPageController : PageController<CreateAdPage>
     {
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetJson(string dropdownId)
+        {
+            //Get the muncipalities for the current id from drop down county.
+
+            var results = ConnectionHelper.GetMuncipalitiesFromId(Convert.ToInt32(dropdownId));
+            var dic = results.Select(m => new SelectListItem()
+            {
+                Text = m.Value,
+                Value = m.Key.ToString(),
+
+            });
+
+            return Json(dic, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Index(CreateAdPage currentPage)
         {
             var model = new CreateAdsPageViewModel(currentPage);
@@ -33,6 +48,8 @@ namespace BlocketProject.Controllers
                 Adress = currentPage.AdressLabel,
                 Category = ConnectionHelper.GetCategories(),
                 Genders = ConnectionHelper.GetGenders(),
+                Municipality = ConnectionHelper.GetMuncipalities(),
+                County = ConnectionHelper.GetCounties(),
             };
 
 
