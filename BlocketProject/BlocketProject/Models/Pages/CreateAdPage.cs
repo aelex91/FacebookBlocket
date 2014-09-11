@@ -94,10 +94,10 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Title for ad Label",
+            Name = "Title for Event Label",
             GroupName = SystemTabNames.Content,
             Order = 1100)]
-        public virtual string TitleLabel { get; set; }
+        public virtual string EventLabel { get; set; }
 
         [CultureSpecific]
         [Display(
@@ -112,7 +112,7 @@ namespace BlocketProject.Models.Pages
             Description = "Set the number of ads you want a user to be avaliable to create",
             GroupName = SystemTabNames.Content,
             Order = 1200)]
-        public virtual int NumberOfAds { get; set; }
+        public virtual int NumberOfEvents { get; set; }
 
         [CultureSpecific]
         [Display(
@@ -122,7 +122,7 @@ namespace BlocketProject.Models.Pages
             Order = 1300)]
         public virtual PageReference ReferenceToLandingPage { get; set; }
 
-      
+
         [CultureSpecific]
         [Display(
             Name = "Set default image.",
@@ -148,12 +148,12 @@ namespace BlocketProject.Models.Pages
             EmailLabel = "Email";
             PhoneLabel = "Telefon";
             CategoryLabel = "Kategori";
-            TitleLabel = "Rubrik";
+            EventLabel = "Rubrik";
             TextLabel = "Text";
             PriceLabel = "Pris";
             UploadImageLabel = "Ladda upp bild";
             ButtonLabel = "Ladda upp annons";
-            NumberOfAds = 5;
+            NumberOfEvents = 5;
             ButtonLabel = "Ladda upp evenemanget";
             ZipCodeLabel = "Postnummer";
             AdressLabel = "Adress";

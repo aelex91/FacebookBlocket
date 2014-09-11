@@ -19,6 +19,7 @@ namespace BlocketProject.Models.ViewModels
             public string Location { get; set; }
             public string ImageUrl { get; set; }
             public string Gender { get; set; }
+            public DateTime RegisterDate { get; set; }
         }
     }
 }

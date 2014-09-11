@@ -33,9 +33,9 @@ namespace BlocketProject.Controllers
         }
 
         [HttpPost]
-        public void AdPage(int AdId)
+        public void AdPage(int EventId)
         {
-            DbUserAds ad = Helpers.ConnectionHelper.GetAdById(AdId);
+            DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
 
             var model = new AdsPageViewModel.UserAdsModel();
             SetAdValues(ad);
@@ -44,11 +44,11 @@ namespace BlocketProject.Controllers
             //Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());
         }
 
-        public AdsPageViewModel.UserAdsModel SetAdValues(DbUserAds ad)
+        public AdsPageViewModel.UserAdsModel SetAdValues(DbUserEvents ad)
         {
             var model = new AdsPageViewModel.UserAdsModel();
 
-            model.AdDescription = ad.AdDescription;
+            model.EventDescription = ad.EventDescription;
             model.CategoryId = ad.CategoryId;
             model.ExpirationDate = ad.ExpirationDate;
             model.ImageUrl = ad.ImageUrl;

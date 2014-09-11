@@ -5,59 +5,99 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Html.PropertyFor(x => x.Heading)</h2>
 
+<h2>@Html.PropertyFor(x => x.Heading)</h2>
+@Html.HiddenFor(x => x.ErrorMessage)
+@if (Model.ErrorMessage != null || Model.ErrorMessage != string.Empty)
+{
+    <h3 style="color: red">@Model.ErrorMessage</h3>
+}
 <div class="">
-    @using (Html.BeginForm("CreateAd", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data", language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
+    @Html.HiddenFor(x => x.ButtonLabel)
+    @Html.HiddenFor(x => x.CategoryLabel)
+    @Html.HiddenFor(x => x.CreateEvent.Adress)
+    @Html.HiddenFor(x => x.CurrentUser.Location)
+    @Html.HiddenFor(x => x.CreateEvent.Genders)
+    @Html.HiddenFor(x => x.CreateEvent.Category)
+    @Html.HiddenFor(x => x.CreateEvent.County)
+    @Html.HiddenFor(x => x.CreateEvent.Municipality)
+    @Html.HiddenFor(x => x.DateLabel)
+    @Html.HiddenFor(x => x.EmailLabel)
+
+    @Html.HiddenFor(x => x.Heading)
+    @Html.HiddenFor(x => x.PersonLabel)
+    @Html.HiddenFor(x => x.NameLabel)
+    @Html.HiddenFor(x => x.Phonelabel)
+    @Html.HiddenFor(x => x.PriceLabel)
+    @Html.HiddenFor(x => x.TextLabel)
+    @Html.HiddenFor(x => x.EventLabel)
+    @Html.HiddenFor(x => x.UploadImageLabel)
+    @Html.HiddenFor(x => x.DefaultImage)
+    @Html.HiddenFor(x => x.ErrorMessage)
+    @Html.HiddenFor(x => x.EventLabel)
+
+    @Html.HiddenFor(x => x.CreateEvent.SelectedGender)
+    @Html.HiddenFor(x => x.CreateEvent.SelectedCategory)
+    @Html.HiddenFor(x => x.CreateEvent.SelectedCounty)
+    @Html.HiddenFor(x => x.CreateEvent.SelectedMunicipality)
+
+    @using (Html.BeginForm("Index", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data", language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
     {
         <div>
-
-            @Html.TextBoxFor(x => x.EmailLabel, new { id = Model.EmailLabel, @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
-
-
-            @Html.TextBoxFor(x => x.CreateEvent.Phone, new { id = Model.Phonelabel, @class = "textfield phone", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
-
-            <br />
-            @Html.TextBoxFor(x => x.CurrentUser.Location, new { id = Model.CreateEvent.Adress, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+            <fieldset>
+                <legend>Fields</legend>
 
 
-            @Html.TextBoxFor(x => x.CreateEvent.ZipCode, new { id = Model.CreateEvent.ZipCode, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
-            <h4>Gömma viktig information för användare?</h4>
-            @Html.CheckBoxFor(m => m.CreateEvent.HideInformation, new { @disabled = "disabled" })
-            <br />
-            <h3>Typ av gäster och typ av fest?</h3>
-            @Html.DropDownListFor(x => x.CreateEvent.SelectedGender, new SelectList(Model.CreateEvent.Genders, "Key", "Value"), new { placeholder = "", @class = "textfield", id = Model.CreateEvent.Genders })
-            @Html.DropDownListFor(x => x.CreateEvent.SelectedCategory, new SelectList(Model.CreateEvent.Category, "Key", "Value"), new { placeholder = "", @class = "textfield", id = Model.CreateEvent.Genders })
 
-            <br />
-            <h3>Vart håller festen till?</h3>
-            @Html.DropDownListFor(x => x.CreateEvent.SelectedCounty, new SelectList(Model.CreateEvent.County, "Key", "Value"), "Välj län", new { placeholder = "", @class = "textfield", id = "counties" })
-            @Html.DropDownListFor(x => x.CreateEvent.SelectedMunicipality, new SelectList(Model.CreateEvent.Municipality, "Key", "Value"), "Välj kommun", new { id = "municipality", @class = "textfield" })
-            <br />
-            <h3>Hur många får komma?</h3>
-            @Html.TextBoxFor(x => x.LabelPerson, new { id = Model.LabelPerson, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);ensureNumeric(arguments[0] || this);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
-            <br />
+                @Html.TextBoxFor(x => x.CreateEvent.Email, new { id = Model.CreateEvent.Email, @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
 
-            <h3>Skriv lite om ditt evenemang</h3>
-            @Html.TextBoxFor(x => x.CreateEvent.Price, new { id = Model.PriceLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "ensureNumeric(arguments[0] || this);" })
-            @Html.TextBoxFor(x => x.DateLabel, new { id = "datepicker", @class = "textfield", @onfocus = "this.style.background = '#fff'", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'"})
-            <br />
-            @Html.TextBoxFor(x => x.CreateEvent.AdTitle, new { id = Model.TitleLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
 
-            <br />
-            @Html.TextAreaFor(x => x.CreateEvent.Text, new { id = Model.TextLabel, @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })
-            <input type='file' id="file" name="file" />
-            <img id="imagefile" src="@Model.DefaultImage" alt="your image" />
-            @if (Model.ErrorMessage != null || Model.ErrorMessage != string.Empty)
-            {
-                <b>@Model.ErrorMessage</b>
-            }
+                @Html.TextBoxFor(x => x.CreateEvent.Phone, new { id = Model.Phonelabel, @class = "textfield phone", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
+
+                <br />
+                @Html.TextBoxFor(x => x.CurrentUser.Location, new { id = Model.CreateEvent.Adress, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+
+
+                @*@Html.TextBoxFor(x => x.zi, new { id = Model.CreateEvent.ZipCode, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })*@
+                <h4>Gömma viktig information för användare?</h4>
+                @Html.CheckBoxFor(m => m.CreateEvent.HideInformation)
+                <br />
+                <h3>Typ av gäster och typ av fest?</h3>
+                @Html.DropDownListFor(x => x.CreateEvent.SelectedGender, new SelectList(Model.CreateEvent.Genders, "Key", "Value"), new { placeholder = "", @class = "textfield" })
+                @Html.DropDownListFor(x => x.CreateEvent.SelectedCategory, new SelectList(Model.CreateEvent.Category, "Key", "Value"), new { placeholder = "", @class = "textfield" })
+
+                <br />
+                <h3>Vart håller festen till?</h3>
+                @Html.DropDownListFor(x => x.CreateEvent.SelectedCounty, new SelectList(Model.CreateEvent.County, "Key", "Value"), "Välj län", new { placeholder = "", @class = "textfield", id = "counties" })
+                @Html.DropDownListFor(x => x.CreateEvent.SelectedMunicipality, new SelectList(Model.CreateEvent.Municipality, "Key", "Value"), "Välj kommun", new { id = "municipality", @class = "textfield" })
+                <br />
+                <h3>Hur många får komma?</h3>
+                @Html.TextBoxFor(x => x.CreateEvent.MaxGuests, new { id = Model.PersonLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);ensureNumeric(arguments[0] || this);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+                <br />
+
+                <h3>Skriv lite om ditt evenemang</h3>
+
+                @Html.TextBoxFor(x => x.CreateEvent.Price, new { id = Model.PriceLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "ensureNumeric(arguments[0] || this);" })
+                @Html.TextBoxFor(x => x.CreateEvent.Date, new { id = Model.DateLabel, @class = "textfield datepicker", @onclick = "datepicker('')", @onfocus = "this.style.background = '#fff'", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'" })
+                <br />
+                @Html.TextBoxFor(x => x.CreateEvent.EventTitle, new { id = Model.EventLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+
+                <br />
+                @Html.TextAreaFor(x => x.CreateEvent.Text, new { id = Model.TextLabel, @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })
+                <input type='file' id="file" name="file" />
+
+                <img id="imagefile" src="@Model.DefaultImage" alt="your image" />
+
+            </fieldset>
         </div>
         <br />
         <input type="submit" class="button" value="@Model.ButtonLabel" />
         <br />
         <br />
+
+     
     }
+
 </div>
 <script type="text/javascript">
     @*    $(document).ready(function () {

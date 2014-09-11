@@ -1,5 +1,6 @@
 ﻿using BlocketProject.Models.DbClasses;
 using BlocketProject.Models.Pages;
+using EPiServer;
 using EPiServer.Core;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,14 @@ namespace BlocketProject.Models.ViewModels
             this.PriceLabel = currentPage.PriceLabel;
             this.UploadImageLabel = currentPage.UploadImageLabel;
             this.ButtonLabel = currentPage.ButtonLabel;
-            this.TitleLabel = currentPage.TitleLabel;
-            this.LabelPerson = currentPage.PersonLabel;
-
+            this.EventLabel = currentPage.EventLabel;
+            this.PersonLabel = currentPage.PersonLabel;
+            this.DateLabel = currentPage.DateLabel;
+           
 
         }
+
+        public string DateLabel { get; set; }
         public string Heading { get; set; }
         public string NameLabel { get; set; }
         public string EmailLabel { get; set; }
@@ -38,42 +42,47 @@ namespace BlocketProject.Models.ViewModels
         public string PriceLabel { get; set; }
         public string UploadImageLabel { get; set; }
         public string ButtonLabel { get; set; }
-        public string TitleLabel { get; set; }
+        public string EventLabel { get; set; }
         public string ErrorMessage { get; set; }
-        public string LabelPerson { get; set; }
-        public EPiServer.Url DefaultImage { get; set; }
+        public string PersonLabel { get; set; }
+        public Url DefaultImage { get; set; }
         public string TextLabel { get; set; }
         public CreateEvent CreateEvent { get; set; }
         public DbUserInformation CurrentUser { get; set; }
-        // properties to create an ad
 
 
 
     }
     public class CreateEvent
     {
-        [Required(ErrorMessage = "Required an email")]
+
+        [Required(ErrorMessage = "The email address is required")]
         public string Email { get; set; }
+        [PhoneAttribute]
         public string Phone { get; set; }
-        public string AdTitle { get; set; }
+        public string EventTitle { get; set; }
         [Required(ErrorMessage = "Set a price")]
         public string Price { get; set; }
         [Required(ErrorMessage = "Write something..")]
+        //[MaxLength(255, ErrorMessage = "The {0} must be maximum {2} characters long")]     
         public string Text { get; set; }
         public string Adress { get; set; }
-        public string ZipCode { get; set; }
-        public bool  HideInformation { get; set; }
+        public bool HideInformation { get; set; }
+        public string Date { get; set; }
+        public string MaxGuests { get; set; }
 
-        //Categories
-        public string SelectedCategory { get; set; }
-        public string SelectedGender { get; set; }
-        public string SelectedNumberOfPeople { get; set; }
-        public string SelectedCounty { get; set; }
-        public string SelectedMunicipality { get; set; }
         public Dictionary<int, string> Category { get; set; }
         public Dictionary<int, string> Genders { get; set; }
         public Dictionary<int, string> County { get; set; }
         public Dictionary<int, string> Municipality { get; set; }
+        //Categories
+        public string SelectedCategory { get; set; }
+        public string SelectedGender { get; set; }
+        public string SelectedCounty { get; set; }
+        public string SelectedMunicipality { get; set; }
+
+
+       
 
 
     }

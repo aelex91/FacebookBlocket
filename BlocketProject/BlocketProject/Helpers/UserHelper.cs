@@ -18,7 +18,7 @@ namespace BlocketProject.Helpers
             model.UserId = user.UserId;
             model.Email = user.Email;
             model.ImageUrl = user.ImageUrl;
-            model.NumberOfAds = user.NumberOfAds;
+            model.NumberOfEvents = user.NumberOfEvents;
             return model;
         }
     }

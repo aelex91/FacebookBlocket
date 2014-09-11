@@ -26,13 +26,13 @@ namespace BlocketProject.Models.ViewModels
         public class UserAdsModel
         {
             public int? UserId { get; set; }
-            public int AdId { get; set; }
+            public int EventId { get; set; }
               [Required(ErrorMessage = "Title is required.")]
             public string Title { get; set; }
              [Required(ErrorMessage = "Price is required.")]
             public int Price { get; set; }
              [Required(ErrorMessage = "Description is required.")]
-            public string AdDescription { get; set; }
+            public string EventDescription { get; set; }
             public string ImageUrl { get; set; }
             public DateTime PublishDate { get; set; }
             public DateTime ExpirationDate { get; set; }

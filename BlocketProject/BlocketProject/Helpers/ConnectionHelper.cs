@@ -19,11 +19,11 @@ namespace BlocketProject.Helpers
 
         public static List<AdsPageViewModel.UserAdsModel> GetAllAds()
         {
-            var query = (from p in db.DbUserAds
+            var query = (from p in db.DbUserEvents
                          select new AdsPageViewModel.UserAdsModel
                           {
                               UserId = p.UserId,
-                              AdDescription = p.AdDescription,
+                              EventDescription = p.EventDescription,
                               ImageUrl = p.ImageUrl,
                               Price = p.Price,
                               PublishDate = p.PublishDate,
@@ -32,18 +32,15 @@ namespace BlocketProject.Helpers
                           }).ToList();
             return query;
         }
-
         public static List<AdsPageViewModel.UserAdsModel> GetCurrentUserAds(int? id)
         {
-
-
             var query = (from r in db.DbUserInformation
-                         join a in db.DbUserAds on r.UserId equals a.UserId
+                         join a in db.DbUserEvents on r.UserId equals a.UserId
                          where a.UserId == id
                          select new AdsPageViewModel.UserAdsModel
                          {
                              UserId = a.UserId,
-                             AdDescription = a.AdDescription,
+                             EventDescription = a.EventDescription,
                              ImageUrl = a.ImageUrl,
                              Price = a.Price,
                              PublishDate = a.PublishDate,
@@ -51,54 +48,60 @@ namespace BlocketProject.Helpers
 
 
                          }).ToList();
-
             return query;
         }
 
         public static void SaveAdInformationToDb(CreateAdsPageViewModel model, HttpPostedFileBase file)
         {
-            DateTime expirationDate = DateTime.Now.AddDays(14);
+            DateTime expirationDate = Convert.ToDateTime(model.CreateEvent.Date);
+            expirationDate.AddDays(1);
             var selectedGender = Convert.ToInt32(model.CreateEvent.SelectedGender);
             var priceAsInt = Convert.ToInt32(model.CreateEvent.Price);
             var phoneAsInt = Convert.ToInt32(model.CreateEvent.Phone);
             var selectedcategoryAsInt = Convert.ToInt32(model.CreateEvent.SelectedCategory);
             var selectedGenderAsInt = Convert.ToInt32(model.CreateEvent.SelectedGender);
-            var modelUserAds = new DbUserAds
+            var selectedCountyAsInt = Convert.ToInt32(model.CreateEvent.SelectedCounty);
+            var selectedMunicipalityAsInt = Convert.ToInt32(model.CreateEvent.SelectedCounty);
+            var modelUserAds = new DbUserEvents
             {
                 Email = model.CreateEvent.Email,
                 Phone = phoneAsInt,
                 CategoryId = selectedcategoryAsInt,
                 ImageUrl = "/images/" + file.FileName,
-                Title = model.CreateEvent.AdTitle,
+                Title = model.CreateEvent.EventTitle,
                 PublishDate = DateTime.Now,
                 ExpirationDate = expirationDate,
                 UserId = model.CurrentUser.UserId,
                 Price = priceAsInt,
                 GenderId = selectedGender,
+                HideImportantInfo = model.CreateEvent.HideInformation,
+                CountyId = selectedCountyAsInt,
+                MunicipalityId = selectedMunicipalityAsInt,
+                MaxGuests = Convert.ToInt32(model.CreateEvent.MaxGuests),
+                EventDescription = model.CreateEvent.Text,
 
             };
-            db.DbUserAds.Add(modelUserAds);
-
-
-
+            db.DbUserEvents.Add(modelUserAds);
         }
-        public static void SaveNumberOfAdsToUser(string email)
+        public static void SaveNumberOfEventsToUser(string email)
         {
-            var checkNumberofAds = CheckNumberOfAds(email);
-            checkNumberofAds = checkNumberofAds + 1;
+            var checkNumberOfEvents = CheckNumberOfEvents(email);  
             var query = (from p in db.DbUserInformation
                          where p.Email == email
                          select p).FirstOrDefault();
             try
             {
-                if (checkNumberofAds == null)
+                if (checkNumberOfEvents == null)
                 {
-                    query.NumberOfAds = 1;
+                    query.NumberOfEvents = 1;
                 }
                 else
                 {
-                    query.NumberOfAds = query.NumberOfAds + 1;
+                    query.NumberOfEvents = query.NumberOfEvents + 1;
                 }
+                db.DbUserInformation.Attach(query);
+                var entry = db.Entry(query);
+                entry.Property(p => p.NumberOfEvents).IsModified = true;
                 db.SaveChanges();
             }
             catch (Exception)
@@ -109,12 +112,12 @@ namespace BlocketProject.Helpers
 
 
         }
-        public static int? CheckNumberOfAds(string email)
+        public static int? CheckNumberOfEvents(string email)
         {
 
             var query = (from p in db.DbUserInformation
                          where email == p.Email
-                         select p.NumberOfAds).FirstOrDefault();
+                         select p.NumberOfEvents).FirstOrDefault();
 
             return query;
         }
@@ -155,7 +158,7 @@ namespace BlocketProject.Helpers
                          join ut in db.DbCounty on p.CountyId equals ut.Id
                          select p).ToDictionary(t => t.Id, t => t.MunicipalityName);
 
-            return query.ToDictionary(x=>x.Key,x=>x.Value);
+            return query.ToDictionary(x => x.Key, x => x.Value);
         }
         public static Dictionary<int, string> GetMuncipalities()
         {
@@ -167,16 +170,16 @@ namespace BlocketProject.Helpers
             return query;
         }
 
-        public static DbUserAds GetAdById(int id)
+        public static DbUserEvents GetAdById(int id)
         {
-            var query = (from p in db.DbUserAds where p.AdId == id select p).FirstOrDefault();
+            var query = (from p in db.DbUserEvents where p.EventId == id select p).FirstOrDefault();
 
             return query;
         }
         public static string GetUserName(int? id)
         {
             var result = (from r in db.DbUserInformation
-                          join a in db.DbUserAds on r.UserId equals a.UserId
+                          join a in db.DbUserEvents on r.UserId equals a.UserId
                           where a.UserId == id
                           select r.FirstName).FirstOrDefault();
 
@@ -260,13 +263,13 @@ namespace BlocketProject.Helpers
 
 
             var query = (from r in db.DbUserInformation
-                         join a in db.DbUserAds on r.UserId equals a.UserId
+                         join a in db.DbUserEvents on r.UserId equals a.UserId
                          where a.UserId == id
                          select new ProfilePageViewModel.UserAdsModel
                          {
                              UserId = a.UserId,
-                             AdId = a.AdId,
-                             AdDescription = a.AdDescription,
+                             EventId = a.EventId,
+                             EventDescription = a.EventDescription,
                              ImageUrl = a.ImageUrl,
                              Price = a.Price,
                              PublishDate = a.PublishDate,

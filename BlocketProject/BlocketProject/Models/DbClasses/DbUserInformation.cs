@@ -19,9 +19,10 @@ namespace BlocketProject.Models.DbClasses
         public string Email { get; set; }
         public string Location { get; set; }
         public string ImageUrl { get; set; }
-        public int? NumberOfAds { get; set; }
+        public int? NumberOfEvents { get; set; }
         public string Gender { get; set; }
         public string Phone { get; set; }
         public int? PhoneValidation { get; set; }
+        public DateTime RegisterDate { get; set; }
     }
 }

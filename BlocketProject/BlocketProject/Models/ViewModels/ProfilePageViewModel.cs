@@ -29,17 +29,17 @@ namespace BlocketProject.Models.ViewModels
             public string Email { get; set; }
             public string Location { get; set; }
             public string ImageUrl { get; set; }
-            public int? NumberOfAds { get; set; }
+            public int? NumberOfEvents { get; set; }
         }
 
 
         public class UserAdsModel
         {
             public int UserId { get; set; }
-            public int AdId { get; set; }
+            public int EventId { get; set; }
             public string Title { get; set; }
             public int Price { get; set; }
-            public string AdDescription { get; set; }
+            public string EventDescription { get; set; }
             public string ImageUrl { get; set; }
             public DateTime PublishDate { get; set; }
             public DateTime ExpirationDate { get; set; }

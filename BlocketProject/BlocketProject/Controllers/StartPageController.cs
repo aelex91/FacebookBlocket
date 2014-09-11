@@ -143,6 +143,7 @@ namespace BlocketProject.Controllers
             DbUser.ImageUrl = UserImageUrl;
             DbUser.Birthday = DateTime.Parse(user.birthday);
             DbUser.Gender = user.gender;
+            DbUser.RegisterDate = DateTime.Now;
             
             model.FacebookId = DbUser.FacebookId;
             model.Birthday = DbUser.Birthday;
@@ -152,6 +153,7 @@ namespace BlocketProject.Controllers
             model.Location = DbUser.Location;
             model.ImageUrl = DbUser.ImageUrl;
             model.Gender = DbUser.Gender;
+            model.RegisterDate = DbUser.RegisterDate;
            
             var checkDbId = ConnectionHelper.GetUserFacebookId(DbUser.FacebookId);
             var checkUsers = ConnectionHelper.GetAllUsers();

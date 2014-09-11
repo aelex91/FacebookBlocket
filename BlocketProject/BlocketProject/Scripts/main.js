@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#municipality").hide();
     $("#counties").change(function () {
         var dID = $(this).val();
-        $.getJSON("GetJson", { dropdownId: dID },
+        $.getJSON("changeidondropdownlist", { dropdownId: dID },
                function (data) {
                    $("#municipality").show();
                    var select = $("#municipality");
@@ -109,6 +109,18 @@ function validateemail() {
     }
 }
 
+$(function () {
+    $('.datepicker').datepicker({
+        minDate: 0,
+        maxDate: 90,
+        inline: true,
+        changeYear: true,
+        changeMonth: true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    });
+});
+
 function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
@@ -117,14 +129,4 @@ function isNumberKey(evt) {
     return true;
 }
 
-  
-    $(function(){  
-        $('#datepicker').datepicker({
-            minDate: 0,
-            inline: true,
-            changeYear: true,
-            changeMonth: true,
-            showOtherMonths: true,  
-            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],  
-        });  
-    });  
+

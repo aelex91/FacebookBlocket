@@ -290,11 +290,12 @@
     <Compile Include="Models\Blocks\PageListBlock.cs" />
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
+    <Compile Include="Models\DbClasses\DbAttending.cs" />
     <Compile Include="Models\DbClasses\DbCategories.cs" />
     <Compile Include="Models\DbClasses\DbCounty.cs" />
     <Compile Include="Models\DbClasses\DbGenders.cs" />
     <Compile Include="Models\DbClasses\DbMunicipality.cs" />
-    <Compile Include="Models\DbClasses\DbUserAds.cs" />
+    <Compile Include="Models\DbClasses\DbUserEvents.cs" />
     <Compile Include="Models\DbClasses\DbUserInformation.cs" />
     <Compile Include="Models\DbClasses\LetemsaleDbContext.cs" />
     <Compile Include="Models\Media\ImageData.cs" />
@@ -483,6 +484,7 @@
     <Content Include="Views\LogoutBlock\Index.cshtml" />
     <Content Include="Views\LandingPage\Index.cshtml" />
     <Content Include="Views\AdsPage\AdPage.cshtml" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

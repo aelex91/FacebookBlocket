@@ -18,7 +18,7 @@ namespace BlocketProject.Controllers
     public class CreateAdPageController : PageController<CreateAdPage>
     {
         [AcceptVerbs(HttpVerbs.Get)]
-        public JsonResult GetJson(string dropdownId)
+        public JsonResult ChangeIdOnDropDownList(string dropdownId)
         {
             //Get the muncipalities for the current id from drop down county.
 
@@ -32,72 +32,69 @@ namespace BlocketProject.Controllers
 
             return Json(dic, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Index(CreateAdPage currentPage)
         {
             var model = new CreateAdsPageViewModel(currentPage);
             model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-
             model.CreateEvent = new CreateEvent
             {
-                Email = currentPage.EmailLabel,
-                Phone = currentPage.PhoneLabel,
-                AdTitle = currentPage.TitleLabel,
-                Price = currentPage.PriceLabel,
+                Email = model.EmailLabel,
+                Phone = model.Phonelabel,
+                EventTitle = model.EventLabel,
+                Price = model.PriceLabel,
                 Text = currentPage.TextLabel,
-                ZipCode = currentPage.ZipCodeLabel,
                 Adress = currentPage.AdressLabel,
                 Category = ConnectionHelper.GetCategories(),
                 Genders = ConnectionHelper.GetGenders(),
                 Municipality = ConnectionHelper.GetMuncipalities(),
                 County = ConnectionHelper.GetCounties(),
                 HideInformation = false,
+                MaxGuests = currentPage.PersonLabel,
+                Date = currentPage.DateLabel,
+
 
             };
-
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult CreateAd(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
+        public ActionResult Index(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
         {
-            if (file == null || model == null)
+            if (ModelState.IsValid)
             {
-                model.ErrorMessage = "You need an image";
-                return View("Index",model.ErrorMessage);
-            }
-            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-            model.CurrentUser = user;
-            if (model.CurrentUser.NumberOfAds >= currentPage.NumberOfAds)
-            {
-                model.ErrorMessage = "You can only have " + currentPage.NumberOfAds + " adds.";
+                var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                model.CurrentUser = user;
+                if (file == null)
+                {
+                    return null;
+                }
+                if (file.ContentLength > 0)
+                {
+                    FileUpload(file, model);
+                }
+
+                ConnectionHelper.SaveAdInformationToDb(model, file);
+                ConnectionHelper.SaveNumberOfEventsToUser(User.Identity.Name);
                 return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
             }
             else
             {
 
-                if (ModelState.IsValid)
-                {
-                    var userEmail = User.Identity.Name;
+                model.ErrorMessage = "Error occured";
+                return View("Index", model);
 
-                    var datetime = DateTime.Now;
-
-
-                    if (file == null)
-                    {
-                        return null;
-                    }
-                    if (file.ContentLength > 0)
-                    {
-                        FileUpload(file, model);
-                    }
-
-                    ConnectionHelper.SaveAdInformationToDb(model, file);
-                    ConnectionHelper.SaveNumberOfAdsToUser(User.Identity.Name);
-                }
             }
+          
+            if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
+            {
+                model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
+                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
+            }
+
             UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-            return Redirect(UrlHelpers.PageLinkUrl(url, PageReference.StartPage).ToHtmlString());
+            return Redirect(UrlHelpers.PageLinkUrl(url, currentPage.ReferenceToLandingPage).ToHtmlString());
         }
         public ActionResult FileUpload(HttpPostedFileBase file, CreateAdsPageViewModel model)
         {
