@@ -1,0 +1,30 @@
+﻿@model BlocketProject.Models.ViewModels.AdminPageViewModel
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>@Html.PropertyFor(x => x.Heading)</h2>
+
+<ul>
+    <li>
+        @foreach (var user in Model.GetFacebookUsers)
+        {
+            <img src="@user.ImageUrl" alt="UserImage" />
+            <b>Mail: @user.Email</b>
+            <b>Name: @user.FirstName @user.LastName</b>
+            <b>UserId: @user.UserId</b>
+            <b>From:@user.Location</b>
+            <b>Register since: @user.RegisterDate</b>
+        
+            using (Html.BeginForm("DeleteUser", "Account", new { id = user.UserId }, FormMethod.Post))
+            {
+          
+   
+            <input type="submit" value="Remove user" id="@user.UserId" />
+           
+            <br />
+            }
+        }
+    </li>
+
+</ul>

@@ -32,13 +32,13 @@ namespace BlocketProject.Controllers
             FacebookFriendsModel friends = new FacebookFriendsModel();
 
 
-            var b = Session["MyAccessToken"].ToString();
-            var client = new FacebookClient(b);
-            dynamic fbresult = client.Get("me/friends");
-            var data = fbresult["data"].ToString();
-            friends.friendsList = JsonConvert.DeserializeObject<List<FacebookFriend>>(data);
+            //var b = Session["MyAccessToken"].ToString();
+            //var client = new FacebookClient(b);
+            //dynamic fbresult = client.Get("me/friends");
+            //var data = fbresult["data"].ToString();
+            //friends.friendsList = JsonConvert.DeserializeObject<List<FacebookFriend>>(data);
 
-            model.friendsList = friends.friendsList;
+            //model.friendsList = friends.friendsList;
 
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
             model.Fbuser = UserHelper.GetUserValues(model.Fbuser, user);

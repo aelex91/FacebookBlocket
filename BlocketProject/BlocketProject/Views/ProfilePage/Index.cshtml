@@ -28,23 +28,26 @@
             <td style="text-align: center; margin: 30px; float: left;">
                 @using (Html.BeginForm("AdPage", "AdsPage", new { EventId = ad.EventId }, FormMethod.Post))
                 {
-                    <button style="padding: 0; border: none; background:none;" type="submit">@ad.Title<br /><img src="@ad.ImageUrl" style="border-radius: 5px;height: 100px; width:100px;"></button>
+                    <button style="padding: 0; border: none; background: none;" type="submit">@ad.Title<br />
+                        <img src="@ad.ImageUrl" style="border-radius: 5px;height: 100px; width:100px;"></button>
                 }
                 <br />
-                <input type="submit" value="Remove" />
+                @using (Html.BeginForm("DeleteEvent", "Account", new { id = ad.EventId }, FormMethod.Post))
+                {
+                    <input type="submit" id="@ad.EventId" value="Remove" />
+           
+                }
             </td>
-
-
         }
 
     </tr>
 </table>
 <b>Vänner:</b><br />
 <table>
-    @foreach (var friend in Model.friendsList)
+  @*  @foreach (var friend in Model.friendsList)
     {
         <tr>
             <td><a href="http://facebook.com/@friend.id" target="_blank">@friend.name</a></td>
         </tr>
-    }
+    }*@
 </table>

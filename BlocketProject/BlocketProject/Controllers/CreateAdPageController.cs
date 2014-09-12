@@ -17,6 +17,7 @@ namespace BlocketProject.Controllers
 {
     public class CreateAdPageController : PageController<CreateAdPage>
     {
+        UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult ChangeIdOnDropDownList(string dropdownId)
         {
@@ -52,16 +53,19 @@ namespace BlocketProject.Controllers
                 HideInformation = false,
                 MaxGuests = currentPage.PersonLabel,
                 Date = currentPage.DateLabel,
-
-
             };
-
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Index(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
         {
+            if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
+            {
+                model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
+                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
+            }
+
             if (ModelState.IsValid)
             {
                 var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
@@ -77,7 +81,8 @@ namespace BlocketProject.Controllers
 
                 ConnectionHelper.SaveAdInformationToDb(model, file);
                 ConnectionHelper.SaveNumberOfEventsToUser(User.Identity.Name);
-                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
+                model.ErrorMessage = "Your event has been created.";
+                return Redirect(UrlHelpers.PageLinkUrl(url, currentPage.ReferenceToLandingPage).ToHtmlString());
             }
             else
             {
@@ -86,15 +91,6 @@ namespace BlocketProject.Controllers
                 return View("Index", model);
 
             }
-          
-            if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
-            {
-                model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
-                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
-            }
-
-            UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-            return Redirect(UrlHelpers.PageLinkUrl(url, currentPage.ReferenceToLandingPage).ToHtmlString());
         }
         public ActionResult FileUpload(HttpPostedFileBase file, CreateAdsPageViewModel model)
         {
