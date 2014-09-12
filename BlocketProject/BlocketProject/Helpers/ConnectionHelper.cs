@@ -32,6 +32,13 @@ namespace BlocketProject.Helpers
                           }).ToList();
             return query;
         }
+
+        public static void FillDropDownLists()
+        { 
+        // hämta alla drop down lists.
+        
+        }
+
         public static List<AdsPageViewModel.UserAdsModel> GetCurrentUserAds(int? id)
         {
             var query = (from r in db.DbUserInformation
@@ -85,7 +92,7 @@ namespace BlocketProject.Helpers
         }
         public static void SaveNumberOfEventsToUser(string email)
         {
-            var checkNumberOfEvents = CheckNumberOfEvents(email);  
+            var checkNumberOfEvents = CheckNumberOfEvents(email);
             var query = (from p in db.DbUserInformation
                          where p.Email == email
                          select p).FirstOrDefault();
@@ -115,9 +122,18 @@ namespace BlocketProject.Helpers
         public static void DeleteUserEvent(int id)
         {
             var f = db.DbUserEvents.FirstOrDefault(x => x.EventId == id);
+
             db.DbUserEvents.Remove(f);
             db.SaveChanges();
-           
+
+        }
+        public static void RemoveUserNumberOfEvents(int id)
+        {
+            //plocka bort numberofads sätt till 0
+            var change = db.DbUserInformation.FirstOrDefault(x => x.UserId == id);
+            change.NumberOfEvents = 0;
+            db.SaveChanges();
+
         }
         public static void DeleteUser(int id)
         {
@@ -270,6 +286,14 @@ namespace BlocketProject.Helpers
                           where r.Email == email
                           select r).FirstOrDefault();
             return result;
+        }
+
+        public static int GetUserAdId(int UserId)
+        {
+            var query = (from p in db.DbUserEvents
+                         where p.UserId == UserId
+                         select p.EventId).FirstOrDefault();
+            return query;
         }
 
         public static List<ProfilePageViewModel.UserAdsModel> GetUserAds(int id)

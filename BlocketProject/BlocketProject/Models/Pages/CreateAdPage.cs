@@ -34,12 +34,6 @@ namespace BlocketProject.Models.Pages
             Order = 300)]
         public virtual string EmailLabel { get; set; }
 
-        [CultureSpecific]
-        [Display(
-            Name = "Adress Label",
-            GroupName = SystemTabNames.Content,
-            Order = 320)]
-        public virtual string AdressLabel { get; set; }
 
         [CultureSpecific]
         [Display(
@@ -156,7 +150,6 @@ namespace BlocketProject.Models.Pages
             NumberOfEvents = 5;
             ButtonLabel = "Ladda upp evenemanget";
             ZipCodeLabel = "Postnummer";
-            AdressLabel = "Adress";
             PersonLabel = "Antal Personer";
             DateLabel = "Välj datum";
 

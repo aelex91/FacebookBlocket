@@ -29,7 +29,6 @@ namespace BlocketProject.Models.ViewModels
             this.EventLabel = currentPage.EventLabel;
             this.PersonLabel = currentPage.PersonLabel;
             this.DateLabel = currentPage.DateLabel;
-           
 
         }
 
@@ -55,18 +54,21 @@ namespace BlocketProject.Models.ViewModels
     {
 
         [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress]
         public string Email { get; set; }
         [PhoneAttribute]
         public string Phone { get; set; }
+        [Required]
         public string EventTitle { get; set; }
         [Required(ErrorMessage = "Set a price")]
         public string Price { get; set; }
-        [Required(ErrorMessage = "Write something..")]
-        //[MaxLength(255, ErrorMessage = "The {0} must be maximum {2} characters long")]     
+        [Required]
+        [MaxLength(255, ErrorMessage = "The {0} must be maximum {2} characters long")]
         public string Text { get; set; }
-        public string Adress { get; set; }
         public bool HideInformation { get; set; }
+        [Required]
         public string Date { get; set; }
+        [Required]
         public string MaxGuests { get; set; }
 
         public Dictionary<int, string> Category { get; set; }
@@ -74,9 +76,13 @@ namespace BlocketProject.Models.ViewModels
         public Dictionary<int, string> County { get; set; }
         public Dictionary<int, string> Municipality { get; set; }
         //Categories
+        [Required]
         public string SelectedCategory { get; set; }
+        [Required]
         public string SelectedGender { get; set; }
+        [Required]
         public string SelectedCounty { get; set; }
+        [Required]
         public string SelectedMunicipality { get; set; }
     }
 }

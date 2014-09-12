@@ -1,5 +1,7 @@
 ﻿using BlocketProject.Models.DbClasses;
 using BlocketProject.Models.ViewModels;
+using EPiServer;
+using EPiServer.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,8 @@ namespace BlocketProject.Helpers
 {
     public static class UserHelper
     {
-        public static ProfilePageViewModel.FacebookUserModel GetUserValues(ProfilePageViewModel.FacebookUserModel model,DbUserInformation user)
+        public static ProfilePageViewModel.FacebookUserModel GetUserValues(ProfilePageViewModel.FacebookUserModel model, DbUserInformation user)
         {
-            model.Location = user.Location;
             model.FacebookId = user.FacebookId;
             model.FirstName = user.FirstName;
             model.LastName = user.LastName;
@@ -21,6 +22,6 @@ namespace BlocketProject.Helpers
             model.NumberOfEvents = user.NumberOfEvents;
             return model;
         }
-        
+
     }
 }

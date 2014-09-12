@@ -31,17 +31,19 @@ namespace BlocketProject.Controllers
         [Authorize]
         public ActionResult DeleteEvent(int id)
         {
-            //UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-            //skapa en metod som tar bort ett id ur userads samt tar bort numberofevents i user tabellen.
+            var userId = ConnectionHelper.GetUserIdByEmail(User.Identity.Name);
+          //ta även bort användarens numberofad.
             ConnectionHelper.DeleteUserEvent(id);
-            return RedirectToAction("Index", new { node = PageReference.StartPage });
+            ConnectionHelper.RemoveUserNumberOfEvents(userId);
+            string successMessage = "You have removed you event.";
+            return RedirectToAction("Index", new { node = PageReference.StartPage, successMessage  });
         }
         [Authorize]
         public ActionResult DeleteUser(int id) //ändra till episerver users kan bara ta bort
         {
-            //UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-            //skapa en metod som tar bort ett id ur userads samt tar bort numberofevents i user tabellen.
+            var eventId = ConnectionHelper.GetUserAds(id);
             ConnectionHelper.DeleteUser(id);
+            //ConnectionHelper.DeleteUserEvent(
             return RedirectToAction("Index", new { node = PageReference.StartPage });
         }
 

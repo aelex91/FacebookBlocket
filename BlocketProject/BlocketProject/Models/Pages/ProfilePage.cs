@@ -15,8 +15,15 @@ namespace BlocketProject.Models.Pages
                 [Display(
                     Name = "Heading",
                     GroupName = SystemTabNames.Content,
-                    Order = 1)]
+                    Order = 100)]
                 public virtual string Heading { get; set; }
+
+                [CultureSpecific]
+                [Display(
+                    Name = "Reference to EditPage",
+                    GroupName = SystemTabNames.Content,
+                    Order = 200)]
+                public virtual PageReference PagereferToEditPage { get; set; }
 
                 public override void SetDefaultValues(ContentType contentType)
                 {

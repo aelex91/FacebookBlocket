@@ -45,7 +45,6 @@ namespace BlocketProject.Controllers
                 EventTitle = model.EventLabel,
                 Price = model.PriceLabel,
                 Text = currentPage.TextLabel,
-                Adress = currentPage.AdressLabel,
                 Category = ConnectionHelper.GetCategories(),
                 Genders = ConnectionHelper.GetGenders(),
                 Municipality = ConnectionHelper.GetMuncipalities(),
@@ -60,15 +59,15 @@ namespace BlocketProject.Controllers
         [HttpPost]
         public ActionResult Index(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
         {
-            if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
-            {
-                model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
-                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
-            }
-
             if (ModelState.IsValid)
             {
                 var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                model.CurrentUser = user;
+                if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
+                {
+                    model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
+                    return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
+                }
                 model.CurrentUser = user;
                 if (file == null)
                 {
@@ -86,8 +85,14 @@ namespace BlocketProject.Controllers
             }
             else
             {
-
+                //skapa metod som fyller alla dropdownlists
+                model.CreateEvent.Category = ConnectionHelper.GetCategories();
+                model.CreateEvent.Genders = ConnectionHelper.GetGenders();
+                model.CreateEvent.Municipality = ConnectionHelper.GetMuncipalities();
+                model.CreateEvent.County = ConnectionHelper.GetCounties();
                 model.ErrorMessage = "Error occured";
+                model.DefaultImage = currentPage.DefaultImage;
+
                 return View("Index", model);
 
             }
