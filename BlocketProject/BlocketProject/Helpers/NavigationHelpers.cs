@@ -12,11 +12,11 @@ namespace BlocketProject.Helpers
     public static class NavigationHelpers
     {
         public static void RenderMainNavigation(
-        this HtmlHelper html,
-        PageReference rootLink = null,
-        ContentReference contentLink = null,
-        bool includeRoot = true,
-        IContentLoader contentLoader = null)
+      this HtmlHelper html,
+      PageReference rootLink = null,
+      ContentReference contentLink = null,
+      bool includeRoot = true,
+      IContentLoader contentLoader = null)
         {
             contentLink = contentLink ??
             html.ViewContext.RequestContext.GetContentLink();
@@ -24,19 +24,17 @@ namespace BlocketProject.Helpers
             ContentReference.StartPage;
             var writer = html.ViewContext.Writer;
             //Top level elements
-            //writer.WriteLine("<nav class=\"navbar navbar-inverse\">");
             writer.WriteLine("<ul class=\"nav navbar-nav\">");
-            writer.WriteLine("<ul class=\"menuborder\">");
             if (includeRoot)
             {
                 //Link to the root page
                 if (rootLink.CompareToIgnoreWorkID(contentLink))
                 {
-                    writer.WriteLine("<li class=\"menuactive\">");
+                    writer.WriteLine("<li class=\"active\">");
                 }
                 else
                 {
-                    writer.WriteLine("<li class=\"menulink\">");
+                    writer.WriteLine("<li>");
                 }
                 writer.WriteLine(
                 html.PageLink(rootLink).ToHtmlString());
@@ -63,19 +61,17 @@ namespace BlocketProject.Helpers
                 if (currentBranch.Any(x =>
                 x.CompareToIgnoreWorkID(topLevelPage.ContentLink)))
                 {
-                    writer.WriteLine("<li class=\"menuactive\">");
+                    writer.WriteLine("<li class=\"active\">");
                 }
                 else
                 {
-                    writer.WriteLine("<li class=\"menulink\">");
+                    writer.WriteLine("<li>");
                 }
                 writer.WriteLine(html.PageLink(topLevelPage).ToHtmlString());
                 writer.WriteLine("</li>");
             }
             //Close top level element
-
             writer.WriteLine("</ul>");
-            writer.WriteLine("</nav>");
         }
 
         public static void RenderSubNavigation(
@@ -188,73 +184,6 @@ IContentLoader contentLoader = null)
 
             //Close list element
             writer.WriteLine("</ul>");
-        }
-
-
-        public static void RenderOtherMainNavigation(
-        this HtmlHelper html,
-        PageReference rootLink = null,
-        ContentReference contentLink = null,
-        bool includeRoot = true,
-        IContentLoader contentLoader = null)
-        {
-            contentLink = contentLink ??
-            html.ViewContext.RequestContext.GetContentLink();
-            rootLink = rootLink ??
-            ContentReference.StartPage;
-            var writer = html.ViewContext.Writer;
-            //Top level elements
-            writer.WriteLine("<nav class=\"navbar navbar-default\">");
-            writer.WriteLine("<ul class=\"nav navbar-nav\">");
-            if (includeRoot)
-            {
-                //Link to the root page
-                if (rootLink.CompareToIgnoreWorkID(contentLink))
-                {
-                    writer.WriteLine("<li class=\"active\">");
-                }
-                else
-                {
-                    writer.WriteLine("<li>");
-                }
-                writer.WriteLine(
-                html.PageLink(rootLink).ToHtmlString());
-                writer.WriteLine("</li>");
-            }
-            //Retrieve and filter the root pages children
-            contentLoader = contentLoader ??
-            ServiceLocator.Current.GetInstance<IContentLoader>();
-            var topLevelPages = contentLoader
-            .GetChildren<PageData>(rootLink);
-            topLevelPages = FilterForVisitor.Filter(topLevelPages)
-            .OfType<PageData>()
-            .Where(x => x.VisibleInMenu);
-            //Retrieve the "path" from the current page up to the
-            //root page in the content tree in order to check if
-            //a link should be highlighted.
-            var currentBranch = contentLoader.GetAncestors(contentLink)
-            .Select(x => x.ContentLink)
-            .ToList();
-            currentBranch.Add(contentLink);
-            //Link to the root pages children
-            foreach (var topLevelPage in topLevelPages)
-            {
-                if (currentBranch.Any(x =>
-                x.CompareToIgnoreWorkID(topLevelPage.ContentLink)))
-                {
-                    writer.WriteLine("<li class=\"active\">");
-                }
-                else
-                {
-                    writer.WriteLine("<li>");
-                }
-                writer.WriteLine(html.PageLink(topLevelPage).ToHtmlString());
-                writer.WriteLine("</li>");
-            }
-            //Close top level element
-            writer.WriteLine("<li><input type=\"submit\" style=\"background: none; border: none; margin-top: 15px;\" value=\"Logout\" /></li>");
-            writer.WriteLine("</ul>");
-            writer.WriteLine("</nav>");
         }
 
     }

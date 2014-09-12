@@ -50,8 +50,6 @@ namespace BlocketProject.Models.ViewModels
         public CreateEvent CreateEvent { get; set; }
         public DbUserInformation CurrentUser { get; set; }
 
-
-
     }
     public class CreateEvent
     {
@@ -80,10 +78,5 @@ namespace BlocketProject.Models.ViewModels
         public string SelectedGender { get; set; }
         public string SelectedCounty { get; set; }
         public string SelectedMunicipality { get; set; }
-
-
-       
-
-
     }
 }

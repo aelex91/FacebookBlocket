@@ -19,26 +19,44 @@
     <link href="~/Style/DatePicker.css" rel="stylesheet" />
 </head>
 <body>
-
-
-
-    
-
-
     <div class="container">
-        @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+        @if (User.Identity.IsAuthenticated)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                Html.RenderOtherMainNavigation(null);
-            }
+            <nav class="navbar navbar-default">
+                @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+                {
+
+
+                    Html.RenderMainNavigation(null);
+                    <div>
+                        <ul class="nav" style="float:right;">
+                            <li class="dropdown" style="margin-right: 15px;">
+                                <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
+                                   <i class="glyphicon glyphicon-align-justify"></i>
+                                </span>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Redigera Profil</a>
+                                    </li>
+                                    <li class="input">
+                                        <input type="submit" class="navbar-btn input" value="Logga ut" />
+
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    }
+                </nav>
         }
-        <h3 class="muted">LetEmSale</h3>
 
-        @RenderBody()
+                <h3 class="muted">LetEmSale</h3>
 
+                @RenderBody()
 
-    </div>
+            </div>
 
-</body>
-</html>
+        </body>
+    </html>

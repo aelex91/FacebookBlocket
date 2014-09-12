@@ -13,11 +13,18 @@ using BlocketProject.Helpers;
 using Facebook;
 using Newtonsoft.Json;
 using System;
+using System.Web.Configuration;
+using System.IO;
+using System.Net;
 
 namespace BlocketProject.Controllers
 {
     public class ProfilePageController : PageController<ProfilePage>
     {
+        string appId = WebConfigurationManager.AppSettings["FacebookAppID"];
+        string appSecret = WebConfigurationManager.AppSettings["FacebookAppSecret"];
+        string scope = WebConfigurationManager.AppSettings["FacebookScope"];
+        string redirectUrl = "http://letemsale.com/";
 
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
@@ -29,26 +36,11 @@ namespace BlocketProject.Controllers
                 return View();
             }
 
-            FacebookFriendsModel friends = new FacebookFriendsModel();
-
-
-            var b = Session["MyAccessToken"].ToString();
-            var client = new FacebookClient(b);
-            dynamic fbresult = client.Get("me/friends");
-            var data = fbresult["data"].ToString();
-            friends.friendsList = JsonConvert.DeserializeObject<List<FacebookFriend>>(data);
-
-            model.friendsList = friends.friendsList;
-
             model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
             model.Fbuser = UserHelper.GetUserValues(model.Fbuser, user);
             model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
         }
-
-
-
-
     }
 }
