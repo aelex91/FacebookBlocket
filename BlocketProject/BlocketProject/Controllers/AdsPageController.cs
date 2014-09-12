@@ -33,14 +33,14 @@ namespace BlocketProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdPage(int EventId)
+        public ActionResult Index(int EventId)
         {
             DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
 
-            var model = new AdsPageViewModel.UserAdsModel();
-            SetEventValues(ad);
+            var model = new AdsPageViewModel();
+            model.UserEventModel = SetEventValues(ad);
 
-            return View("Adpage", model);
+            return View("Index", model);
         }
 
         public AdsPageViewModel.UserAdsModel SetEventValues(DbUserEvents userEvent)
