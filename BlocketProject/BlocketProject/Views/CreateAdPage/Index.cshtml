@@ -17,28 +17,31 @@
     @Html.HiddenFor(x => x.CreateEvent.SelectedCategory)
     @Html.HiddenFor(x => x.CreateEvent.SelectedCounty)
     @Html.HiddenFor(x => x.CreateEvent.SelectedMunicipality)
-         @Html.HiddenFor(x => x.DateLabel)
-                @Html.HiddenFor(x => x.EmailLabel)
-                @Html.HiddenFor(x => x.ButtonLabel)
-                @Html.HiddenFor(x => x.CategoryLabel)
-                @Html.HiddenFor(x => x.Heading)
-                @Html.HiddenFor(x => x.PersonLabel)
-                @Html.HiddenFor(x => x.NameLabel)
-                @Html.HiddenFor(x => x.Phonelabel)
-                @Html.HiddenFor(x => x.PriceLabel)
-                @Html.HiddenFor(x => x.TextLabel)
-                @Html.HiddenFor(x => x.EventLabel)
-                @Html.HiddenFor(x => x.UploadImageLabel)
-                @Html.HiddenFor(x => x.ErrorMessage)
-                @Html.HiddenFor(x => x.EventLabel)
+    @Html.HiddenFor(x => x.DateLabel)
+    @Html.HiddenFor(x => x.EmailLabel)
+    @Html.HiddenFor(x => x.ButtonLabel)
+    @Html.HiddenFor(x => x.CategoryLabel)
+    @Html.HiddenFor(x => x.Heading)
+    @Html.HiddenFor(x => x.PersonLabel)
+    @Html.HiddenFor(x => x.NameLabel)
+    @Html.HiddenFor(x => x.Phonelabel)
+    @Html.HiddenFor(x => x.PriceLabel)
+    @Html.HiddenFor(x => x.TextLabel)
+    @Html.HiddenFor(x => x.EventLabel)
+    @Html.HiddenFor(x => x.UploadImageLabel)
+    @Html.HiddenFor(x => x.ErrorMessage)
+    @Html.HiddenFor(x => x.EventLabel)
 
 
+
+    <h4 style="color: red">@Html.ValidationSummary()</h4>
 
     @using (Html.BeginForm("Index", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data", language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
     {
         <div>
             <fieldset>
                 <legend>Fields</legend>
+
 
                 @Html.TextBoxFor(x => x.CreateEvent.Email, new { id = Model.CreateEvent.Email, @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
 

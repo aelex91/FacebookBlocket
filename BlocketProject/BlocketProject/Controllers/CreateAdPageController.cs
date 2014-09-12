@@ -59,17 +59,15 @@ namespace BlocketProject.Controllers
         [HttpPost]
         public ActionResult Index(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
         {
-            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-            model.CurrentUser = user;
-            if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
-            {
-                model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
-                return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
-            }
-
             if (ModelState.IsValid)
             {
-
+                var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                model.CurrentUser = user;
+                if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
+                {
+                    model.ErrorMessage = "You can only have " + currentPage.NumberOfEvents + " adds.";
+                    return RedirectToAction("Index", new { node = currentPage.ReferenceToLandingPage, message = model.ErrorMessage });
+                }
                 model.CurrentUser = user;
                 if (file == null)
                 {
@@ -94,7 +92,7 @@ namespace BlocketProject.Controllers
                 model.CreateEvent.County = ConnectionHelper.GetCounties();
                 model.ErrorMessage = "Error occured";
                 model.DefaultImage = currentPage.DefaultImage;
-              
+
                 return View("Index", model);
 
             }

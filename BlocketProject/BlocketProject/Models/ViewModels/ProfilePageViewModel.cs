@@ -1,6 +1,9 @@
 ﻿using BlocketProject.Models.DbClasses;
 using BlocketProject.Models.Pages;
+using EPiServer;
 using EPiServer.Core;
+using EPiServer.ServiceLocation;
+using EPiServer.Web.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +11,18 @@ using System.Web;
 
 namespace BlocketProject.Models.ViewModels
 {
+ 
+
     public class ProfilePageViewModel
     {
+      
         public ProfilePageViewModel(ProfilePage currentPage)
         {
             Heading = currentPage.Heading;
+            this.ReferToEditPage = currentPage.PagereferToEditPage;
 
         }
+        public PageReference ReferToEditPage { get; set; }
         public string Heading { get; set; }
         public FacebookUserModel Fbuser { get; set; }
         public List<UserAdsModel> ListUserAds { get; set; }
@@ -44,6 +52,14 @@ namespace BlocketProject.Models.ViewModels
             public DateTime PublishDate { get; set; }
             public DateTime ExpirationDate { get; set; }
             public int CategoryId { get; set; }
+        }
+        public string GetLinkByPageReference(PageReference pReference)
+        {
+            var locate = new ServiceLocationHelper(ServiceLocator.Current);
+            var page = locate.ContentRepository().Get<PageData>(pReference);
+            var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
+            var pageUrl = urlResolver.GetVirtualPath(page.ContentLink);
+            return pageUrl;
         }
 
     }
