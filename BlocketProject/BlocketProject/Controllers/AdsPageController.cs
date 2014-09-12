@@ -9,6 +9,8 @@ using BlocketProject.Models.Pages;
 using BlocketProject.Models.ViewModels;
 using BlocketProject.Models.DbClasses;
 using BlocketProject.Helpers;
+using EPiServer.ServiceLocation;
+using EPiServer.Web.Routing;
 
 namespace BlocketProject.Controllers
 {
@@ -30,17 +32,17 @@ namespace BlocketProject.Controllers
                 model.ListUserAdsModel = value;
                 return View(model);
             }
+
         }
 
         [HttpPost]
         public ActionResult Index(int EventId)
         {
             DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
-
             var model = new AdsPageViewModel();
             model.UserEventModel = SetEventValues(ad);
+            return RedirectToAction("Index", model);
 
-            return View("Index", model);
         }
 
         public AdsPageViewModel.UserAdsModel SetEventValues(DbUserEvents userEvent)
@@ -62,6 +64,7 @@ namespace BlocketProject.Controllers
             model.MunicipalityId = userEvent.MunicipalityId;
             model.PublishDate = userEvent.PublishDate;
             model.ExpirationDate = userEvent.ExpirationDate;
+            model.EventId = userEvent.EventId;
 
             return model;
         }

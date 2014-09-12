@@ -11,17 +11,20 @@ namespace BlocketProject.Models.ViewModels
     {
         public AdsPageViewModel(AdsPage currentPage)
         {
+
             Heading = currentPage.Heading;
             CurrentUserAds = currentPage.CurrentUserAds;
+
         }
 
-
+        public AdsPageViewModel() { }
 
         public List<UserAdsModel> ListUserAdsModel { get; set; }
         public List<UserAdsModel> ListCurrentUserAdsModel { get; set; }
         public string Heading { get; set; }
         public bool CurrentUserAds { get; set; }
         public string AdCategory { get; set; }
+        public UserAdsModel UserEventModel { get; set; }
 
         public class UserAdsModel
         {
@@ -44,7 +47,7 @@ namespace BlocketProject.Models.ViewModels
             public int MunicipalityId { get; set; }
             public DateTime PublishDate { get; set; }
             public DateTime ExpirationDate { get; set; }
-            
+
         }
     }
 }

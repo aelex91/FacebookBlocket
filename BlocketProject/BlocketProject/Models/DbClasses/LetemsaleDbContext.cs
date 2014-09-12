@@ -20,6 +20,7 @@ namespace BlocketProject.Models.DbClasses
             base.OnModelCreating(modelBuilder);
         } // om du har uppdaterat databasen på senaste måste du skriva in detta ^
 
+        public DbSet<DbAttending> DbAttending { get; set; }
         public DbSet<DbUserEvents> DbUserEvents { get; set; }
         public DbSet<DbUserInformation> DbUserInformation { get; set; }
         public DbSet<DbCategories> DbCategories { get; set; }
