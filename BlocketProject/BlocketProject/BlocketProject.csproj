@@ -270,6 +270,7 @@
     </Compile>
     <Compile Include="Business\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminPageController.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\AdsPageController.cs" />
     <Compile Include="Controllers\CreateAdPageController.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Models\DbClasses\DbUserInformation.cs" />
     <Compile Include="Models\DbClasses\LetemsaleDbContext.cs" />
     <Compile Include="Models\Media\ImageData.cs" />
+    <Compile Include="Models\Pages\AdminPage.cs" />
     <Compile Include="Models\Pages\AdsPage.cs" />
     <Compile Include="Models\Pages\CreateAdPage.cs" />
     <Compile Include="Models\Pages\LandingPage.cs" />
@@ -306,6 +308,7 @@
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\StandardPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
+    <Compile Include="Models\ViewModels\AdminPageViewModel.cs" />
     <Compile Include="Models\ViewModels\FacebookFriendsModel.cs" />
     <Compile Include="Models\ViewModels\LandingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\AdsPageViewModel.cs" />
@@ -485,6 +488,7 @@
     <Content Include="Views\LandingPage\Index.cshtml" />
     <Content Include="Views\AdsPage\AdPage.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\AdminPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

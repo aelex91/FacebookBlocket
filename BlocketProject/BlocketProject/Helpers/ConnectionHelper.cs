@@ -112,6 +112,20 @@ namespace BlocketProject.Helpers
 
 
         }
+        public static void DeleteUserEvent(int id)
+        {
+            var f = db.DbUserEvents.FirstOrDefault(x => x.EventId == id);
+            db.DbUserEvents.Remove(f);
+            db.SaveChanges();
+           
+        }
+        public static void DeleteUser(int id)
+        {
+            var f = db.DbUserInformation.FirstOrDefault(x => x.UserId == id);
+            db.DbUserInformation.Remove(f);
+            db.SaveChanges();
+
+        }
         public static int? CheckNumberOfEvents(string email)
         {
 

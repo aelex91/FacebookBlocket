@@ -21,5 +21,6 @@ namespace BlocketProject.Helpers
             model.NumberOfEvents = user.NumberOfEvents;
             return model;
         }
+        
     }
 }
