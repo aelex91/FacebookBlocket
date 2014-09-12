@@ -24,7 +24,6 @@ namespace BlocketProject.Controllers
         string appId = WebConfigurationManager.AppSettings["FacebookAppID"];
         string appSecret = WebConfigurationManager.AppSettings["FacebookAppSecret"];
         string scope = WebConfigurationManager.AppSettings["FacebookScope"];
-        string redirectUrl = "http://letemsale.com/";
 
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)

@@ -13,33 +13,26 @@
     <h3 style="color: red">@Model.ErrorMessage</h3>
 }
 <div class="">
-    @Html.HiddenFor(x => x.ButtonLabel)
-    @Html.HiddenFor(x => x.CategoryLabel)
-    @Html.HiddenFor(x => x.CreateEvent.Adress)
-    @Html.HiddenFor(x => x.CurrentUser.Location)
-    @Html.HiddenFor(x => x.CreateEvent.Genders)
-    @Html.HiddenFor(x => x.CreateEvent.Category)
-    @Html.HiddenFor(x => x.CreateEvent.County)
-    @Html.HiddenFor(x => x.CreateEvent.Municipality)
-    @Html.HiddenFor(x => x.DateLabel)
-    @Html.HiddenFor(x => x.EmailLabel)
-
-    @Html.HiddenFor(x => x.Heading)
-    @Html.HiddenFor(x => x.PersonLabel)
-    @Html.HiddenFor(x => x.NameLabel)
-    @Html.HiddenFor(x => x.Phonelabel)
-    @Html.HiddenFor(x => x.PriceLabel)
-    @Html.HiddenFor(x => x.TextLabel)
-    @Html.HiddenFor(x => x.EventLabel)
-    @Html.HiddenFor(x => x.UploadImageLabel)
-    @Html.HiddenFor(x => x.DefaultImage)
-    @Html.HiddenFor(x => x.ErrorMessage)
-    @Html.HiddenFor(x => x.EventLabel)
-
     @Html.HiddenFor(x => x.CreateEvent.SelectedGender)
     @Html.HiddenFor(x => x.CreateEvent.SelectedCategory)
     @Html.HiddenFor(x => x.CreateEvent.SelectedCounty)
     @Html.HiddenFor(x => x.CreateEvent.SelectedMunicipality)
+         @Html.HiddenFor(x => x.DateLabel)
+                @Html.HiddenFor(x => x.EmailLabel)
+                @Html.HiddenFor(x => x.ButtonLabel)
+                @Html.HiddenFor(x => x.CategoryLabel)
+                @Html.HiddenFor(x => x.Heading)
+                @Html.HiddenFor(x => x.PersonLabel)
+                @Html.HiddenFor(x => x.NameLabel)
+                @Html.HiddenFor(x => x.Phonelabel)
+                @Html.HiddenFor(x => x.PriceLabel)
+                @Html.HiddenFor(x => x.TextLabel)
+                @Html.HiddenFor(x => x.EventLabel)
+                @Html.HiddenFor(x => x.UploadImageLabel)
+                @Html.HiddenFor(x => x.ErrorMessage)
+                @Html.HiddenFor(x => x.EventLabel)
+
+
 
     @using (Html.BeginForm("Index", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data", language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
     {
@@ -47,16 +40,12 @@
             <fieldset>
                 <legend>Fields</legend>
 
-
-
                 @Html.TextBoxFor(x => x.CreateEvent.Email, new { id = Model.CreateEvent.Email, @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
 
 
                 @Html.TextBoxFor(x => x.CreateEvent.Phone, new { id = Model.Phonelabel, @class = "textfield phone", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
 
                 <br />
-                @Html.TextBoxFor(x => x.CurrentUser.Location, new { id = Model.CreateEvent.Adress, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
-
 
                 @*@Html.TextBoxFor(x => x.zi, new { id = Model.CreateEvent.ZipCode, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })*@
                 <h4>Gömma viktig information för användare?</h4>

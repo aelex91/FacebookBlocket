@@ -64,7 +64,6 @@ namespace BlocketProject.Models.ViewModels
         [Required(ErrorMessage = "Write something..")]
         //[MaxLength(255, ErrorMessage = "The {0} must be maximum {2} characters long")]     
         public string Text { get; set; }
-        public string Adress { get; set; }
         public bool HideInformation { get; set; }
         public string Date { get; set; }
         public string MaxGuests { get; set; }
