@@ -341,6 +341,16 @@ namespace BlocketProject.Helpers
             return query;
         }
 
+        public static List<DbUserInformation> GetAttendingUsers(int eventId)
+        {
+            var query = (from p in db.DbUserInformation
+                         join a in db.DbAttending on p.UserId equals a.UserId
+                         where a.EventId == eventId && a.IsAttending == true
+                         select p).ToList();
+
+            return query;
+        }
+
 
     }
 }

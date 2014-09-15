@@ -159,10 +159,6 @@ namespace BlocketProject.Controllers
                 FormsAuthentication.SetAuthCookie(user.Email, false);
                 Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());
             }
-            else
-            {
-
-            }
         }
 
     }

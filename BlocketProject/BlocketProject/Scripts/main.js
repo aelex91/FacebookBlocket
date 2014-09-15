@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#municipality").hide();
     $("#counties").change(function () {
         var dID = $(this).val();
-        $.getJSON("changeidondropdownlist", { dropdownId: dID },
+        $.getJSON("ChangeIdOnDropDownList", { dropdownId: dID },
                function (data) {
                    $("#municipality").show();
                    var select = $("#municipality");
