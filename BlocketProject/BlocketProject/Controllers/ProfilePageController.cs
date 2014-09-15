@@ -35,11 +35,26 @@ namespace BlocketProject.Controllers
                 return View();
             }
 
-            model.Fbuser = new ProfilePageViewModel.FacebookUserModel();
-            model.Fbuser = UserHelper.GetUserValues(model.Fbuser, user);
-            model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
+            model.CurrentUser = new ProfilePageViewModel.UserInformation();
+            model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+         model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
+        }
+        public ActionResult EditProfile(ProfilePage currentPage)
+        {
+
+            var model = new ProfilePageViewModel(currentPage)
+            {
+               
+            };
+
+        
+            //Country defaultCountry = new Country("-1", "b", "",""); 
+            //model.Countries.Insert(0, defaultCountry);
+
+            model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+            return View("Edit", model);
         }
     }
 }

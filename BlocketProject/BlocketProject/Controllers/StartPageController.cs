@@ -37,7 +37,7 @@ namespace BlocketProject.Controllers
 
         LetemsaleDbContext db = new LetemsaleDbContext();
 
-        HomeModel.UserInformation model = new HomeModel.UserInformation();
+        ProfilePageViewModel.UserInformation model = new BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation();
 
         public ActionResult Index(StartPage currentPage)
         {
@@ -59,7 +59,7 @@ namespace BlocketProject.Controllers
         {
 
             CheckAuthorization();
-            
+
 
             return View("Index");
 
@@ -101,7 +101,7 @@ namespace BlocketProject.Controllers
             return null;
         }
 
-        public HomeModel.UserInformation SaveUser(JsonObject jsonUser)
+        public BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation SaveUser(JsonObject jsonUser)
         {
             JsonUserModel user = new JsonUserModel();
             string jsonString = jsonUser.ToString();
@@ -122,7 +122,7 @@ namespace BlocketProject.Controllers
             DbUser.Birthday = DateTime.Parse(user.birthday);
             DbUser.Gender = user.gender;
             DbUser.RegisterDate = DateTime.Now;
-            
+
             model.FacebookId = DbUser.FacebookId;
             model.Birthday = DbUser.Birthday;
             model.FirstName = DbUser.FirstName;
@@ -132,7 +132,7 @@ namespace BlocketProject.Controllers
             model.ImageUrl = DbUser.ImageUrl;
             model.Gender = DbUser.Gender;
             model.RegisterDate = DbUser.RegisterDate;
-           
+
             var checkDbId = ConnectionHelper.GetUserFacebookId(DbUser.FacebookId);
 
             if (checkDbId != DbUser.FacebookId)
@@ -144,7 +144,7 @@ namespace BlocketProject.Controllers
             return model;
         }
 
-        public void Login(HomeModel.UserInformation user, PageReference page)
+        public void Login(BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation user, PageReference page)
         {
             bool isAuthenticated = false;
             var checkUserEmail = ConnectionHelper.GetUserEmailById(user.FacebookId);
@@ -153,11 +153,11 @@ namespace BlocketProject.Controllers
             {
                 isAuthenticated = true;
             }
-            if(isAuthenticated == true)
+            if (isAuthenticated == true)
             {
                 UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
-                Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());  
+                Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());
             }
             else
             {

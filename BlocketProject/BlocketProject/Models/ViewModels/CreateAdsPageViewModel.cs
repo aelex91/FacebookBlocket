@@ -47,7 +47,7 @@ namespace BlocketProject.Models.ViewModels
         public Url DefaultImage { get; set; }
         public string TextLabel { get; set; }
         public CreateEvent CreateEvent { get; set; }
-        public DbUserInformation CurrentUser { get; set; }
+        public BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation CurrentUser { get; set; }
 
     }
     public class CreateEvent

@@ -280,11 +280,25 @@ namespace BlocketProject.Helpers
             return pictureUrl;
         }
 
-        public static DbUserInformation GetUserInformationByEmail(string email)
+        public static BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation GetUserInformationByEmail(string email)
         {
             var result = (from r in db.DbUserInformation
                           where r.Email == email
-                          select r).FirstOrDefault();
+                          select new BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation
+                          {
+                              Birthday = r.Birthday,
+                              Email = r.Email,
+                              FacebookId = r.FacebookId,
+                              FirstName = r.FirstName,
+                              Gender = r.Gender,
+                              ImageUrl = r.ImageUrl,
+                              LastName = r.LastName,
+                              Location = r.Location,
+                              NumberOfEvents = r.NumberOfEvents,
+                              RegisterDate = r.RegisterDate,
+                              UserId = r.UserId,
+
+                          }).FirstOrDefault();
             return result;
         }
 
