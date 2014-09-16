@@ -1,0 +1,24 @@
+﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
+
+<h2>Edit your profile</h2>
+@if (Model.CurrentUser != null)
+{
+    
+
+    @Html.PropertyFor(x => x.LabelFirstName)
+    @Html.TextBoxFor(x => x.CurrentUser.FirstName)
+    <br />
+    @Html.PropertyFor(x => x.LabelLastName)
+    @Html.TextBoxFor(x => x.CurrentUser.LastName)
+    <br />
+    @Html.PropertyFor(x => x.LabelEmail)
+    @Html.TextBoxFor(x => x.CurrentUser.Email)
+    <br />
+    @Html.PropertyFor(x => x.LabelPhone)
+    @Html.TextBoxFor(x => x.CurrentUser.Phone)
+    <br />
+}
+@using (Html.BeginForm("SaveProfile", "ProfilePage", FormMethod.Post))
+{
+    <input type="submit" value="@Model.LabelButton" />
+}

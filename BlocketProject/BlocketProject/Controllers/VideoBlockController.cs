@@ -13,6 +13,7 @@ namespace BlocketProject.Controllers
 {
     public class VideoBlockController : BlockController<VideoBlock>
     {
+        
         public override ActionResult Index(VideoBlock currentBlock)
         {
             return PartialView(currentBlock);

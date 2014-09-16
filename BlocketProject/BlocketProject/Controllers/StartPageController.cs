@@ -38,7 +38,7 @@ namespace BlocketProject.Controllers
         LetemsaleDbContext db = new LetemsaleDbContext();
 
         ProfilePageViewModel.UserInformation model = new BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation();
-
+        
         public ActionResult Index(StartPage currentPage)
         {
             if (Request["code"] != null)

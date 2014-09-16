@@ -3,29 +3,27 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+<link rel="~/Style/Custom.css" type="text/css" />
+<script src="http://jwpsrv.com/library/xp0lYIyzEeOSuyIACrqE1A.js"></script>
+<meta name="viewport" content="width=device-width" />
 
-<html>
-
-    <script src="http://jwpsrv.com/library/xp0lYIyzEeOSuyIACrqE1A.js"></script>
-    <meta name="viewport" content="width=device-width" />
-
-<body>
+<div class="video-block">
     @if (@Model.ShowTitle)
     {
-        <h1>@Html.PropertyFor(p=>p.Title)</h1>
+        <h1>@Html.PropertyFor(p => p.Title)</h1>
     }
-    
+
     <div id='playerYxldMoyGhAPQ'></div>
     <script type='text/javascript'>
         jwplayer('playerYxldMoyGhAPQ').setup({
             file: '@Model.VideoFile',
-            image: '@Model.Image',
-            width: '@Model.VideoWidth%',
-            aspectratio: '16:9',
-            autostart: '@Model.Autoplay',
-            
-        });
+        image: '@Model.Image',
+        width: '@Model.VideoWidth%',
+        aspectratio: '16:9',
+        autostart: '@Model.Autoplay',
+
+    });
     </script>
-</body>
-</html>
+</div>
+
+

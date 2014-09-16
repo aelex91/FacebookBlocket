@@ -1,55 +1,56 @@
 ﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
 
 <h2>@Model.Heading</h2>
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<table id="UserTable" style="margin: 30px;">
-    <tr>
-        <td>
-            <img src="@Model.CurrentUser.ImageUrl" />
-        </td>
-    </tr>
-    <tr>
-        <td>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName </td>
-    </tr>
-    <tr>
-        <td>
-            @Model.CurrentUser.Location
-        </td>
-    </tr>
-   
-</table>
-<a href="@Url.PageUrl(Model.GetLinkByPageReference(Model.ReferToEditPage))">
-    Click here
-</a>
-<table id="UserAds">
-    <tr>
-        @foreach (var ad in Model.ListUserAds)
-        {
-            <td style="text-align: center; margin: 30px; float: left;">
-                @using (Html.BeginForm("Index", "AdsPage", new { EventId = ad.EventId }, FormMethod.Post))
-                {
-                    <button style="padding: 0; border: none; background: none;" type="submit">@ad.Title<br />
-                        <img src="@ad.ImageUrl" style="border-radius: 5px;height: 100px; width:100px;"></button>
-                }
-                <br />
-                @using (Html.BeginForm("DeleteEvent", "Account", new { id = ad.EventId }, FormMethod.Post))
-                {
-                    <input type="submit" id="@ad.EventId" value="Remove" />
-           
-                }
-            </td>
-        }
 
-    </tr>
-</table>
-<b>Vänner:</b><br />
-<table>
-    @*  @foreach (var friend in Model.friendsList)
-    {
+@if (Model.CurrentUser != null)
+{
+    
+
+    <table id="UserTable" style="margin: 30px;">
         <tr>
-            <td><a href="http://facebook.com/@friend.id" target="_blank">@friend.name</a></td>
+            <td>
+                <img src="@Model.CurrentUser.ImageUrl" />
+            </td>
         </tr>
-    }*@
-</table>
+        <tr>
+            <td>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName </td>
+        </tr>
+        <tr>
+            <td>
+                @Model.CurrentUser.Location
+            </td>
+        </tr>
+
+    </table>
+
+
+    <table id="UserAds">
+        <tr>
+            @foreach (var ad in Model.ListUserAds)
+            {
+                <td style="text-align: center; margin: 30px; float: left;">
+                    @using (Html.BeginForm("Index", "AdsPage", new { EventId = ad.EventId }, FormMethod.Post))
+                    {
+                        <button style="padding: 0; border: none; background: none;" type="submit">@ad.Title<br />
+                            <img src="@ad.ImageUrl" style="border-radius: 5px;height: 100px; width:100px;"></button>
+                    }
+                    <br />
+                    @using (Html.BeginForm("DeleteEvent", "Account", new { id = ad.EventId }, FormMethod.Post))
+                    {
+                        <input type="submit" id="@ad.EventId" value="Remove" />
+           
+                    }
+                </td>
+            }
+
+        </tr>
+    </table>
+}
+
+@using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
+{
+
+    <input type="submit" value="Edit Profile" />
+
+}
+<b>Vänner:</b><br />

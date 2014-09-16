@@ -32,29 +32,31 @@ namespace BlocketProject.Controllers
             var model = new ProfilePageViewModel(currentPage);
             if (user == null)
             {
-                return View();
+                return View(model);
             }
 
             model.CurrentUser = new ProfilePageViewModel.UserInformation();
             model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-         model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
+            model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
         }
+
         public ActionResult EditProfile(ProfilePage currentPage)
         {
 
-            var model = new ProfilePageViewModel(currentPage)
-            {
-               
-            };
-
-        
-            //Country defaultCountry = new Country("-1", "b", "",""); 
-            //model.Countries.Insert(0, defaultCountry);
-
+            var model = new ProfilePageViewModel(currentPage);
             model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-            return View("Edit", model);
+
+            return View("EditProfile", model);
         }
+        [HttpPost]
+        public ActionResult SaveProfile(ProfilePageViewModel.UserInformation model)
+        {
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

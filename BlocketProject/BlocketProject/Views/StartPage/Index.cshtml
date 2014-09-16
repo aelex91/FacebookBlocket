@@ -1,16 +1,17 @@
 ﻿@model BlocketProject.Models.Pages.StartPage
-
-
-@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
-
 <h2>Index</h2>
 
 @Html.PropertyFor(x => x.ContentArea)
 @Html.PropertyFor(x => x.MainBody)
 
+
 @using (Html.BeginForm("Authenticate", "StartPage", FormMethod.Post))
 {
+    if (!User.Identity.IsAuthenticated)
+    {
+          <button type="submit" class="logInOutButton">Login</button>
+    }
 
-    <button type="submit" class="logInOutButton">Login</button>
+  
 
 }

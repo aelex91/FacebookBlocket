@@ -11,17 +11,26 @@ using System.Web;
 
 namespace BlocketProject.Models.ViewModels
 {
-
-
     public class ProfilePageViewModel
     {
-
+        public ProfilePageViewModel() { }
         public ProfilePageViewModel(ProfilePage currentPage)
         {
             Heading = currentPage.Heading;
             this.ReferToEditPage = currentPage.PagereferToEditPage;
+            this.LabelFirstName = currentPage.LabelFirstName;
+            this.LabelLastName = currentPage.LabelLastName;
+            this.LabelLocation = currentPage.LabelLocation;
+            this.LabelPhone = currentPage.LabelPhone;
+            this.LabelButton = currentPage.LabelButton;
 
         }
+        public string LabelFirstName { get; set; }
+        public string LabelLastName { get; set; }
+        public string LabelEmail { get; set; }
+        public string LabelLocation { get; set; }
+        public string LabelPhone { get; set; }
+        public string LabelButton { get; set; }
         public PageReference ReferToEditPage { get; set; }
         public string Heading { get; set; }
         public UserInformation CurrentUser { get; set; }
@@ -41,6 +50,7 @@ namespace BlocketProject.Models.ViewModels
             public string Gender { get; set; }
             public DateTime RegisterDate { get; set; }
             public int? NumberOfEvents { get; set; }
+            public int Phone { get; set; }
         }
 
 
