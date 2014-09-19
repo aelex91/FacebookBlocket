@@ -1,17 +1,16 @@
 ﻿@model BlocketProject.Models.Pages.StartPage
-<h2>Index</h2>
 
-@Html.PropertyFor(x => x.ContentArea)
-@Html.PropertyFor(x => x.MainBody)
+<div class="startWrapper">
 
-
-@using (Html.BeginForm("Authenticate", "StartPage", FormMethod.Post))
-{
-    if (!User.Identity.IsAuthenticated)
+    @using (Html.BeginForm("Authenticate", "StartPage", FormMethod.Post))
     {
-          <button type="submit" class="logInOutButton">Login</button>
+        if (!User.Identity.IsAuthenticated)
+        {
+        <button type="submit" class="logInOutButton">Login</button>
+        }
     }
+    @Html.PropertyFor(x => x.MainBody)
+    @Html.PropertyFor(x => x.ContentArea)
 
-  
+</div>
 
-}

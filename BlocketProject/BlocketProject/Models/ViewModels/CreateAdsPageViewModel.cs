@@ -53,22 +53,23 @@ namespace BlocketProject.Models.ViewModels
     public class CreateEvent
     {
 
-        [Required(ErrorMessage = "The email address is required")]
+        [Required(ErrorMessage = "Vänligen fyll i Email")]
         [EmailAddress]
         public string Email { get; set; }
         [PhoneAttribute]
+        [Range(0, int.MaxValue, ErrorMessage = "Ange ett korrekt telefon nummer")]
         public string Phone { get; set; }
         [Required]
         public string EventTitle { get; set; }
-        [Required(ErrorMessage = "Set a price")]
         public string Price { get; set; }
         [Required]
-        [MaxLength(255, ErrorMessage = "The {0} must be maximum {2} characters long")]
+        [MaxLength(255, ErrorMessage = "Annonstexten får max vara {1} tecken lång")]
         public string Text { get; set; }
         public bool HideInformation { get; set; }
         [Required]
         public string Date { get; set; }
         [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Välj ett korrekt värde")]
         public string MaxGuests { get; set; }
 
         public Dictionary<int, string> Category { get; set; }

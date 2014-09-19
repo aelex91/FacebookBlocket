@@ -33,14 +33,24 @@ namespace BlocketProject.Controllers
         string appId = WebConfigurationManager.AppSettings["FacebookAppID"];
         string appSecret = WebConfigurationManager.AppSettings["FacebookAppSecret"];
         string scope = WebConfigurationManager.AppSettings["FacebookScope"];
-        string redirectUrl = "http://letemsale.com/";
+        string redirectUrl = "http://hiqstow165.sto.hiq.se";
 
         LetemsaleDbContext db = new LetemsaleDbContext();
 
         ProfilePageViewModel.UserInformation model = new BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation();
-        
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetUsersCount(string dropdownId)
+        {
+            //Get the muncipalities for the current id from drop down county.
+
+            var userCount = ConnectionHelper.GetRegisteredUsers();
+
+            return Json(userCount, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Index(StartPage currentPage)
         {
+
+
             if (Request["code"] != null)
             {
                 var info = CheckAuthorization(); // har access att få logga in
@@ -111,7 +121,18 @@ namespace BlocketProject.Controllers
             user = (JsonUserModel)ser.ReadObject(stream);
             DbUserInformation DbUser = new DbUserInformation();
 
-            var location = user.location.name;
+            string location = string.Empty;
+            var birthday = DateTime.Now;
+
+            if (user.location != null)
+            {
+                location = user.location.name;
+            }
+            if (user.birthday != null)
+            {
+                DbUser.Birthday = DateTime.Parse(user.birthday);
+            }
+
             DbUser.FacebookId = user.id;
             var UserImageUrl = ConnectionHelper.GetUserImageUrl(DbUser.FacebookId);
             DbUser.FirstName = user.first_name;
@@ -119,7 +140,7 @@ namespace BlocketProject.Controllers
             DbUser.Email = user.email;
             DbUser.Location = location;
             DbUser.ImageUrl = UserImageUrl;
-            DbUser.Birthday = DateTime.Parse(user.birthday);
+
             DbUser.Gender = user.gender;
             DbUser.RegisterDate = DateTime.Now;
 
@@ -132,6 +153,8 @@ namespace BlocketProject.Controllers
             model.ImageUrl = DbUser.ImageUrl;
             model.Gender = DbUser.Gender;
             model.RegisterDate = DbUser.RegisterDate;
+            DbUser.Phone = "";
+
 
             var checkDbId = ConnectionHelper.GetUserFacebookId(DbUser.FacebookId);
 
@@ -157,6 +180,7 @@ namespace BlocketProject.Controllers
             {
                 UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
+
                 Response.Redirect(UrlHelpers.PageLinkUrl(url, page).ToHtmlString());
             }
         }

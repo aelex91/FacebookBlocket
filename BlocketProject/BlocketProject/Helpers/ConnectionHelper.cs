@@ -2,6 +2,7 @@
 using BlocketProject.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,13 +33,34 @@ namespace BlocketProject.Helpers
                           }).ToList();
             return query;
         }
-
-        public static void FillDropDownLists()
-        { 
-        // hämta alla drop down lists.
+        public static int FemaleRegistered()
+        {
+            string female = "female";
+            var query = (from p in db.DbUserInformation
+                         where p.Gender == female
+                         select p).Count();
+           
+            return query;
         
         }
+        public static int MaleRegistered()
+        {
+            string male = "male";
+            var query = (from p in db.DbUserInformation
+                         where p.Gender == male
+                         select p).Count();
 
+            return query;
+
+        }
+        public static int GetRegisteredUsers()
+        {
+
+            var query = (from p in db.DbUserInformation
+                         select p).Count();
+            return query;
+        
+        }
         public static List<AdsPageViewModel.UserAdsModel> GetCurrentUserAds(int? id)
         {
             var query = (from r in db.DbUserInformation
@@ -57,7 +79,11 @@ namespace BlocketProject.Helpers
                          }).ToList();
             return query;
         }
-
+        //public static void SaveEditCurrentUser(ProfilePageViewModel.UserInformation currentUser)
+        //{
+        //    db.Entry(currentUser).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //}
         public static void SaveAdInformationToDb(CreateAdsPageViewModel model, HttpPostedFileBase file)
         {
             DateTime expirationDate = Convert.ToDateTime(model.CreateEvent.Date);
@@ -137,8 +163,19 @@ namespace BlocketProject.Helpers
         }
         public static void DeleteUser(int id)
         {
+            var e = db.DbUserEvents.FirstOrDefault(x => x.UserId == id);
             var f = db.DbUserInformation.FirstOrDefault(x => x.UserId == id);
-            db.DbUserInformation.Remove(f);
+            if (e != null)
+            {
+                db.DbUserEvents.Remove(e);
+            }
+
+            if (f != null)
+            {
+                db.DbUserInformation.Remove(f);
+            }
+
+
             db.SaveChanges();
 
         }
@@ -297,6 +334,8 @@ namespace BlocketProject.Helpers
                               NumberOfEvents = r.NumberOfEvents,
                               RegisterDate = r.RegisterDate,
                               UserId = r.UserId,
+                              Phone = r.Phone,
+                              ModifiedOn = r.ModifiedOn,
 
                           }).FirstOrDefault();
             return result;

@@ -15,6 +15,7 @@ using BlocketProject.Models;
 
 namespace BlocketProject.Controllers
 {
+    [Authorize]
     public class CreateAdPageController : PageController<CreateAdPage>
     {
         UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
@@ -59,8 +60,13 @@ namespace BlocketProject.Controllers
         [HttpPost]
         public ActionResult Index(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)
         {
+
             if (ModelState.IsValid)
             {
+                if (model.CreateEvent.Price == null || model.CreateEvent.Price == string.Empty)
+                {
+                    model.CreateEvent.Price = "0";
+                }
                 var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
                 model.CurrentUser = user;
                 if (model.CurrentUser.NumberOfEvents >= currentPage.NumberOfEvents)
@@ -75,7 +81,7 @@ namespace BlocketProject.Controllers
                 }
                 if (file.ContentLength > 0)
                 {
-                    FileUpload(file, model);
+                    FileUpload(file);
                 }
 
                 ConnectionHelper.SaveAdInformationToDb(model, file);
@@ -90,20 +96,21 @@ namespace BlocketProject.Controllers
                 model.CreateEvent.Genders = ConnectionHelper.GetGenders();
                 model.CreateEvent.Municipality = ConnectionHelper.GetMuncipalities();
                 model.CreateEvent.County = ConnectionHelper.GetCounties();
-                model.ErrorMessage = "Error occured";
+               
                 model.DefaultImage = currentPage.DefaultImage;
 
                 return View("Index", model);
 
             }
         }
-        public ActionResult FileUpload(HttpPostedFileBase file, CreateAdsPageViewModel model)
+        public ActionResult FileUpload(HttpPostedFileBase file)
         {
             if (file != null)
             {
                 if (file.ContentType.Contains("jpg") || file.ContentType.Contains("png") || file.ContentType.Contains("jpeg"))
                 {
 
+                    // kolla gamla värdet på bilden och overidea.
 
                     string pic = System.IO.Path.GetFileName(file.FileName);
                     string path = System.IO.Path.Combine(
@@ -130,7 +137,7 @@ namespace BlocketProject.Controllers
 
 
             // after successfully uploading redirect the user
-            return RedirectToAction("Index", model);
+            return RedirectToAction("Index");
         }
     }
 }

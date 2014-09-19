@@ -32,19 +32,19 @@ namespace BlocketProject.Controllers
         public ActionResult DeleteEvent(int id)
         {
             var userId = ConnectionHelper.GetUserIdByEmail(User.Identity.Name);
-          //ta även bort användarens numberofad.
+            //ta även bort användarens numberofad.
             ConnectionHelper.DeleteUserEvent(id);
             ConnectionHelper.RemoveUserNumberOfEvents(userId);
             string successMessage = "You have removed you event.";
-            return RedirectToAction("Index", new { node = PageReference.StartPage, successMessage  });
+            return RedirectToAction("Index", new { node = PageReference.StartPage, successMessage });
         }
         [Authorize]
         public ActionResult DeleteUser(int id) //ändra till episerver users kan bara ta bort
         {
-            var eventId = ConnectionHelper.GetUserAds(id);
+           
             ConnectionHelper.DeleteUser(id);
             //ConnectionHelper.DeleteUserEvent(
-            return RedirectToAction("Index", new { node = PageReference.StartPage });
+            return View("Index", "Admin", new { language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name });
         }
 
     }

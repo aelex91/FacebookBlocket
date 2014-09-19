@@ -16,6 +16,9 @@ using System;
 using System.Web.Configuration;
 using System.IO;
 using System.Net;
+using System.Data.Entity;
+using System.Web;
+
 
 namespace BlocketProject.Controllers
 {
@@ -28,8 +31,13 @@ namespace BlocketProject.Controllers
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
         {
-            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
             var model = new ProfilePageViewModel(currentPage);
+            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+            if (user.Location == "")
+            {
+                return RedirectToAction("EditProfile");
+            }
+
             if (user == null)
             {
                 return View(model);
@@ -47,13 +55,101 @@ namespace BlocketProject.Controllers
 
             var model = new ProfilePageViewModel(currentPage);
             model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-
+            if (model.CurrentUser.Location == "")
+            {
+                return View("EditProfile", model);
+            }
             return View("EditProfile", model);
         }
         [HttpPost]
-        public ActionResult SaveProfile(ProfilePageViewModel.UserInformation model)
+        public ActionResult SaveProfile(ProfilePageViewModel model, ProfilePage currentPage, HttpPostedFileBase file)
+        {
+            var db = new LetemsaleDbContext();
+            if (ModelState.IsValid)
+            {
+                var oldUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                var image = "";
+                if (file == null)
+                {
+                    image = oldUser.ImageUrl;
+                }
+                else
+                {
+                    if (file.ContentType.Contains("jpg") || file.ContentType.Contains("png") || file.ContentType.Contains("jpeg"))
+                    {
+                        try
+                        {
+
+                            if (!oldUser.ImageUrl.Contains("https"))
+                            {  
+                                var fixedPath = Server.MapPath("~/" + oldUser.ImageUrl);
+                                System.IO.File.Delete(fixedPath);
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                        // kolla gamla värdet på bilden och overidea.
+
+                        string pic = System.IO.Path.GetFileName(Guid.NewGuid() + file.FileName);
+                        string path = System.IO.Path.Combine(
+                                               Server.MapPath("/images"), pic);
+                        // file is uploaded
+                        file.SaveAs(path);
+
+                        // save the image path path to the database or you can send image 
+                        // directly to database
+                        // in-case if you want to store byte[] ie. for DB
+                        //using (MemoryStream ms = new MemoryStream())
+                        //{
+                        //    file.InputStream.CopyTo(ms);
+                        //    byte[] array = ms.GetBuffer();
+                        //}
+                        image = "/images/" + pic;
+                    }
+                    else
+                    {
+                        Response.Write("Image is weird dude..");
+                        return null;
+                    }
+
+                }
+
+                var dbUser = new DbUserInformation
+                {
+                    FirstName = model.CurrentUser.FirstName ?? oldUser.FirstName,
+                    LastName = model.CurrentUser.LastName ?? oldUser.LastName,
+                    Email = oldUser.Email,
+                    Phone = model.CurrentUser.Phone ?? oldUser.Phone,
+                    ImageUrl = image,
+                    ModifiedOn = DateTime.Now,
+                    RegisterDate = oldUser.RegisterDate,
+                    UserId = oldUser.UserId,
+                    FacebookId = oldUser.FacebookId,
+                    Gender = oldUser.Gender,
+                    NumberOfEvents = oldUser.NumberOfEvents,
+                    Location = model.CurrentUser.Location ?? oldUser.Location,
+                };
+
+                db.Entry(dbUser).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("EditProfile", model);
+            }
+
+        }
+        public ActionResult FileUpload(HttpPostedFileBase file)
         {
 
+
+
+            // after successfully uploading redirect the user
             return RedirectToAction("Index");
         }
 

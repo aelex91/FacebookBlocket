@@ -6,6 +6,7 @@ using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,7 @@ namespace BlocketProject.Models.ViewModels
             this.LabelLocation = currentPage.LabelLocation;
             this.LabelPhone = currentPage.LabelPhone;
             this.LabelButton = currentPage.LabelButton;
+            this.LabelEmail = currentPage.LabelEmail;
 
         }
         public string LabelFirstName { get; set; }
@@ -37,20 +39,25 @@ namespace BlocketProject.Models.ViewModels
         public List<UserAdsModel> ListUserAds { get; set; }
         public List<FacebookFriend> friendsList { get; set; }
 
+
         public class UserInformation
         {
             public int UserId { get; set; }
-            public DateTime Birthday { get; set; }
             public string FacebookId { get; set; }
+            [MaxLength(30, ErrorMessage = "Namnet får max vara {1} tecken lång")]
             public string FirstName { get; set; }
+            [MaxLength(30, ErrorMessage = "Efternamnet får max vara {1} tecken lång")]
             public string LastName { get; set; }
             public string Email { get; set; }
             public string Location { get; set; }
             public string ImageUrl { get; set; }
             public string Gender { get; set; }
+            public DateTime Birthday { get; set; }
             public DateTime RegisterDate { get; set; }
+            public DateTime ModifiedOn { get; set; }
             public int? NumberOfEvents { get; set; }
-            public int Phone { get; set; }
+            [MaxLength(25, ErrorMessage = "Skriv in ett korrekt telefonnummer")]
+            public string Phone { get; set; }
         }
 
 
@@ -71,7 +78,7 @@ namespace BlocketProject.Models.ViewModels
             var locate = new ServiceLocationHelper(ServiceLocator.Current);
             var page = locate.ContentRepository().Get<PageData>(pReference);
             var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
-            var pageUrl = urlResolver.GetVirtualPath(page.ContentLink);
+            var pageUrl = urlResolver.GetUrl(page.ContentLink);
             return pageUrl;
         }
 

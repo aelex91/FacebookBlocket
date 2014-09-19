@@ -13,7 +13,6 @@ namespace BlocketProject.Models.DbClasses
         [Key, Column("UserId")]
         public int UserId { get; set; }
         public string FacebookId { get; set; }
-        public DateTime Birthday { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -22,7 +21,9 @@ namespace BlocketProject.Models.DbClasses
         public int? NumberOfEvents { get; set; }
         public string Gender { get; set; }
         public string Phone { get; set; }
-        public int? PhoneValidation { get; set; }
+        public string PhoneValidation { get; set; }
+        public DateTime Birthday { get; set; }
+        public DateTime ModifiedOn { get; set; }
         public DateTime RegisterDate { get; set; }
     }
 }

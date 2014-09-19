@@ -1,12 +1,10 @@
 ﻿@model BlocketProject.Models.ViewModels.CreateAdsPageViewModel
 
-<h2>@Html.PropertyFor(x => x.Heading)</h2>
-@Html.HiddenFor(x => x.ErrorMessage)
-@if (Model.ErrorMessage != null || Model.ErrorMessage != string.Empty)
-{
-    <h3 style="color: red">@Model.ErrorMessage</h3>
-}
-<div class="">
+<div class="createEvent">
+    <h2>@Html.PropertyFor(x => x.Heading)</h2>
+    @Html.HiddenFor(x => x.ErrorMessage)
+
+
     @Html.HiddenFor(x => x.CreateEvent.SelectedGender)
     @Html.HiddenFor(x => x.CreateEvent.SelectedCategory)
     @Html.HiddenFor(x => x.CreateEvent.SelectedCounty)
@@ -33,59 +31,120 @@
     @using (Html.BeginForm("Index", "CreateAdPage", FormMethod.Post, new { enctype = "multipart/form-data", language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
     {
         <div>
-            <fieldset>
-                <legend>Fields</legend>
+            <table>
+                <tr>
+                    <td>
+                        @Html.Label("Personlig information", new { @class = "labeledit" })
+
+                    </td>
+                    <td>
+
+                        @Html.TextBoxFor(x => x.CreateEvent.Email, null, new { @class = "textfield mail" })
+
+                        @Html.TextBoxFor(x => x.CreateEvent.Phone, null, new { @class = "textfield phone" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Label("Dölj viktig information för andra användare?", new { @class = "labeledit" })
+
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(m => m.CreateEvent.HideInformation, new { id = "hideinformation", @class = "checkbox" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Label("Vilka typ av gäster får komma och vad är det för fest?", new { @class = "labeledit" })
+
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.CreateEvent.SelectedGender, new SelectList(Model.CreateEvent.Genders, "Key", "Value"), new { id = "gender", @class = "textfield" })
+                        @Html.DropDownListFor(x => x.CreateEvent.SelectedCategory, new SelectList(Model.CreateEvent.Category, "Key", "Value"), new { id = "category", @class = "textfield" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        @Html.Label("Vart håller festen till?", new { @class = "labeledit" })
+
+                    </td>
+                    <td>
+
+                        @Html.DropDownListFor(x => x.CreateEvent.SelectedCounty, new SelectList(Model.CreateEvent.County, "Key", "Value"), "Välj län", new { id = "counties", @class = "textfield" })
+                        @Html.DropDownListFor(x => x.CreateEvent.SelectedMunicipality, new SelectList(Model.CreateEvent.Municipality, "Key", "Value"), "Välj kommun", new { id = "municipality", @class = "textfield" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        @Html.Label("Hur många får komma?", new { @class = "labeledit" })
+
+                    </td>
+                    <td>
+
+                        @Html.TextBoxFor(x => x.CreateEvent.MaxGuests, null, new { @class = "textfield" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        @Html.Label("Skriv lite om ditt evenemang", new { @class = "labeledit" })
+
+                    </td>
+                    <td>
+
+                        @Html.TextBoxFor(x => x.CreateEvent.EventTitle, null, new { @class = "textfield" })
 
 
-                @Html.TextBoxFor(x => x.CreateEvent.Email, new { id = Model.CreateEvent.Email, @class = "textfield mail", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emailkoll()", @onkeypress = "change(id)" })
+                        @Html.TextAreaFor(x => x.CreateEvent.Text, new { @class = "textarea" })
 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
 
-                @Html.TextBoxFor(x => x.CreateEvent.Phone, new { id = Model.Phonelabel, @class = "textfield phone", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })
+                        @Html.Label("Övrig information", new { @class = "labeledit" })
 
-                <br />
+                    </td>
+                    <td>
 
-                @*@Html.TextBoxFor(x => x.zi, new { id = Model.CreateEvent.ZipCode, @class = "textfield", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id); emaikoll()", @onkeypress = "change(id)" })*@
-                <h4>Gömma viktig information för användare?</h4>
-                @Html.CheckBoxFor(m => m.CreateEvent.HideInformation)
-                <br />
-                <h3>Typ av gäster och typ av fest?</h3>
-                @Html.DropDownListFor(x => x.CreateEvent.SelectedGender, new SelectList(Model.CreateEvent.Genders, "Key", "Value"), new { placeholder = "", @class = "textfield" })
-                @Html.DropDownListFor(x => x.CreateEvent.SelectedCategory, new SelectList(Model.CreateEvent.Category, "Key", "Value"), new { placeholder = "", @class = "textfield" })
+                        @Html.TextBoxFor(x => x.CreateEvent.Price, null, new { @class = "textfield" })
+                        @Html.TextBoxFor(x => x.CreateEvent.Date, null, new { @onclick = "datepicker()", @class = "datepicker textfield" })
 
-                <br />
-                <h3>Vart håller festen till?</h3>
-                @Html.DropDownListFor(x => x.CreateEvent.SelectedCounty, new SelectList(Model.CreateEvent.County, "Key", "Value"), "Välj län", new { placeholder = "", @class = "textfield", id = "counties" })
-                @Html.DropDownListFor(x => x.CreateEvent.SelectedMunicipality, new SelectList(Model.CreateEvent.Municipality, "Key", "Value"), "Välj kommun", new { id = "municipality", @class = "textfield" })
-                <br />
-                <h3>Hur många får komma?</h3>
-                @Html.TextBoxFor(x => x.CreateEvent.MaxGuests, new { id = Model.PersonLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);ensureNumeric(arguments[0] || this);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
-                <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Label("Ladda upp bild", new { @class = "labeledit" })
+                    </td>
+                    <td>
 
-                <h3>Skriv lite om ditt evenemang</h3>
+                        <div class="image-upload">
+                            <label for="file">
+                                <img src="@Model.DefaultImage" width="300"id="imagefile" />
+                            </label>
 
-                @Html.TextBoxFor(x => x.CreateEvent.Price, new { id = Model.PriceLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id);", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "ensureNumeric(arguments[0] || this);" })
-                @Html.TextBoxFor(x => x.CreateEvent.Date, new { id = Model.DateLabel, @class = "textfield datepicker", @onclick = "datepicker('')", @onfocus = "this.style.background = '#fff'", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'" })
-                <br />
-                @Html.TextBoxFor(x => x.CreateEvent.EventTitle, new { id = Model.EventLabel, @class = "textfield", @onfocus = "this.style.background = '#fff'", @onclick = "textfieldpressed(id)", @onblur = "textfieldblur(id), this.style.background = '#ECF7FB'", @onkeypress = "change(id)" })
+                            <input id="file" type="file" name="file" />
+                        </div>
 
-                <br />
-                @Html.TextAreaFor(x => x.CreateEvent.Text, new { id = Model.TextLabel, @class = "textarea", @onfocus = "this.style.background = '#fff', this.value = ''", @onclick = "textareapressed()", placeholder = "Text", @onblur = "textareablur(), this.style.background = '#ECF7FB'" })
-                <input type='file' id="file" name="file" />
-
-                <img id="imagefile" src="@Model.DefaultImage" alt="your image" />
-
-            </fieldset>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <br />
-        <input type="submit" class="button" value="@Model.ButtonLabel" />
-        <br />
-        <br />
+       
+        <input type="submit" class="btnEvent" value="@Model.ButtonLabel" />
 
-     
     }
-
 </div>
+
 <script type="text/javascript">
+  
     @*    $(document).ready(function () {
         $('#@Model.PriceLabel').hide();
 
@@ -101,7 +160,6 @@
 
         });
     });*@
-
     function readURL(input) {
 
         if (input.files && input.files[0]) {
@@ -118,4 +176,5 @@
     $("#file").change(function () {
         readURL(this);
     });
+
 </script>

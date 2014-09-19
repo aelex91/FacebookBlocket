@@ -1,24 +1,108 @@
 ﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
 
 <h2>Edit your profile</h2>
+
+
+@Html.HiddenFor(x => x.CurrentUser.Email)
+@Html.HiddenFor(x => x.CurrentUser.FirstName)
+@Html.HiddenFor(x => x.CurrentUser.LastName)
+@Html.HiddenFor(x => x.CurrentUser.Phone)
+@Html.HiddenFor(x => x.CurrentUser.ImageUrl)
+@Html.HiddenFor(x => x.CurrentUser.UserId)
+
+
+
+<h4 style="color: red">@Html.ValidationSummary()</h4>
 @if (Model.CurrentUser != null)
 {
-    
+    using (Html.BeginForm("SaveProfile", "ProfilePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.HiddenFor(x => x.LabelFirstName)
+    @Html.HiddenFor(x => x.LabelLastName)
+    @Html.HiddenFor(x => x.LabelPhone)
+    @Html.HiddenFor(x => x.LabelLocation)
+    @Html.HiddenFor(x => x.CurrentUser.ImageUrl)
+ 
 
-    @Html.PropertyFor(x => x.LabelFirstName)
-    @Html.TextBoxFor(x => x.CurrentUser.FirstName)
+    @Html.HiddenFor(x => x.LabelButton)
+    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imagefile" />
+    <h3>Details</h3>
     <br />
-    @Html.PropertyFor(x => x.LabelLastName)
-    @Html.TextBoxFor(x => x.CurrentUser.LastName)
-    <br />
-    @Html.PropertyFor(x => x.LabelEmail)
-    @Html.TextBoxFor(x => x.CurrentUser.Email)
-    <br />
-    @Html.PropertyFor(x => x.LabelPhone)
-    @Html.TextBoxFor(x => x.CurrentUser.Phone)
-    <br />
+    <table id="UserTable" style="margin: 30px;">
+
+        <tr>
+            <td>
+                @Html.Label("Username", new { @class = "labeledit" })
+
+            </td>
+            <td>
+                <p style="font-size: 12px;">www.letEmSale.com/<b>@User.Identity.Name</b></p>
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label(Model.LabelFirstName, new { @class = "labeledit" })
+
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.CurrentUser.FirstName, null, new { @class = "textfield" })
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label(Model.LabelLastName, new { @class = "labeledit" })
+
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.CurrentUser.LastName, null, new { @class = "textfield" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label(Model.LabelPhone, new { @class = "labeledit" })
+
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.CurrentUser.Phone, null, new { @class = "textfield" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label(Model.LabelLocation, new { @class = "labeledit" })
+
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.CurrentUser.Location, null, new { @class = "textfield" })
+            </td>
+        </tr>
+    </table>
+
+   
+
+    <input type='file' id="file" name="file" />
+
+    <center>   <input type="submit" value="@Model.LabelButton" /></center>
+    }
 }
-@using (Html.BeginForm("SaveProfile", "ProfilePage", FormMethod.Post))
-{
-    <input type="submit" value="@Model.LabelButton" />
-}
+<script type="text/javascript">
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imagefile').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file").change(function () {
+        readURL(this);
+    });
+</script>
