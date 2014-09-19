@@ -447,8 +447,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="images\191f5bb9-ca91-4f7b-a902-20b3b3138c7cProfilbild.jpg" />
-    <Content Include="images\39baaf32-9622-4fa9-a72e-83892a65d73dprofilbild2.jpg" />
     <Content Include="images\facebook.jpg" />
     <Content Include="images\femaleIcon.jpg" />
     <Content Include="images\festbakgrund.JPG" />
