@@ -11,9 +11,18 @@
     <input type="submit" value="Edit Profile" />
 
     }
-    <input type="button" value="Click" id="showProfile" />
-    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" />
-    
+  
+  
+    <div>
+        <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" height="300" />
+    </div>
+    <div>
+        <button type="submit" style="border: none; outline: none; background: transparent">
+            <img src="~/images/profileMenyIcon.png" class="profilepicmenu" id="showProfile" />
+        </button>
+
+    </div>
+ 
     <div class="projectWrapper">
         <table id="UserTable" style="margin: 30px;">
             <tr>
@@ -63,15 +72,26 @@
 }
 
 <script type="text/javascript">
-
+    //Klicka en gång sätt variable värde till true
+    // om den är true, så skapa en metod som stänger den.
     $(document).ready(function () {
         $("#UserTable").hide();
+
     });
-    $("#showProfile").click(function () {
-        $("#UserTable").show();
-    });
-    $('#UserTable').click(function () {
-        $("#UserTable").hide();
+
+
+    $('#showProfile').click(function () {
+        if ($("#UserTable").is(":hidden")) {
+
+            $('#showProfile').animate({ marginLeft: '-10px' });
+            $("#UserTable").show(500);
+
+        }
+        else if ($("#UserTable").is(":visible")) {
+            $('#showProfile').animate({ marginLeft: '-33px' });
+            $("#UserTable").hide();
+        }
+
 
     });
 
