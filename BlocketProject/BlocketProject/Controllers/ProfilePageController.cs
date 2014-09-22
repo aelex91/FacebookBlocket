@@ -81,7 +81,7 @@ namespace BlocketProject.Controllers
                         {
 
                             if (!oldUser.ImageUrl.Contains("https"))
-                            {  
+                            {
                                 var fixedPath = Server.MapPath("~/" + oldUser.ImageUrl);
                                 System.IO.File.Delete(fixedPath);
                             }
@@ -144,14 +144,17 @@ namespace BlocketProject.Controllers
             }
 
         }
-        public ActionResult FileUpload(HttpPostedFileBase file)
+        [Authorize]
+        public ActionResult DeleteEvent(int id)
         {
-
-
-
-            // after successfully uploading redirect the user
+          
+            var userId = ConnectionHelper.GetUserIdByEmail(User.Identity.Name);
+            //ta även bort användarens numberofad.
+            ConnectionHelper.DeleteUserEvent(id);
+            ConnectionHelper.RemoveUserNumberOfEvents(userId);
             return RedirectToAction("Index");
         }
+
 
 
     }

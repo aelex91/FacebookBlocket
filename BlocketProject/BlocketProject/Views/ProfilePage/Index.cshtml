@@ -50,7 +50,7 @@
                             <img src="@ad.ImageUrl" class="adImageProfile" /></button>
                     }
                     <br />
-                    @using (Html.BeginForm("DeleteEvent", "Account", new { id = ad.EventId }, FormMethod.Post))
+                    @using (Html.BeginForm("DeleteEvent", "ProfilePage", new { id = ad.EventId }, FormMethod.Post))
                     {
                         <input type="submit" id="@ad.EventId" value="Remove" />
            

@@ -39,9 +39,9 @@ namespace BlocketProject.Helpers
             var query = (from p in db.DbUserInformation
                          where p.Gender == female
                          select p).Count();
-           
+
             return query;
-        
+
         }
         public static int MaleRegistered()
         {
@@ -59,7 +59,7 @@ namespace BlocketProject.Helpers
             var query = (from p in db.DbUserInformation
                          select p).Count();
             return query;
-        
+
         }
         public static List<AdsPageViewModel.UserAdsModel> GetCurrentUserAds(int? id)
         {
@@ -112,6 +112,8 @@ namespace BlocketProject.Helpers
                 MunicipalityId = selectedMunicipalityAsInt,
                 MaxGuests = Convert.ToInt32(model.CreateEvent.MaxGuests),
                 EventDescription = model.CreateEvent.Text,
+                Zipcode = Convert.ToInt32(model.CreateEvent.ZipCode),
+
 
             };
             db.DbUserEvents.Add(modelUserAds);

@@ -15,6 +15,7 @@ namespace BlocketProject.Helpers
         ///     so if the page is set as a shortcut to another page or an external URL that URL
         ///     will be returned.
         /// </summary>
+        /// 
         public static IHtmlString PageLinkUrl(this UrlHelper urlHelper, EPiServer.Core.PageReference pageLink)
         {
             if (ContentReference.IsNullOrEmpty(pageLink))

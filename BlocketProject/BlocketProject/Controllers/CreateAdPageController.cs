@@ -53,6 +53,8 @@ namespace BlocketProject.Controllers
                 HideInformation = false,
                 MaxGuests = currentPage.PersonLabel,
                 Date = currentPage.DateLabel,
+                ZipCode = currentPage.ZipCodeLabel,
+               
             };
             return View(model);
         }

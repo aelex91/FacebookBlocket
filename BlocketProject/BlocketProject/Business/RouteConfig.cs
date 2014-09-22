@@ -10,9 +10,7 @@ namespace BlocketProject.Business
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-
-           
-        
+          
         }
     }
 }

@@ -23,11 +23,7 @@
         <div class="container">
             @if (User.Identity.IsAuthenticated)
             {
-                using (Html.BeginForm("Index", "Search", FormMethod.Post))
-                {
-                <input type="submit" value="search" />
-
-                }
+               
                 <nav class="navbar navbar-default">
                     @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
                     {
@@ -74,15 +70,15 @@
                 <img src="~/Content/Images/arrownavigate.png" alt="navigate" id="scrollTop" /></a>*@
 
             <div class="columnRight">
-                    <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Policy</a><br>
-                    <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Användarvilkor</a><br>
-                    <a href="https://www.linkedin.com/pub/alexander-helsinghof/57/a19/b4b" target="_blank">Cookies</a><br>
-                    <a href="http://hiq.se/" target="_blank">Hiq</a>
-                    <br />
-                    <div class="fb-like" style="color: white;" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-                    <div id="fb-root"></div>
+                <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Policy</a><br>
+                <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Användarvilkor</a><br>
+                <a href="https://www.linkedin.com/pub/alexander-helsinghof/57/a19/b4b" target="_blank">Cookies</a><br>
+                <a href="http://hiq.se/" target="_blank">Hiq</a>
+                <br />
+                <div class="fb-like" style="color: white;" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="fb-root"></div>
 
-                
+
             </div>
             <div class="column">
             </div>

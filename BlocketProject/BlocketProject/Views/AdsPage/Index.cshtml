@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Teststyle.css" rel="stylesheet" />
-<h2>@Model.Heading</h2>
-<div id="search" class="searchbox_standard">
 
+<div class="projectWrapper">
+    <h2>@Model.Heading</h2>
     @if (Model.UserEventModel == null)
     {
         <ul>
@@ -14,17 +14,17 @@
             {
                 foreach (var ad in Model.ListCurrentUserAdsModel)
                 {
-                    <li>
-                        <h3>@ad.Title</h3>
-                        <br />
-                        <img src="@ad.ImageUrl" width="150" alt="" /><br />
-                        <p>@ad.EventDescription</p>
-                        <br />
-                        <p>Pris: @ad.Price kr</p>
-                        <p>Skapad: @ad.PublishDate.ToString()</p>
-                        <p>Går ut: @ad.ExpirationDate.ToString()</p>
+                <li>
+                    <h3>@ad.Title</h3>
+                    <br />
+                    <img src="@ad.ImageUrl" width="150" alt="" /><br />
+                    <p>@ad.EventDescription</p>
+                    <br />
+                    <p>Pris: @ad.Price kr</p>
+                    <p>Skapad: @ad.PublishDate.ToString()</p>
+                    <p>Går ut: @ad.ExpirationDate.ToString()</p>
 
-                    </li>
+                </li>
 
                 }
             }
@@ -32,17 +32,17 @@
             {
                 foreach (var ad in Model.ListUserAdsModel)
                 {
-                    <li>
-                        <h3>@ad.Title</h3>
-                        <br />
-                        <img src="@ad.ImageUrl" width="150" alt="" /><br />
-                        <p>@ad.EventDescription</p>
-                        <br />
-                        <p>Pris: @ad.Price kr</p>
-                        <p>Datum: @ad.PublishDate.ToShortDateString()</p>
-                        <b>Annons av: <a href="#">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</a></b>
+                <li>
+                    <h3>@ad.Title</h3>
+                    <br />
+                    <img src="@ad.ImageUrl" width="150" alt="" /><br />
+                    <p>@ad.EventDescription</p>
+                    <br />
+                    <p>Pris: @ad.Price kr</p>
+                    <p>Datum: @ad.PublishDate.ToShortDateString()</p>
+                    <b>Annons av: <a href="#">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</a></b>
 
-                    </li>
+                </li>
 
                 }
 
@@ -61,12 +61,14 @@
             <a href="#">Ta bort</a><br />
         </div>
         <br />
-        <h3>@Model.UserEventModel.Title</h3><br />
-        <p>@Model.UserEventModel.EventDescription</p><br />
+        <h3>@Model.UserEventModel.Title</h3>
+        <br />
+        <p>@Model.UserEventModel.EventDescription</p>
+        <br />
         <p>@ConnectionHelper.GetAttendingUsers(Model.UserEventModel.EventId).Count()/@Model.UserEventModel.MaxGuests</p>
         
         
         
     }
-    
+
 </div>

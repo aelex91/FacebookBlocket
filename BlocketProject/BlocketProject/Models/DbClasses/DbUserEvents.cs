@@ -27,7 +27,8 @@ namespace BlocketProject.Models.DbClasses
         public DateTime ExpirationDate { get; set; }
         public int MunicipalityId { get; set; }
         public int CountyId { get; set; }
-        public bool HideImportantInfo  { get; set; }
+        public bool HideImportantInfo { get; set; }
         public int MaxGuests { get; set; }
+        public int Zipcode { get; set; }
     }
 }

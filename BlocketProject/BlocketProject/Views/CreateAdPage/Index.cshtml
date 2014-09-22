@@ -41,7 +41,9 @@
 
                         @Html.TextBoxFor(x => x.CreateEvent.Email, null, new { @class = "textfield mail" })
 
-                        @Html.TextBoxFor(x => x.CreateEvent.Phone, null, new { @class = "textfield phone" })
+                        @Html.TextBoxFor(x => x.CreateEvent.Phone, null, new { @class = "textfield phone", @onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
+
+                        @Html.TextBoxFor(x => x.CreateEvent.ZipCode, null, new { @class = "textfield", @onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
 
                     </td>
                 </tr>
@@ -87,7 +89,7 @@
                     </td>
                     <td>
 
-                        @Html.TextBoxFor(x => x.CreateEvent.MaxGuests, null, new { @class = "textfield" })
+                        @Html.TextBoxFor(x => x.CreateEvent.MaxGuests, null, new { @class = "textfield", @onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
 
                     </td>
                 </tr>
@@ -114,7 +116,7 @@
                     </td>
                     <td>
 
-                        @Html.TextBoxFor(x => x.CreateEvent.Price, null, new { @class = "textfield" })
+                        @Html.TextBoxFor(x => x.CreateEvent.Price, null, new { @class = "textfield", @onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
                         @Html.TextBoxFor(x => x.CreateEvent.Date, null, new { @onclick = "datepicker()", @class = "datepicker textfield" })
 
                     </td>

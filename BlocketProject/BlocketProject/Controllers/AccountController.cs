@@ -1,5 +1,7 @@
 ﻿using BlocketProject.Helpers;
+using EPiServer;
 using EPiServer.Core;
+using EPiServer.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,20 +30,12 @@ namespace BlocketProject.Controllers
             Response.Redirect(UrlHelpers.PageLinkUrl(url, PageReference.StartPage).ToHtmlString());
 
         }
-        [Authorize]
-        public ActionResult DeleteEvent(int id)
-        {
-            var userId = ConnectionHelper.GetUserIdByEmail(User.Identity.Name);
-            //ta även bort användarens numberofad.
-            ConnectionHelper.DeleteUserEvent(id);
-            ConnectionHelper.RemoveUserNumberOfEvents(userId);
-            string successMessage = "You have removed you event.";
-            return RedirectToAction("Index", new { node = PageReference.StartPage, successMessage });
-        }
+      
         [Authorize]
         public ActionResult DeleteUser(int id) //ändra till episerver users kan bara ta bort
         {
-           
+            // hämta en url från 
+            var repository = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<IContentRepository>();
             ConnectionHelper.DeleteUser(id);
             //ConnectionHelper.DeleteUserEvent(
             return View("Index", "Admin", new { language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name });

@@ -29,9 +29,10 @@ namespace BlocketProject.Models.ViewModels
             this.EventLabel = currentPage.EventLabel;
             this.PersonLabel = currentPage.PersonLabel;
             this.DateLabel = currentPage.DateLabel;
+            this.ZipCodeLabel = currentPage.ZipCodeLabel;
 
         }
-
+        public string ZipCodeLabel { get; set; }
         public string DateLabel { get; set; }
         public string Heading { get; set; }
         public string NameLabel { get; set; }
@@ -71,6 +72,7 @@ namespace BlocketProject.Models.ViewModels
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Välj ett korrekt värde")]
         public string MaxGuests { get; set; }
+        public string ZipCode { get; set; }
 
         public Dictionary<int, string> Category { get; set; }
         public Dictionary<int, string> Genders { get; set; }
