@@ -11,13 +11,13 @@
     <input type="submit" value="Edit Profile" />
 
     }
+    <input type="button" value="Click" id="showProfile" />
+    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" />
+    
     <div class="projectWrapper">
         <table id="UserTable" style="margin: 30px;">
             <tr>
-                <td rowspan="2">
-                    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" />
-
-                </td>
+                <td rowspan="2"></td>
                 <td>
                     @Model.CurrentUser.FirstName @Model.CurrentUser.LastName
                 </td>
@@ -61,4 +61,21 @@
         </tr>
     </table>
 }
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#UserTable").hide();
+    });
+    $("#showProfile").click(function () {
+        $("#UserTable").show();
+    });
+    $('#UserTable').click(function () {
+        $("#UserTable").hide();
+
+    });
+
+
+
+</script>
 
