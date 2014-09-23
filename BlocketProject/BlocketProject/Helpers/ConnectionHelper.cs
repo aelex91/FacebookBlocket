@@ -283,10 +283,10 @@ namespace BlocketProject.Helpers
             }
         }
 
-        public static string GetUserEmailById(string id)
+        public static string GetUserEmailById(int id)
         {
             var result = (from r in db.DbUserInformation
-                          where r.FacebookId == id
+                          where r.UserId == id
                           select r.Email).FirstOrDefault();
             return result;
         }

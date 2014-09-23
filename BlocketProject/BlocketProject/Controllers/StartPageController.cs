@@ -33,7 +33,8 @@ namespace BlocketProject.Controllers
         string appId = WebConfigurationManager.AppSettings["FacebookAppID"];
         string appSecret = WebConfigurationManager.AppSettings["FacebookAppSecret"];
         string scope = WebConfigurationManager.AppSettings["FacebookScope"];
-        string redirectUrl = "http://hiqstow165.sto.hiq.se";
+        //string redirectUrl = "http://hiqstow165.sto.hiq.se";
+        string redirectUrl = "http://letemsale.com";
 
         LetemsaleDbContext db = new LetemsaleDbContext();
 
@@ -153,6 +154,7 @@ namespace BlocketProject.Controllers
             model.ImageUrl = DbUser.ImageUrl;
             model.Gender = DbUser.Gender;
             model.RegisterDate = DbUser.RegisterDate;
+            model.UserId = DbUser.UserId;
             DbUser.Phone = "";
 
 
@@ -163,14 +165,15 @@ namespace BlocketProject.Controllers
                 db.DbUserInformation.Add(DbUser);
                 db.SaveChanges();
             }
+            model.UserId = ConnectionHelper.GetUserIdByEmail(model.Email);
 
             return model;
         }
 
-        public void Login(BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation user, PageReference page)
+        public void Login(ProfilePageViewModel.UserInformation user, PageReference page)
         {
             bool isAuthenticated = false;
-            var checkUserEmail = ConnectionHelper.GetUserEmailById(user.FacebookId);
+            var checkUserEmail = ConnectionHelper.GetUserEmailById(user.UserId);
 
             if (checkUserEmail != null)
             {
