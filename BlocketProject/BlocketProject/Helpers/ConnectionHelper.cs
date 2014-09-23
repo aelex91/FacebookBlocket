@@ -23,12 +23,22 @@ namespace BlocketProject.Helpers
             var query = (from p in db.DbUserEvents
                          select new AdsPageViewModel.UserAdsModel
                           {
-                              UserId = p.UserId,
-                              EventDescription = p.EventDescription,
-                              ImageUrl = p.ImageUrl,
-                              Price = p.Price,
-                              PublishDate = p.PublishDate,
-                              Title = p.Title,
+                                EventId = p.EventId,
+                                UserId = p.UserId,
+                                Email = p.Email,
+                                Title = p.Title,                              
+                                Price = p.Price,
+                                Phone = p.Phone,
+                                MaxGuests = p.MaxGuests,
+                                HideImportantInformation = p.HideImportantInfo,
+                                EventDescription = p.EventDescription,
+                                ImageUrl = p.ImageUrl,
+                                CategoryId = p.CategoryId,
+                                GenderId = p.GenderId,
+                                CountyId = p.CountyId,
+                                MunicipalityId = p.MunicipalityId,
+                                PublishDate  = p.PublishDate,
+                                ExpirationDate = p.ExpirationDate
 
                           }).ToList();
             return query;

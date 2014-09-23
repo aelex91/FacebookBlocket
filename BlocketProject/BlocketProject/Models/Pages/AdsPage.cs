@@ -20,17 +20,10 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Ad Category",
-            GroupName = SystemTabNames.Content,
-            Order = 200)]
-        public virtual string AdCategory { get; set; }
-
-        [CultureSpecific]
-        [Display(
             Name = "Only show current users ads",
             Description = "Checking this will only show the ads from the currently active user.",
             GroupName = SystemTabNames.Content,
-            Order = 300)]
+            Order = 200)]
         public virtual bool CurrentUserAds { get; set; }
 
         public override void SetDefaultValues(ContentType contentType)

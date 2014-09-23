@@ -1,15 +1,13 @@
 ﻿@model BlocketProject.Models.ViewModels.AdsPageViewModel
 @using BlocketProject.Helpers
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
 <link href="~/Content/Teststyle.css" rel="stylesheet" />
 
 <div class="projectWrapper">
-    <h2>@Model.Heading</h2>
+    @*<h2>@Model.Heading</h2>*@
     @if (Model.UserEventModel == null)
     {
-        <ul>
+        <ul style="list-style: none;">
             @if (Model.CurrentUserAds)
             {
                 foreach (var ad in Model.ListCurrentUserAdsModel)
@@ -23,7 +21,6 @@
                     <p>Pris: @ad.Price kr</p>
                     <p>Skapad: @ad.PublishDate.ToString()</p>
                     <p>Går ut: @ad.ExpirationDate.ToString()</p>
-
                 </li>
 
                 }
@@ -32,17 +29,20 @@
             {
                 foreach (var ad in Model.ListUserAdsModel)
                 {
-                <li>
-                    <h3>@ad.Title</h3>
-                    <br />
-                    <img src="@ad.ImageUrl" width="150" alt="" /><br />
-                    <p>@ad.EventDescription</p>
-                    <br />
-                    <p>Pris: @ad.Price kr</p>
-                    <p>Datum: @ad.PublishDate.ToShortDateString()</p>
-                    <b>Annons av: <a href="#">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</a></b>
-
-                </li>
+                    using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId }, FormMethod.Post)) { 
+                    <li>
+                        <button type="submit" style="border:none; background: none;">
+                            <h3>@ad.Title</h3>
+                            <br />
+                            <img src="@ad.ImageUrl" width="150" alt="" /><br />
+                            <p>@ad.EventDescription</p>
+                            <br />
+                            <p>Pris: @ad.Price kr</p>
+                            <p>Datum: @ad.PublishDate.ToShortDateString()</p> 
+                        </button><br />
+                        <b>Annons av: <a href="#">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</a></b>
+                    </li>
+                    }
 
                 }
 
@@ -54,21 +54,10 @@
 
     else
     {
-        <img src="@Model.UserEventModel.ImageUrl" style="float: left; margin-left: 25px; margin-right: 25px; border-radius: 12px;"/>
-        <div style="border: 2px solid gray; float: left; border-radius: 12px;">
-            <a href="#">Redigera event</a><br />
-            <a href="#">Bjud in gäster</a><br />
-            <a href="#">Ta bort</a><br />
+        <div class="eventImage">
+            <img src="@Model.UserEventModel.ImageUrl" style="max-height: 500px; max-width: 500px; float: left;"/>
+            <h1><span>@Model.UserEventModel.Title</span></h1>
         </div>
-        <br />
-        <h3>@Model.UserEventModel.Title</h3>
-        <br />
-        <p>@Model.UserEventModel.EventDescription</p>
-        <br />
-        <p>@ConnectionHelper.GetAttendingUsers(Model.UserEventModel.EventId).Count()/@Model.UserEventModel.MaxGuests</p>
-        
-        
-        
     }
 
 </div>
