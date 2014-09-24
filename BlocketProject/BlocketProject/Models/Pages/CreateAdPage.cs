@@ -114,7 +114,7 @@ namespace BlocketProject.Models.Pages
             Description = "Redirects users to the Landing Page.",
             GroupName = SystemTabNames.Content,
             Order = 1300)]
-        public virtual PageReference ReferenceToLandingPage { get; set; }
+        public virtual ContentReference ReferenceToLandingPage { get; set; }
 
 
         [CultureSpecific]

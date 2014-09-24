@@ -11,6 +11,8 @@ using BlocketProject.Models.Blocks;
 using BlocketProject.Models.ViewModels;
 using BlocketProject.Helpers;
 using System.Web.UI.WebControls;
+using EPiServer.Web.Routing;
+using EPiServer.ServiceLocation;
 
 namespace BlocketProject.Controllers
 {
@@ -18,6 +20,7 @@ namespace BlocketProject.Controllers
     {
         public override ActionResult Index(RegisterBlock currentBlock)
         {
+
             var model = new RegisterBlockViewModel(currentBlock);
             model.RegisterUser = new Register();
             model.RegisterUser.Gender = ConnectionHelper.GetGenders();
@@ -28,7 +31,7 @@ namespace BlocketProject.Controllers
 
             for (int i = 1915; i <= 1996; i++)
             {
-              
+
                 yearDic.Add(i, i);
             }
             for (int i = 1; i <= 31; i++)
@@ -39,8 +42,11 @@ namespace BlocketProject.Controllers
                     monthDic.Add(i, i);
                 }
             }
-
+            var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
+            model.testurl = ContentReference.StartPage;
+            var pageUrl = urlResolver.GetUrl(model.testurl);
             model.RegisterUser.Day = dayDic;
+
             model.RegisterUser.Month = monthDic;
             model.RegisterUser.Year = yearDic;
             model.RegisterUser.Year.OrderBy(x => x.Value);

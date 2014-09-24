@@ -1,4 +1,5 @@
 ﻿using BlocketProject.Models.Blocks;
+using EPiServer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace BlocketProject.Models.ViewModels
         public string EmailLabel { get; set; }
         public string Text { get; set; }
         public Register RegisterUser { get; set; }
+        public PageReference testurl { get; set; }
 
     }
 
