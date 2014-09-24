@@ -25,5 +25,7 @@ namespace BlocketProject.Models.DbClasses
         public DateTime Birthday { get; set; }
         public DateTime ModifiedOn { get; set; }
         public DateTime RegisterDate { get; set; }
+        public int Password { get; set; }
+        public bool HasFacebook { get; set; }
     }
 }

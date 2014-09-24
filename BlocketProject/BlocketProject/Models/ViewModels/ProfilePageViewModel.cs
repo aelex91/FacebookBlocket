@@ -58,6 +58,8 @@ namespace BlocketProject.Models.ViewModels
             public int? NumberOfEvents { get; set; }
             [MaxLength(25, ErrorMessage = "Skriv in ett korrekt telefonnummer")]
             public string Phone { get; set; }
+            public int Password { get; set; }
+            public bool HasFacebook { get; set; }
         }
 
 
