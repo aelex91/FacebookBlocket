@@ -16,7 +16,7 @@ namespace BlocketProject.Helpers
         ///     will be returned.
         /// </summary>
         /// 
-        public static IHtmlString PageLinkUrl(this UrlHelper urlHelper, EPiServer.Core.PageReference pageLink)
+        public static IHtmlString PageLinkUrl(this UrlHelper urlHelper, EPiServer.Core.ContentReference pageLink)
         {
             if (ContentReference.IsNullOrEmpty(pageLink))
             {
