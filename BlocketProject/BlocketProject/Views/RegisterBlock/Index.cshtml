@@ -1,0 +1,26 @@
+﻿@model BlocketProject.Models.ViewModels.RegisterBlockViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="registerform">
+    <h2>@Html.PropertyFor(x => x.Text)</h2>
+
+    @Html.PropertyFor(x => x.FirstNameLabel)
+    @Html.TextBoxFor(x => x.RegisterUser.FirstName)
+
+    @Html.PropertyFor(x => x.BirthLabel)
+    @Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Gender, "Key", "Value"), new { id = "gender", @class = "textfield" })
+    @Html.DropDownListFor(x => x.RegisterUser.Day, new SelectList(Model.RegisterUser.Day, "Key", "Value"), "Dag", new { id = "day", @class = "textfield" })
+    @Html.DropDownListFor(x => x.RegisterUser.Month, new SelectList(Model.RegisterUser.Month, "Key", "Value"), "Månad", new { id = "month", @class = "textfield" })
+    @Html.DropDownListFor(x => x.RegisterUser.Year, new SelectList(Model.RegisterUser.Year, "Key", "Value"), "År", new { id = "year", @class = "textfield" })
+    @*  @Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Year, "Key", "Value"), "År", new { id = "year", @class = "textfield" })*@
+    @*@Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Month, "Key", "Value"), new { id = "month", @class = "textfield" })
+@Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Year, "Key", "Value"), new { id = "year", @class = "textfield" })*@
+
+    @Html.PropertyFor(x => x.LastNameLabel)
+    @Html.TextBoxFor(x => x.RegisterUser.LastName)
+
+    @Html.PropertyFor(x => x.EmailLabel)
+    @Html.TextBoxFor(x => x.RegisterUser.Email)
+</div>
