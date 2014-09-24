@@ -62,6 +62,8 @@ namespace BlocketProject.Models.ViewModels
             public string Phone { get; set; }
             public int Password { get; set; }
             public bool HasFacebook { get; set; }
+            public string Municipality { get; set; }
+            public string County { get; set; }
         }
 
 
@@ -93,7 +95,7 @@ namespace BlocketProject.Models.ViewModels
             var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
             var pageUrl = urlResolver.GetUrl(page.ContentLink);
             Dictionary<string, object> values = new Dictionary<string, object>();
-           
+
             values.Add(pageUrl, routeValues);
             return values;
         }

@@ -23,22 +23,22 @@ namespace BlocketProject.Helpers
             var query = (from p in db.DbUserEvents
                          select new AdsPageViewModel.UserAdsModel
                           {
-                                EventId = p.EventId,
-                                UserId = p.UserId,
-                                Email = p.Email,
-                                Title = p.Title,                              
-                                Price = p.Price,
-                                Phone = p.Phone,
-                                MaxGuests = p.MaxGuests,
-                                HideImportantInformation = p.HideImportantInfo,
-                                EventDescription = p.EventDescription,
-                                ImageUrl = p.ImageUrl,
-                                CategoryId = p.CategoryId,
-                                GenderId = p.GenderId,
-                                CountyId = p.CountyId,
-                                MunicipalityId = p.MunicipalityId,
-                                PublishDate  = p.PublishDate,
-                                ExpirationDate = p.ExpirationDate
+                              EventId = p.EventId,
+                              UserId = p.UserId,
+                              Email = p.Email,
+                              Title = p.Title,
+                              Price = p.Price,
+                              Phone = p.Phone,
+                              MaxGuests = p.MaxGuests,
+                              HideImportantInformation = p.HideImportantInfo,
+                              EventDescription = p.EventDescription,
+                              ImageUrl = p.ImageUrl,
+                              CategoryId = p.CategoryId,
+                              GenderId = p.GenderId,
+                              CountyId = p.CountyId,
+                              MunicipalityId = p.MunicipalityId,
+                              PublishDate = p.PublishDate,
+                              ExpirationDate = p.ExpirationDate
 
                           }).ToList();
             return query;
@@ -94,6 +94,17 @@ namespace BlocketProject.Helpers
         //    db.Entry(currentUser).State = EntityState.Modified;
         //    db.SaveChanges();
         //}
+        public static void SaveUserToDb(Register registerUser)
+        {
+            var userModel = new DbUserInformation
+            {
+
+
+
+            };
+            db.DbUserInformation.Add(userModel);
+
+        }
         public static void SaveAdInformationToDb(CreateAdsPageViewModel model, HttpPostedFileBase file)
         {
             DateTime expirationDate = Convert.ToDateTime(model.CreateEvent.Date);
@@ -159,7 +170,7 @@ namespace BlocketProject.Helpers
         }
         public static void DeleteUserEvent(int id)
         {
-            var f = db.DbUserEvents.FirstOrDefault(x => x.EventId == id);
+            var f = db.DbUserEvents.FirstOrDefault(x => x.UserId == id);
 
             db.DbUserEvents.Remove(f);
             db.SaveChanges();
@@ -177,18 +188,17 @@ namespace BlocketProject.Helpers
         {
             var e = db.DbUserEvents.FirstOrDefault(x => x.UserId == id);
             var f = db.DbUserInformation.FirstOrDefault(x => x.UserId == id);
+
             if (e != null)
             {
                 db.DbUserEvents.Remove(e);
+                db.SaveChanges();
             }
-
             if (f != null)
             {
                 db.DbUserInformation.Remove(f);
+                db.SaveChanges();
             }
-
-
-            db.SaveChanges();
 
         }
         public static int? CheckNumberOfEvents(string email)

@@ -13,35 +13,58 @@ using BlocketProject.Helpers;
 using System.Web.UI.WebControls;
 using EPiServer.Web.Routing;
 using EPiServer.ServiceLocation;
+using System.Collections;
 
 namespace BlocketProject.Controllers
 {
     public class RegisterBlockController : BlockController<RegisterBlock>
     {
+      
         public override ActionResult Index(RegisterBlock currentBlock)
         {
 
             var model = new RegisterBlockViewModel(currentBlock);
             model.RegisterUser = new Register();
             model.RegisterUser.Gender = ConnectionHelper.GetGenders();
+            model.RegisterUser.Municipality = ConnectionHelper.GetMuncipalities();
+            model.RegisterUser.County = ConnectionHelper.GetCounties();
             var dayDic = new Dictionary<int, int>();
-            var monthDic = new Dictionary<int, int>();
+            var monthDic = new Dictionary<int, string>();
             var yearDic = new Dictionary<int, int>();
             //skapa en loop som fyller en dictionary med värden, id och int siffra.
 
+            string[] record = new string[20];
+
+            var stringList = new string[13] { "Månad", "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augutsti", "September", "Oktober", "November", "December" };
+            for (int i = 0; i < stringList.Length; i++)
+            {
+                record[i] = stringList[i];
+
+            }
+
+
+            for (int i = 1; i <= 31; i++)
+            {
+                dayDic.Add(i, i);
+
+            }
+            for (int i = 0; i <= 12; i++)
+            {
+
+                monthDic.Add(i, record[i]);
+            }
             for (int i = 1915; i <= 1996; i++)
             {
 
                 yearDic.Add(i, i);
             }
-            for (int i = 1; i <= 31; i++)
-            {
-                dayDic.Add(i, i);
-                if (i <= 12)
-                {
-                    monthDic.Add(i, i);
-                }
-            }
+            ArrayList result = new ArrayList((from p in monthDic
+                                              select new
+                                              {
+                                                  Value = p.Value,
+                                                  Key = p.Key
+                                              }).ToArray());
+
             var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
             model.testurl = ContentReference.StartPage;
             var pageUrl = urlResolver.GetUrl(model.testurl);
@@ -57,11 +80,6 @@ namespace BlocketProject.Controllers
             // Födelsedatum, Stad och kön samt email. Skicka personen till profilsidan
             return PartialView(model);
         }
-        [HttpPost]
-        public ActionResult SaveUser(RegisterBlock currentBlock)
-        {
 
-            return View("Index");
-        }
     }
 }

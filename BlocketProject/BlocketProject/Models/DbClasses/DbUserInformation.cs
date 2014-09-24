@@ -27,5 +27,7 @@ namespace BlocketProject.Models.DbClasses
         public DateTime RegisterDate { get; set; }
         public int? Password { get; set; }
         public bool HasFacebook { get; set; }
+        public string Municipality { get; set; }
+        public string County { get; set; }
     }
 }

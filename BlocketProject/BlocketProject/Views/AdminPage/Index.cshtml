@@ -16,7 +16,7 @@
             <b>From:@user.Location</b>
             <b>Register since: @user.RegisterDate</b>
         
-            using (Html.BeginForm("DeleteUser", "Account", new { id = user.UserId }, FormMethod.Post))
+            using (Html.BeginForm("DeleteUser", "Account", new { @id = user.UserId }, FormMethod.Post))
             {
             <input type="submit" value="Remove user" id="@user.UserId" />
            
