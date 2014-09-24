@@ -11,10 +11,8 @@ namespace BlocketProject.Models.ViewModels
     {
         public AdsPageViewModel(AdsPage currentPage)
         {
-
             Heading = currentPage.Heading;
             CurrentUserAds = currentPage.CurrentUserAds;
-
         }
 
         public AdsPageViewModel() { }
@@ -23,13 +21,12 @@ namespace BlocketProject.Models.ViewModels
         public List<UserAdsModel> ListCurrentUserAdsModel { get; set; }
         public string Heading { get; set; }
         public bool CurrentUserAds { get; set; }
-        public string AdCategory { get; set; }
         public UserAdsModel UserEventModel { get; set; }
 
         public class UserAdsModel
         {
             public int EventId { get; set; }
-            public int? UserId { get; set; }
+            public int UserId { get; set; }
             public string Email { get; set; }
             [Required(ErrorMessage = "Title is required.")]
             public string Title { get; set; }

@@ -20,50 +20,50 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            @if (User.Identity.IsAuthenticated)
-            {
-               
-                <nav class="navbar navbar-default">
-                    @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
-                    {
+        @if (User.Identity.IsAuthenticated)
+        {
 
-                        Html.RenderMainNavigation(null);
-                        <div>
+            <nav class="navbar navbar-default">
+                
+                @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+                {
 
-                            <ul class="nav" style="float: right;">
+                    Html.RenderMainNavigation(null);
+                    <div>
 
-                                <li class="dropdown" style="margin-right: 15px;">
-                                    <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
-                                        <i class="glyphicon glyphicon-align-justify"></i>
-                                    </span>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">Redigera Profil</a>
-                                        </li>
-                                        <li class="input">
-                                            <input type="submit" class="navbar-btn input" value="Logga ut" />
+                        <ul class="nav" style="float: right;">
 
-                                        </li>
+                            <li class="dropdown" style="margin-right: 15px;">
+                                <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-align-justify"></i>
+                                </span>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Redigera Profil</a>
+                                    </li>
+                                    <li class="input">
+                                        <input type="submit" class="navbar-btn input" value="Logga ut" />
 
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                                    </li>
 
-                    }
-                </nav>
-            }
-        </div>
-        <h3 class="logo">LetEmSale beta</h3>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                }
+            </nav>
+        }
+
+
     </header>
+    <div class="projectWrapper">
+        @RenderBody()
 
-    @RenderBody()
-
-    <br />
-    @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-
+        <br />
+        @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </div>
     <footer class="footer">
         <div class="wrapper">
             @*<a href="#">

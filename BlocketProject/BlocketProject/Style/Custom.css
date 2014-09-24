@@ -586,6 +586,28 @@ h3 {
     height: 350px;
 }
 
+
 .registerform {
     height: 150px;
 }
+
+
+.eventImage{
+    position: relative;
+}
+
+.eventImage h1{
+    position: absolute;
+    top: 50px;
+    left: 0;
+}
+
+.eventImage h1 span { 
+   color: white; 
+   font: bold 36px/64px Helvetica, Sans-Serif, Verdana; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.4);
+   padding: 10px; 
+}
+>>>>>>> d2bc5d91649c5c68d322642931f3ad42379d666d

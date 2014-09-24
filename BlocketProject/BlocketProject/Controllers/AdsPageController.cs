@@ -18,6 +18,7 @@ namespace BlocketProject.Controllers
     {
         public ActionResult Index(AdsPage currentPage)
         {
+
             var model = new AdsPageViewModel(currentPage);
             if (currentPage.CurrentUserAds == true)
             {
@@ -41,7 +42,7 @@ namespace BlocketProject.Controllers
             DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
             var model = new AdsPageViewModel();
             model.UserEventModel = SetEventValues(ad);
-            return RedirectToAction("Index", model);
+            return View("Index", model);
 
         }
 
@@ -67,6 +68,15 @@ namespace BlocketProject.Controllers
             model.EventId = userEvent.EventId;
 
             return model;
+        }
+
+        public string GetLinkByPageReference(PageReference pReference)
+        {
+            var locate = new ServiceLocationHelper(ServiceLocator.Current);
+            var page = locate.ContentRepository().Get<PageData>(pReference);
+            var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
+            var pageUrl = urlResolver.GetUrl(page.ContentLink);
+            return pageUrl;
         }
     }
 }

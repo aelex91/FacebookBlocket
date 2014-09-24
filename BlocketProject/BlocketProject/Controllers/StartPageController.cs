@@ -38,7 +38,7 @@ namespace BlocketProject.Controllers
 
         LetemsaleDbContext db = new LetemsaleDbContext();
 
-        ProfilePageViewModel.UserInformation model = new BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation();
+        ProfilePageViewModel.UserInformation model = new ProfilePageViewModel.UserInformation();
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult GetUsersCount(string dropdownId)
         {
@@ -112,7 +112,7 @@ namespace BlocketProject.Controllers
             return null;
         }
 
-        public BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation SaveUser(JsonObject jsonUser)
+        public ProfilePageViewModel.UserInformation SaveUser(JsonObject jsonUser)
         {
             JsonUserModel user = new JsonUserModel();
             string jsonString = jsonUser.ToString();
