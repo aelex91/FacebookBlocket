@@ -510,6 +510,7 @@ nav, section {
     font-size: 12px;
     float: right;
     min-width: 180px;
+    max-height: 120px;
 }
 
 .columnLeft {
@@ -518,6 +519,7 @@ nav, section {
     font-size: 12px;
     float: left;
     min-width: 180px;
+    max-height: 120px;
 }
 
 header {
