@@ -20,7 +20,7 @@
         <button type="submit" style="border: none; outline: none; background: transparent">
             <img src="~/images/profileMenyIcon.png" class="profilepicmenu" id="showProfile" />
         </button>
-
+        
     </div>
  
     <div class="projectWrapper">
@@ -45,26 +45,32 @@
 
         </table>
     </div>
-
+    
     <table id="UserAds">
         <tr>
             @foreach (var ad in Model.ListUserAds)
             {
                 <td style="text-align: center; margin: 30px; float: left;">
-                    @using (Html.BeginForm("Index", "AdsPage", new { EventId = ad.EventId }, FormMethod.Post))
-                    {
-                        <button style="padding: 0; border: none; background: none;" type="submit">
+
+                    @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
+                    { 
+                        <button type="submit">
+                            
+                            
                             @ad.Title
                             <br />
-                            <img src="@ad.ImageUrl" class="adImageProfile" /></button>
+                            <img src="@ad.ImageUrl" class="adImageProfile" />
+                            
+                            <br />
+                        </button>
                     }
-                    <br />
                     @using (Html.BeginForm("DeleteEvent", "ProfilePage", new { id = ad.EventId }, FormMethod.Post))
                     {
                         <input type="submit" id="@ad.EventId" value="Remove" />
-           
+
                     }
                 </td>
+                @Html.PageLink(Model.EventRedirect, new { @EventId = ad.EventId }, null)
             }
 
         </tr>

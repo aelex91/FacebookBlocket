@@ -25,8 +25,10 @@ namespace BlocketProject.Models.ViewModels
             this.LabelPhone = currentPage.LabelPhone;
             this.LabelButton = currentPage.LabelButton;
             this.LabelEmail = currentPage.LabelEmail;
+            this.EventRedirect = currentPage.EventRedirect;
 
         }
+        public PageReference EventRedirect { get; set; }
         public string LabelFirstName { get; set; }
         public string LabelLastName { get; set; }
         public string LabelEmail { get; set; }
@@ -82,6 +84,18 @@ namespace BlocketProject.Models.ViewModels
             var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
             var pageUrl = urlResolver.GetUrl(page.ContentLink);
             return pageUrl;
+        }
+
+        public Dictionary<string, object> GetLinkByPageReference(PageReference pReference, object routeValues)
+        {
+            var locate = new ServiceLocationHelper(ServiceLocator.Current);
+            var page = locate.ContentRepository().Get<PageData>(pReference);
+            var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
+            var pageUrl = urlResolver.GetUrl(page.ContentLink);
+            Dictionary<string, object> values = new Dictionary<string, object>();
+           
+            values.Add(pageUrl, routeValues);
+            return values;
         }
 
     }

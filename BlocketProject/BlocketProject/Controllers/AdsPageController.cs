@@ -16,25 +16,38 @@ namespace BlocketProject.Controllers
 {
     public class AdsPageController : PageController<AdsPage>
     {
-        public ActionResult Index(AdsPage currentPage)
-        {
 
+        public ActionResult Index(AdsPage currentPage, int? EventId)
+        {
             var model = new AdsPageViewModel(currentPage);
-            if (currentPage.CurrentUserAds == true)
+            if (EventId == null)
             {
-                var user = Helpers.ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
-                var value = Helpers.ConnectionHelper.GetCurrentUserAds(user.UserId);
-                model.ListCurrentUserAdsModel = value;
-                return View(model);
+
+                if (currentPage.CurrentUserAds == true)
+                {
+                    var user = Helpers.ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                    var value = Helpers.ConnectionHelper.GetCurrentUserAds(user.UserId);
+                    model.ListCurrentUserAdsModel = value;
+                    return View(model);
+                }
+                else
+                {
+                    var value = Helpers.ConnectionHelper.GetAllAds();
+                    model.ListUserAdsModel = value;
+                    return View(model);
+                }
             }
             else
             {
-                var value = Helpers.ConnectionHelper.GetAllAds();
-                model.ListUserAdsModel = value;
-                return View(model);
+                DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
+                model.UserEventModel = SetEventValues(ad);
+                return View("Index", model);
+
             }
 
         }
+
+        
 
         [HttpPost]
         public ActionResult Index(int EventId)

@@ -74,6 +74,17 @@ namespace BlocketProject.Models.Pages
             Order = 900)]
         public virtual string LabelImageUpload { get; set; }
 
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Event redirect",
+            Description = "Set this redirect to the EventPage where you list all events.",
+            GroupName = SystemTabNames.Content,
+            Order = 1000)]
+        public virtual PageReference EventRedirect { get; set; }
+
+
+
         public override void SetDefaultValues(ContentType contentType)
         {
             base.SetDefaultValues(contentType);

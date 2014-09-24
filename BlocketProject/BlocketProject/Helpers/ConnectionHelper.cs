@@ -255,6 +255,14 @@ namespace BlocketProject.Helpers
 
             return query;
         }
+
+        public static DbUserEvents GetAdById(int? id)
+        {
+            var query = (from p in db.DbUserEvents where p.EventId == id select p).FirstOrDefault();
+
+            return query;
+        }
+
         public static string GetUserName(int? id)
         {
             var result = (from r in db.DbUserInformation
