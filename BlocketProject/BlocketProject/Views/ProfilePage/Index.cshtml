@@ -23,7 +23,6 @@
         
     </div>
  
-    <div class="projectWrapper">
         <table id="UserTable" style="margin: 30px;">
             <tr>
                 <td rowspan="2"></td>
@@ -44,7 +43,6 @@
             </tr>
 
         </table>
-    </div>
     
     <table id="UserAds">
         <tr>
@@ -54,10 +52,10 @@
 
                     @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
                     { 
-                        <button type="submit">
+                        <button type="submit" style="border: none; background:none;">
                             
                             
-                            @ad.Title
+                            <h3>@ad.Title</h3>
                             <br />
                             <img src="@ad.ImageUrl" class="adImageProfile" />
                             
@@ -70,7 +68,6 @@
 
                     }
                 </td>
-                @Html.PageLink(Model.EventRedirect, new { @EventId = ad.EventId }, null)
             }
 
         </tr>

@@ -19,80 +19,90 @@
     <link href="~/Style/DatePicker.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        @if (User.Identity.IsAuthenticated)
-        {
 
-            <nav class="navbar navbar-default">
-                
-                @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+    <div id="container">
+        <div id="header">
+            <header>
+                @if (User.Identity.IsAuthenticated)
                 {
 
-                    Html.RenderMainNavigation(null);
-                    <div>
+                    <nav class="navbar navbar-default">
 
-                        <ul class="nav" style="float: right;">
+                        @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+                        {
 
-                            <li class="dropdown" style="margin-right: 15px;">
-                                <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
-                                    <i class="glyphicon glyphicon-align-justify"></i>
-                                </span>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#">Redigera Profil</a>
+                            Html.RenderMainNavigation(null);
+                            <div>
+
+                                <ul class="nav" style="float: right;">
+
+                                    <li class="dropdown" style="margin-right: 15px;">
+                                        <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
+                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                        </span>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Redigera Profil</a>
+                                            </li>
+                                            <li class="input">
+                                                <input type="submit" class="navbar-btn input" value="Logga ut" />
+
+                                            </li>
+
+                                        </ul>
                                     </li>
-                                    <li class="input">
-                                        <input type="submit" class="navbar-btn input" value="Logga ut" />
-
-                                    </li>
-
                                 </ul>
-                            </li>
-                        </ul>
-                    </div>
+                            </div>
 
+                        }
+                    </nav>
                 }
-            </nav>
-        }
 
 
-    </header>
-    <div class="projectWrapper">
-        @RenderBody()
-
-        <br />
-        @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </div>
-    <footer class="footer">
-        <div class="wrapper">
-            @*<a href="#">
-                <img src="~/Content/Images/arrownavigate.png" alt="navigate" id="scrollTop" /></a>*@
-
-            <div class="columnRight">
-                <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Policy</a><br>
-                <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Användarvilkor</a><br>
-                <a href="https://www.linkedin.com/pub/alexander-helsinghof/57/a19/b4b" target="_blank">Cookies</a><br>
-                <a href="http://hiq.se/" target="_blank">Hiq</a>
-                <br />
-                <div class="fb-like" style="color: white;" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-                <div id="fb-root"></div>
-
-
-            </div>
-            <div class="column">
-            </div>
-            <div class="columnLeft" id="contact">
-                <p>
-                    Explore
-                    <br />
-                    Search<br />
-                    Log in
-                </p>
-
-            </div>
-            <div class="clear">&nbsp;</div>
+            </header>
         </div>
-    </footer>
+        <div class="projectWrapper">
+            <div id="body">
+
+                @RenderBody()
+
+                <br />
+                @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+                @RenderSection("scripts", required: false)
+            </div>
+        </div>
+        <div id="footer">
+            <footer class="footer">
+                <div class="footer-wrap">
+                    @*<a href="#">
+                        <img src="~/Content/Images/arrownavigate.png" alt="navigate" id="scrollTop" /></a>*@
+
+                    <div class="columnRight">
+                        <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Policy</a><br>
+                        <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Användarvilkor</a><br>
+                        <a href="https://www.linkedin.com/pub/alexander-helsinghof/57/a19/b4b" target="_blank">Cookies</a><br>
+                        <a href="http://hiq.se/" target="_blank">Hiq</a>
+                        <br />
+                        <div class="fb-like" style="color: white;" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <div id="fb-root"></div>
+
+
+                    </div>
+                    <div class="column">
+                    </div>
+                    <div class="columnLeft" id="contact">
+                        <p>
+                            Explore
+                            <br />
+                            Search<br />
+                            Log in
+                        </p>
+
+                    </div>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>

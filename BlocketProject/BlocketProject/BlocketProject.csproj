@@ -524,7 +524,6 @@
     <Content Include="Views\InformationBlock\Index.cshtml" />
     <Content Include="Views\LogoutBlock\Index.cshtml" />
     <Content Include="Views\LandingPage\Index.cshtml" />
-    <Content Include="Views\AdsPage\AdPage.cshtml" />
     <Content Include="Views\AdminPage\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\ProfilePage\EditProfile.cshtml" />

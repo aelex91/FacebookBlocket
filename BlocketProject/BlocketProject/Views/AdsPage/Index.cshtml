@@ -3,8 +3,7 @@
 
 <link href="~/Content/Teststyle.css" rel="stylesheet" />
 
-<div class="projectWrapper">
-    @*<h2>@Model.Heading</h2>*@
+    <h2>@Model.Heading</h2>
     @if (Model.UserEventModel == null)
     {
         <ul style="list-style: none;">
@@ -54,10 +53,12 @@
 
     else
     {
-        <div class="eventImage">
-            <img src="@Model.UserEventModel.ImageUrl" style="max-height: 500px; max-width: 500px; float: left;"/>
-            <h1><span>@Model.UserEventModel.Title</span></h1>
+        <div class="fullEvent">
+            <div class="eventImage">
+                <img src="@Model.UserEventModel.ImageUrl" style="max-height: 500px; max-width: 500px; float: left;" />
+                <h1><span>@Model.UserEventModel.Title</span></h1>
+            </div>
         </div>
     }
 
-</div>
+
