@@ -4,27 +4,69 @@
 }
 
 
+@Html.HiddenFor(x => x.RegisterUser.SelectedCounty)
+@Html.HiddenFor(x => x.RegisterUser.SelectedMunicipality)
 
+<link href="~/Style/Custom.css" rel="stylesheet" />
 
 <div class="registerform">
-    
+
     <h2>@Html.PropertyFor(x => x.Text)</h2>
 
-    @Html.PropertyFor(x => x.FirstNameLabel)
-    @Html.TextBoxFor(x => x.RegisterUser.FirstName)
+    @using (Html.BeginForm("RegisterUser", "Account", FormMethod.Post, new { language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
+    { 
+        <table>
+            <tr>
+                <td>
+                    @Html.PropertyFor(x => x.FirstNameLabel)
+                    @Html.TextBoxFor(x => x.RegisterUser.FirstName)
+                    <br />
+                    @Html.PropertyFor(x => x.LastNameLabel)
+                    @Html.TextBoxFor(x => x.RegisterUser.LastName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PropertyFor(x => x.EmailLabel)
+                    @Html.TextBoxFor(x => x.RegisterUser.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PropertyFor(x => x.CityLabel)
+                    @Html.DropDownListFor(x => x.RegisterUser.SelectedCounty, new SelectList(Model.RegisterUser.County, "Key", "Value"), "Välj län", new { id = "counties", @class = "textfield" })
+                    @Html.DropDownListFor(x => x.RegisterUser.SelectedMunicipality, new SelectList(Model.RegisterUser.Municipality, "Key", "Value"), "Välj kommun", new { id = "municipality", @class = "textfield" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PropertyFor(x => x.GenderLabel)
 
-    @Html.PropertyFor(x => x.BirthLabel)
-    @Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Gender, "Key", "Value"), new { id = "gender", @class = "textfield" })
-    @Html.DropDownListFor(x => x.RegisterUser.Day, new SelectList(Model.RegisterUser.Day, "Key", "Value"), "Dag", new { id = "day", @class = "textfield" })
-    @Html.DropDownListFor(x => x.RegisterUser.Month, new SelectList(Model.RegisterUser.Month, "Key", "Value"), "Månad", new { id = "month", @class = "textfield" })
-    @Html.DropDownListFor(x => x.RegisterUser.Year, new SelectList(Model.RegisterUser.Year, "Key", "Value"), "År", new { id = "year", @class = "textfield" })
-    @*  @Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Year, "Key", "Value"), "År", new { id = "year", @class = "textfield" })*@
-    @*@Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Month, "Key", "Value"), new { id = "month", @class = "textfield" })
-@Html.DropDownListFor(x => x.RegisterUser.SelectedGender, new SelectList(Model.RegisterUser.Year, "Key", "Value"), new { id = "year", @class = "textfield" })*@
+                    @Html.Label("Man")
+                    @Html.RadioButtonFor(m => m.GenderLabel, "M")
+                    @Html.Label("Kvinna")
+                    @Html.RadioButtonFor(m => m.GenderLabel, "F")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PropertyFor(x => x.BirthLabel)
+                    @Html.DropDownListFor(x => x.RegisterUser.SelectedDay, new SelectList(Model.RegisterUser.Day, "Key", "Value"), "Dag", new { id = "day", @class = "textfield" })
+                    <br />
+                    @Html.DropDownListFor(x => x.RegisterUser.SelectedMonth, new SelectList(Model.RegisterUser.Month, "Key", "Value"), new { id = "month", @class = "textfield" })
+                    <br />
+                    @Html.DropDownListFor(x => x.RegisterUser.SelectedYear, new SelectList(Model.RegisterUser.Year, "Key", "Value"), "År", new { id = "year", @class = "textfield" })
+                </td>
+            </tr>
+            <tr>
 
-    @Html.PropertyFor(x => x.LastNameLabel)
-    @Html.TextBoxFor(x => x.RegisterUser.LastName)
+                <td>
 
-    @Html.PropertyFor(x => x.EmailLabel)
-    @Html.TextBoxFor(x => x.RegisterUser.Email)
+                    <input type="submit" value="@Model.ButtonLabel" />
+
+
+                </td>
+            </tr>
+        </table>
+    }
 </div>

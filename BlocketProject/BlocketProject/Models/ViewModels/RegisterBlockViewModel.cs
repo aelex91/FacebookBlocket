@@ -10,6 +10,8 @@ namespace BlocketProject.Models.ViewModels
 {
     public class RegisterBlockViewModel
     {
+
+        public RegisterBlockViewModel() { }
         public RegisterBlockViewModel(RegisterBlock currentBlock)
         {
             this.FirstNameLabel = currentBlock.FirstNameLabel;
@@ -18,7 +20,9 @@ namespace BlocketProject.Models.ViewModels
             this.CityLabel = currentBlock.CityLabel;
             this.GenderLabel = currentBlock.GenderLabel;
             this.Text = currentBlock.Text;
+            this.ButtonLabel = currentBlock.RegisterLabel;
         }
+
         public string FirstNameLabel { get; set; }
         public string LastNameLabel { get; set; }
         public string BirthLabel { get; set; }
@@ -26,6 +30,7 @@ namespace BlocketProject.Models.ViewModels
         public string GenderLabel { get; set; }
         public string EmailLabel { get; set; }
         public string Text { get; set; }
+        public string ButtonLabel { get; set; }
         public Register RegisterUser { get; set; }
         public PageReference testurl { get; set; }
 
@@ -44,12 +49,18 @@ namespace BlocketProject.Models.ViewModels
         public string SelectedDay { get; set; }
         public string SelectedMonth { get; set; }
         public string SelectedYear { get; set; }
+        public string SelectedCounty { get; set; }
+        public string SelectedMunicipality { get; set; }
 
         public Dictionary<int, string> City { get; set; }
         public Dictionary<int, string> Gender { get; set; }
         public Dictionary<int, int> Day { get; set; }
-        public Dictionary<int, int> Month { get; set; }
+        public Dictionary<int, string> Month { get; set; }
         public Dictionary<int, int> Year { get; set; }
+
+        public Dictionary<int, string> County { get; set; }
+        public Dictionary<int, string> Municipality { get; set; }
+
 
     }
 }
