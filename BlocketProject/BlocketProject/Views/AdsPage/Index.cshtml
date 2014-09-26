@@ -53,12 +53,59 @@
 
     else
     {
-        <div class="fullEvent">
-            <div class="eventImage">
-                <img src="@Model.UserEventModel.ImageUrl" style="max-height: 500px; max-width: 500px; float: left;" />
-                <h1><span>@Model.UserEventModel.Title</span></h1>
+            <div class="fullEvent">
+
+                <div class="eventImage" style="float: left;">
+                    <img src="@Model.UserEventModel.ImageUrl" style="max-width: 300px; float: left;" />
+                    <h1><span>@Model.UserEventModel.Title</span></h1>
+                </div>
+                @if (User.Identity.Name == Model.User.Email)
+                {
+                    <div class="eventOptions" style="float: left; margin-left: 30px; border: 2px solid black; width: 150px; height: 150px;">
+                        <ul style="margin: 0; list-style: none;">
+                            <li><a href="#">Länk</a></li>
+                            <li><a href="#">Länk</a></li>
+                            <li><a href="#">Länk</a></li>
+                            <li><a href="#">Länk</a></li>
+                            <li><a href="#">Länk</a></li>
+                        </ul>
+                    </div>
+                }
+                
+                <div class="guestList" style="float: left; width: 390px; border: 2px solid black; height: 600px; margin-left: 30px;">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#pane1" data-toggle="tab">Kommer</a></li>
+                            <li><a href="#pane2" data-toggle="tab">Kanske</a></li>
+                            <li><a href="#pane3" data-toggle="tab">Kommer inte</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="pane1" class="tab-pane active">
+                               @Html.Partial("AttendingList")
+                            </div>
+                            <div id="pane2" class="tab-pane">
+                                @Html.Partial("PendingList")
+                            </div>
+                            <div id="pane3" class="tab-pane">
+                               @Html.Partial("NotAttendingList")
+                            </div>
+                        </div>
+                </div>
+
+                <div class="eventInformation" style="float: left; margin-top: 20px; position: relative; bottom: 300px;">
+                    <h1>@Model.UserEventModel.Title</h1>
+                    <p>@Model.UserEventModel.EventDescription</p>
+                    <p>@ConnectionHelper.GetAttendingUsers(Model.UserEventModel.EventId).Count()/@Model.UserEventModel.MaxGuests kommer.</p>
+                    <p><b>Var?</b><br />
+                        @ConnectionHelper.GetCountyNameById(Model.UserEventModel.CountyId), @ConnectionHelper.GetMunicipalityNameById(Model.UserEventModel.MunicipalityId)
+                        <br /><b>När?</b><br />
+                        @Model.UserEventModel.ExpirationDate.ToShortDateString()
+                    </p>
+
+
+                </div>
             </div>
-        </div>
     }
 
 
+
+    
