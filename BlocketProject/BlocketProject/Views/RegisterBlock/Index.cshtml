@@ -43,9 +43,9 @@
                     @Html.PropertyFor(x => x.GenderLabel)
 
                     @Html.Label("Man")
-                    @Html.RadioButtonFor(m => m.GenderLabel, "M")
+                    @Html.RadioButtonFor(m => m.RegisterUser.SelectedGender, "Male")
                     @Html.Label("Kvinna")
-                    @Html.RadioButtonFor(m => m.GenderLabel, "F")
+                    @Html.RadioButtonFor(m => m.RegisterUser.SelectedGender, "Female")
                 </td>
             </tr>
             <tr>

@@ -20,13 +20,6 @@ namespace BlocketProject.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Reference to EditPage",
-            GroupName = SystemTabNames.Content,
-            Order = 200)]
-        public virtual PageReference PagereferToEditPage { get; set; }
-
-        [CultureSpecific]
-        [Display(
             Name = "First name label",
             GroupName = SystemTabNames.Content,
             Order = 300)]

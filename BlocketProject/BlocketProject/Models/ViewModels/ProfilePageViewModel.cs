@@ -18,7 +18,6 @@ namespace BlocketProject.Models.ViewModels
         public ProfilePageViewModel(ProfilePage currentPage)
         {
             Heading = currentPage.Heading;
-            this.ReferToEditPage = currentPage.PagereferToEditPage;
             this.LabelFirstName = currentPage.LabelFirstName;
             this.LabelLastName = currentPage.LabelLastName;
             this.LabelLocation = currentPage.LabelLocation;
@@ -35,7 +34,6 @@ namespace BlocketProject.Models.ViewModels
         public string LabelLocation { get; set; }
         public string LabelPhone { get; set; }
         public string LabelButton { get; set; }
-        public PageReference ReferToEditPage { get; set; }
         public string Heading { get; set; }
         public UserInformation CurrentUser { get; set; }
         public List<UserAdsModel> ListUserAds { get; set; }

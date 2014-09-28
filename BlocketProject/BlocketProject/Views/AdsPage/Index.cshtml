@@ -96,7 +96,7 @@
                     <p>@Model.UserEventModel.EventDescription</p>
                     <p>@ConnectionHelper.GetAttendingUsers(Model.UserEventModel.EventId).Count()/@Model.UserEventModel.MaxGuests kommer.</p>
                     <p><b>Var?</b><br />
-                        @ConnectionHelper.GetCountyNameById(Model.UserEventModel.CountyId), @ConnectionHelper.GetMunicipalityNameById(Model.UserEventModel.MunicipalityId)
+                        @ConnectionHelper.GetCountiesById(Model.UserEventModel.CountyId), @ConnectionHelper.GetMuncipalitiesFromId(Model.UserEventModel.MunicipalityId)
                         <br /><b>När?</b><br />
                         @Model.UserEventModel.ExpirationDate.ToShortDateString()
                     </p>
