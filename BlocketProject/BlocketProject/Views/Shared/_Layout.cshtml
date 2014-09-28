@@ -20,11 +20,13 @@
 </head>
 <body>
 
-    <div id="container">
-        <div id="header">
-            <header>
-                @if (User.Identity.IsAuthenticated)
-                {
+
+    <div id="header">
+        <header>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div id="container">
 
                     <nav class="navbar navbar-default">
 
@@ -81,11 +83,18 @@
 
 
                     </nav>
-                }
+                </div>
+            }
+            else
+            {
+
+                <div id="containeranonym">
+                </div>
+            }
 
 
-            </header>
-        </div>
+        </header>
+
         <div class="projectWrapper">
             <div id="body">
 
