@@ -19,7 +19,21 @@ namespace BlocketProject.Controllers
 {
     public class RegisterBlockController : BlockController<RegisterBlock>
     {
-      
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult ChangeIdOnDropDownList(string dropdownId)
+        {
+            //Get the muncipalities for the current id from drop down county.
+
+            var results = ConnectionHelper.GetMuncipalitiesFromId(Convert.ToInt32(dropdownId));
+            var dic = results.Select(m => new SelectListItem()
+            {
+                Text = m.Value,
+                Value = m.Key.ToString(),
+
+            });
+
+            return Json(dic, JsonRequestBehavior.AllowGet);
+        }
         public override ActionResult Index(RegisterBlock currentBlock)
         {
 
