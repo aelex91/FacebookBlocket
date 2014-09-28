@@ -18,6 +18,8 @@ using System.IO;
 using System.Net;
 using System.Data.Entity;
 using System.Web;
+using EPiServer.ServiceLocation;
+using EPiServer.Web.Routing;
 
 
 namespace BlocketProject.Controllers
@@ -27,6 +29,7 @@ namespace BlocketProject.Controllers
         string appId = WebConfigurationManager.AppSettings["FacebookAppID"];
         string appSecret = WebConfigurationManager.AppSettings["FacebookAppSecret"];
         string scope = WebConfigurationManager.AppSettings["FacebookScope"];
+        UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
 
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage)
@@ -155,6 +158,16 @@ namespace BlocketProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult EventRedirect(ProfilePageViewModel model, ProfilePage currentPage, int id)
+        {
+            model = new ProfilePageViewModel(currentPage);
+            return RedirectToAction("Index", new {node = model.EventRedirect, EventId = id});
+        }
+
+
+
+        
 
 
     }

@@ -41,6 +41,8 @@ namespace BlocketProject.Controllers
             {
                 DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
                 model.UserEventModel = SetEventValues(ad);
+                model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
+                model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
                 return View("Index", model);
 
             }
@@ -55,6 +57,8 @@ namespace BlocketProject.Controllers
             DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
             var model = new AdsPageViewModel();
             model.UserEventModel = SetEventValues(ad);
+            model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
+            model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
             return View("Index", model);
 
         }

@@ -1,4 +1,5 @@
-﻿using BlocketProject.Models.Pages;
+﻿using BlocketProject.Models.DbClasses;
+using BlocketProject.Models.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,11 @@ namespace BlocketProject.Models.ViewModels
         public string Heading { get; set; }
         public bool CurrentUserAds { get; set; }
         public UserAdsModel UserEventModel { get; set; }
+
+        public ProfilePageViewModel.UserInformation User { get; set; }
+        public List<DbUserInformation> ListAttendingUsers { get; set; }
+        public List<DbUserInformation> ListPendingUsers { get; set; }
+        public List<DbUserInformation> ListApplyingUsers { get; set; }
 
         public class UserAdsModel
         {
