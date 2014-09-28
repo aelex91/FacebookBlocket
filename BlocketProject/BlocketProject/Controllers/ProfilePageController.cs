@@ -31,6 +31,7 @@ namespace BlocketProject.Controllers
         string scope = WebConfigurationManager.AppSettings["FacebookScope"];
         UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
 
+    
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage, int? UserId)
         {

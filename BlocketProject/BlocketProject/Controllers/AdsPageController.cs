@@ -39,6 +39,7 @@ namespace BlocketProject.Controllers
             }
             else
             {
+
                 DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
                 model.UserEventModel = SetEventValues(ad);
                 model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
@@ -47,17 +48,10 @@ namespace BlocketProject.Controllers
                 model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
                 model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
                 model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
-                
-
-
                 return View("Index", model);
 
             }
-
         }
-
-        
-
         [HttpPost]
         public ActionResult Index(int EventId)
         {
@@ -74,7 +68,6 @@ namespace BlocketProject.Controllers
             return View("Index", model);
 
         }
-
         public AdsPageViewModel.UserAdsModel SetEventValues(DbUserEvents userEvent)
         {
             var model = new AdsPageViewModel.UserAdsModel();

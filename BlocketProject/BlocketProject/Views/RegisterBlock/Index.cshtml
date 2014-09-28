@@ -3,9 +3,15 @@
     ViewBag.Title = "Index";
 }
 
+<h4 style="color: red">@Html.ValidationSummary()</h4>
 
 @Html.HiddenFor(x => x.RegisterUser.SelectedCounty)
 @Html.HiddenFor(x => x.RegisterUser.SelectedMunicipality)
+@Html.HiddenFor(x => x.RegisterUser.SelectedCity)
+@Html.HiddenFor(x => x.RegisterUser.SelectedDay)
+@Html.HiddenFor(x => x.RegisterUser.SelectedGender)
+@Html.HiddenFor(x => x.RegisterUser.SelectedMonth)
+@Html.HiddenFor(x => x.RegisterUser.SelectedYear)
 
 <link href="~/Style/Custom.css" rel="stylesheet" />
 
@@ -13,8 +19,22 @@
 
     <h2>@Html.PropertyFor(x => x.Text)</h2>
 
-    @using (Html.BeginForm("RegisterUser", "Account", FormMethod.Post, new { language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
+
+    @using (Html.BeginForm("RegisterUser", "RegisterBlock", FormMethod.Post, new { language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }))
     { 
+        
+        @Html.HiddenFor(x => x.RegisterUser.SelectedCounty)
+        @Html.HiddenFor(x => x.RegisterUser.SelectedMunicipality)
+        @Html.HiddenFor(x => x.RegisterUser.SelectedCity)
+        @Html.HiddenFor(x => x.RegisterUser.SelectedDay)
+        @Html.HiddenFor(x => x.RegisterUser.SelectedGender)
+        @Html.HiddenFor(x => x.RegisterUser.SelectedMonth)
+        @Html.HiddenFor(x => x.RegisterUser.SelectedYear)
+        @Html.HiddenFor(x => x.RegisterUser.Day)
+        @Html.HiddenFor(x => x.RegisterUser.Month)
+        @Html.HiddenFor(x => x.RegisterUser.Year)
+
+
         <table>
             <tr>
                 <td>
@@ -29,6 +49,13 @@
                 <td>
                     @Html.PropertyFor(x => x.EmailLabel)
                     @Html.TextBoxFor(x => x.RegisterUser.Email)
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    @Html.PropertyFor(x => x.PasswordLabel)
+                    @Html.TextBoxFor(x => x.RegisterUser.Password)
                 </td>
             </tr>
             <tr>

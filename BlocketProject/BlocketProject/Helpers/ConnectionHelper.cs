@@ -98,7 +98,7 @@ namespace BlocketProject.Helpers
         {
             var userModel = new DbUserInformation
             {
-
+                
 
 
             };
@@ -344,7 +344,7 @@ namespace BlocketProject.Helpers
                 response = request.GetResponse();
                 pictureUrl = response.ResponseUri.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -389,8 +389,6 @@ namespace BlocketProject.Helpers
 
         public static List<ProfilePageViewModel.UserAdsModel> GetUserAds(int id)
         {
-
-
             var query = (from r in db.DbUserInformation
                          join a in db.DbUserEvents on r.UserId equals a.UserId
                          where a.UserId == id

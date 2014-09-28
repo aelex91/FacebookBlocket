@@ -19,7 +19,13 @@ namespace BlocketProject
         {
             //Call base.RegisterRoutes so default CMS routes are registered
             base.RegisterRoutes(routes);
-           
+
+            routes.MapRoute(
+              "Default",                                              // Route name
+              "{controller}/{action}/{id}",                           // URL with parameters
+              new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
+          );
+
             routes.MapRoute(
                 "Logout",
                 "Account/{action}",

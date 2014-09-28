@@ -34,6 +34,7 @@ namespace BlocketProject.Controllers
 
             return Json(dic, JsonRequestBehavior.AllowGet);
         }
+
         public override ActionResult Index(RegisterBlock currentBlock)
         {
 
@@ -55,8 +56,6 @@ namespace BlocketProject.Controllers
                 record[i] = stringList[i];
 
             }
-
-
             for (int i = 1; i <= 31; i++)
             {
                 dayDic.Add(i, i);
@@ -93,6 +92,73 @@ namespace BlocketProject.Controllers
             // vad man vill egentligen skriva in
             // Födelsedatum, Stad och kön samt email. Skicka personen till profilsidan
             return PartialView(model);
+        }
+        [AllowAnonymous]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult RegisterUser(RegisterBlockViewModel model)
+        {
+            var message = string.Empty;
+            if (model.RegisterUser.SelectedMonth == "0")
+            {
+                model.RegisterUser.Gender = ConnectionHelper.GetGenders();
+                model.RegisterUser.Municipality = ConnectionHelper.GetMuncipalities();
+                model.RegisterUser.County = ConnectionHelper.GetCounties();
+                return PartialView("Index", model);
+            }
+
+            if (ModelState.IsValid)
+            {
+                string date = model.RegisterUser.SelectedDay + "/" + model.RegisterUser.SelectedMonth + "/" + model.RegisterUser.SelectedYear;
+                DateTime dt = Convert.ToDateTime(date);
+
+                if (model.RegisterUser.SelectedGender == "Female" || model.RegisterUser.SelectedGender == "Male")
+                {
+                    // check from database if email is registred.
+
+                    // spara in men först kolla om användarens email redan finns. sätt även HasFacebook till false.
+
+
+                    var CheckIfEmailExists = ConnectionHelper.GetUserInformationByEmail(model.RegisterUser.Email);
+                    if (CheckIfEmailExists == null)
+                    {
+                        //ConnectionHelper.SaveUserToDb(model.RegisterUser);
+                        // metod logga in
+                        var birthday = model.RegisterUser.SelectedDay;
+                        var userModel = new BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation
+                        {
+                            FirstName = model.RegisterUser.FirstName,
+                            LastName = model.RegisterUser.LastName,
+                            Municipality = model.RegisterUser.SelectedMunicipality,
+                            County = model.RegisterUser.SelectedCounty,
+                            Gender = model.RegisterUser.SelectedGender,
+                            Birthday = dt,
+                            RegisterDate = DateTime.Now,
+                            HasFacebook = false,
+                            
+                         
+                            //   Birthday = model.RegisterUser.Day + model.RegisterUser.Month + model.RegisterUser.Year,
+                        };
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(model.RegisterUser.Email, " Finns redan.");
+                        return View("Index", "Startpage", model);
+                    }
+
+                }
+            }
+            else
+            {
+                model.RegisterUser.Gender = ConnectionHelper.GetGenders();
+                model.RegisterUser.Municipality = ConnectionHelper.GetMuncipalities();
+                model.RegisterUser.County = ConnectionHelper.GetCounties();
+                ModelState.AddModelError("CustomError", "Sorrybrotha");
+                return View("Index", "StartPage");
+
+            }
+
+            return View("Index", "StartPage", model);
         }
 
     }

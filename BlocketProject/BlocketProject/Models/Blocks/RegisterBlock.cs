@@ -32,6 +32,14 @@ namespace BlocketProject.Models.Blocks
             Order = 250)]
         public virtual string LastNameLabel { get; set; }
 
+
+        [CultureSpecific]
+        [Display(
+            Name = "Password Label",
+            GroupName = SystemTabNames.Content,
+            Order = 270)]
+        public virtual string PasswordLabel { get; set; }
+
         [CultureSpecific]
         [Display(
             Name = "Birth Label",

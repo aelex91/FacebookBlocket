@@ -58,6 +58,8 @@ namespace BlocketProject.Controllers
             };
             return View(model);
         }
+        [AllowAnonymous]
+      
 
         [HttpPost]
         public ActionResult Index(CreateAdsPageViewModel model, CreateAdPage currentPage, HttpPostedFileBase file)

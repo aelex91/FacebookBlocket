@@ -14,13 +14,12 @@ namespace BlocketProject.Controllers
 {
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/
 
         public ActionResult Index()
         {
             return View();
         }
+
 
         [HttpPost]
         public void Logout()
@@ -41,36 +40,7 @@ namespace BlocketProject.Controllers
             //ConnectionHelper.DeleteUserEvent(id);
             return View("Index", "Admin", new { language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name });
         }
-        [AllowAnonymous]
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult RegisterUser(RegisterBlockViewModel model)
-        {
-            if (model.RegisterUser.SelectedMonth == "0")
-            {
-                return View("Index", "Startpage");
-            }
 
-            if (ModelState.IsValid)
-            {
-
-                var emailCheck = ConnectionHelper.GetUserInformationByEmail(model.RegisterUser.Email);
-                // check from database if email is registred.
-
-                // spara in men först kolla om användarens email redan finns. sätt även HasFacebook till false.
-                if (emailCheck == null)
-                {
-                    //spara in nya värden till database
-
-                }
-                else
-                {
-                    ModelState.AddModelError(model.RegisterUser.Email, " Finns redan.");
-                    return View("Index", "Startpage", model);
-                }
-
-            }
-            return View("Index", "Startpage");
-        }
 
     }
 }
