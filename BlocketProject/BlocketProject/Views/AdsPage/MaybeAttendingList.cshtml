@@ -1,0 +1,27 @@
+﻿@model BlocketProject.Models.ViewModels.AdsPageViewModel
+
+<table class="statusTable">
+    @if (Model.ListMaybeAttendingUsers.Count() != 0)
+    {
+        foreach (var user in Model.ListMaybeAttendingUsers)
+        {
+            <tr>
+                <td>
+                    <span>
+                        <img src="@user.ImageUrl" style="width: 40px; height: 40px;" />
+                        @user.FirstName @user.LastName
+                    </span>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                Inga gäster har registrerats.
+            </td>
+        </tr>
+    }
+
+</table>

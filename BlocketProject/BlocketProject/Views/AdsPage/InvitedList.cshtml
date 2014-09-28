@@ -1,0 +1,32 @@
+﻿@model BlocketProject.Models.ViewModels.AdsPageViewModel
+@using BlocketProject.Helpers
+
+    <table class="statusTable">
+        @if (Model.ListInvitedUsers.Count() != 0)
+        {
+            foreach (var user in Model.ListInvitedUsers)
+            {
+                if (!Model.ListAttendingUsers.Contains(user) && !Model.ListMaybeAttendingUsers.Contains(user) && !Model.ListPendingUsers.Contains(user) && !Model.ListNotAttendingUsers.Contains(user))
+                {
+                    <tr>
+                        <td>
+                            <span>
+                                <img src="@user.ImageUrl" style="width: 40px; height: 40px;" />
+                                @user.FirstName @user.LastName
+                            </span>
+                        </td>
+                    </tr>
+                }
+
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    Inga gäster har registrerats.
+                </td>
+            </tr>
+        }
+
+    </table>
