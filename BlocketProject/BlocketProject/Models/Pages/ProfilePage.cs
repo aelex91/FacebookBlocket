@@ -83,6 +83,15 @@ namespace BlocketProject.Models.Pages
             Order = 1000)]
         public virtual PageReference EventRedirect { get; set; }
 
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Profile redirect",
+            Description = "Set this redirect to the ProfilePage.",
+            GroupName = SystemTabNames.Content,
+            Order = 1100)]
+        public virtual PageReference ProfileRedirect { get; set; }
+
 
 
         public override void SetDefaultValues(ContentType contentType)

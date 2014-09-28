@@ -1,0 +1,37 @@
+﻿@model BlocketProject.Models.ViewModels.AdsPageViewModel
+@using BlocketProject.Helpers
+
+<table class="statusTable">
+    @if (ConnectionHelper.GetUserIdByEmail(User.Identity.Name) == Model.UserEventModel.UserId)
+    {
+        if (Model.ListPendingUsers.Count() != 0)
+        {
+            foreach (var user in Model.ListPendingUsers)
+            {
+                <tr>
+                    <td style="width: 200px;">
+                        <span>
+                            <img src="@user.ImageUrl" style="width: 40px; height: 40px;" />
+                            @user.FirstName @user.LastName
+
+                            <button>Acceptera</button>
+                            <button>Neka</button>
+                        </span>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    Inga vilande förfrågningar.
+                </td>
+            </tr>
+        }
+    }
+    
+
+    
+
+</table>

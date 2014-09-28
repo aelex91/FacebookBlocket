@@ -1,6 +1,6 @@
 ﻿@using BlocketProject.Helpers
 @{
-
+    BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
 }
 <!DOCTYPE html>
 
@@ -28,33 +28,58 @@
 
                     <nav class="navbar navbar-default">
 
-                        @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+
+                        @using (Html.BeginForm())
                         {
-
                             Html.RenderMainNavigation(null);
-                            <div>
-
-                                <ul class="nav" style="float: right;">
-
-                                    <li class="dropdown" style="margin-right: 15px;">
-                                        <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
-                                            <i class="glyphicon glyphicon-align-justify"></i>
-                                        </span>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="#">Redigera Profil</a>
-                                            </li>
-                                            <li class="input">
-                                                <input type="submit" class="navbar-btn input" value="Logga ut" />
-
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
 
                         }
+                        <ul class="nav" id="colNav" style="float: right;">
+                            @if (user != null)
+                            {
+
+                                using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { id = user.UserId }, FormMethod.Post))
+                                {
+                                    <li>
+                                        <button type="submit" class="profileButton">
+                                            @user.FirstName @user.LastName &nbsp;&nbsp;
+                                            <img src="@user.ImageUrl" style="width: 30px; height: 30px;" />
+                                        </button>
+                                    </li>
+                                }
+                            }
+
+                            <li class="dropdown">
+                                <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-align-justify"></i>
+                                </span>
+                                <ul class="dropdown-menu">
+                                    @using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
+                                    {
+                                        <li>
+                                            <button type="submit" class="dropdownButton">
+                                                Redigera Profil
+                                            </button>
+                                        </li>
+                                    }
+                                    @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+                                    {
+                                        <li>
+                                            <button type="submit" class="dropdownButton" value="Logga ut">
+                                                Logga Ut
+                                            </button>
+
+                                        </li>
+                                    }
+
+                                </ul>
+                            </li>
+
+                        </ul>
+
+
+
+
                     </nav>
                 }
 

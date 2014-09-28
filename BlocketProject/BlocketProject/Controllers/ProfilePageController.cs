@@ -32,10 +32,29 @@ namespace BlocketProject.Controllers
         UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
 
         [Authorize] // users must be authenticated to view this page
-        public ActionResult Index(ProfilePage currentPage)
+        public ActionResult Index(ProfilePage currentPage, int? UserId)
         {
             var model = new ProfilePageViewModel(currentPage);
-            var user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+            var user = new ProfilePageViewModel.UserInformation();
+            if (UserId == null)
+            {
+                user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+                model.CurrentUser = user;
+            }
+
+            else
+            {
+                user = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(UserId));
+                if (user.Email != User.Identity.Name)
+                {
+                    model.OtherUser = user;
+                }
+                else
+                {
+                    model.CurrentUser = user;
+                }
+            }
+
             if (user.Location == "")
             {
                 return RedirectToAction("EditProfile");
@@ -46,8 +65,6 @@ namespace BlocketProject.Controllers
                 return View(model);
             }
 
-            model.CurrentUser = new ProfilePageViewModel.UserInformation();
-            model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
             model.ListUserAds = ConnectionHelper.GetUserAds(user.UserId);
 
             return View(model);
@@ -150,7 +167,7 @@ namespace BlocketProject.Controllers
         [Authorize]
         public ActionResult DeleteEvent(int id)
         {
-          
+
             var userId = ConnectionHelper.GetUserIdByEmail(User.Identity.Name);
             //ta även bort användarens numberofad.
             ConnectionHelper.DeleteUserEvent(id);
@@ -162,12 +179,19 @@ namespace BlocketProject.Controllers
         public ActionResult EventRedirect(ProfilePageViewModel model, ProfilePage currentPage, int id)
         {
             model = new ProfilePageViewModel(currentPage);
-            return RedirectToAction("Index", new {node = model.EventRedirect, EventId = id});
+            return RedirectToAction("Index", new { node = model.EventRedirect, EventId = id });
+        }
+
+        [HttpPost]
+        public ActionResult ProfileRedirect(ProfilePageViewModel model, ProfilePage currentPage, int id)
+        {
+            model = new ProfilePageViewModel(currentPage);
+            return RedirectToAction("Index", new { node = model.ProfileRedirect, UserId = id });
         }
 
 
 
-        
+
 
 
     }

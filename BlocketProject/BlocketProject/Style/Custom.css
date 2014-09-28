@@ -55,7 +55,8 @@ body {
             }
 
 .adImageProfile {
-    height: 150px;
+    height: 170px;
+    width: 210px;
 }
 
 #UserTable img {
@@ -627,3 +628,58 @@ h3 {
             background: rgba(0, 0, 0, 0.4);
             padding: 10px;
         }
+
+
+#colNav .profileButton {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial,sans-serif; /*input has OS specific font-family*/
+    color: lightgray;
+    cursor: pointer;
+}
+
+    #colNav .profileButton:hover {
+        color: white;
+    }
+
+#colNav li {
+    float: left;
+}
+
+.dropdownButton {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    border: none;
+    background: none;
+}
+
+.liButton:hover, .liButton:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.linkButton {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial,sans-serif; /*input has OS specific font-family*/
+    color: #069;
+    cursor: pointer;
+}
+
+    .linkButton:hover {
+        color: lightblue;
+    }
+
+.statusTable td {
+    width: 385px;
+}

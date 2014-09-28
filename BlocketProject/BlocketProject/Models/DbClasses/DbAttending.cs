@@ -14,6 +14,11 @@ namespace BlocketProject.Models.DbClasses
         public bool IsAttending { get; set; }
         public int UserId { get; set; }
         public int EventId { get; set; }
+        public bool IsMaybeAttending { get; set; }
+        public bool IsNotAttending { get; set; }
+        public bool IsPending { get; set; }
+        public bool IsInvited { get; set; }
+        public int InvitedByUserId { get; set; }
     }
 
 }

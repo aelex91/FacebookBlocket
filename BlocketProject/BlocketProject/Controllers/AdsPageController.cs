@@ -43,6 +43,13 @@ namespace BlocketProject.Controllers
                 model.UserEventModel = SetEventValues(ad);
                 model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
                 model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
+                model.ListMaybeAttendingUsers = ConnectionHelper.GetMaybeAttendingUsers(ad.EventId);
+                model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
+                model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
+                model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
+                
+
+
                 return View("Index", model);
 
             }
@@ -59,6 +66,11 @@ namespace BlocketProject.Controllers
             model.UserEventModel = SetEventValues(ad);
             model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
             model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
+            model.ListMaybeAttendingUsers = ConnectionHelper.GetMaybeAttendingUsers(ad.EventId);
+            model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
+            model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
+            model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
+
             return View("Index", model);
 
         }

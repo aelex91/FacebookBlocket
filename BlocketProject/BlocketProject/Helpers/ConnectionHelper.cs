@@ -318,6 +318,14 @@ namespace BlocketProject.Helpers
                           select r.Email).FirstOrDefault();
             return result;
         }
+
+        public static string GetUserEmailById(int? id)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.UserId == id
+                          select r.Email).FirstOrDefault();
+            return result;
+        }
         public static int GetUserIdByEmail(string email)
         {
             var result = (from r in db.DbUserInformation
@@ -410,6 +418,15 @@ namespace BlocketProject.Helpers
             return query;
         }
 
+        public static List<DbUserInformation> GetUsersByEventId(int eventId)
+        {
+            var query = (from p in db.DbUserInformation
+                         join a in db.DbGuestList on p.UserId equals a.UserId
+                         where a.EventId == eventId
+                         select p).ToList();
+            return query;
+        }
+
         public static List<DbUserInformation> GetAttendingUsers(int eventId)
         {
             var query = (from p in db.DbUserInformation
@@ -419,6 +436,64 @@ namespace BlocketProject.Helpers
 
             return query;
         }
+
+        public static List<DbUserInformation> GetMaybeAttendingUsers(int eventId)
+        {
+            var query = (from p in db.DbUserInformation
+                         join a in db.DbAttending on p.UserId equals a.UserId
+                         where a.EventId == eventId && a.IsMaybeAttending == true
+                         select p).ToList();
+
+            return query;
+        }
+
+        public static List<DbUserInformation> GetPendingUsers(int eventId)
+        {
+            var query = (from p in db.DbUserInformation
+                         join a in db.DbAttending on p.UserId equals a.UserId
+                         where a.EventId == eventId && a.IsPending == true
+                         select p).ToList();
+
+            return query;
+        }
+
+        public static List<DbUserInformation> GetInvitedUsers(int eventId)
+        {
+            var query = (from p in db.DbUserInformation
+                         join a in db.DbAttending on p.UserId equals a.UserId
+                         where a.EventId == eventId && a.IsInvited == true
+                         select p).ToList();
+
+            return query;
+        }
+
+        public static List<DbUserInformation> GetNotAttendingUsers(int eventId)
+        {
+            var query = (from p in db.DbUserInformation
+                         join a in db.DbAttending on p.UserId equals a.UserId
+                         where a.EventId == eventId && a.IsNotAttending == true
+                         select p).ToList();
+
+            return query;
+        }
+
+        public static string GetCountyNameById(int id)
+        {
+            var query = (from p in db.DbCounty
+                         where p.Id == id
+                         select p.CountyName).FirstOrDefault();
+
+            return query;
+        }
+
+        public static string GetMunicipalityNameById(int id)
+        {
+            var query = (from p in db.DbMunicipality where p.Id == id select p.MunicipalityName).FirstOrDefault();
+
+            return query;
+        }
+
+
 
 
     }

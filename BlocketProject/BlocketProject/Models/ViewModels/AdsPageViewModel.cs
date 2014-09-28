@@ -27,7 +27,10 @@ namespace BlocketProject.Models.ViewModels
         public ProfilePageViewModel.UserInformation User { get; set; }
         public List<DbUserInformation> ListAttendingUsers { get; set; }
         public List<DbUserInformation> ListPendingUsers { get; set; }
-        public List<DbUserInformation> ListApplyingUsers { get; set; }
+        public List<DbUserInformation> ListMaybeAttendingUsers { get; set; }
+        public List<DbUserInformation> ListInvitedUsers { get; set; }
+        public List<DbUserInformation> ListNotAttendingUsers { get; set; }
+
 
         public class UserAdsModel
         {

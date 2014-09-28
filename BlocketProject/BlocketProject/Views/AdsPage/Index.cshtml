@@ -28,8 +28,9 @@
             {
                 foreach (var ad in Model.ListUserAdsModel)
                 {
-                    using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId }, FormMethod.Post)) { 
+                    
                     <li>
+                        @using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId }, FormMethod.Post)) { 
                         <button type="submit" style="border:none; background: none;">
                             <h3>@ad.Title</h3>
                             <br />
@@ -39,9 +40,13 @@
                             <p>Pris: @ad.Price kr</p>
                             <p>Datum: @ad.PublishDate.ToShortDateString()</p> 
                         </button><br />
-                        <b>Annons av: <a href="#">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</a></b>
+                        }
+                        @using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { id = ad.UserId }, FormMethod.Post))
+                        {
+                        <b>Annons av: <button class="linkButton">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</button></b>
+                        }
                     </li>
-                    }
+                    
 
                 }
 
@@ -76,17 +81,21 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#pane1" data-toggle="tab">Kommer</a></li>
                             <li><a href="#pane2" data-toggle="tab">Kanske</a></li>
-                            <li><a href="#pane3" data-toggle="tab">Kommer inte</a></li>
+                            <li><a href="#pane3" data-toggle="tab">Förfrågningar</a></li>
+                            <li><a href="#pane4" data-toggle="tab">Inbjudna</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="pane1" class="tab-pane active">
                                @Html.Partial("AttendingList")
                             </div>
                             <div id="pane2" class="tab-pane">
-                                @Html.Partial("PendingList")
+                                @Html.Partial("MaybeAttendingList")
                             </div>
                             <div id="pane3" class="tab-pane">
-                               @Html.Partial("NotAttendingList")
+                               @Html.Partial("PendingList")
+                            </div>
+                            <div id="pane4" class="tab-pane">
+                                @Html.Partial("InvitedList")
                             </div>
                         </div>
                 </div>

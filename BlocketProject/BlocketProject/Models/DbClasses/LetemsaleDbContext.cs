@@ -27,5 +27,7 @@ namespace BlocketProject.Models.DbClasses
         public DbSet<DbGenders> DbGenders { get; set; }
         public DbSet<DbMunicipality> DbMunicipality { get; set; }
         public DbSet<DbCounty> DbCounty { get; set; }
+        public DbSet<DbAttendingStatus> DbAttendingStatus { get; set; }
+        public DbSet<DbGuestList> DbGuestList { get; set; }
     }
 }

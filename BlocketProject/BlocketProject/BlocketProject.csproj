@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -320,9 +320,11 @@
     <Compile Include="Models\Blocks\UsersOnlineBlock.cs" />
     <Compile Include="Models\Blocks\VideoBlock.cs" />
     <Compile Include="Models\DbClasses\DbAttending.cs" />
+    <Compile Include="Models\DbClasses\DbAttendingStatus.cs" />
     <Compile Include="Models\DbClasses\DbCategories.cs" />
     <Compile Include="Models\DbClasses\DbCounty.cs" />
     <Compile Include="Models\DbClasses\DbGenders.cs" />
+    <Compile Include="Models\DbClasses\DbGuestList.cs" />
     <Compile Include="Models\DbClasses\DbMunicipality.cs" />
     <Compile Include="Models\DbClasses\DbUserEvents.cs" />
     <Compile Include="Models\DbClasses\DbUserInformation.cs" />
@@ -531,7 +533,8 @@
     <Content Include="Views\RegisterBlock\Index.cshtml" />
     <Content Include="Views\AdsPage\AttendingList.cshtml" />
     <Content Include="Views\AdsPage\PendingList.cshtml" />
-    <Content Include="Views\AdsPage\NotAttendingList.cshtml" />
+    <Content Include="Views\AdsPage\MaybeAttendingList.cshtml" />
+    <Content Include="Views\AdsPage\InvitedList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -28,6 +28,7 @@ namespace BlocketProject.Models.ViewModels
             this.EventRedirect = currentPage.EventRedirect;
 
         }
+        public PageReference ProfileRedirect { get; set; }
         public PageReference EventRedirect { get; set; }
         public string LabelFirstName { get; set; }
         public string LabelLastName { get; set; }
@@ -38,6 +39,7 @@ namespace BlocketProject.Models.ViewModels
         public PageReference ReferToEditPage { get; set; }
         public string Heading { get; set; }
         public UserInformation CurrentUser { get; set; }
+        public UserInformation OtherUser { get; set; }
         public List<UserAdsModel> ListUserAds { get; set; }
         public List<FacebookFriend> friendsList { get; set; }
 

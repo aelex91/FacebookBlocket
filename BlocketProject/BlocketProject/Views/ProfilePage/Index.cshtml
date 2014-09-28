@@ -2,17 +2,87 @@
 
 <h2>@Model.Heading</h2>
 @Html.HiddenFor(x => x.CurrentUser.FirstName)
+@if (Model.OtherUser != null)
+{
+    <div>
+        <img src="@Model.OtherUser.ImageUrl" class="profilepic" id="imageid" height="300" />
+    </div>
+    <div>
+        <button type="submit" style="border: none; outline: none; background: transparent">
+            <img src="~/images/profileMenyIcon.png" class="profilepicmenu" id="showProfile" />
+        </button>
+
+    </div>
+
+    <table id="UserTable" style="margin: 30px;">
+        <tr>
+            <td rowspan="2"></td>
+            <td>
+                @Model.OtherUser.FirstName @Model.OtherUser.LastName
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <img src="~/images/map_pin.png" class="icon" />
+                @Model.OtherUser.Location
+            </td>
+            <td>
+
+                @Model.OtherUser.Phone
+            </td>
+        </tr>
+
+    </table>
+
+    <table id="UserAds">
+        <tr>
+            @if (Model.ListUserAds != null)
+            {
+
+
+                foreach (var ad in Model.ListUserAds)
+                {
+                    <td style="text-align: center; margin: 30px; float: left;">
+
+                        @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
+                        {
+                            <button type="submit" style="border: none; background:none;">
+
+
+                                <h3>@ad.Title</h3>
+                                <br />
+                                <img src="@ad.ImageUrl" class="adImageProfile" />
+
+                                <br />
+                            </button>
+                        }
+                    </td>
+                }
+            }
+
+            else
+            {
+                <td>
+                    <p>Denna användare har inga skapade event.</p>
+                </td>
+            }
+
+        </tr>
+    </table>
+
+}
 @if (Model.CurrentUser != null)
 {
     @Html.HiddenFor(x => x.CurrentUser.FirstName)
     using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
     {
 
-    <input type="submit" value="Edit Profile" />
+        <input type="submit" value="Edit Profile" />
 
     }
-  
-  
+
+
     <div>
         <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" height="300" />
     </div>
@@ -20,53 +90,62 @@
         <button type="submit" style="border: none; outline: none; background: transparent">
             <img src="~/images/profileMenyIcon.png" class="profilepicmenu" id="showProfile" />
         </button>
-        
+
     </div>
- 
-        <table id="UserTable" style="margin: 30px;">
-            <tr>
-                <td rowspan="2"></td>
-                <td>
-                    @Model.CurrentUser.FirstName @Model.CurrentUser.LastName
-                </td>
-            </tr>
-            <tr>
-                <td>
 
-                    <img src="~/images/map_pin.png" class="icon" />
-                    @Model.CurrentUser.Location
-                </td>
-                <td>
+    <table id="UserTable" style="margin: 30px;">
+        <tr>
+            <td rowspan="2"></td>
+            <td>
+                @Model.CurrentUser.FirstName @Model.CurrentUser.LastName
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-                    @Model.CurrentUser.Phone
-                </td>
-            </tr>
+                <img src="~/images/map_pin.png" class="icon" />
+                @Model.CurrentUser.Location
+            </td>
+            <td>
 
-        </table>
-    
+                @Model.CurrentUser.Phone
+            </td>
+        </tr>
+
+    </table>
+
     <table id="UserAds">
         <tr>
-            @foreach (var ad in Model.ListUserAds)
+            @if (Model.ListUserAds != null)
             {
-                <td style="text-align: center; margin: 30px; float: left;">
+                foreach (var ad in Model.ListUserAds)
+                {
+                    <td style="text-align: center; margin: 30px; float: left;">
 
-                    @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
-                    { 
-                        <button type="submit" style="border: none; background:none;">
-                            
-                            
-                            <h3>@ad.Title</h3>
-                            <br />
-                            <img src="@ad.ImageUrl" class="adImageProfile" />
-                            
-                            <br />
-                        </button>
-                    }
-                    @using (Html.BeginForm("DeleteEvent", "ProfilePage", new { id = ad.EventId }, FormMethod.Post))
-                    {
-                        <input type="submit" id="@ad.EventId" value="Remove" />
+                        @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
+                        {
+                            <button type="submit" style="border: none; background:none;">
 
-                    }
+
+                                <h3>@ad.Title</h3>
+                                <br />
+                                <img src="@ad.ImageUrl" class="adImageProfile" />
+
+                                <br />
+                            </button>
+                        }
+                        @using (Html.BeginForm("DeleteEvent", "ProfilePage", new { id = ad.EventId }, FormMethod.Post))
+                        {
+                            <input type="submit" id="@ad.EventId" value="Remove" />
+
+                        }
+                    </td>
+                }
+            }
+            else
+            {
+                <td>
+                    <p>Denna användare har inga skapade event.</p>
                 </td>
             }
 
