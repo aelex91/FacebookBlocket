@@ -1,32 +1,63 @@
 ﻿@model BlocketProject.Models.ViewModels.AdsPageViewModel
 @using BlocketProject.Helpers
 
-    <table class="statusTable">
-        @if (Model.ListInvitedUsers.Count() != 0)
+<table class="statusTable">
+    @if (Model.ListInvitedUsers.Count() != 0)
+    {
+        foreach (var user in Model.ListInvitedUsers)
         {
-            foreach (var user in Model.ListInvitedUsers)
+            if (!Model.ListAttendingUsers.Contains(user) && !Model.ListMaybeAttendingUsers.Contains(user) && !Model.ListPendingUsers.Contains(user) && !Model.ListNotAttendingUsers.Contains(user))
             {
-                if (!Model.ListAttendingUsers.Contains(user) && !Model.ListMaybeAttendingUsers.Contains(user) && !Model.ListPendingUsers.Contains(user) && !Model.ListNotAttendingUsers.Contains(user))
-                {
-                    <tr>
-                        <td>
-                            <span>
-                                <img src="@user.ImageUrl" style="width: 40px; height: 40px;" />
+                <tr>
+                    <td>
+
+
+                        @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = user.UserId }, FormMethod.Post))
+                        {
+                            <button type="submit" class="linkButton">
+                                <img src="@user.ImageUrl" />
                                 @user.FirstName @user.LastName
-                            </span>
-                        </td>
-                    </tr>
-                }
+                            </button>
+                        }
 
+                        @{
+                             var invitee = ConnectionHelper.GetInvitee(user.UserId);
+                        }
+
+                        @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = invitee.UserId }, FormMethod.Post))
+                        {
+                            <span>Inbjuden av: </span><button type="submit" class="linkButton noFloat">@invitee.FirstName @invitee.LastName</button>
+                        }
+                        @if (user.Email == User.Identity.Name)
+                        {
+                            using (Html.BeginForm("SetAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            {
+                                <button class="btn btn-default LeftButton statusButton">Kommer</button>
+                            }
+                            using (Html.BeginForm("SetMaybeAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            {
+                                <button class="btn btn-default LeftButton statusButton">Kanske</button>
+                            }
+                            using (Html.BeginForm("RemoveAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            {
+                                <button class="btn btn-default LeftButton statusButton">Kommer inte</button>
+                            }
+                            
+                        }
+
+                    </td>
+                </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td>
-                    Inga gäster har registrerats.
-                </td>
-            </tr>
-        }
 
-    </table>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                Inga gäster har blivit inbjudna.
+            </td>
+        </tr>
+    }
+
+</table>

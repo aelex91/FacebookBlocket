@@ -1,5 +1,5 @@
 ﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
-
+@using BlocketProject.Helpers
 <h2>@Model.Heading</h2>
 @Html.HiddenFor(x => x.CurrentUser.FirstName)
 @if (Model.OtherUser != null)
@@ -78,7 +78,7 @@
     using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
     {
 
-    <input type="submit" value="Ändra profil" />
+        <input type="submit" value="Ändra profil" />
 
 
     }
@@ -152,6 +152,35 @@
 
         </tr>
     </table>
+
+    <table id="friendTable">
+        <tr>
+
+
+
+            @{
+            var friends = ConnectionHelper.GetFriendsByUserId(Model.CurrentUser.UserId);
+
+
+            foreach (var friend in friends)
+            {
+                using (Html.BeginForm("Index", "ProfilePage", new { @UserId = friend.UserId }, FormMethod.Post))
+                {
+                    <td>
+                        <button type="submit" class="linkButton">
+                            <img src="@friend.ImageUrl" /><br />
+                            @friend.FirstName @friend.LastName
+                        </button>
+                    </td>
+                }
+
+            }
+            }
+
+
+        </tr>
+    </table>
+
 }
 
 <script type="text/javascript">

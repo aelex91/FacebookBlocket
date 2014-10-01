@@ -5,16 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-
 namespace BlocketProject.Models.DbClasses
 {
-    [Table("GuestList")]
-    public class DbGuestList
+    [Table("Friends")]
+    public class DbFriends
     {
         [Key, Column("UserId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
-        public int EventId { get; set; }
-        public int StatusId { get; set; }
-        public int InvitedByUserId { get; set; }
+        public int FriendId { get; set; }
     }
 }

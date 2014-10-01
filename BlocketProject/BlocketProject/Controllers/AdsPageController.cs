@@ -40,14 +40,7 @@ namespace BlocketProject.Controllers
             else
             {
 
-                DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
-                model.UserEventModel = SetEventValues(ad);
-                model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
-                model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
-                model.ListMaybeAttendingUsers = ConnectionHelper.GetMaybeAttendingUsers(ad.EventId);
-                model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
-                model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
-                model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
+                model = SetModelValues(EventId);
                 return View("Index", model);
 
             }
@@ -55,19 +48,51 @@ namespace BlocketProject.Controllers
         [HttpPost]
         public ActionResult Index(int EventId)
         {
-            DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
-            var model = new AdsPageViewModel();
-            model.UserEventModel = SetEventValues(ad);
-            model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
-            model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
-            model.ListMaybeAttendingUsers = ConnectionHelper.GetMaybeAttendingUsers(ad.EventId);
-            model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
-            model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
-            model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
-
+            var model = SetModelValues(EventId);
             return View("Index", model);
 
         }
+
+        [HttpPost]
+        public ActionResult Invite(int UserId, int EventId)
+        {
+            var friends = ConnectionHelper.GetFriendsByUserId(UserId);
+            List<DbUserInformation> model = new List<DbUserInformation>();
+
+            foreach (var friend in friends)
+            {
+            }
+
+            return PartialView("Invite", model);
+        }
+
+
+        [HttpPost]
+        public ActionResult SetAttendingStatus(int UserId, int EventId)
+        {
+            ConnectionHelper.SetAttendingStatus(UserId, EventId);
+
+            return RedirectToAction("Index", new { @EventId = EventId });
+        }
+
+        [HttpPost]
+        public ActionResult RemoveAttendingStatus(int UserId, int EventId)
+        {
+            ConnectionHelper.RemoveAttendingStatus(UserId, EventId);
+
+            return RedirectToAction("Index", new { @EventId = EventId });
+
+        }
+
+        [HttpPost]
+        public ActionResult SetMaybeAttendingStatus(int UserId, int EventId)
+        {
+            ConnectionHelper.SetMaybeAttendingStatus(UserId, EventId);
+
+            return RedirectToAction("Index", new { @EventId = EventId });
+
+        }
+
         public AdsPageViewModel.UserAdsModel SetEventValues(DbUserEvents userEvent)
         {
             var model = new AdsPageViewModel.UserAdsModel();
@@ -88,6 +113,38 @@ namespace BlocketProject.Controllers
             model.PublishDate = userEvent.PublishDate;
             model.ExpirationDate = userEvent.ExpirationDate;
             model.EventId = userEvent.EventId;
+
+            return model;
+        }
+
+        public AdsPageViewModel SetModelValues(int EventId)
+        {
+            var model = new AdsPageViewModel();
+
+            DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
+            model.UserEventModel = SetEventValues(ad);
+            model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
+            model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
+            model.ListMaybeAttendingUsers = ConnectionHelper.GetMaybeAttendingUsers(ad.EventId);
+            model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
+            model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
+            model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
+
+            return model;
+        }
+
+        public AdsPageViewModel SetModelValues(int? EventId)
+        {
+            var model = new AdsPageViewModel();
+
+            DbUserEvents ad = Helpers.ConnectionHelper.GetAdById(EventId);
+            model.UserEventModel = SetEventValues(ad);
+            model.User = ConnectionHelper.GetUserInformationByEmail(ConnectionHelper.GetUserEmailById(ad.UserId));
+            model.ListAttendingUsers = ConnectionHelper.GetAttendingUsers(ad.EventId);
+            model.ListMaybeAttendingUsers = ConnectionHelper.GetMaybeAttendingUsers(ad.EventId);
+            model.ListPendingUsers = ConnectionHelper.GetPendingUsers(ad.EventId);
+            model.ListInvitedUsers = ConnectionHelper.GetInvitedUsers(ad.EventId);
+            model.ListNotAttendingUsers = ConnectionHelper.GetNotAttendingUsers(ad.EventId);
 
             return model;
         }

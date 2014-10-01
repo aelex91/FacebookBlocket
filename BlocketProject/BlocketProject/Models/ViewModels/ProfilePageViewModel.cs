@@ -39,7 +39,6 @@ namespace BlocketProject.Models.ViewModels
         public UserInformation CurrentUser { get; set; }
         public UserInformation OtherUser { get; set; }
         public List<UserAdsModel> ListUserAds { get; set; }
-        public List<FacebookFriend> friendsList { get; set; }
 
 
         public class UserInformation

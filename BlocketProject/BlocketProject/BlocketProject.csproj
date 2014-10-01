@@ -295,6 +295,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminPageController.cs" />
     <Compile Include="Controllers\AdsPageController.cs" />
+    <Compile Include="Models\ViewModels\DbUserInformation.cs" />
+    <Compile Include="Models\ViewModels\FacebookFriendModel.cs" />
+    <Compile Include="Models\ViewModels\FacebookUserModel.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\CreateAdPageController.cs" />
     <Compile Include="Controllers\InformationBlockController.cs" />
@@ -323,6 +326,7 @@
     <Compile Include="Models\DbClasses\DbAttendingStatus.cs" />
     <Compile Include="Models\DbClasses\DbCategories.cs" />
     <Compile Include="Models\DbClasses\DbCounty.cs" />
+    <Compile Include="Models\DbClasses\DbFriends.cs" />
     <Compile Include="Models\DbClasses\DbGenders.cs" />
     <Compile Include="Models\DbClasses\DbGuestList.cs" />
     <Compile Include="Models\DbClasses\DbMunicipality.cs" />
@@ -339,7 +343,6 @@
     <Compile Include="Models\Pages\StandardPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
     <Compile Include="Models\ViewModels\AdminPageViewModel.cs" />
-    <Compile Include="Models\ViewModels\FacebookFriendsModel.cs" />
     <Compile Include="Models\ViewModels\LandingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\AdsPageViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateAdsPageViewModel.cs" />
@@ -476,6 +479,8 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\facebook.jpg" />
+    <Content Include="images\FB-f-Logo__blue_72.png" />
+    <Content Include="images\FB-f-Logo__white_72.png" />
     <Content Include="images\femaleIcon.jpg" />
     <Content Include="images\festbakgrund.JPG" />
     <Content Include="images\mail.jpg" />
@@ -535,6 +540,7 @@
     <Content Include="Views\AdsPage\PendingList.cshtml" />
     <Content Include="Views\AdsPage\MaybeAttendingList.cshtml" />
     <Content Include="Views\AdsPage\InvitedList.cshtml" />
+    <Content Include="Views\AdsPage\Invite.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

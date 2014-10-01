@@ -1,0 +1,13 @@
+﻿@using BlocketProject.Models.DbClasses
+@model List<DbUserInformation>
+
+<table>
+    @foreach (var user in Model)
+{
+        <tr>
+            <td>
+                <input type="checkbox" />&nbsp;@user.FirstName @user.LastName
+            </td>
+        </tr>
+}
+</table>

@@ -9,15 +9,27 @@
             foreach (var user in Model.ListPendingUsers)
             {
                 <tr>
-                    <td style="width: 200px;">
-                        <span>
-                            <img src="@user.ImageUrl" style="width: 40px; height: 40px;" />
-                            @user.FirstName @user.LastName
 
-                            <button>Acceptera</button>
-                            <button>Neka</button>
+                    <td>
+                        <span>
+                            @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = user.UserId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="linkButton LeftButton">
+                                    <img src="@user.ImageUrl" />
+                                    @user.FirstName @user.LastName
+                                </button>
+                            }
+                            @using (Html.BeginForm("SetAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            {
+                                <button class="btn btn-default LeftButton statusButton">Acceptera</button>
+                            }
+                            @using (Html.BeginForm("RemoveAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            {
+                                <button class="btn btn-default LeftButton statusButton">Neka</button>
+                            }
                         </span>
                     </td>
+
                 </tr>
             }
         }
@@ -25,13 +37,13 @@
         {
             <tr>
                 <td>
-                    Inga vilande förfrågningar.
+                    <p>Inga vilande förfrågningar.</p>
                 </td>
             </tr>
         }
     }
-    
 
-    
+
+
 
 </table>

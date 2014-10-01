@@ -91,7 +91,7 @@ namespace BlocketProject.Controllers
 
         }
 
-        public JsonObject CheckAuthorization()
+        public FacebookUserModel CheckAuthorization()
         {
             if (Request["code"] == null)
             {
@@ -120,17 +120,46 @@ namespace BlocketProject.Controllers
                 Session["accessToken"] = client;
 
                 JsonObject user = client.Get("me/") as JsonObject;
+                var friendListData = client.Get("me/friends");
 
-                return user;
+                JObject friendListJson = JObject.Parse(friendListData.ToString());
+                var model = new FacebookUserModel();
+
+
+                List<FacebookFriendModel> fbUsers = new List<FacebookFriendModel>();
+                foreach (var friend in friendListJson["data"].Children())
+                {
+                    FacebookFriendModel fbUser = new FacebookFriendModel();
+                    fbUser.FacebookId = friend["id"].ToString().Replace("\"", "");
+                    fbUser.Name = friend["name"].ToString().Replace("\"", "");
+                    fbUsers.Add(fbUser);
+                }
+
+                List<DbUserInformation> friendList = new List<DbUserInformation>();
+
+                foreach (var friend in fbUsers)
+                {
+                    var found = ConnectionHelper.GetUserByFacebookId(friend.FacebookId);
+                    if (found != null)
+                    {
+                        friendList.Add(found);
+                    }
+
+                }
+
+                model.user = user;
+                model.friends = friendList;
+
+                return model;
             }
 
             return null;
         }
 
-        public ProfilePageViewModel.UserInformation SaveUser(JsonObject jsonUser)
+        public ProfilePageViewModel.UserInformation SaveUser(FacebookUserModel jsonUser)
         {
             JsonUserModel user = new JsonUserModel();
-            string jsonString = jsonUser.ToString();
+            string jsonString = jsonUser.user.ToString();
 
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(JsonUserModel));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
@@ -181,6 +210,17 @@ namespace BlocketProject.Controllers
                 db.SaveChanges();
             }
             model.UserId = ConnectionHelper.GetUserIdByEmail(model.Email);
+
+            foreach (var friend in jsonUser.friends)
+            {
+                var friendModel = new DbFriends();
+                friendModel.UserId = model.UserId;
+                friendModel.FriendId = friend.UserId;
+
+                db.DbFriends.Add(friendModel);
+
+            }
+            db.SaveChanges();
 
             return model;
         }

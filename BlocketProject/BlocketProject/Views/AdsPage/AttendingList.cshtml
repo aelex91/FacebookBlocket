@@ -7,10 +7,13 @@
         {
             <tr>
                 <td>
-                    <span>
-                        <img src="@user.ImageUrl" style="width: 40px; height: 40px;" />
-                        @user.FirstName @user.LastName
-                    </span>
+                    @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = user.UserId }, FormMethod.Post))
+                    { 
+                        <button type="submit" class="linkButton">
+                            <img src="@user.ImageUrl"/>
+                            @user.FirstName @user.LastName
+                        </button>
+                    }
                 </td>
             </tr>
         }
