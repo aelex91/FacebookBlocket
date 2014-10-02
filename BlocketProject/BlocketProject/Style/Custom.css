@@ -13,14 +13,20 @@ body {
 
 #body {
     padding: 10px;
-    padding-bottom: 120px; /* Height of the footer */
+    padding-bottom: 130px; /* Height of the footer */
 }
 
 #footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    height: 120px; /* Height of the footer */
+    height: 130px; /* Height of the footer */
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #3f4752;
+    color: #9ea8b8;
+    line-height: 1.333;
+    -webkit-font-smoothing: antialiased;
 }
 
 #nav li {
@@ -109,11 +115,6 @@ td .floatleft {
     font-size: 12px;
 }
 
-
-
-td {
-    width: 150px;
-}
 
 .textfield {
     background-color: white;
@@ -462,22 +463,6 @@ nav, section {
     line-height: 1.167;
 }
 
-
-.footer {
-    margin-top: 25px;
-    position: relative;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
-    bottom: 0;
-    min-height: 120px;
-    max-height: 200px;
-    background: #3f4752;
-    color: #9ea8b8;
-    line-height: 1.333;
-    -webkit-font-smoothing: antialiased;
-}
-
 .projectWrapper {
     width: 1100px;
     margin-top: 40px;
@@ -515,13 +500,14 @@ header {
     text-align: left;
 }
 
-.wrapper{
+.wrapper {
     width: 1200px;
     margin: 0 auto;
     margin-top: 40px;
     height: 100%;
     text-align: center;
 }
+
 }
 
 .right {
@@ -569,7 +555,7 @@ header {
     height: 350px;
 }
 
-.RegisterButton{
+.RegisterButton {
     width: 200px;
     height: 80px;
     margin: 0 auto;
@@ -587,41 +573,55 @@ header {
     width: 600px;
     margin: 0 auto;
     text-align: center;
-
 }
 
-.registerform h2{
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
+    .registerform h2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 
 
-.registerform tr{
-    width: 600px;
-    height: 70px;
-}
+    .registerform tr {
+        width: 600px;
+        height: 70px;
+    }
 
-.registerform td{
-    float: left;
-}
-.registerform .dateList{
-    width: 130px;
-}
+    .registerform td {
+        float: left;
+    }
 
-.registerform .list{
-    width: 188px;
-}
-.boxPlacement td{
-        margin-left: 60px;
+    .registerform .dateList {
+        width: 130px;
+    }
+
+    .registerform .list {
+        width: 188px;
+    }
+
+.boxPlacement td {
+    margin-left: 60px;
     margin-bottom: 10px;
 }
 
-.smallBoxPlacement td{
+    .boxPlacement td input {
+        color: black;
+    }
+
+.textfield {
+    color: black;
+}
+
+.smallBoxPlacement td {
     margin-left: 40px;
 }
 
-.bodyBg{
-     background: url("../images/oooawBackground.jpg") no-repeat center center fixed;
+.bodyBg {
+    background: url("../images/oooawBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top center bottom;
+    background-attachment: fixed;
+    background-color: #000;
 }
 
 
@@ -703,17 +703,17 @@ header {
     padding: 10px;
 }
 
-.statusTable td img{
-    width: 40px;
-    height: 40px;
-}
+    .statusTable td img {
+        width: 40px;
+        height: 40px;
+    }
 
-.statusTable p{
+.statusTable p {
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-.LeftButton{
+.LeftButton {
     float: left;
     margin-left: 5px;
     margin-right: 5px;
@@ -731,21 +731,86 @@ header {
 }
 
 .glow {
-display: inline-block;
--webkit-transition-duration: 0.3s;
-transition-duration: 0.3s;
--webkit-transition-property: box-shadow;
-transition-property: box-shadow;
--webkit-transform: translateZ(0);
-transform: translateZ(0);
-box-shadow: 0 0 25px rgba(0, 0, 0, 0);
-}
-.glow:hover, .glow:focus, .glow:active {
-box-shadow: 0 0 50px rgba(139,157,195, 0.9);
+    display: inline-block;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow;
+    transition-property: box-shadow;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0);
 }
 
+    .glow:hover, .glow:focus, .glow:active {
+        box-shadow: 0 0 50px rgba(139,157,195, 0.9);
+    }
 
-#friendTable td img{
+
+#friendTable td img {
     height: 100px;
     width: 100px;
+}
+
+.adListImage {
+    width: 200px;
+    height: 150px;
+}
+
+#adList li {
+    float: left;
+    margin: 10px 10px 0px 10px;
+}
+
+.infoTable td {
+    width: 900px;
+}
+
+.messagepop a.selected {
+  background-color:#1F75CC;
+  color:white;
+  z-index:100;
+}
+
+.messagepop {
+  background-color:#FFFFFF;
+  border:1px solid #999999;
+  cursor:default;
+  display:none;
+  margin-top: 15px;
+  position:absolute;
+  text-align:left;
+  width:400px;
+  z-index:50;
+  padding: 25px 25px 20px;
+  border-radius: 12px;
+}
+.messagepop p, .messagepop.div {
+  border-bottom: 1px solid #EFEFEF;
+  margin: 8px 0;
+  padding-bottom: 8px;
+}
+
+.inviteFriendImage{
+    width: 40px;
+    height: 40px;
+}
+
+#inviteFriendTable tr td{
+    min-width: 340px;
+    padding: 10px;
+}
+
+.inviteButtons{
+    height: 80px;
+}
+.inviteButtons button{
+    float: left;
+    margin: 10px;
+}
+#inviteFriendTable input{
+    margin-right: 20px;
+}
+
+.tdBorder{
+    border-bottom: 1px solid lightgray;
 }

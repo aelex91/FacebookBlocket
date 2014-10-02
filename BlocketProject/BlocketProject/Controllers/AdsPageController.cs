@@ -11,6 +11,8 @@ using BlocketProject.Models.DbClasses;
 using BlocketProject.Helpers;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
+using System.Web.Routing;
+using System;
 
 namespace BlocketProject.Controllers
 {
@@ -54,16 +56,20 @@ namespace BlocketProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Invite(int UserId, int EventId)
+        public ActionResult InviteFriends(List<int> selectedList, int EventId, int userId)
         {
-            var friends = ConnectionHelper.GetFriendsByUserId(UserId);
-            List<DbUserInformation> model = new List<DbUserInformation>();
 
-            foreach (var friend in friends)
+            foreach (var friend in selectedList)
             {
+                if (friend != 0)
+                {
+                    ConnectionHelper.InviteFriends(friend, EventId, userId);
+                }
+                
             }
 
-            return PartialView("Invite", model);
+            return RedirectToAction("Index", new { @EventId = EventId });
+
         }
 
 

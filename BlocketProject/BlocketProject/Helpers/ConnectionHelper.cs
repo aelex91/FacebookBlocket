@@ -355,7 +355,7 @@ namespace BlocketProject.Helpers
             return pictureUrl;
         }
 
-        public static BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation GetUserInformationByEmail(string email)
+        public static ProfilePageViewModel.UserInformation GetUserInformationByEmail(string email)
         {
             var result = (from r in db.DbUserInformation
                           where r.Email == email
@@ -376,6 +376,14 @@ namespace BlocketProject.Helpers
                               ModifiedOn = r.ModifiedOn,
 
                           }).FirstOrDefault();
+            return result;
+        }
+
+        public static DbUserInformation GetUserInformationByUserId(int UserId)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.UserId == UserId
+                          select r).FirstOrDefault();
             return result;
         }
 
@@ -562,6 +570,58 @@ namespace BlocketProject.Helpers
             query.StatusId = 3;
             db.SaveChanges();
 
+        }
+
+        public static string GetCategoryNameById(int id)
+        {
+            var query = (from p in db.DbCategories
+                         where p.Id == id
+                         select p.CategoryName).FirstOrDefault();
+            return query;
+        }
+
+        public static bool CheckIfFriendExistInDB(int id, int userId)
+        {
+            var query = (from p in db.DbFriends
+                         where p.FriendId == id && p.UserId == userId
+                         select p).FirstOrDefault();
+            if (query != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool CheckInvitableFriends(int id, int eventId)
+        {
+            var query = (from p in db.DbGuestList
+                         where p.UserId == id && p.EventId == eventId
+                         select p).FirstOrDefault();
+            if (query != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public static void InviteFriends(int friendId, int eventId, int userId)
+        {
+
+            DbGuestList newGuest = new DbGuestList();
+
+            newGuest.StatusId = 4;
+            newGuest.EventId = eventId;
+            newGuest.UserId = friendId;
+            newGuest.InvitedByUserId = userId;
+
+            db.DbGuestList.Add(newGuest);
+            db.SaveChanges();
         }
 
 

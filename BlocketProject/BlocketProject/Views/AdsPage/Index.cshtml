@@ -7,7 +7,7 @@
 <h2>@Model.Heading</h2>
 @if (Model.UserEventModel == null)
 {
-    <ul style="list-style: none;">
+    <ul id="adList" style="list-style: none;">
         @if (Model.CurrentUserAds)
         {
             foreach (var ad in Model.ListCurrentUserAdsModel)
@@ -25,6 +25,7 @@
 
             }
         }
+
         else
         {
             foreach (var ad in Model.ListUserAdsModel)
@@ -35,17 +36,26 @@
                     {
                         <button type="submit" style="border:none; background: none;">
                             <h3>@ad.Title</h3>
-                            <br />
-                            <img src="@ad.ImageUrl" width="150" alt="" /><br />
-                            <p>@ad.EventDescription</p>
-                            <br />
+                            <img src="@ad.ImageUrl" class="adListImage" />
+                            @if (ad.EventDescription.Count() > 80)
+                            {
+
+                            }
+                            else
+                            {
+                                <p>@ad.EventDescription</p>
+                            }
                             <p>Pris: @ad.Price kr</p>
                             <p>Datum: @ad.PublishDate.ToShortDateString()</p>
-                        </button><br />
+                        </button>
                     }
                     @using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { id = ad.UserId }, FormMethod.Post))
                     {
-                        <b>Annons av: <button class="linkButton">@BlocketProject.Helpers.ConnectionHelper.GetUserName(ad.UserId)</button></b>
+                        {
+                            var user = ConnectionHelper.GetUserInformationByUserId(ad.UserId);
+
+                            <b>Skapad av: <button class="linkButton">@user.FirstName @user.LastName</button></b>
+                        }
                     }
                 </li>
 
@@ -70,32 +80,109 @@ else
         {
             <div class="eventOptions" style="float: left; margin-left: 30px; border: 2px solid black; width: 150px; height: 150px;">
                 <ul style="margin: 0; list-style: none;">
-                    @using (Html.BeginForm("Invite", "AdsPage", new { @UserId = ConnectionHelper.GetUserIdByEmail(User.Identity.Name),@EventId = Model.UserEventModel.EventId, @class = "InvitePopup" }, FormMethod.Post))
-                    {
-                        <li><button type="submit" class="linkButton">Bjud in</button></li>
-                    }
                     <li><button type="submit" class="linkButton InvitePopup">Bjud in</button></li>
-                    <li><button type="submit" class="linkButton">Bjud in</button></li>
-                    <li><button type="submit" class="linkButton">Bjud in</button></li>
-                    <li><button type="submit" class="linkButton">Bjud in</button></li>
+                    <li><button type="submit" class="linkButton">Annat</button></li>
+                    <li><button type="submit" class="linkButton">Annat</button></li>
+                    <li><button type="submit" class="linkButton">Annat</button></li>
+                    <li><button type="submit" class="linkButton">Annat</button></li>
 
                 </ul>
             </div>
-        }
-        <script type="text/javascript">
-            $(function () {
-                $('.InvitePopup').click(function () {
-                    $('<div />').appendTo('body').dialog({
-                        close: function (event, ui) {
-                            dialog.remove();
-                        },
-                        modal: true
-                    }).load(this.href, {});
 
+            {
+                var checkFriends = ConnectionHelper.GetFriendsByUserId(Model.UserEventModel.UserId);
+                var friends = new List<BlocketProject.Models.DbClasses.DbUserInformation>();
+
+
+                <div class="messagepop pop">
+
+
+                    <table id="inviteFriendTable">
+                        <tr>
+                            <td><h3>Bjud in vänner:</h3></td>
+                        </tr>
+                        @foreach (var friend in checkFriends)
+                        {
+                            var check = ConnectionHelper.CheckInvitableFriends(friend.UserId, Model.UserEventModel.EventId);
+                            if (check == true)
+                            {
+                                friends.Add(friend);
+                            }
+
+                        }
+
+
+                        @using (Html.BeginForm("InviteFriends", "AdsPage", new { @eventId = Model.UserEventModel.EventId, @userId = Model.UserEventModel.UserId }, FormMethod.Post))
+                        {
+                            foreach (var friend in friends)
+                            {
+                                <tr>
+                                    <td class="tdBorder">
+                                        <input type="checkbox" name="selectedList" value="@friend.UserId" />
+                                        <img src="@friend.ImageUrl" class="inviteFriendImage" /> @friend.FirstName @friend.LastName
+                                    </td>
+                                </tr>
+                            }
+
+                            if (friends.Count == 0)
+                            {
+                                <tr class="inviteButtons">
+                                    <td>
+                                        <h5>Du har inga vänner som du kan bjuda in.<br />Kontrollera att dina vänner inte redan deltar i evenemanget.</h5>
+                                    </td>
+                                </tr>
+                                <tr class="inviteButtons">
+                                    <td>
+                                        <button class="btn btn-default closeDialog">Stäng</button>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr class="inviteButtons">
+                                    <td>
+                                        <button type="submit" class="btn btn-default">Skicka</button>
+                                        <button class="btn btn-default closeDialog">Avbryt</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </table>
+                </div>
+
+            }
+        }
+
+        <script type="text/javascript">
+            function deselect(e) {
+                $('.pop').slideFadeToggle(function () {
+                    e.removeClass('selected');
+                });
+            }
+
+            $(function () {
+                $('.InvitePopup').on('click', function () {
+                    if ($(this).hasClass('selected')) {
+                        deselect($(this));
+                    } else {
+                        $(this).addClass('selected');
+                        $('.pop').slideFadeToggle();
+                    }
+                    return false;
+                });
+
+                $('.closeDialog').on('click', function () {
+                    deselect($('.InvitePopup'));
                     return false;
                 });
             });
+
+            $.fn.slideFadeToggle = function (easing, callback) {
+                return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+            };
         </script>
+
 
         <div class="guestList" style="float: left; width: 390px; border: 2px solid black; height: 600px; margin-left: 30px;">
             <ul class="nav nav-tabs">

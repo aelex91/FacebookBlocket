@@ -216,8 +216,14 @@ namespace BlocketProject.Controllers
                 var friendModel = new DbFriends();
                 friendModel.UserId = model.UserId;
                 friendModel.FriendId = friend.UserId;
+                var check = ConnectionHelper.CheckIfFriendExistInDB(friend.UserId, model.UserId);
 
-                db.DbFriends.Add(friendModel);
+                if(check == false)
+                { 
+                    db.DbFriends.Add(friendModel);
+                }
+                
+                
 
             }
             db.SaveChanges();

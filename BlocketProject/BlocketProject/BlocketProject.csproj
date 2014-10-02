@@ -540,7 +540,6 @@
     <Content Include="Views\AdsPage\PendingList.cshtml" />
     <Content Include="Views\AdsPage\MaybeAttendingList.cshtml" />
     <Content Include="Views\AdsPage\InvitedList.cshtml" />
-    <Content Include="Views\AdsPage\Invite.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
