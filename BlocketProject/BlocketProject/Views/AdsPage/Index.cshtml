@@ -3,6 +3,9 @@
 
 
 <link href="~/Content/Teststyle.css" rel="stylesheet" />
+@{
+    var currentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+}
 
 <h2>@Model.Heading</h2>
 @if (Model.UserEventModel == null)
@@ -30,35 +33,64 @@
         {
             foreach (var ad in Model.ListUserAdsModel)
             {
+                if (ad.ExpirationDate > DateTime.Now && ad.MaxGuests > ConnectionHelper.GetAttendingUsers(ad.EventId).Count())
+                {
 
-                <li>
-                    @using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId }, FormMethod.Post))
-                    {
-                        <button type="submit" style="border:none; background: none;">
-                            <h3>@ad.Title</h3>
-                            <img src="@ad.ImageUrl" class="adListImage" />
-                            @if (ad.EventDescription.Count() > 80)
-                            {
 
-                            }
-                            else
-                            {
-                                <p>@ad.EventDescription</p>
-                            }
-                            <p>Pris: @ad.Price kr</p>
-                            <p>Datum: @ad.PublishDate.ToShortDateString()</p>
-                        </button>
-                    }
-                    @using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { id = ad.UserId }, FormMethod.Post))
-                    {
-                        {
-                            var user = ConnectionHelper.GetUserInformationByUserId(ad.UserId);
+                    <li>
+                        <table class="eventListTable">
+                            <tr>
 
-                            <b>Skapad av: <button class="linkButton">@user.FirstName @user.LastName</button></b>
-                        }
-                    }
-                </li>
+                                @using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId }, FormMethod.Post))
+                                {
+                                    <td>
+                                        <button type="submit" style="border:none; background: none;">
+                                            <h3>@ad.Title</h3>
+                                            <img src="@ad.ImageUrl" class="adListImage" />
+                                        </button>
+                                    </td>
 
+                                }
+                            </tr>
+                            <tr>
+                                <td>
+                                    @ConnectionHelper.GetCountyNameById(ad.CountyId), @ConnectionHelper.GetMunicipalityNameById(ad.MunicipalityId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Gäster: @ConnectionHelper.GetAttendingUsers(@ad.EventId).Count()/@ad.MaxGuests.
+                                    Söker: @ConnectionHelper.GetGenderName(ad.GenderId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (ad.Price != null)
+                                    {
+
+                                        <span>Pris: @ad.Price kr.</span>
+                                    }
+                                    @{
+
+                                        <span>@ad.ExpirationDate.Subtract(DateTime.Now).Days dagar kvar.</span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { id = ad.UserId }, FormMethod.Post))
+                                    {
+                                        {
+                                            var user = ConnectionHelper.GetUserInformationByUserId(ad.UserId);
+
+                                            <b>Värd: <button class="linkButton">@user.FirstName @user.LastName</button></b>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                }
 
             }
 
@@ -71,10 +103,72 @@
 else
 {
     <div class="fullEvent">
-
         <div class="eventImage" style="float: left;">
             <img src="@Model.UserEventModel.ImageUrl" style="max-width: 300px; float: left;" />
             <h1><span>@Model.UserEventModel.Title</span></h1>
+        </div>
+        <div class="eventInformation" style="float: left;">
+            <h1>@Model.UserEventModel.Title</h1>
+            <p>@Model.UserEventModel.EventDescription</p>
+            <p>@ConnectionHelper.GetAttendingUsers(Model.UserEventModel.EventId).Count()/@Model.UserEventModel.MaxGuests kommer.</p>
+
+            @if (currentUser.Email != ConnectionHelper.GetUserInformationByEmail(Model.UserEventModel.Email).Email)
+            {
+
+
+                var host = ConnectionHelper.GetUserInformationByEmail(Model.UserEventModel.Email);
+                var currentUserFriends = ConnectionHelper.GetFriendsByUserId(currentUser.UserId);
+                var hostFriends = ConnectionHelper.GetFriendsByUserId(Model.UserEventModel.UserId);
+                var compare = ConnectionHelper.CompareFriends(currentUserFriends, hostFriends);
+
+
+
+
+                using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { id = host.UserId }, FormMethod.Post))
+                {
+                    <p>Skapad av: <button type="submit" class="linkButton">@host.FirstName @host.LastName</button> &nbsp;<button type="button" class="commonFriends linkButton">(@compare.Count() gemensamma vänner.)</button></p>
+                    <div class="messagepop pop">
+
+
+                        <table id="inviteFriendTable">
+                            <tr>
+                                <td><h3>Gemensamma vänner:</h3></td>
+                            </tr>
+
+                            @foreach (var friend in compare)
+                            {
+                                <tr>
+                                    <td class="tdBorder">
+                                        <img src="@friend.ImageUrl" class="inviteFriendImage" /> @friend.FirstName @friend.LastName
+                                    </td>
+                                </tr>
+                            }
+
+
+                            <tr class="inviteButtons">
+                                <td>
+                                    <button class="btn btn-default closeDialog">Stäng</button>
+                                </td>
+                            </tr>
+
+
+
+                        </table>
+                    </div>
+                }
+
+
+
+            }
+            @if (Model.ListAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListMaybeAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListInvitedUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListNotAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)))
+            {
+
+                <b>Var?</b><br />
+                <span>@ConnectionHelper.GetCountyNameById(Model.UserEventModel.CountyId), @ConnectionHelper.GetMunicipalityNameById(Model.UserEventModel.MunicipalityId)</span>
+                <br /><b>När?</b><br />
+                @Model.UserEventModel.ExpirationDate.ToShortDateString()
+            }
+
         </div>
         @if (User.Identity.Name == Model.User.Email)
         {
@@ -153,73 +247,34 @@ else
 
             }
         }
-
-        <script type="text/javascript">
-            function deselect(e) {
-                $('.pop').slideFadeToggle(function () {
-                    e.removeClass('selected');
-                });
-            }
-
-            $(function () {
-                $('.InvitePopup').on('click', function () {
-                    if ($(this).hasClass('selected')) {
-                        deselect($(this));
-                    } else {
-                        $(this).addClass('selected');
-                        $('.pop').slideFadeToggle();
-                    }
-                    return false;
-                });
-
-                $('.closeDialog').on('click', function () {
-                    deselect($('.InvitePopup'));
-                    return false;
-                });
-            });
-
-            $.fn.slideFadeToggle = function (easing, callback) {
-                return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
-            };
-        </script>
+        @if (Model.ListAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListMaybeAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListInvitedUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListNotAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)))
+        {
 
 
-        <div class="guestList" style="float: left; width: 390px; border: 2px solid black; height: 600px; margin-left: 30px;">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#pane1" data-toggle="tab">Kommer</a></li>
-                <li><a href="#pane2" data-toggle="tab">Kanske</a></li>
-                <li><a href="#pane3" data-toggle="tab">Förfrågningar</a></li>
-                <li><a href="#pane4" data-toggle="tab">Inbjudna</a></li>
-            </ul>
-            <div class="tab-content">
-                <div id="pane1" class="tab-pane active">
-                    @Html.Partial("AttendingList")
-                </div>
-                <div id="pane2" class="tab-pane">
-                    @Html.Partial("MaybeAttendingList")
-                </div>
-                <div id="pane3" class="tab-pane">
-                    @Html.Partial("PendingList")
-                </div>
-                <div id="pane4" class="tab-pane">
-                    @Html.Partial("InvitedList")
+            <div class="guestList" style="float: left; width: 390px; border: 2px solid black; height: 600px; margin-left: 30px;">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#pane1" data-toggle="tab">Kommer</a></li>
+                    <li><a href="#pane2" data-toggle="tab">Kanske</a></li>
+                    <li><a href="#pane3" data-toggle="tab">Förfrågningar</a></li>
+                    <li><a href="#pane4" data-toggle="tab">Inbjudna</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="pane1" class="tab-pane active">
+                        @Html.Partial("AttendingList")
+                    </div>
+                    <div id="pane2" class="tab-pane">
+                        @Html.Partial("MaybeAttendingList")
+                    </div>
+                    <div id="pane3" class="tab-pane">
+                        @Html.Partial("PendingList")
+                    </div>
+                    <div id="pane4" class="tab-pane">
+                        @Html.Partial("InvitedList")
+                    </div>
                 </div>
             </div>
-        </div>
+        }
 
-        <div class="eventInformation" style="float: left; margin-top: 20px; position: relative; bottom: 300px;">
-            <h1>@Model.UserEventModel.Title</h1>
-            <p>@Model.UserEventModel.EventDescription</p>
-            <p>@ConnectionHelper.GetAttendingUsers(Model.UserEventModel.EventId).Count()/@Model.UserEventModel.MaxGuests kommer.</p>
-            <p>
-                <b>Var?</b><br />
-                @ConnectionHelper.GetCountyNameById(Model.UserEventModel.CountyId), @ConnectionHelper.GetMunicipalityNameById(Model.UserEventModel.MunicipalityId)
-                <br /><b>När?</b><br />
-                @Model.UserEventModel.ExpirationDate.ToShortDateString()
-            </p>
-
-
-        </div>
     </div>
 }
 

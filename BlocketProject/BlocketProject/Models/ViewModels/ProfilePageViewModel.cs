@@ -68,15 +68,23 @@ namespace BlocketProject.Models.ViewModels
 
         public class UserAdsModel
         {
-            public int UserId { get; set; }
             public int EventId { get; set; }
+            public string Email { get; set; }
+            public int UserId { get; set; }
             public string Title { get; set; }
             public int Price { get; set; }
+            public int Phone { get; set; }
             public string EventDescription { get; set; }
             public string ImageUrl { get; set; }
+            public int CategoryId { get; set; }
+            public int GenderId { get; set; }
             public DateTime PublishDate { get; set; }
             public DateTime ExpirationDate { get; set; }
-            public int CategoryId { get; set; }
+            public int MunicipalityId { get; set; }
+            public int CountyId { get; set; }
+            public bool HideImportantInfo { get; set; }
+            public int MaxGuests { get; set; }
+            public int Zipcode { get; set; }
         }
         public string GetLinkByPageReference(PageReference pReference)
         {

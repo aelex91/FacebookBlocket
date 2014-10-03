@@ -402,6 +402,7 @@ namespace BlocketProject.Helpers
                          where a.UserId == id
                          select new ProfilePageViewModel.UserAdsModel
                          {
+                             Email = a.Email,
                              UserId = a.UserId,
                              EventId = a.EventId,
                              EventDescription = a.EventDescription,
@@ -410,8 +411,14 @@ namespace BlocketProject.Helpers
                              PublishDate = a.PublishDate,
                              ExpirationDate = a.ExpirationDate,
                              Title = a.Title,
-
-
+                             CategoryId = a.CategoryId,
+                             GenderId = a.GenderId,
+                             CountyId = a.CountyId,
+                             MunicipalityId = a.MunicipalityId,
+                             HideImportantInfo = a.HideImportantInfo,
+                             MaxGuests = a.MaxGuests,
+                             Zipcode = a.Zipcode,
+                             Phone = a.Phone
                          }).ToList();
 
             return query;
@@ -622,6 +629,51 @@ namespace BlocketProject.Helpers
 
             db.DbGuestList.Add(newGuest);
             db.SaveChanges();
+        }
+
+        public static List<DbUserInformation> CompareFriends(List<DbUserInformation> friends, List<DbUserInformation> hostFriends)
+        {
+            var commonFriends = new List<DbUserInformation>();
+
+            if (friends.Count() > hostFriends.Count())
+            {
+                foreach (var friend in friends)
+                {
+                    foreach (var hostFriend in hostFriends)
+                    {
+                        if (friend.UserId == hostFriend.UserId)
+                        {
+                            commonFriends.Add(hostFriend);
+                        }
+                    }
+                }
+            }
+            else if (hostFriends.Count() > friends.Count())
+            {
+                foreach (var hostFriend in hostFriends)
+                {
+                    foreach (var friend in friends)
+                    {
+                        if (hostFriend.UserId == friend.UserId)
+                        {
+                            commonFriends.Add(friend);
+                        }
+                    }
+                }
+            }
+
+            return commonFriends;
+           
+          
+        }
+
+        public static string GetGenderName(int id)
+        {
+            var query = (from p in db.DbGenders
+                         where p.GenderId == id
+                         select p.Gender).FirstOrDefault();
+
+            return query;
         }
 
 

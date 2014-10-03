@@ -186,5 +186,68 @@ IContentLoader contentLoader = null)
             writer.WriteLine("</ul>");
         }
 
+        public static void RenderFooterNavigation(
+      this HtmlHelper html,
+      PageReference rootLink = null,
+      ContentReference contentLink = null,
+      bool includeRoot = true,
+      IContentLoader contentLoader = null)
+        {
+            contentLink = contentLink ??
+            html.ViewContext.RequestContext.GetContentLink();
+            rootLink = rootLink ??
+            ContentReference.StartPage;
+            var writer = html.ViewContext.Writer;
+            //Top level elements
+            writer.WriteLine("<ul class=\"footerNav\">");
+            if (includeRoot)
+            {
+                //Link to the root page
+                if (rootLink.CompareToIgnoreWorkID(contentLink))
+                {
+                    writer.WriteLine("<li class=\"active\">");
+                }
+                else
+                {
+                    writer.WriteLine("<li>");
+                }
+                writer.WriteLine(
+                html.PageLink(rootLink).ToHtmlString());
+                writer.WriteLine("</li>");
+            }
+            //Retrieve and filter the root pages children
+            contentLoader = contentLoader ??
+            ServiceLocator.Current.GetInstance<IContentLoader>();
+            var topLevelPages = contentLoader
+            .GetChildren<PageData>(rootLink);
+            topLevelPages = FilterForVisitor.Filter(topLevelPages)
+            .OfType<PageData>()
+            .Where(x => x.VisibleInMenu);
+            //Retrieve the "path" from the current page up to the
+            //root page in the content tree in order to check if
+            //a link should be highlighted.
+            var currentBranch = contentLoader.GetAncestors(contentLink)
+            .Select(x => x.ContentLink)
+            .ToList();
+            currentBranch.Add(contentLink);
+            //Link to the root pages children
+            foreach (var topLevelPage in topLevelPages)
+            {
+                if (currentBranch.Any(x =>
+                x.CompareToIgnoreWorkID(topLevelPage.ContentLink)))
+                {
+                    writer.WriteLine("<li class=\"active\">");
+                }
+                else
+                {
+                    writer.WriteLine("<li>");
+                }
+                writer.WriteLine(html.PageLink(topLevelPage).ToHtmlString());
+                writer.WriteLine("</li>");
+            }
+            //Close top level element
+            writer.WriteLine("</ul>");
+        }
+
     }
 }

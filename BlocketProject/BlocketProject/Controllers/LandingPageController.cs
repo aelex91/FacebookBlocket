@@ -34,5 +34,11 @@ namespace BlocketProject.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Search(LandingPage currentPage, string query)
+        {
+            return View();
+        }
+
     }
 }

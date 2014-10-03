@@ -33,31 +33,32 @@
             <table>
                 <tr class="boxPlacement">
                     <td>
-                        @Html.PropertyFor(x => x.FirstNameLabel)
+                        @Html.PropertyFor(x => x.FirstNameLabel)<br />
                         @Html.TextBoxFor(x => x.RegisterUser.FirstName)
                     </td>
                     <td>
-                        @Html.PropertyFor(x => x.LastNameLabel)
+                        @Html.PropertyFor(x => x.LastNameLabel)<br />
                         @Html.TextBoxFor(x => x.RegisterUser.LastName)
                     </td>
                 </tr>
                 <tr class="boxPlacement">
                     <td>
-                        @Html.PropertyFor(x => x.EmailLabel)
+                        @Html.PropertyFor(x => x.EmailLabel)<br />
                         @Html.TextBoxFor(x => x.RegisterUser.Email)
                     </td>
                     <td>
-                        @Html.PropertyFor(x => x.PasswordLabel)
+                        @Html.PropertyFor(x => x.PasswordLabel)<br />
                         @Html.PasswordFor(x => x.RegisterUser.Password)
                     </td>
 
                 </tr>
                 <tr class="boxPlacement">
                     <td>
-                        @Html.PropertyFor(x => x.CityLabel)
+                        @Html.PropertyFor(x => x.CityLabel)<br />
                         @Html.DropDownListFor(x => x.RegisterUser.SelectedCounty, new SelectList(Model.RegisterUser.County, "Key", "Value"), "Välj län", new { id = "counties", @class = "textfield list" })
                     </td>
                     <td>
+                        <br />
                         @Html.DropDownListFor(x => x.RegisterUser.SelectedMunicipality, new SelectList(Model.RegisterUser.Municipality, "Key", "Value"), "Välj kommun", new { id = "municipality", @class = "textfield list" })
                     </td>
                 </tr>

@@ -30,20 +30,31 @@
                         }
                         @if (user.Email == User.Identity.Name)
                         {
-                            using (Html.BeginForm("SetAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            if (Model.ListAttendingUsers.Count() < Model.UserEventModel.MaxGuests)
                             {
-                                <button class="btn btn-default LeftButton statusButton">Kommer</button>
+
+
+                                using (Html.BeginForm("SetAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                                {
+                                    <button class="btn btn-default LeftButton statusButton">Kommer</button>
+                                }
+                                using (Html.BeginForm("SetMaybeAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                                {
+                                    <button class="btn btn-default LeftButton statusButton">Kanske</button>
+                                }
+                                using (Html.BeginForm("RemoveAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                                {
+                                    <button class="btn btn-default LeftButton statusButton">Kommer inte</button>
+                                }
+
                             }
-                            using (Html.BeginForm("SetMaybeAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
+                            else
                             {
-                                <button class="btn btn-default LeftButton statusButton">Kanske</button>
+                                <p>Eventet är fullt.</p>
                             }
-                            using (Html.BeginForm("RemoveAttendingStatus", "AdsPage", new { @UserId = user.UserId, @EventId = Model.UserEventModel.EventId }, FormMethod.Post))
-                            {
-                                <button class="btn btn-default LeftButton statusButton">Kommer inte</button>
-                            }
-                            
+
                         }
+
 
                     </td>
                 </tr>

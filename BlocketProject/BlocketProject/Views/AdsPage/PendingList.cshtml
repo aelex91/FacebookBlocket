@@ -42,6 +42,38 @@
             </tr>
         }
     }
+    else
+    {
+        if (Model.ListPendingUsers.Count() != 0)
+        {
+            foreach (var user in Model.ListPendingUsers)
+            {
+                <tr>
+
+                    <td>
+                        <span>
+                            @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = user.UserId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="linkButton LeftButton">
+                                    <img src="@user.ImageUrl" />
+                                    @user.FirstName @user.LastName
+                                </button>
+                            }
+                        </span>
+                    </td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <p>Inga ansökande.</p>
+                </td>
+            </tr>
+        }
+    }
 
 
 

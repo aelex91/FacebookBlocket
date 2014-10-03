@@ -32,12 +32,21 @@ namespace BlocketProject.Models.Pages
             )]
         public virtual PageReference LoginRedirect { get; set; }
 
+        [Required]
+        [Display(
+            Name = "Facebookbutton text",
+            Description = "The text that will be displayed on the 'Sign in with facebook'-button.",
+            Order = 400
+            )]
+        public virtual string FacebookButtonText { get; set; }
+
         public override void SetDefaultValues(ContentType contentType)
         {
 
             base.SetDefaultValues(contentType);
 
             LoginRedirect = PageReference.StartPage;
+            FacebookButtonText = "Logga in med";
         }
 
     }

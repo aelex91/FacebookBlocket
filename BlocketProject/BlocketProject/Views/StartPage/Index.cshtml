@@ -5,7 +5,7 @@
     {
         if (!User.Identity.IsAuthenticated)
         {
-            <button type="submit" class="loginbutton glow">Logga in med <img src="~/images/FB-f-Logo__white_72.png" /></button>
+            <button type="submit" class="loginbutton glow">@Model.FacebookButtonText &nbsp;&nbsp;&nbsp;<img src="~/images/FB-f-Logo__white_72.png" /></button>
         }
     }
 

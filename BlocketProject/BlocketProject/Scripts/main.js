@@ -153,3 +153,139 @@ function isNumberKey(evt) {
 
 
 
+function deselect(e) {
+    $('.pop').slideFadeToggle(function () {
+        e.removeClass('selected');
+    });
+}
+
+$(function () {
+    $('.friendsLink').on('click', function () {
+        if ($(this).hasClass('selected')) {
+            deselect($(this));
+        } else {
+            $(this).addClass('selected');
+            $('.pop').slideFadeToggle();
+        }
+        return false;
+    });
+
+    $('.closeDialog').on('click', function () {
+        deselect($('.commonFriends'));
+        return false;
+    });
+});
+
+$.fn.slideFadeToggle = function (easing, callback) {
+    return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+};
+
+$(function () {
+    $('.commonFriends').on('click', function () {
+        if ($(this).hasClass('selected')) {
+            deselect($(this));
+        } else {
+            $(this).addClass('selected');
+            $('.pop').slideFadeToggle();
+        }
+        return false;
+    });
+
+    $('.closeDialog').on('click', function () {
+        deselect($('.commonFriends'));
+        return false;
+    });
+});
+
+$.fn.slideFadeToggle = function (easing, callback) {
+    return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+};
+
+
+
+//Klicka en gång sätt variable värde till true
+// om den är true, så skapa en metod som stänger den.
+$(document).ready(function () {
+    $("#UserTable").hide();
+
+});
+
+
+$('#showProfile').click(function () {
+    if ($("#UserTable").is(":hidden")) {
+
+        $('#showProfile').animate({ marginLeft: '-10px' });
+        $("#UserTable").show(500);
+
+    }
+    else if ($("#UserTable").is(":visible")) {
+        $('#showProfile').animate({ marginLeft: '-33px' });
+        $("#UserTable").hide();
+    }
+
+
+});
+
+
+function deselect(e) {
+    $('.pop').slideFadeToggle(function () {
+        e.removeClass('selected');
+    });
+}
+
+$(function () {
+    $('.InvitePopup').on('click', function () {
+        if ($(this).hasClass('selected')) {
+            deselect($(this));
+        } else {
+            $(this).addClass('selected');
+            $('.pop').slideFadeToggle();
+        }
+        return false;
+    });
+
+    $('.closeDialog').on('click', function () {
+        deselect($('.InvitePopup'));
+        return false;
+    });
+});
+
+$.fn.slideFadeToggle = function (easing, callback) {
+    return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+};
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imagefile').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#file").change(function () {
+    readURL(this);
+});
+
+
+$(document).ready(function () {
+    $(".searchField").hide();
+
+    $(".searchTrigger").click(function () {
+
+        // Set the effect type
+        var effect = 'slide';
+
+        // Set the options for the effect type chosen
+        var options = { direction: 'left' };
+
+        // Set the duration (default: 400 milliseconds)
+        var duration = 400;
+
+        $('.searchField').toggle(effect, options, duration);
+    });
+});

@@ -87,22 +87,3 @@
     <center>   <input type="submit" value="@Model.LabelButton" /></center>
     }
 }
-<script type="text/javascript">
-
-    function readURL(input) {
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#imagefile').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $("#file").change(function () {
-        readURL(this);
-    });
-</script>

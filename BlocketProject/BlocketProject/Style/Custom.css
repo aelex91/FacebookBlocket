@@ -8,7 +8,6 @@ body {
 #container {
     min-height: 100%;
     position: relative;
-    height: 100%;
 }
 
 #body {
@@ -16,9 +15,13 @@ body {
     padding-bottom: 130px; /* Height of the footer */
 }
 
+#header {
+}
+
 #footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
     height: 130px; /* Height of the footer */
     -moz-box-sizing: border-box;
@@ -62,8 +65,8 @@ body {
             }
 
 .adImageProfile {
-    height: 170px;
-    width: 210px;
+    height: 100px;
+    width: 150px;
 }
 
 #UserTable img {
@@ -128,7 +131,6 @@ td .floatleft {
     box-shadow: inset 0 2px 3px rgba( 0, 0, 0, 0.1 );
     clear: both;
     font-family: 'Open Sans', sans-serif;
-    margin-right: 15px;
     font-weight: 400;
     font-size: 12px;
     text-shadow: 1px 1px 0 rgba(256, 256, 256, 1.0);
@@ -508,8 +510,6 @@ header {
     text-align: center;
 }
 
-}
-
 .right {
     width: 55%;
     position: relative;
@@ -573,6 +573,7 @@ header {
     width: 600px;
     margin: 0 auto;
     text-align: center;
+    margin-bottom: 250px;
 }
 
     .registerform h2 {
@@ -665,6 +666,10 @@ header {
     margin-right: 20px;
 }
 
+#colNav {
+    float: right;
+}
+
 .dropdownButton {
     display: block;
     padding: 3px 20px;
@@ -720,14 +725,15 @@ header {
 }
 
 .loginbutton {
-    width: 300px;
+    width: 400px;
     height: 120px;
     background-color: #3b5998;
     color: ivory;
     border: 2px solid #3c3b98;
     border-radius: 15px;
     font-size: 1.8em;
-    margin-bottom: 80px;
+    margin-bottom: 250px;
+    margin-top: 250px;
 }
 
 .glow {
@@ -742,14 +748,8 @@ header {
 }
 
     .glow:hover, .glow:focus, .glow:active {
-        box-shadow: 0 0 50px rgba(139,157,195, 0.9);
+        box-shadow: 0 0 100px rgba(139,157,195, 0.8);
     }
-
-
-#friendTable td img {
-    height: 100px;
-    width: 100px;
-}
 
 .adListImage {
     width: 200px;
@@ -766,51 +766,117 @@ header {
 }
 
 .messagepop a.selected {
-  background-color:#1F75CC;
-  color:white;
-  z-index:100;
+    background-color: #1F75CC;
+    color: white;
+    z-index: 100;
 }
 
 .messagepop {
-  background-color:#FFFFFF;
-  border:1px solid #999999;
-  cursor:default;
-  display:none;
-  margin-top: 15px;
-  position:absolute;
-  text-align:left;
-  width:400px;
-  z-index:50;
-  padding: 25px 25px 20px;
-  border-radius: 12px;
-}
-.messagepop p, .messagepop.div {
-  border-bottom: 1px solid #EFEFEF;
-  margin: 8px 0;
-  padding-bottom: 8px;
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    cursor: default;
+    display: none;
+    margin-top: 15px;
+    position: absolute;
+    text-align: left;
+    width: 400px;
+    z-index: 50;
+    padding: 25px 25px 20px;
+    border-radius: 12px;
 }
 
-.inviteFriendImage{
+    .messagepop p, .messagepop.div {
+        border-bottom: 1px solid #EFEFEF;
+        margin: 8px 0;
+        padding-bottom: 8px;
+    }
+
+.inviteFriendImage {
     width: 40px;
     height: 40px;
 }
 
-#inviteFriendTable tr td{
+#inviteFriendTable tr td {
     min-width: 340px;
     padding: 10px;
 }
 
-.inviteButtons{
+.inviteButtons {
     height: 80px;
 }
-.inviteButtons button{
-    float: left;
-    margin: 10px;
-}
-#inviteFriendTable input{
+
+    .inviteButtons button {
+        float: left;
+        margin: 10px;
+    }
+
+#inviteFriendTable input {
     margin-right: 20px;
 }
 
-.tdBorder{
+.tdBorder {
     border-bottom: 1px solid lightgray;
+}
+
+
+#footer ul li {
+    list-style: none;
+}
+
+#footer a {
+    color: #DDD;
+}
+
+    #footer a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+#footer li {
+    line-height: 1.5em;
+}
+
+.searchForm {
+    float: left;
+    margin-top: 4px;
+}
+.searchForm li{
+    float: left;
+}
+
+    .searchForm .glyphicon {
+        font-size: 18px;
+        margin-right: 20px;
+        margin-left: 10px;
+        margin-top: 11px;
+        color: #ddd;
+        border:none;
+        background:none;
+    }
+    .searchForm .glyphicon:hover {
+        color: #fff;
+    }
+
+.searchButton {
+    height: 27px;
+    line-height: 0.8em;
+    margin-bottom: 1px;
+    margin-left: 5px;
+    color: #ddd;
+    background-color: #4d5663;
+    border: 1px solid #666666;
+}
+
+.searchButton:hover{
+    color: #fff;
+}
+#searchField {
+    width:400px;
+}
+
+#profileTable tr td {
+}
+
+.eventListTable{
+    text-align: center;
 }
