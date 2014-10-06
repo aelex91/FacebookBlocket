@@ -30,5 +30,6 @@ namespace BlocketProject.Models.DbClasses
         public DbSet<DbAttendingStatus> DbAttendingStatus { get; set; }
         public DbSet<DbGuestList> DbGuestList { get; set; }
         public DbSet<DbFriends> DbFriends { get; set; }
+        public DbSet<DbMessages> DbMessages { get; set; }
     }
 }

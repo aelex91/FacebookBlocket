@@ -70,10 +70,10 @@
 
                                         <span>Pris: @ad.Price kr.</span>
                                     }
-                                    @{
+                                    
 
                                         <span>@ad.ExpirationDate.Subtract(DateTime.Now).Days dagar kvar.</span>
-                                    }
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -170,6 +170,7 @@ else
             }
 
         </div>
+
         @if (User.Identity.Name == Model.User.Email)
         {
             <div class="eventOptions" style="float: left; margin-left: 30px; border: 2px solid black; width: 150px; height: 150px;">
@@ -247,7 +248,7 @@ else
 
             }
         }
-        @if (Model.ListAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListMaybeAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListInvitedUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListNotAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)))
+        @if (Model.ListAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListMaybeAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListInvitedUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || Model.ListNotAttendingUsers.Contains(ConnectionHelper.GetUserInformationByUserId(currentUser.UserId)) || currentUser.Email == User.Identity.Name)
         {
 
 

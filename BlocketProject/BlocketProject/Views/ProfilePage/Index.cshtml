@@ -196,7 +196,15 @@
 
 
                             <h3>@ad.Title</h3>
-                            <br />
+                            @if (@ad.ExpirationDate < DateTime.Now)
+                            {
+                                <p style="color: red; font-weight: bold;">Detta event har gått ut.</p>
+                            }
+                            else
+                            {
+                                <br />
+                            }
+                            
                             <img src="@ad.ImageUrl" class="adImageProfile" />
 
                             <br />

@@ -668,6 +668,7 @@ header {
 
 #colNav {
     float: right;
+    width: 350px;
 }
 
 .dropdownButton {
@@ -871,7 +872,7 @@ header {
     color: #fff;
 }
 #searchField {
-    width:400px;
+    width:200px;
 }
 
 #profileTable tr td {
@@ -879,4 +880,40 @@ header {
 
 .eventListTable{
     text-align: center;
+}
+
+.searchTrigger:focus
+{
+    outline: none !important;
+
+}
+
+.inbox{
+        font-size: 18px;
+        margin-top: 13px;
+        color: #ddd;
+        border:none;
+        background:none;
+}
+
+.inbox:hover{
+    color: #fff;
+}
+
+.inbox .newMessage{
+    color: #ff7500;
+}
+
+.messageButton{
+    border: none;
+    background: none;
+}
+
+#messageTable td{
+    border: 1px solid lightgray;
+    padding: 5px;
+}
+
+#messageTable tr{
+    padding: 10px;
 }

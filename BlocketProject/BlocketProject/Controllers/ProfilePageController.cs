@@ -31,7 +31,7 @@ namespace BlocketProject.Controllers
         string scope = WebConfigurationManager.AppSettings["FacebookScope"];
         UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
 
-    
+
         [Authorize] // users must be authenticated to view this page
         public ActionResult Index(ProfilePage currentPage, int? UserId)
         {
@@ -190,10 +190,23 @@ namespace BlocketProject.Controllers
             return RedirectToAction("Index", new { node = model.ProfileRedirect, UserId = id });
         }
 
+        [HttpPost]
+        public ActionResult Inbox()
+        {
+            var allMessages = ConnectionHelper.GetAllMessages(ConnectionHelper.GetUserByEmail(User.Identity.Name).UserId);
+            var model = new ProfilePageViewModel();
 
+            model.UserMessages = allMessages;
 
+            return View("Inbox", model);
 
+        }
 
-
+        [HttpPost]
+        public ActionResult ReadMessage(int messageId)
+        {
+            var model = ConnectionHelper.GetMessageByMessageId(messageId);
+            return PartialView("ReadMessage", model);
+        }
     }
 }

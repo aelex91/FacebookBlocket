@@ -1,6 +1,6 @@
 ﻿@using BlocketProject.Helpers
 @{
-    BlocketProject.Models.ViewModels.ProfilePageViewModel.UserInformation user = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+    var user = ConnectionHelper.GetUserByEmail(User.Identity.Name);
 }
 <!DOCTYPE html>
 
@@ -17,6 +17,7 @@
     <script src="~/Scripts/main.js"></script>
     <link href="~/Style/Custom.css" rel="stylesheet" />
     <link href="~/Style/DatePicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </head>
 
 @if (!User.Identity.IsAuthenticated)
@@ -27,10 +28,7 @@
 
             </div>
             <div id="body">
-
-
                 @RenderBody()
-
                 @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
             </div>
             <div id="footer">
@@ -93,7 +91,7 @@ else
                                         <button type="button" class="glyphicon glyphicon-search searchTrigger"></button>
                                     </li>
                                     <li class="navbar-btn searchField">
-                                        @using (Html.BeginForm("Search", "LandingPage", FormMethod.Post))
+                                        @using (Html.BeginForm("", "", FormMethod.Post))
                                         {
                                             @Html.TextBox("searchField")
                                             <button type="submit" class="btn searchButton">Sök</button>
@@ -103,9 +101,30 @@ else
                                 <ul class="nav" id="colNav">
                                     @if (user != null)
                                     {
+                                        
+                                            using (Html.BeginForm("Inbox", "ProfilePage", FormMethod.Post))
+                                            {
 
+                                                //Ändra så att man ser antal nya meddelanden.
+                                                <li>
+                                                    <button class="inbox">
+                                                        <span class="glyphicon glyphicon-envelope" >
+     
+                                                        </span>
+                                                        <span class="newMessage">
+                                                            @if (user.NumberOfUnreadMessages != 0)
+                                                            {
+                                                                @user.NumberOfUnreadMessages
+                                                            }
+                                                        </span>
+                                                    </button>
+                                                </li>
+                                            }
+                                        
+         
 
                                         <li>
+
                                             <a href="../profilepage" class="profileButton navbar-btn">
                                                 @user.FirstName @user.LastName &nbsp;&nbsp;
                                                 <img src="@user.ImageUrl" style="width: 30px; height: 30px;" />
@@ -118,7 +137,7 @@ else
                                         <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
                                             <i class="glyphicon glyphicon-align-justify"></i>
                                         </span>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu pull-right">
                                             @using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
                                             {
                                                 <li>

@@ -621,12 +621,27 @@ namespace BlocketProject.Helpers
         {
 
             DbGuestList newGuest = new DbGuestList();
+            DbMessages newMessage = new DbMessages();
+            var user = GetUserInformationByUserId(userId);
+            var friend = GetUserInformationByUserId(friendId);
+            var ad = GetAdById(eventId);
+
+
+            newMessage.EventId = eventId;
+            newMessage.UserId = friendId;
+            newMessage.InvitedByUserId = userId;
+            newMessage.MessageTitle = "Inbjudan till " + ad.Title;
+            newMessage.MessageText = "Du har blivit inbjuden till eventet " + ad.Title + " av " + user.FirstName + " " + user.LastName + ", du kan gå till eventet genom att klicka ";
+            newMessage.Unread = true;
 
             newGuest.StatusId = 4;
             newGuest.EventId = eventId;
             newGuest.UserId = friendId;
             newGuest.InvitedByUserId = userId;
 
+            friend.NumberOfUnreadMessages += 1;
+
+            db.DbMessages.Add(newMessage);
             db.DbGuestList.Add(newGuest);
             db.SaveChanges();
         }
@@ -676,6 +691,48 @@ namespace BlocketProject.Helpers
             return query;
         }
 
+        public static DbUserInformation GetUserByEmail(string email)
+        {
+            var result = (from r in db.DbUserInformation
+                          where r.Email == email
+                          select r).FirstOrDefault();
+            return result;
+        }
+
+        public static List<DbMessages> GetUnreadMessages(int userId)
+        {
+            var query = (from p in db.DbMessages
+                             join a in db.DbUserInformation on p.UserId equals a.UserId
+                             where a.UserId == userId && a.NumberOfUnreadMessages > 0
+                             select p).ToList();
+
+            return query;
+        }
+
+        public static List<DbMessages> GetAllMessages(int userId)
+        {
+            var query = (from p in db.DbMessages
+                         join a in db.DbUserInformation on p.UserId equals a.UserId
+                         where a.UserId == userId
+                         select p).ToList();
+
+            return query;
+        }
+
+        public static DbMessages GetMessageByMessageId(int messageId)
+        {
+            var query = (from p in db.DbMessages
+                         where p.MessageId == messageId
+                         select p).FirstOrDefault();
+            if (query.Unread == true)
+            {
+                var user = GetUserInformationByUserId(query.UserId);
+                query.Unread = false;
+                user.NumberOfUnreadMessages -= 1;
+                db.SaveChanges();
+            }
+            return query;
+        }
 
 
     }

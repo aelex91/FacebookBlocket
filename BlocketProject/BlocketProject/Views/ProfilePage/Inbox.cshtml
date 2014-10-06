@@ -1,0 +1,34 @@
+﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
+@{
+    ViewBag.Title = "Inbox";
+}
+
+<h2>Dina meddelanden:</h2><br />
+
+<div class="left">
+    <table id="messageTable">
+        @foreach (var message in Model.UserMessages)
+        {
+            <tr>
+                <td>
+                    @using (Ajax.BeginForm("ReadMessage", "ProfilePage", new { area = "ReadMessage", @messageId = message.MessageId }, new AjaxOptions() { UpdateTargetId = "showMessage" }))
+                    {
+                        <button type="submit" class="messageButton">
+                            @if (message.Unread == true)
+                            {
+                                <h4 style="font-weight:bold;">@message.MessageTitle</h4>
+                            }
+                            else if (message.Unread == false)
+                            {
+                                <h4>@message.MessageTitle</h4>
+                            }
+                        </button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="right" id="showMessage">
+    @Html.Partial("ReadMessage")
+</div>

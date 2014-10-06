@@ -64,6 +64,7 @@ namespace BlocketProject.Controllers
                 if (friend != 0)
                 {
                     ConnectionHelper.InviteFriends(friend, EventId, userId);
+                    
                 }
                 
             }

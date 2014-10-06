@@ -152,13 +152,6 @@ function isNumberKey(evt) {
 }(document, 'script', 'facebook-jssdk'));
 
 
-
-function deselect(e) {
-    $('.pop').slideFadeToggle(function () {
-        e.removeClass('selected');
-    });
-}
-
 $(function () {
     $('.friendsLink').on('click', function () {
         if ($(this).hasClass('selected')) {
@@ -169,16 +162,32 @@ $(function () {
         }
         return false;
     });
-
     $('.closeDialog').on('click', function () {
         deselect($('.commonFriends'));
         return false;
     });
+
 });
 
-$.fn.slideFadeToggle = function (easing, callback) {
-    return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
-};
+
+$(function () {
+    $('.InvitePopup').on('click', function () {
+        if ($(this).hasClass('selected')) {
+            deselect($(this));
+        } else {
+            $(this).addClass('selected');
+            $('.pop').slideFadeToggle();
+        }
+        return false;
+    });
+
+    $('.closeDialog').on('click', function () {
+        deselect($('.InvitePopup'));
+        return false;
+    });
+});
+
+
 
 $(function () {
     $('.commonFriends').on('click', function () {
@@ -201,6 +210,11 @@ $.fn.slideFadeToggle = function (easing, callback) {
     return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
 };
 
+function deselect(e) {
+    $('.pop').slideFadeToggle(function () {
+        e.removeClass('selected');
+    });
+}
 
 
 //Klicka en gång sätt variable värde till true
@@ -226,33 +240,6 @@ $('#showProfile').click(function () {
 
 });
 
-
-function deselect(e) {
-    $('.pop').slideFadeToggle(function () {
-        e.removeClass('selected');
-    });
-}
-
-$(function () {
-    $('.InvitePopup').on('click', function () {
-        if ($(this).hasClass('selected')) {
-            deselect($(this));
-        } else {
-            $(this).addClass('selected');
-            $('.pop').slideFadeToggle();
-        }
-        return false;
-    });
-
-    $('.closeDialog').on('click', function () {
-        deselect($('.InvitePopup'));
-        return false;
-    });
-});
-
-$.fn.slideFadeToggle = function (easing, callback) {
-    return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
-};
 
 function readURL(input) {
 
