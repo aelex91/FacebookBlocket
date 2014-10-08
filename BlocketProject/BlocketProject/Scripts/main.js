@@ -159,6 +159,11 @@ $(function () {
         } else {
             $(this).addClass('selected');
             $('.pop').slideFadeToggle();
+            $(".pop").position({
+                my: "center",
+                at: "center",
+                of: window
+            })
         }
         return false;
     });
@@ -177,6 +182,11 @@ $(function () {
         } else {
             $(this).addClass('selected');
             $('.pop').slideFadeToggle();
+            $(".pop").position({
+                my: "center",
+                at: "center",
+                of: window
+            })
         }
         return false;
     });
@@ -196,6 +206,11 @@ $(function () {
         } else {
             $(this).addClass('selected');
             $('.pop').slideFadeToggle();
+            $(".pop").position({
+                my: "center",
+                at: "center",
+                of: window
+            })
         }
         return false;
     });

@@ -202,7 +202,6 @@ namespace BlocketProject.Controllers
 
         }
 
-        [HttpPost]
         public ActionResult ReadMessage(int messageId)
         {
             var model = ConnectionHelper.GetMessageByMessageId(messageId);

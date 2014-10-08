@@ -1,7 +1,7 @@
 ﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
 @using BlocketProject.Helpers
 <h2>@Model.Heading</h2>
-@Html.HiddenFor(x => x.CurrentUser.FirstName)
+
 @if (Model.OtherUser != null)
 {
 
@@ -13,7 +13,7 @@
     <table id="profileTable">
         <tr>
             <td>
-            <img src="@Model.OtherUser.ImageUrl" height="300" />
+                <img src="@Model.OtherUser.ImageUrl" height="300" />
             </td>
         </tr>
         <tr>
@@ -22,14 +22,16 @@
 
                 @if (compare.Count() != 0)
                 {
-                <h5>
-                    <button type="button" class="linkButton commonFriends">@compare.Count() gemensamma vänner.</button>
-                </h5>
+                    <h5>
+                        <button type="button" class="linkButton commonFriends">@compare.Count() gemensamma vänner.</button>
+                    </h5>
                 }
                 else
                 {
-                <h6>Inga gemensamma vänner.</h6>
+                    <h6>Inga gemensamma vänner.</h6>
                 }
+
+                <button type="submit" id="newMessageButton" class="btn btn-default">Skicka meddelande</button>
                 <div class="messagepop pop">
 
 
@@ -42,7 +44,12 @@
                         {
                             <tr>
                                 <td class="tdBorder">
-                                    <img src="@friend.ImageUrl" class="inviteFriendImage" /> @friend.FirstName @friend.LastName
+                                    @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = friend.UserId }, FormMethod.Post))
+                                    {
+                                        <button type="submit" class="linkButton">
+                                            <img src="@friend.ImageUrl" class="inviteFriendImage" /> @friend.FirstName @friend.LastName
+                                        </button>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -70,28 +77,28 @@
 
                 foreach (var ad in Model.ListUserAds)
                 {
-            <td style="text-align: center; margin: 30px; float: left;">
+                    <td style="text-align: center; margin: 30px; float: left;">
 
-                @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
+                        @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
                         {
-                        <button type="submit" style="border: none; background:none;">
+                            <button type="submit" style="border: none; background:none;">
 
 
-                            <h4>@ad.Title</h4>
-                            <img src="@ad.ImageUrl" class="adImageProfile" /><br />
-                            <p>@ad.Price kr</p>
-                            <p>@ConnectionHelper.GetAttendingUsers(@ad.EventId).Count()/@ad.MaxGuests kommer.</p>
-                        </button>
+                                <h4>@ad.Title</h4>
+                                <img src="@ad.ImageUrl" class="adImageProfile" /><br />
+                                <p>@ad.Price kr</p>
+                                <p>@ConnectionHelper.GetAttendingUsers(@ad.EventId).Count()/@ad.MaxGuests kommer.</p>
+                            </button>
                         }
-            </td>
+                    </td>
                 }
             }
 
             else
             {
-            <td>
-                <p>Denna användare har inga skapade event.</p>
-            </td>
+                <td>
+                    <p>Denna användare har inga skapade event.</p>
+                </td>
             }
 
         </tr>
@@ -100,24 +107,32 @@
 }
 @if (Model.CurrentUser != null)
 {
-    @Html.HiddenFor(x => x.CurrentUser.FirstName)
+
 
 
 
     <div>
-        <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" height="300" />
-    </div>
-    <div>
-        <button type="submit" style="border: none; outline: none; background: transparent">
-            <img src="~/images/profileMenyIcon.png" class="profilepicmenu" id="showProfile" />
-        </button>
+        <table>
+            <tr>
+                <td>
+                    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" height="300"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
+                    {
+                        <input type="submit" value="Ändra profil" class="btn btn-default" /><br />
+                        <button type="button" class="friendsLink linkButton">@ConnectionHelper.GetFriendsByUserId(Model.CurrentUser.UserId).Count() Vänner</button>
+                    }
+                </td>
+            </tr>
 
+
+        </table>
     </div>
-    using (Html.BeginForm("EditProfile", "ProfilePage", FormMethod.Post))
-    {
-        <input type="submit" value="Ändra profil" />
-        <button type="button" class="friendsLink linkButton">@ConnectionHelper.GetFriendsByUserId(Model.CurrentUser.UserId).Count() Vänner</button>
-    }
+
+
 
     var friends = ConnectionHelper.GetFriendsByUserId(Model.CurrentUser.UserId);
 
@@ -132,20 +147,25 @@
 
             @foreach (var friend in friends)
             {
-            <tr>
-                <td class="tdBorder">
-                    <img src="@friend.ImageUrl" class="inviteFriendImage" /> @friend.FirstName @friend.LastName
-                </td>
-            </tr>
+                <tr>
+                    <td class="tdBorder">
+                        @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = friend.UserId }, FormMethod.Post))
+                        {
+                            <button type="submit" class="linkButton">
+                                <img src="@friend.ImageUrl" class="inviteFriendImage" /> @friend.FirstName @friend.LastName
+                            </button>
+                        }
+                    </td>
+                </tr>
             }
 
             @if (friends.Count == 0)
             {
-            <tr class="inviteButtons">
-                <td>
-                    <h5>Du har inga vänner.</h5>
-                </td>
-            </tr>
+                <tr class="inviteButtons">
+                    <td>
+                        <h5>Du har inga vänner.</h5>
+                    </td>
+                </tr>
 
             }
 
@@ -160,69 +180,47 @@
         </table>
     </div>
 
-
-    <table id="UserTable" style="margin: 30px;">
-        <tr>
-            <td rowspan="2"></td>
-            <td>
-                @Model.CurrentUser.FirstName @Model.CurrentUser.LastName
-            </td>
-        </tr>
-        <tr>
-            <td>
-
-                <img src="~/images/map_pin.png" class="icon" />
-                @Model.CurrentUser.Location
-            </td>
-            <td>
-
-                @Model.CurrentUser.Phone
-            </td>
-        </tr>
-
-    </table>
-
     <table id="UserAds">
         <tr>
             @if (Model.ListUserAds != null)
             {
                 foreach (var ad in Model.ListUserAds)
                 {
-            <td style="text-align: center; margin: 30px; float: left;">
+                    <td style="text-align: center; margin: 30px; float: left;">
 
-                @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
+                        @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, language = EPiServer.Globalization.ContentLanguage.PreferredCulture.Name }, FormMethod.Post))
                         {
-                        <button type="submit" style="border: none; background:none;">
+                            <button type="submit" style="border: none; background:none;">
 
 
-                            <h3>@ad.Title</h3>
-                            @if (@ad.ExpirationDate < DateTime.Now)
-                            {
-                                <p style="color: red; font-weight: bold;">Detta event har gått ut.</p>
-                            }
-                            else
-                            {
+                                <h3>@ad.Title</h3>
+                                @if (@ad.ExpirationDate < DateTime.Now)
+                                {
+                                    <p style="color: red; font-weight: bold;">Detta event har gått ut.</p>
+                                }
+                                else
+                                {
+                                    <br />
+                                }
+
+                                <img src="@ad.ImageUrl" class="adImageProfile" />
+
                                 <br />
-                            }
-                            
-                            <img src="@ad.ImageUrl" class="adImageProfile" />
-
-                            <br />
-                        </button>
+                            </button>
                         }
-                @using (Html.BeginForm("DeleteEvent", "ProfilePage", new { id = ad.EventId }, FormMethod.Post))
+                        @using (Html.BeginForm("DeleteEvent", "ProfilePage", new { id = ad.EventId }, FormMethod.Post))
                         {
-                        <input type="submit" id="@ad.EventId" value="Remove" />
+                            <input type="submit" id="@ad.EventId" value="Remove" />
 
                         }
-            </td>
+                    </td>
                 }
             }
             else
             {
-            <td>
-                <p>Denna användare har inga skapade event.</p>
-            </td>
+                <td>
+                    <p>Denna användare har inga skapade event.</p>
+                </td>
             }
 
         </tr>

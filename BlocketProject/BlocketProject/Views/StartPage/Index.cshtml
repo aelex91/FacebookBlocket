@@ -1,6 +1,6 @@
 ﻿@model BlocketProject.Models.Pages.StartPage
 
-<div class="wrapper">
+<div class="projectWrapper">
     @using (Html.BeginForm("Authenticate", "StartPage", FormMethod.Post))
     {
         if (!User.Identity.IsAuthenticated)

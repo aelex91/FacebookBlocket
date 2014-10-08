@@ -11,24 +11,48 @@
         {
             <tr>
                 <td>
-                    @using (Ajax.BeginForm("ReadMessage", "ProfilePage", new { area = "ReadMessage", @messageId = message.MessageId }, new AjaxOptions() { UpdateTargetId = "showMessage" }))
+                    @using (Ajax.BeginForm("ReadMessage", new { @messageId = message.MessageId }, new AjaxOptions { UpdateTargetId = "showMessage" }, FormMethod.Post))
                     {
                         <button type="submit" class="messageButton">
-                            @if (message.Unread == true)
+                            @if (message.Unread == true && message.SenderUserId != null)
                             {
                                 <h4 style="font-weight:bold;">@message.MessageTitle</h4>
+                                <abbr>@message.Timestamp.ToString("dd MMM HH:mm")</abbr>
                             }
-                            else if (message.Unread == false)
+                            else if (message.Unread == false && message.SenderUserId != null)
                             {
                                 <h4>@message.MessageTitle</h4>
+                                <abbr>@message.Timestamp.ToString("dd MMM HH:mm")</abbr>
+                            }
+                            else
+                            {
+                                <h4>@message.</h4>
+                                <h5>@message.MessageTitle</h5>
+                                <abbr>@message.Timestamp.ToString("dd MMM HH:mm")</abbr>
                             }
                         </button>
                     }
                 </td>
             </tr>
         }
+
     </table>
+    @if (Model.UserMessages.Count == 0)
+    {
+        <h4>Du har inga meddelanden.</h4>
+    }
 </div>
-<div class="right" id="showMessage">
-    @Html.Partial("ReadMessage")
-</div>
+@{
+    if (Model.UserMessages.Count != 0)
+    {
+        <div class="right" id="showMessage">
+
+            @{
+                  var msg = Model.UserMessages[0];
+            }
+            @Html.Partial("ReadMessage", msg)
+
+
+        </div>
+    }
+}

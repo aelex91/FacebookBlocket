@@ -629,16 +629,21 @@ namespace BlocketProject.Helpers
 
             newMessage.EventId = eventId;
             newMessage.UserId = friendId;
-            newMessage.InvitedByUserId = userId;
+            newMessage.SenderUserId = userId;
             newMessage.MessageTitle = "Inbjudan till " + ad.Title;
-            newMessage.MessageText = "Du har blivit inbjuden till eventet " + ad.Title + " av " + user.FirstName + " " + user.LastName + ", du kan gå till eventet genom att klicka ";
+            newMessage.MessageText = "Du har blivit inbjuden till eventet " + ad.Title + " av " + user.FirstName + " " + user.LastName + ", du kan gå till eventet genom att klicka här.";
             newMessage.Unread = true;
+            newMessage.Timestamp = DateTime.Now;
 
             newGuest.StatusId = 4;
             newGuest.EventId = eventId;
             newGuest.UserId = friendId;
             newGuest.InvitedByUserId = userId;
 
+            if (friend.NumberOfUnreadMessages < 0 || friend.NumberOfUnreadMessages == null)
+            {
+                friend.NumberOfUnreadMessages = 0;
+            }
             friend.NumberOfUnreadMessages += 1;
 
             db.DbMessages.Add(newMessage);

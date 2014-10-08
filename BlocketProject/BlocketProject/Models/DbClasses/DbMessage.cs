@@ -16,7 +16,8 @@ namespace BlocketProject.Models.DbClasses
         public string MessageText { get; set; }
         public int EventId { get; set; }
         public int UserId { get; set; }
-        public int InvitedByUserId { get; set; }
+        public int SenderUserId { get; set; }
         public bool Unread { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

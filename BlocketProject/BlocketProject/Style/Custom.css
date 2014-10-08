@@ -13,6 +13,7 @@ body {
 #body {
     padding: 10px;
     padding-bottom: 130px; /* Height of the footer */
+
 }
 
 #header {
@@ -30,6 +31,7 @@ body {
     color: #9ea8b8;
     line-height: 1.333;
     -webkit-font-smoothing: antialiased;
+
 }
 
 #nav li {
@@ -259,19 +261,6 @@ td .floatleft {
         text-decoration: none;
     }
 
-
-.profilepic {
-    background-size: cover;
-    width: 300px;
-    height: 300px;
-    float: left;
-    margin-left: 44px;
-    text-decoration: none;
-    display: block;
-    -webkit-border-radius: 9em;
-    -moz-border-radius: 9em;
-    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
-}
 
 .menuborder {
     border-radius: 3px;
@@ -770,6 +759,10 @@ header {
     background-color: #1F75CC;
     color: white;
     z-index: 100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -10px -10px auto auto;
 }
 
 .messagepop {
@@ -841,9 +834,10 @@ header {
     float: left;
     margin-top: 4px;
 }
-.searchForm li{
-    float: left;
-}
+
+    .searchForm li {
+        float: left;
+    }
 
     .searchForm .glyphicon {
         font-size: 18px;
@@ -851,12 +845,13 @@ header {
         margin-left: 10px;
         margin-top: 11px;
         color: #ddd;
-        border:none;
-        background:none;
+        border: none;
+        background: none;
     }
-    .searchForm .glyphicon:hover {
-        color: #fff;
-    }
+
+        .searchForm .glyphicon:hover {
+            color: #fff;
+        }
 
 .searchButton {
     height: 27px;
@@ -868,52 +863,91 @@ header {
     border: 1px solid #666666;
 }
 
-.searchButton:hover{
-    color: #fff;
-}
+    .searchButton:hover {
+        color: #fff;
+    }
+
 #searchField {
-    width:200px;
+    width: 200px;
 }
 
 #profileTable tr td {
 }
 
-.eventListTable{
+.eventListTable {
     text-align: center;
 }
 
-.searchTrigger:focus
-{
+.searchTrigger:focus {
     outline: none !important;
-
 }
 
-.inbox{
-        font-size: 18px;
-        margin-top: 13px;
-        color: #ddd;
-        border:none;
-        background:none;
-}
-
-.inbox:hover{
-    color: #fff;
-}
-
-.inbox .newMessage{
-    color: #ff7500;
-}
-
-.messageButton{
+.inbox {
+    font-size: 18px;
+    margin-top: 13px;
+    color: #ddd;
     border: none;
     background: none;
 }
 
-#messageTable td{
+    .inbox:hover {
+        color: #fff;
+    }
+
+    .inbox .newMessage {
+        color: #ff7500;
+    }
+
+.messageButton {
+    border: none;
+    background: none;
+}
+
+#messageTable td {
     border: 1px solid lightgray;
     padding: 5px;
 }
 
-#messageTable tr{
+    #messageTable td:active {
+        text-decoration: underline;
+    }
+
+#messageTable tr {
     padding: 10px;
+}
+
+#showMessage form {
+    display: inline;
+}
+
+#showMessage {
+    float: left;
+    text-align: left;
+    font-size: 15px;
+    border: 1px solid lightgray;
+    width: 650px;
+    min-height: 100%;
+    padding: 30px;
+    padding-bottom: 40px;
+}
+
+.guestList {
+    float: left;
+    width: 390px;
+    border: 1px solid lightgray;
+    margin-left: 30px;
+    max-height: 225px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.wider {
+    width: 410px;
+}
+
+
+.dlgfixed{
+    position: fixed;
+    left: 50%;
+    top: 50%;
 }
