@@ -68,7 +68,9 @@
 else
 {
 
+
     <body>
+
         <div id="container">
             <div id="header">
                 <header>
@@ -102,27 +104,27 @@ else
                                 <ul class="nav" id="colNav">
                                     @if (user != null)
                                     {
-                                        
-                                            using (Html.BeginForm("Inbox", "ProfilePage", FormMethod.Post))
-                                            {
 
-                                                //Ändra så att man ser antal nya meddelanden.
-                                                <li>
-                                                    <button class="inbox">
-                                                        <span class="glyphicon glyphicon-envelope" >
-     
-                                                        </span>
-                                                        <span class="newMessage">
-                                                            @if (user.NumberOfUnreadMessages != 0)
-                                                            {
-                                                                @user.NumberOfUnreadMessages
-                                                            }
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                            }
-                                        
-         
+                                        using (Html.BeginForm("Inbox", "ProfilePage", FormMethod.Post))
+                                        {
+
+                                            //Ändra så att man ser antal nya meddelanden.
+                                            <li>
+                                                <button class="inbox">
+                                                    <span class="glyphicon glyphicon-envelope">
+
+                                                    </span>
+                                                    <span class="newMessage">
+                                                        @if (user.NumberOfUnreadMessages != 0)
+                                                        {
+                                                            @user.NumberOfUnreadMessages
+                                                        }
+                                                    </span>
+                                                </button>
+                                            </li>
+                                        }
+
+
 
                                         <li>
 

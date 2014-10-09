@@ -457,7 +457,7 @@ nav, section {
 .projectWrapper {
     width: 1100px;
     margin-top: 40px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .columnRight {
@@ -724,6 +724,8 @@ header {
     font-size: 1.8em;
     margin-bottom: 250px;
     margin-top: 250px;
+    margin-left: 335px;
+
 }
 
 .glow {

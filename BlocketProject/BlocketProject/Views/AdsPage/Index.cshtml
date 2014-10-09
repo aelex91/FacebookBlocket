@@ -40,8 +40,9 @@
                         <table class="eventListTable">
                             <tr>
 
-                                @using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId }, FormMethod.Post))
+                                @using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId, @message = Model.InvitationMessage, @messageTitle = Model.InvitationMessageTitle }, FormMethod.Post))
                                 {
+
                                     <td>
                                         <button type="submit" style="border:none; background: none;">
                                             <h3>@ad.Title</h3>
@@ -50,6 +51,7 @@
                                     </td>
 
                                 }
+
                             </tr>
                             <tr>
                                 <td>
@@ -69,10 +71,10 @@
 
                                         <span>Pris: @ad.Price kr.</span>
                                     }
-                                    
 
-                                        <span>@ad.ExpirationDate.Subtract(DateTime.Now).Days dagar kvar.</span>
-                                    
+
+                                    <span>@ad.ExpirationDate.Subtract(DateTime.Now).Days dagar kvar.</span>
+
                                 </td>
                             </tr>
                             <tr>
@@ -233,7 +235,7 @@ else
                         }
 
 
-                        @using (Html.BeginForm("InviteFriends", "AdsPage", new { @eventId = Model.UserEventModel.EventId, @userId = Model.UserEventModel.UserId }, FormMethod.Post))
+                        @using (Html.BeginForm("InviteFriends", "AdsPage", new { @eventId = Model.UserEventModel.EventId, @userId = Model.UserEventModel.UserId, @message = Model.InvitationMessage, @messageTitle = Model.InvitationMessageTitle }, FormMethod.Post))
                         {
                             foreach (var friend in friends)
                             {
@@ -274,7 +276,7 @@ else
 
             }
         }
-       
+
 
     </div>
 }

@@ -1,4 +1,5 @@
 ﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
+@using BlocketProject.Helpers
 @{
     ViewBag.Title = "Inbox";
 }
@@ -9,6 +10,8 @@
     <table id="messageTable">
         @foreach (var message in Model.UserMessages)
         {
+            var user = ConnectionHelper.GetUserInformationByUserId(message.SenderUserId);
+            var Event = ConnectionHelper.GetAdById(message.EventId);
             <tr>
                 <td>
                     @using (Ajax.BeginForm("ReadMessage", new { @messageId = message.MessageId }, new AjaxOptions { UpdateTargetId = "showMessage" }, FormMethod.Post))
@@ -26,8 +29,8 @@
                             }
                             else
                             {
-                                <h4>@message.</h4>
-                                <h5>@message.MessageTitle</h5>
+
+                                <h4>@message.MessageTitle</h4>
                                 <abbr>@message.Timestamp.ToString("dd MMM HH:mm")</abbr>
                             }
                         </button>
@@ -48,7 +51,7 @@
         <div class="right" id="showMessage">
 
             @{
-                  var msg = Model.UserMessages[0];
+        var msg = Model.UserMessages[0];
             }
             @Html.Partial("ReadMessage", msg)
 

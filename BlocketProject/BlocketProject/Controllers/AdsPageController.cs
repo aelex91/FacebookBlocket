@@ -48,22 +48,24 @@ namespace BlocketProject.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Index(int EventId)
+        public ActionResult Index(int EventId, string message, string messageTitle)
         {
             var model = SetModelValues(EventId);
+            model.InvitationMessage = message;
+            model.InvitationMessageTitle = messageTitle;
             return View("Index", model);
 
         }
 
         [HttpPost]
-        public ActionResult InviteFriends(List<int> selectedList, int EventId, int userId)
+        public ActionResult InviteFriends(List<int> selectedList, int EventId, int userId, string message, string messageTitle)
         {
 
             foreach (var friend in selectedList)
             {
                 if (friend != 0)
                 {
-                    ConnectionHelper.InviteFriends(friend, EventId, userId);
+                    ConnectionHelper.InviteFriends(friend, EventId, userId, message, messageTitle);
                     
                 }
                 

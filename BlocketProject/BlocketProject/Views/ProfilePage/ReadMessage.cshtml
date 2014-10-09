@@ -1,42 +1,29 @@
 ﻿@model BlocketProject.Models.DbClasses.DbMessages
 @using BlocketProject.Helpers
-@if (Model.MessageTitle != null && Model.SenderUserId != null)
-{
+@{
     var user = ConnectionHelper.GetUserInformationByUserId(Model.SenderUserId);
+    var userName = user.FirstName + " " + user.LastName;
     var Event = ConnectionHelper.GetAdById(Model.EventId);
-    var first = @Model.MessageText.Substring(0, 36);
-    var second = @Model.MessageText.Substring(56 + user.FirstName.Length + user.LastName.Length + 1);
+    var newString = "";
+
+}
+@if (Model.MessageText.Contains(userName) || Model.MessageText.Contains(Event.Title))
+{
+
+
+
+    newString = Model.MessageText.Replace(userName, "<a href=\"../../ProfilePage/Index?UserId=" + Model.SenderUserId + "\">" + userName + "</a>").Replace(Event.Title, "<a href=\"../../events/?EventId=" + Event.EventId + "\">" + Event.Title + "</a>");
     
+    var text = new MvcHtmlString(newString);
 
     <h3>@Model.MessageTitle</h3><br />
-    <span>
-        @first
-        @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = Event.EventId }, FormMethod.Post))
-        {
-            <button type="submit" class="linkButton">
-                @Event.Title
-            </button>
-        }
-        av
-        @using (Html.BeginForm("Index", "ProfilePage", new { @UserId = user.UserId }, FormMethod.Post))
-        {
-            <button type="submit" class="linkButton">
-                @user.FirstName @user.LastName
-            </button>@second.Substring(0, second.Length - 4)
-        }
-        @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = Event.EventId }, FormMethod.Post))
-        {
-            <button type="submit" class="linkButton">
-                här.
-            </button>
-        }
-    </span>
+    <p>@text</p>
 
 }
 else if (Model.MessageTitle != null)
 {
     <h3>@Model.MessageTitle</h3><br />
-    <p>@Model.MessageText.</p>
+    <p>@Model.MessageText</p>
 }
 else
 {

@@ -617,7 +617,7 @@ namespace BlocketProject.Helpers
             }
         }
 
-        public static void InviteFriends(int friendId, int eventId, int userId)
+        public static void InviteFriends(int friendId, int eventId, int userId, string message, string messageTitle)
         {
 
             DbGuestList newGuest = new DbGuestList();
@@ -626,12 +626,30 @@ namespace BlocketProject.Helpers
             var friend = GetUserInformationByUserId(friendId);
             var ad = GetAdById(eventId);
 
+            if (message.Contains("[User]"))
+            {
+                message = message.Replace("[User]", user.FirstName + " " + user.LastName);
+            }
+            if (message.Contains("[EventName]"))
+            {
+                message = message.Replace("[EventName]", ad.Title);
+            }
+
+            if (messageTitle.Contains("[User]"))
+            {
+                messageTitle = messageTitle.Replace("[User]", user.FirstName + " " + user.LastName);
+            }
+            if (messageTitle.Contains("[EventName]"))
+            {
+                messageTitle = messageTitle.Replace("[EventName]", ad.Title);
+            }
+            
 
             newMessage.EventId = eventId;
             newMessage.UserId = friendId;
             newMessage.SenderUserId = userId;
-            newMessage.MessageTitle = "Inbjudan till " + ad.Title;
-            newMessage.MessageText = "Du har blivit inbjuden till eventet " + ad.Title + " av " + user.FirstName + " " + user.LastName + ", du kan gå till eventet genom att klicka här.";
+            newMessage.MessageTitle = messageTitle;
+            newMessage.MessageText = message;
             newMessage.Unread = true;
             newMessage.Timestamp = DateTime.Now;
 

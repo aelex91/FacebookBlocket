@@ -14,6 +14,8 @@ namespace BlocketProject.Models.ViewModels
         {
             Heading = currentPage.Heading;
             CurrentUserAds = currentPage.CurrentUserAds;
+            InvitationMessage = currentPage.InvitationMessage;
+            InvitationMessageTitle = currentPage.InvitationMessageTitle;
         }
 
         public AdsPageViewModel() { }
@@ -23,6 +25,8 @@ namespace BlocketProject.Models.ViewModels
         public string Heading { get; set; }
         public bool CurrentUserAds { get; set; }
         public UserAdsModel UserEventModel { get; set; }
+        public string InvitationMessage { get; set; }
+        public string InvitationMessageTitle { get; set; }
 
         public ProfilePageViewModel.UserInformation User { get; set; }
         public List<DbUserInformation> ListAttendingUsers { get; set; }
