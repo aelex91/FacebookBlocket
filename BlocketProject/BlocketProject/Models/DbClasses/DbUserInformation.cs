@@ -28,7 +28,7 @@ namespace BlocketProject.Models.DbClasses
         public int? Password { get; set; }
         public bool HasFacebook { get; set; }
         public int? NumberOfUnreadMessages { get; set; }
-        //public string Municipality { get; set; }
-        //public string County { get; set; }
+        public string Municipality { get; set; }
+        public string County { get; set; }
     }
 }

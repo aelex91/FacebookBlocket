@@ -36,6 +36,8 @@ namespace BlocketProject.Controllers
         public ActionResult Index(ProfilePage currentPage, int? UserId)
         {
             var model = new ProfilePageViewModel(currentPage);
+            model.InvitationMessage = currentPage.StartPage.InvitationMessage;
+            model.InvitationMessageTitle = currentPage.StartPage.InvitationMessageTitle;
             var user = new ProfilePageViewModel.UserInformation();
             if (UserId == null)
             {
@@ -206,6 +208,22 @@ namespace BlocketProject.Controllers
         {
             var model = ConnectionHelper.GetMessageByMessageId(messageId);
             return PartialView("ReadMessage", model);
+        }
+
+        [HttpPost]
+        public ActionResult NewMessage(int UserId)
+        {
+            ProfilePageViewModel model = new ProfilePageViewModel();
+            model.MessageModel = new DbMessages();
+            model.MessageModel.UserId = UserId;
+            model.CurrentUser = ConnectionHelper.GetUserInformationByEmail(User.Identity.Name);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SendMessage(string MessageText, string MessageTitle)
+        {
+            return View("Index");
         }
     }
 }

@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 using EPiServer.Web.Routing;
 using EPiServer.ServiceLocation;
 using System.Collections;
+using BlocketProject.Models.DbClasses;
 
 namespace BlocketProject.Controllers
 {
@@ -128,22 +129,34 @@ namespace BlocketProject.Controllers
                         {
                             FirstName = model.RegisterUser.FirstName,
                             LastName = model.RegisterUser.LastName,
-                            Municipality = model.RegisterUser.SelectedMunicipality,
-                            County = model.RegisterUser.SelectedCounty,
+                            Email = model.RegisterUser.Email,
+                            Password = model.RegisterUser.Password,
+                            FacebookId = null,
+                            Location = null,
+                            ImageUrl = null,
+                            NumberOfEvents = 0,
                             Gender = model.RegisterUser.SelectedGender,
+                            Phone = null,
                             Birthday = dt,
+                            ModifiedOn = DateTime.Now,
                             RegisterDate = DateTime.Now,
                             HasFacebook = false,
+                            Municipality = model.RegisterUser.SelectedMunicipality,
+                            County = model.RegisterUser.SelectedCounty,
+
+                            
                             
                          
                             //   Birthday = model.RegisterUser.Day + model.RegisterUser.Month + model.RegisterUser.Year,
                         };
 
+
+                        ConnectionHelper.SaveUserToDb(userModel);
                     }
                     else
                     {
                         ModelState.AddModelError(model.RegisterUser.Email, " Finns redan.");
-                        return View("Index", "Startpage", model);
+                        return RedirectToAction("Index", "StartPage", model);
                     }
 
                 }
@@ -154,11 +167,11 @@ namespace BlocketProject.Controllers
                 model.RegisterUser.Municipality = ConnectionHelper.GetMuncipalities();
                 model.RegisterUser.County = ConnectionHelper.GetCounties();
                 ModelState.AddModelError("CustomError", "Sorrybrotha");
-                return View("Index", "StartPage");
+                return RedirectToAction("Index", "StartPage");
 
             }
 
-            return View("Index", "StartPage", model);
+            return RedirectToAction("Index", "StartPage", model);
         }
 
     }

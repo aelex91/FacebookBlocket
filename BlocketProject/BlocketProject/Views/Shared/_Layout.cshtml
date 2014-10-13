@@ -94,7 +94,7 @@ else
                                         <button type="button" class="glyphicon glyphicon-search searchTrigger"></button>
                                     </li>
                                     <li class="navbar-btn searchField">
-                                        @using (Html.BeginForm("", "", FormMethod.Post))
+                                        @using (Html.BeginForm("Search", "SearchPage", FormMethod.Post))
                                         {
                                             @Html.TextBox("searchField")
                                             <button type="submit" class="btn searchButton">Sök</button>
@@ -107,8 +107,6 @@ else
 
                                         using (Html.BeginForm("Inbox", "ProfilePage", FormMethod.Post))
                                         {
-
-                                            //Ändra så att man ser antal nya meddelanden.
                                             <li>
                                                 <button class="inbox">
                                                     <span class="glyphicon glyphicon-envelope">

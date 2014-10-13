@@ -22,6 +22,8 @@ namespace BlocketProject.Controllers
         public ActionResult Index(AdsPage currentPage, int? EventId)
         {
             var model = new AdsPageViewModel(currentPage);
+            model.InvitationMessage = currentPage.StartPage.InvitationMessage;
+            model.InvitationMessageTitle = currentPage.StartPage.InvitationMessageTitle;
             if (EventId == null)
             {
 
@@ -58,14 +60,16 @@ namespace BlocketProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult InviteFriends(List<int> selectedList, int EventId, int userId, string message, string messageTitle)
+        public ActionResult InviteFriends(List<int> selectedList, int EventId, int userId, AdsPage currentPage)
         {
-
+            var model = new AdsPageViewModel(currentPage);
+            model.InvitationMessage = currentPage.StartPage.InvitationMessage;
+            model.InvitationMessageTitle = currentPage.StartPage.InvitationMessageTitle;
             foreach (var friend in selectedList)
             {
                 if (friend != 0)
                 {
-                    ConnectionHelper.InviteFriends(friend, EventId, userId, message, messageTitle);
+                    ConnectionHelper.InviteFriends(friend, EventId, userId, model.InvitationMessage, model.InvitationMessageTitle);
                     
                 }
                 

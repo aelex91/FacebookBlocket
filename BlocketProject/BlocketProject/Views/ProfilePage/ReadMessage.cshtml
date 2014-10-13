@@ -12,7 +12,8 @@
 
 
 
-    newString = Model.MessageText.Replace(userName, "<a href=\"../../ProfilePage/Index?UserId=" + Model.SenderUserId + "\">" + userName + "</a>").Replace(Event.Title, "<a href=\"../../events/?EventId=" + Event.EventId + "\">" + Event.Title + "</a>");
+    newString = Model.MessageText.Replace(userName, "<a href=\"../../ProfilePage/Index?UserId=" + Model.SenderUserId + "\">" + userName + "</a>")
+        .Replace(Event.Title, "<a href=\"../../events/?EventId=" + Event.EventId + "\">" + Event.Title + "</a>");
     
     var text = new MvcHtmlString(newString);
 

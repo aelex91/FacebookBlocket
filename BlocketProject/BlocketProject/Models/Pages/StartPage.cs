@@ -8,7 +8,7 @@ using EPiServer.SpecializedProperties;
 namespace BlocketProject.Models.Pages
 {
     [ContentType(DisplayName = "StartPage", GUID = "061a1365-7fd6-4f72-ad76-4e8f349029ba", Description = "")]
-    public class StartPage : PageData
+    public class StartPage : SitePageData
     {
         [CultureSpecific]
         [Display(
@@ -39,6 +39,33 @@ namespace BlocketProject.Models.Pages
             Order = 400
             )]
         public virtual string FacebookButtonText { get; set; }
+
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Invitation Message Title",
+            Description = "Title of the message that will be sent to invited users. Use [EventName] or [User] tag if you want them to be a part of the title.",
+            GroupName = SystemTabNames.Content,
+            Order = 500)]
+        public virtual string InvitationMessageTitle { get; set; }
+
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Invitation Message",
+            Description = "The message that will be sent when a user invites others to their event. Always specify a part in the message which contains these tags '[EventName]' or '[User]' if you want to link to the specific event and user in the message.",
+            GroupName = SystemTabNames.Content,
+            Order = 600)]
+        public virtual string InvitationMessage { get; set; }
+
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Search Page URL",
+            Description = "Select your created SearchPage where the users will see their search results.",
+            GroupName = SystemTabNames.Content,
+            Order = 700)]
+        public virtual PageReference SearchPageUrl { get; set; }
 
         public override void SetDefaultValues(ContentType contentType)
         {

@@ -1,5 +1,6 @@
 ﻿using BlocketProject.Models.DbClasses;
 using BlocketProject.Models.Pages;
+using EPiServer.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,8 +15,6 @@ namespace BlocketProject.Models.ViewModels
         {
             Heading = currentPage.Heading;
             CurrentUserAds = currentPage.CurrentUserAds;
-            InvitationMessage = currentPage.InvitationMessage;
-            InvitationMessageTitle = currentPage.InvitationMessageTitle;
         }
 
         public AdsPageViewModel() { }

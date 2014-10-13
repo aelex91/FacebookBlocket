@@ -1,0 +1,11 @@
+﻿@model BlocketProject.Models.ViewModels.ProfilePageViewModel
+
+@using (Html.BeginForm("SendMessage", "ProfilePage", new { }, FormMethod.Post))
+{
+    <p>Titel:</p>
+    @Html.TextBoxFor(m => m.MessageModel.MessageTitle)
+    <p>Meddelande:</p>
+    @Html.TextBoxFor(m => m.MessageModel.MessageText)<br /><br />
+
+    <button type="submit" class="btn btn-default">Skicka meddelande</button>
+}

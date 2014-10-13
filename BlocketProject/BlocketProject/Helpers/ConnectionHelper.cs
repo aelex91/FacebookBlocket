@@ -94,14 +94,28 @@ namespace BlocketProject.Helpers
         //    db.Entry(currentUser).State = EntityState.Modified;
         //    db.SaveChanges();
         //}
-        public static void SaveUserToDb(Register registerUser)
+        public static void SaveUserToDb(ProfilePageViewModel.UserInformation registerUser)
         {
-            var userModel = new DbUserInformation
-            {
-
-
-
+            var userModel = new DbUserInformation {
+                FirstName = registerUser.FirstName,
+                LastName = registerUser.LastName,
+                Email = registerUser.Email,
+                Password = registerUser.Password,
+                FacebookId = null,
+                Location = null,
+                ImageUrl = null,
+                NumberOfEvents = 0,
+                Gender = registerUser.Gender,
+                Phone = null,
+                Birthday = registerUser.Birthday,
+                ModifiedOn = DateTime.Now,
+                RegisterDate = DateTime.Now,
+                HasFacebook = false,
+                Municipality = registerUser.Municipality,
+                County = registerUser.County,
             };
+
+
             db.DbUserInformation.Add(userModel);
 
         }
@@ -754,6 +768,29 @@ namespace BlocketProject.Helpers
                 user.NumberOfUnreadMessages -= 1;
                 db.SaveChanges();
             }
+            return query;
+        }
+
+        public static SearchPageViewModel Search(string searchQuery)
+        {
+            SearchPageViewModel model = new SearchPageViewModel();
+
+            List<DbUserInformation> users = db.DbUserInformation.Where(x => x.FirstName.Contains(searchQuery) || x.LastName.Contains(searchQuery)).ToList();
+            List<DbUserEvents> events = db.DbUserEvents.Where(x => x.Title.Contains(searchQuery) || x.EventDescription.Contains(searchQuery)).ToList();
+
+            model.eventResults = events;
+            model.userResults = users;
+
+            return model;
+        }
+
+        public static List<DbUserEvents> GetAllUserEventsByUserId(int id)
+        {
+            var query = (from p in db.DbUserEvents
+                         join a in db.DbUserInformation on p.UserId equals a.UserId
+                         where p.UserId == id
+                         select p).ToList();
+
             return query;
         }
 

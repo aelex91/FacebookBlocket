@@ -30,8 +30,10 @@
                 {
                     <h6>Inga gemensamma vänner.</h6>
                 }
-
-                <button type="submit" id="newMessageButton" class="btn btn-default">Skicka meddelande</button>
+                @using (Html.BeginForm("NewMessage", "ProfilePage", new { @UserId = Model.OtherUser.UserId }, FormMethod.Post))
+                {
+                    <button type="submit" id="newMessageButton" class="btn btn-default">Skicka meddelande</button>
+                }
                 <div class="messagepop pop">
 
 
@@ -115,7 +117,7 @@
         <table>
             <tr>
                 <td>
-                    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" height="300"/>
+                    <img src="@Model.CurrentUser.ImageUrl" class="profilepic" id="imageid" height="300" />
                 </td>
             </tr>
             <tr>

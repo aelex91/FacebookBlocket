@@ -295,7 +295,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminPageController.cs" />
     <Compile Include="Controllers\AdsPageController.cs" />
-    <Compile Include="Models\ViewModels\DbUserInformation.cs" />
+    <Compile Include="Models\Pages\SearchPage.cs" />
     <Compile Include="Models\ViewModels\FacebookFriendModel.cs" />
     <Compile Include="Models\ViewModels\FacebookUserModel.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
@@ -304,7 +304,7 @@
     <Compile Include="Controllers\PageListBlockController.cs" />
     <Compile Include="Controllers\ProfilePageController.cs" />
     <Compile Include="Controllers\RegisterBlockController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SearchPageController.cs" />
     <Compile Include="Controllers\StandardPageController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Controllers\UsersOnlineBlockController.cs" />
@@ -346,13 +346,12 @@
     <Compile Include="Models\ViewModels\LandingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\AdsPageViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateAdsPageViewModel.cs" />
-    <Compile Include="Models\ViewModels\HomeModel.cs" />
     <Compile Include="Models\ViewModels\JsonUserModel.cs" />
-    <Compile Include="Models\ViewModels\LayoutViewModel.cs" />
     <Compile Include="Models\DbClasses\DbMessage.cs" />
     <Compile Include="Models\ViewModels\PageListBlockViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfilePageViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterBlockViewModel.cs" />
+    <Compile Include="Models\ViewModels\SearchPageViewModel.cs" />
     <Compile Include="Models\ViewModels\StandardPageViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersOnlineViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -545,6 +544,8 @@
     <Content Include="Views\AdsPage\InvitedList.cshtml" />
     <Content Include="Views\ProfilePage\Inbox.cshtml" />
     <Content Include="Views\ProfilePage\ReadMessage.cshtml" />
+    <Content Include="Views\ProfilePage\NewMessage.cshtml" />
+    <Content Include="Views\Shared\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

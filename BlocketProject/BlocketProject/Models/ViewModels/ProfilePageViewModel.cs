@@ -27,6 +27,8 @@ namespace BlocketProject.Models.ViewModels
             this.EventRedirect = currentPage.EventRedirect;
 
         }
+        public string InvitationMessage { get; set; }
+        public string InvitationMessageTitle { get; set; }
         public PageReference ProfileRedirect { get; set; }
         public PageReference EventRedirect { get; set; }
         public string LabelFirstName { get; set; }
@@ -40,6 +42,7 @@ namespace BlocketProject.Models.ViewModels
         public UserInformation OtherUser { get; set; }
         public List<UserAdsModel> ListUserAds { get; set; }
         public List<DbMessages> UserMessages { get; set; }
+        public DbMessages MessageModel { get; set; }
 
 
         public class UserInformation
