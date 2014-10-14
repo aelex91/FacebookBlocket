@@ -67,6 +67,41 @@ namespace BlocketProject.Models.Pages
             Order = 700)]
         public virtual PageReference SearchPageUrl { get; set; }
 
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "First FooterLink",
+            Description = "Select your desired PageReference that will be shown in the right column of the footer. Various information about e.x. cookies, user agreement etc. is recommended.",
+            GroupName = SystemTabNames.Content,
+            Order = 800)]
+        public virtual PageReference FooterPageReference1 { get; set; }
+
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Second FooterLink",
+           Description = "Select your desired PageReference that will be shown in the right column of the footer. Various information about e.x. cookies, user agreement etc. is recommended.",
+            GroupName = SystemTabNames.Content,
+            Order = 800)]
+        public virtual PageReference FooterPageReference2 { get; set; }
+
+        [Required]
+        [CultureSpecific]
+        [Display(
+            Name = "Third FooterLink",
+            Description = "Select your desired PageReference that will be shown in the right column of the footer. Various information about e.x. cookies, user agreement etc. is recommended.",
+            GroupName = SystemTabNames.Content,
+            Order = 800)]
+        public virtual PageReference FooterPageReference3 { get; set; }
+
+        [CultureSpecific]
+        [Display(
+            Name = "Fourth FooterLink",
+            Description = "Select your desired PageReference that will be shown in the right column of the footer. Various information about e.x. cookies, user agreement etc. is recommended.",
+            GroupName = SystemTabNames.Content,
+            Order = 800)]
+        public virtual PageReference FooterPageReference4 { get; set; }
+
         public override void SetDefaultValues(ContentType contentType)
         {
 

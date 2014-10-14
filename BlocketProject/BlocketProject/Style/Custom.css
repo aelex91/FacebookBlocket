@@ -953,3 +953,14 @@ header {
     left: 50%;
     top: 50%;
 }
+
+.customBtn
+{
+    color: black;
+    background: #D3D3D3;
+}
+
+.customBtn:hover{
+    background: #fff;
+    color: darkgray;
+}

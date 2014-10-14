@@ -1,5 +1,9 @@
 ﻿using BlocketProject.Models.DbClasses;
+using BlocketProject.Models.Pages;
 using BlocketProject.Models.ViewModels;
+using EPiServer.Core;
+using EPiServer.ServiceLocation;
+using EPiServer.Web.Routing;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +14,10 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using EPiServer;
+using EPiServer.Framework.DataAnnotations;
+using EPiServer.Web.Mvc;
+using System.Web.Routing;
 
 namespace BlocketProject.Helpers
 {
@@ -792,6 +800,38 @@ namespace BlocketProject.Helpers
                          select p).ToList();
 
             return query;
+        }
+
+        public static _LayoutModel GetLayoutModel()
+        {
+            _LayoutModel model = new _LayoutModel();
+            StandardPage page = new StandardPage();
+
+            model.LinkList = new Dictionary<string,string>();
+            List<PageReference> PageList = new List<PageReference>();
+
+            PageList.Add(page.StartPage.FooterPageReference1);
+            PageList.Add(page.StartPage.FooterPageReference2);
+            PageList.Add(page.StartPage.FooterPageReference3);
+            PageList.Add(page.StartPage.FooterPageReference4);
+
+            foreach (var link in PageList)
+            {
+                var pageData = DataFactory.Instance.GetPage(link);
+                model.LinkList.Add(GetLinkByPageReference(link), pageData.Name);
+                
+            }
+
+            return model;
+        }
+
+        public static string GetLinkByPageReference(PageReference pReference)
+        {
+            var locate = new ServiceLocationHelper(ServiceLocator.Current);
+            var page = locate.ContentRepository().Get<PageData>(pReference);
+            var urlResolver = ServiceLocator.Current.GetInstance<UrlResolver>();
+            var pageUrl = urlResolver.GetUrl(page.ContentLink);
+            return pageUrl;
         }
 
 

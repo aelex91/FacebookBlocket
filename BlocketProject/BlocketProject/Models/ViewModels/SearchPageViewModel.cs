@@ -17,6 +17,7 @@ namespace BlocketProject.Models.ViewModels
         }
         public List<DbUserInformation> userResults { get; set; }
         public List<DbUserEvents> eventResults { get; set; }
+        public string SearchQuery { get; set; }
     }
 
 }

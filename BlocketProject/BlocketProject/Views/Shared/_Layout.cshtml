@@ -1,6 +1,8 @@
 ﻿@using BlocketProject.Helpers
 @{
     var user = ConnectionHelper.GetUserByEmail(User.Identity.Name);
+    var model = ConnectionHelper.GetLayoutModel();
+
 }
 <!DOCTYPE html>
 
@@ -37,10 +39,12 @@
                     <img src="~/Content/Images/arrownavigate.png" alt="navigate" id="scrollTop" /></a>*@
 
                 <div class="columnRight">
-                    <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Policy</a><br>
-                    <a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Användarvilkor</a><br>
-                    <a href="https://www.linkedin.com/pub/alexander-helsinghof/57/a19/b4b" target="_blank">Cookies</a><br>
-                    <a href="http://hiq.se/" target="_blank">Hiq</a>
+                    <ul>
+                        @foreach (var link in model.LinkList)
+                        {
+                            <li><a href="@link.Key">@link.Value</a></li>
+                        }
+                    </ul>
                     <br />
                     <div class="fb-like" style="color: white;" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                     <div id="fb-root"></div>
@@ -135,7 +139,7 @@ else
                                     }
 
                                     <li class="dropdown">
-                                        <span class="dropdown-toggle navbar-btn btn btn-default" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
+                                        <span class="dropdown-toggle navbar-btn btn customBtn" style="border-color: rgba(0,0,0,0.1)" data-toggle="dropdown">
                                             <i class="glyphicon glyphicon-align-justify"></i>
                                         </span>
                                         <ul class="dropdown-menu pull-right">
@@ -189,10 +193,11 @@ else
 
                             <div class="columnRight">
                                 <ul>
-                                    <li><a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Policy</a><br></li>
-                                    <li><a href="https://www.facebook.com/alexandervan.helsinghof" target="_blank">Användarvilkor</a><br></li>
-                                    <li><a href="https://www.linkedin.com/pub/alexander-helsinghof/57/a19/b4b" target="_blank">Cookies</a><br></li>
-                                    <li><a href="http://hiq.se/" target="_blank">Hiq</a></li>
+                                    @foreach (var link in model.LinkList)
+                                    {
+                                        <li><a href="@link.Key">@link.Value</a></li>
+                                    }
+
                                     <li><div class="fb-like" style="color: white;" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></li>
                                     <li><div id="fb-root"></div></li>
                                 </ul>
