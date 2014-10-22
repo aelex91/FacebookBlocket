@@ -1,0 +1,43 @@
+﻿@model BlocketProject.Models.ViewModels.CustomNavPageViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.AvailablePageList.Count != 0 && Model.AvailablePageList != null)
+{
+    <h2>Tillgängliga länkar:</h2>
+
+    foreach (var page in Model.AvailablePageList)
+    {
+        using (Html.BeginForm("SetCustomLinks", "CustomNavPage", new { @pageID = page.ContentLink.ID }, FormMethod.Post, null))
+        {
+            <span><button type="submit" class="linkButton">+</button>&nbsp;@page.Name</span>
+        }
+    }
+}
+
+@if (Model.SelectedPageList.Count != 0 && Model.SelectedPageList != null)
+{
+    <h2>Valda länkar:</h2>
+
+    foreach (var page in Model.SelectedPageList)
+    {
+        using (Html.BeginForm("RemoveCustomLinks", "CustomNavPage", new { @pageID = page.ContentLink.ID }, FormMethod.Post, null))
+        {
+            <span><button type="submit" class="linkButton">-</button>&nbsp;@page.Name</span>
+        }
+    }
+
+    <div>
+        <h3>Din meny förhandsvisning:</h3>
+            <ul class="nav navbar-nav navbar-inverse">
+                @foreach (var page in Model.SelectedPageList)
+                {
+                    
+                    <li class="active">
+                        @Html.UrlLink(page.LinkURL, page.Name)
+                    </li>
+                }
+            </ul>
+    </div>
+}

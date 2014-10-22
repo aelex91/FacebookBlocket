@@ -1,104 +1,60 @@
 ﻿@model BlocketProject.Models.ViewModels.SearchPageViewModel
 
-<h2>Search</h2>
-
-@{
-    var EventTitle = "";
-    var Event = "";
-    var userName = "";
-}
-
-@if (Model.eventResults.Count != 0 && Model.userResults.Count != 0 && Model.SearchQuery != "" && Model.SearchQuery != null)
+@if (Model.SearchQuery != null && Model.SearchQuery != "")
 {
-    if (Model.eventResults.Count != 0)
+    if (Model.NumberOfResults != 0 || Model.NumberOfResults != null)
     {
-        <h2>Event:</h2>
-
-        foreach (var _event in Model.eventResults)
-        {
-            using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = _event.EventId }, FormMethod.Post))
+        <h3>@Model.NumberOfResults sökresultat matchade din sökning</h3>
+    }
+    else
+    {
+        <p>Inga resultat matchade din sökning.</p>
+    }
+    if (Model.EventModelList != null && Model.EventModelList.Count != 0)
+    {
+        <h4>Event:</h4>
+        <table class="searchEventTable">
+            @foreach (var Event in Model.EventModelList)
             {
-                if (_event.Title.Contains(Model.SearchQuery))
+                using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = Event.Key }, FormMethod.Post))
                 {
-                    EventTitle = _event.Title.Replace(Model.SearchQuery, "<b>" + Model.SearchQuery + "</b>");
-                }
-                if (_event.EventDescription.Contains(Model.SearchQuery))
-                {
-                    Event = _event.EventDescription.Replace(Model.SearchQuery, "<b>" + Model.SearchQuery + "</b>");
-                }
-                {
-                    var formatEventTitle = new MvcHtmlString(EventTitle);
-                    var formatEvent = new MvcHtmlString(Event);
-                    {
-                        Event = "";
-                        EventTitle = "";
-                    }
-
-                    if (formatEvent != null || formatEvent.ToHtmlString() != "" && formatEventTitle != null || formatEventTitle.ToHtmlString() != "")
-                    {
-                        <button type="submit" class="linkButton">
-                            <h4>@formatEventTitle</h4>
-                        </button>
-                        <p>@formatEvent</p>
-
-                    }
-                    else
-                    {
-                        <button type="submit" class="linkButton">
-                            @if (formatEventTitle != null && formatEventTitle.ToHtmlString() != "")
-                            {
-                                <h4>@formatEventTitle</h4>
-                            }
-                            @if (formatEvent != null && formatEvent.ToHtmlString() != "")
-                            {
-                                <p>@formatEvent</p>
-                            }
-                            else if (formatEventTitle == null || formatEventTitle.ToHtmlString() == "")
-                            {
-                                <h4>@_event.Title</h4>
-                            }
-                            else if (formatEvent == null || formatEvent.ToHtmlString() == "")
-                            {
-                                <p>@_event.EventDescription</p>
-                            }
-                        </button>
-
-                    }
-
-
+                    <tr>
+                        <td>
+                            <button type="submit" class="linkButton">
+                                @Event.Value.EventTitleHtmlString
+                            </button><br />
+                            @Event.Value.EventHtmlString
+                        </td>
+                    </tr>
                 }
             }
-        }
+        </table>
     }
-    if (Model.userResults.Count != 0)
+
+    if (Model.UserHtmlStringDictionary != null && Model.UserHtmlStringDictionary.Count != 0)
     {
-        <h2>Användare:</h2>
-        foreach (var user in Model.userResults)
-        {
-            using (Html.BeginForm("Index", "ProfilePage", new { @UserId = user.UserId }, FormMethod.Post))
+        <h3>Personer:</h3>
+
+        <table class="searchUserTable">
+            @foreach (var user in Model.UserHtmlStringDictionary)
             {
-                userName = user.FirstName + " " + user.LastName;
-                if (userName.Contains(Model.SearchQuery))
-                {
-                    var newUserName = userName.Replace(Model.SearchQuery, "<b>" + Model.SearchQuery + "</b>");
-                    MvcHtmlString formatUser = new MvcHtmlString(newUserName);
-                    <button type="submit" class="linkButton">
-                        <h4>@formatUser</h4>
-                    </button>
-                    userName = "";
-                    newUserName = "";
-                }
-                else
-                {
-                    <button type="submit" class="linkButton">
-                        <h4>@userName</h4>
-                    </button>
-                }
+                <tr>
+                    @using (Html.BeginForm("ProfileRedirect", "ProfilePage", new { @id = user.Key }, FormMethod.Post))
+                    {
+                        <td>
+                            <button type="submit" class="linkButton">
+                                @user.Value
+                            </button>
+                        </td>
+                    }
+                </tr>
             }
-        }
+        </table>
     }
+    
+
 }
 else
 {
-    <p>Inga sökresultat innehöll "@Model.SearchQuery".</p>
+    <h3>Du har inte angivit en sökterm, var god försök igen.</h3>
 }

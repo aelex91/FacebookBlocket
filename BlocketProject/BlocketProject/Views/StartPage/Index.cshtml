@@ -5,6 +5,7 @@
     {
         if (!User.Identity.IsAuthenticated)
         {
+            @Html.PropertyFor(x => x.FirstPageBanner)
             <button type="submit" class="loginbutton glow">@Model.FacebookButtonText &nbsp;&nbsp;&nbsp;<img src="~/images/FB-f-Logo__white_72.png" /></button>
         
         }

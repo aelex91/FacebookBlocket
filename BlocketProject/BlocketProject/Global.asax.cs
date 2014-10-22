@@ -42,6 +42,8 @@ namespace BlocketProject
               "{controller}/{action}/{id}",                           // URL with parameters
               new { controller = "Home", action = "Index", id = "" });
 
+
+
         }
 
 

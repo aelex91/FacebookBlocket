@@ -40,6 +40,13 @@ namespace BlocketProject.Models.Pages
             )]
         public virtual string FacebookButtonText { get; set; }
 
+        [Display(
+            Name = "Firstpage banner",
+            Description = "Please put key information that will be the first thing the user will see. A good thing would be to explain what the site is for and why they should use it. This will not be visible when the user has registered or logged in.",
+            Order = 410
+            )]
+        public virtual XhtmlString FirstPageBanner { get; set; }
+
         [Required]
         [CultureSpecific]
         [Display(
