@@ -93,12 +93,13 @@ namespace BlocketProject.Controllers
         {
             var availablePageList = new List<PageData>();
             var pageList = DataFactory.Instance.GetChildren(PageReference.StartPage);
+            availablePageList.Add(DataFactory.Instance.GetPage(PageReference.StartPage));
 
             foreach (var page in pageList)
             {
                 availablePageList.Add(page);
             }
-
+            
             return availablePageList;
         }
 

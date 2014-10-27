@@ -220,7 +220,7 @@
             foreach (var ad in Model.ListUserAds)
             {
                 <tr>
-                    @using (Html.BeginForm("Index", "AdsPage", new { @EventId = ad.EventId, @message = Model.InvitationMessage, @messageTitle = Model.InvitationMessageTitle }, FormMethod.Post))
+                    @using (Html.BeginForm("EventRedirect", "ProfilePage", new { @id = ad.EventId, @message = Model.InvitationMessage, @messageTitle = Model.InvitationMessageTitle }, FormMethod.Post))
                     {
                         <td>
                             <button type="submit" style="border:none; background: none;">

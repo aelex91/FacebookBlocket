@@ -4,7 +4,6 @@
 })();
 
 
-
 function textfieldpressed(onClass) {
 
     var element = $('#' + id);

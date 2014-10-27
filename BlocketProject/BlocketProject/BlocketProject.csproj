@@ -318,7 +318,6 @@
     <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Helpers\NavigationHelpers.cs" />
     <Compile Include="Helpers\UrlHelpers.cs" />
-    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\Blocks\InformationBlock.cs" />
     <Compile Include="Models\Blocks\RegisterBlock.cs" />
     <Compile Include="Models\Blocks\PageListBlock.cs" />

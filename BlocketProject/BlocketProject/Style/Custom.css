@@ -639,8 +639,7 @@ header {
 #colNav .profileButton {
     background: none !important;
     border: none;
-    padding: 0 !important;
-    /*optional*/
+    padding: 2px 0 0 0 !important;
     font-family: arial,sans-serif; /*input has OS specific font-family*/
     color: lightgray;
     cursor: pointer;
@@ -871,9 +870,8 @@ header {
 
 #searchField {
     width: 200px;
-}
+    padding-left: 5px;
 
-#profileTable tr td {
 }
 
 .eventListTable {
